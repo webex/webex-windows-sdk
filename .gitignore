@@ -1,0 +1,8 @@
+
+
+# generated files
+obj/
+binary/
+*.obj
+.vs
+packages

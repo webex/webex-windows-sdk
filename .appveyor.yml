@@ -1,0 +1,21 @@
+# version format
+version: 2.0.0.{build}
+
+# build platform, i.e. x86, x64, Any CPU. This setting is optional.
+platform: x86
+
+# build Configuration, i.e. Debug, Release, etc.
+configuration: Release
+
+
+build:
+  parallel: true                  # enable MSBuild parallel builds
+  project: sdk\solutions\WinSDK4Desktop\WinSDK4Desktop.sln      # path to Visual Studio solution or project
+
+before_build:
+  - ps: nuget restore sdk\solutions\WinSDK4Desktop\WinSDK4Desktop.sln
+  
+test:
+   assemblies:
+    except:
+     - WebexSDKTests.dll

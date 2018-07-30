@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{71755A7A-5CA8-4E68-8F9C-76EB1176F636}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebexSDK</RootNamespace>
+    <AssemblyName>WebexSDK</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\binary\[build]\bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\binary\[build]\bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+    <DocumentationFile>..\binary\[build]\bin\x86\Release\WebexSDK.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\binary\[build]\bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\binary\[build]\bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>..\binary\[build]\bin\x86\Release\WebexSDK.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\solutions\WinSDK4Desktop\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\solutions\WinSDK4Desktop\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="spark-client-framework-dot-net, Culture=neutral, processorArchitecture=x86">
+      <HintPath>..\solutions\WinSDK4Desktop\packages\Cisco.Webex.WindowsSDK.2.0.0-EFT\lib\net452\spark-client-framework-dot-net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\Auth\IAuthenticator.cs" />
+    <Compile Include="Source\Auth\JWTAuthClient.cs" />
+    <Compile Include="Source\Auth\JWTAuthenticator.cs" />
+    <Compile Include="Source\Auth\OAuthAuthenticator.cs" />
+    <Compile Include="Source\Auth\SSOAuthenticator.cs" />
+    <Compile Include="Source\Http\RestSharpClient.cs" />
+    <Compile Include="Source\Http\ServiceRequest.cs" />
+    <Compile Include="Source\Http\IServiceRequestClient.cs" />
+    <Compile Include="Source\Http\UserAgent.cs" />
+    <Compile Include="Source\Logger\ILogger.cs" />
+    <Compile Include="Source\Logger\SDKLogger.cs" />
+    <Compile Include="Source\Membership\Membership.cs" />
+    <Compile Include="Source\Membership\MembershipClient.cs" />
+    <Compile Include="Source\Message\Message.cs" />
+    <Compile Include="Source\Message\MessageClient.cs" />
+    <Compile Include="Source\Message\MessageEvent.cs" />
+    <Compile Include="Source\Person\Person.cs" />
+    <Compile Include="Source\Person\PersonClient.cs" />
+    <Compile Include="Source\Phone\Call.cs" />
+    <Compile Include="Source\Phone\CallEvent.cs" />
+    <Compile Include="Source\Phone\CallMembership.cs" />
+    <Compile Include="Source\Phone\CallStatus.cs" />
+    <Compile Include="Source\Phone\AVIODevice.cs" />
+    <Compile Include="Source\Phone\H264LicensePrompter.cs" />
+    <Compile Include="Source\Phone\MediaOption.cs" />
+    <Compile Include="Source\Phone\Phone.cs" />
+    <Compile Include="Source\Phone\ShareSource.cs" />
+    <Compile Include="Source\Room\Room.cs" />
+    <Compile Include="Source\Room\RoomClient.cs" />
+    <Compile Include="Source\TeamMembership\TeamMembership.cs" />
+    <Compile Include="Source\TeamMembership\TeamMembershipClient.cs" />
+    <Compile Include="Source\Team\Team.cs" />
+    <Compile Include="Source\Team\TeamClient.cs" />
+    <Compile Include="Source\Utils\StringExtention.cs" />
+    <Compile Include="Source\Utils\TimerHelper.cs" />
+    <Compile Include="Source\Webhook\Webhook.cs" />
+    <Compile Include="Source\Webhook\WebhookClient.cs" />
+    <Compile Include="Source\Webex.cs" />
+    <Compile Include="Source\WebexApiEventArgs.cs" />
+    <Compile Include="Source\WebexError.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\solutions\WinSDK4Desktop\packages\Cisco.Webex.WindowsSDK.2.0.0-EFT\build\Cisco.Webex.WindowsSDK.targets" Condition="Exists('..\solutions\WinSDK4Desktop\packages\Cisco.Webex.WindowsSDK.2.0.0-EFT\build\Cisco.Webex.WindowsSDK.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\solutions\WinSDK4Desktop\packages\Cisco.Webex.WindowsSDK.2.0.0-EFT\build\Cisco.Webex.WindowsSDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\solutions\WinSDK4Desktop\packages\Cisco.Webex.WindowsSDK.2.0.0-EFT\build\Cisco.Webex.WindowsSDK.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

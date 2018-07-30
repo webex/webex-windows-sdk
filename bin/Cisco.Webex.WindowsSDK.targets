@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <ItemGroup>
+        <None Include="$(MSBuildThisFileDirectory)\..\lib\native\appshare.dll">
+            <Link>appshare.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Include="$(MSBuildThisFileDirectory)\..\lib\native\ciscosrtp.dll">
+            <Link>ciscosrtp.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\dbghelp.dll">
+            <Link>dbghelp.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\libBgSub.dll">
+            <Link>libBgSub.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\libeay32.dll">
+            <Link>libeay32.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\mediasession.dll">
+            <Link>mediasession.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\MJPGDecoder.dll">
+            <Link>MJPGDecoder.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\msvcp120.dll">
+            <Link>msvcp120.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\msvcr120.dll">
+            <Link>msvcr120.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\opencv_core2413.dll">
+            <Link>opencv_core2413.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\opencv_core320.dll">
+            <Link>opencv_core320.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\opencv_highgui2413.dll">
+            <Link>opencv_highgui2413.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\opencv_imgproc2413.dll">
+            <Link>opencv_imgproc2413.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\opencv_imgproc320.dll">
+            <Link>opencv_imgproc320.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\opencv_objdetect320.dll">
+            <Link>opencv_objdetect320.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\openh264.dll">
+            <Link>openh264.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\shareux.dll">
+            <Link>shareux.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\ssleay32.dll">
+            <Link>ssleay32.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\tp.dll">
+            <Link>tp.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\util.dll">
+            <Link>util.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\wbxaecodec.dll">
+            <Link>wbxaecodec.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\wbxaudioengine.dll">
+            <Link>wbxaudioengine.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\wbxtrace.dll">
+            <Link>wbxtrace.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\wme4net_40.dll">
+            <Link>wme4net_40.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\wmeclient.dll">
+            <Link>wmeclient.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\wqos.dll">
+            <Link>wqos.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\wrtp.dll">
+            <Link>wrtp.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\wseclient.dll">
+            <Link>wseclient.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\wsertp.dll">
+            <Link>wsertp.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+		<None Include="$(MSBuildThisFileDirectory)\..\lib\native\spark-windows-office-integration.dll">
+            <Link>spark-windows-office-integration.dll</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+</Project>

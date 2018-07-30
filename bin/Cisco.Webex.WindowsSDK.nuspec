@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Cisco.Webex.WindowsSDK</id>
+    <version>2.0.0-EFT</version>
+    <authors>Cisco</authors>
+    <owners>Cisco</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/ciscowebex/webex-windows-sdk/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/ciscowebex/webex-windows-sdk</projectUrl>
+    <description>Cisco Webex SDK on Windows, WME version 8.0.2</description>
+    <releaseNotes>Added end to end encrypted message.</releaseNotes>
+    <copyright>Copyright ©2018 Cisco Corporation</copyright>
+    <tags>Webex Video Audio Call Message</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.5.2">
+        <dependency id="Newtonsoft.Json" version="10.0.3" />
+        <dependency id="RestSharp" version="105.2.3" />
+      </group>
+    </dependencies>
+    <references>
+      <group targetFramework=".NETFramework4.5.2">
+        <reference file="WebexSdk.dll" />
+        <reference file="spark-client-framework-dot-net.dll" />
+      </group>
+    </references>
+  </metadata>
+  <files>
+	<file src="..\sdk\binary\[build]\bin\x86\Release\WebexSDK.dll" target="lib\net452" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\spark-client-framework-dot-net.dll" target="lib\net452" />
+	
+	<file src="Cisco.Webex.WindowsSDK.targets" target="build" />
+	
+	<file src="..\sdk\binary\[build]\bin\x86\Release\appshare.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\ciscosrtp.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\dbghelp.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\libBgSub.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\libeay32.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\mediasession.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\MJPGDecoder.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\msvcp120.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\msvcr120.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\opencv_core320.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\opencv_core2413.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\opencv_highgui2413.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\opencv_imgproc320.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\opencv_imgproc2413.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\opencv_objdetect320.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\openh264.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\shareux.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\spark-windows-office-integration.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\ssleay32.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\tp.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\util.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\wbxaecodec.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\wbxaudioengine.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\wbxtrace.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\wme4net_40.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\wmeclient.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\wqos.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\wrtp.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\wseclient.dll" target="lib\native" />
+	<file src="..\sdk\binary\[build]\bin\x86\Release\wsertp.dll" target="lib\native" />
+  </files>
+</package>
