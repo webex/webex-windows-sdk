@@ -1,5 +1,5 @@
 # Cisco Webex Windows SDK
-[![Build status](https://ci.appveyor.com/api/projects/status/67u908ms00m4w7vh/branch/develop?svg=true)](https://ci.appveyor.com/project/ciscowebex/webex-windows-sdk/branch/EFT/1.4.0)
+[![Build status](https://ci.appveyor.com/api/projects/status/k7bu14htnvcxkdwd/branch/master?svg=true)](https://ci.appveyor.com/project/ciscospark/webex-windows-sdk/branch/master)
 [![LICENSE](https://img.shields.io/github/license/ciscowebex/webex-windows-sdk.svg)](https://github.com/ciscowebex/webex-windows-sdk/blob/master/LICENSE)
 > The Cisco Webex™ Windows SDK
  
