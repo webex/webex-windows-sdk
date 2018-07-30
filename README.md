@@ -1,6 +1,6 @@
 # Cisco Webex Windows SDK
 [![Build status](https://ci.appveyor.com/api/projects/status/k7bu14htnvcxkdwd/branch/master?svg=true)](https://ci.appveyor.com/project/ciscospark/webex-windows-sdk/branch/master)
-[![LICENSE](https://img.shields.io/github/license/ciscowebex/webex-windows-sdk.svg)](https://github.com/webex/webex-windows-sdk/blob/master/LICENSE)
+[![LICENSE](https://img.shields.io/github/license/webex/webex-windows-sdk.svg)](https://github.com/webex/webex-windows-sdk/blob/master/LICENSE)
 > The Cisco Webex™ Windows SDK
  
 The Cisco Webex Windows SDK makes it easy to integrate secure and convenient Cisco Webex calling and messaging features in your Windows applications.
@@ -24,12 +24,12 @@ In your Windows application for example WPF project, here are steps to integrate
 3. Install the lastest stable version
 
 ## Usage
-To use the SDK, you will need Cisco Webex integration credentials. If you do not already have a Cisco Webex account, visit the [Cisco Webex for Developers portal](https://developer.ciscowebex.com/) to create your account and [register an integration](https://developer.ciscowebex.com/authentication.html#registering-your-integration). Your app will need to authenticate users via an [OAuth](https://oauth.net/) grant flow for existing Cisco Webex users or a [JSON Web Token](https://jwt.io/) for guest users without a Cisco Webex account.
+To use the SDK, you will need Cisco Webex integration credentials. If you do not already have a Cisco Webex account, visit the [Cisco Webex for Developers portal](https://developer.webex.com/) to create your account and [register an integration](https://developer.webex.com/authentication.html#registering-your-integration). Your app will need to authenticate users via an [OAuth](https://oauth.net/) grant flow for existing Cisco Webex users or a [JSON Web Token](https://jwt.io/) for guest users without a Cisco Webex account.
 
-See the [Windows SDK area](https://developer.ciscowebex.com/sdk-for-windows.html) of the Cisco Webex for Developers site for more information about this SDK.
+See the [Windows SDK area](https://developer.webex.com/sdk-for-windows.html) of the Cisco Webex for Developers site for more information about this SDK.
 
 ### Examples
-Here are some examples of how to use the Windows SDK in your application. More details can be found under [Windows SDK Demo app](https://github.com/ciscowebex/webex-windows-sdk-example).
+Here are some examples of how to use the Windows SDK in your application. More details can be found under [Windows SDK Demo app](https://github.com/webex/webex-windows-sdk-example).
 
 1. Create a new *Webex* instance using Webex ID authentication ([OAuth](https://oauth.net/)-based):  
 
@@ -374,4 +374,4 @@ Pull requests welcome. To suggest changes to the SDK, please fork this repositor
 
 &copy; 2016-2018 Cisco Systems, Inc. and/or its affiliates. All Rights Reserved.
 
-See [LICENSE](https://github.com/ciscowebex/webex-windows-sdk/blob/master/LICENSE) for details.
+See [LICENSE](https://github.com/webex/webex-windows-sdk/blob/master/LICENSE) for details.
