@@ -38,7 +38,7 @@ namespace WebexSDK.Tests
         string clientId = ConfigurationManager.AppSettings["ClientID"] ?? "";
         string clientSecret = ConfigurationManager.AppSettings["ClientSecret"] ?? "";
         string redirectUri = ConfigurationManager.AppSettings["RedirectURL"] ?? "";
-        string scope = "webex: all";
+        string scope = "spark: all";
 
         [TestMethod()]
         public void OAuthAuthenticatorTest()
@@ -46,7 +46,7 @@ namespace WebexSDK.Tests
             var auth = new OAuthAuthenticator(clientId, clientSecret, scope, redirectUri);
             Assert.IsNotNull(auth);
 
-            string authUrl = "https://idbroker.webex.com/idb/oauth2/v1/authorize?cisKeepMeSignedInOption=1&response_type=code&client_id=C452b978600b789f41d65b6a017f7f8e10c14925af17b1befac2293d107b943ac&redirect_uri=SparkSdkWinUnitTest%3A%2F%2Fredirect";
+            string authUrl = "https://idbroker.webex.com/idb/oauth2/v1/authorize?cisKeepMeSignedInOption=1&response_type=code&client_id=C452b978600b789f41d65b6a017f7f8e10c14925af17b1befac2293d107b943ac&redirect_uri=WebexSdkWinUnitTest%3A%2F%2Fredirect";
             Assert.IsTrue(auth.AuthorizationUrl.StartsWith(authUrl));
         }
 

@@ -214,8 +214,8 @@ namespace WebexSDK.Tests
 
         private static TestUser CreateUser(string adminAccessToken, string adminClientId, string adminClientSecret)
         {
-            string[] entitlements = { "webex", "webExSquared", "squaredCallInitiation", "squaredTeamMember", "squaredRoomModeration" };
-            string scopes = "webex:people_read webex:rooms_read webex:rooms_write webex:memberships_read webex:memberships_write webex:messages_read webex:messages_write webex:teams_write webex:teams_read webex:team_memberships_write webex:team_memberships_read";
+            string[] entitlements = { "spark", "webExSquared", "squaredCallInitiation", "squaredTeamMember", "squaredRoomModeration" };
+            string scopes = "spark:people_read spark:rooms_read spark:rooms_write spark:memberships_read spark:memberships_write spark:messages_read spark:messages_write spark:teams_write spark:teams_read spark:team_memberships_write spark:team_memberships_read";
             string userName = Guid.NewGuid().ToString();
             string email = userName + "@squared.example.com";
 
