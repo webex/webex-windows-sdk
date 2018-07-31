@@ -47,14 +47,15 @@ namespace WebexSDK.Tests
         {
             Thread.Sleep(10000);
         }
-        [TestMethod()]
-        public void AuthorizeWithTest()
-        {
-            var auth = new JWTAuthenticator();
+        //#
+        //[TestMethod()]
+        //public void AuthorizeWithTest()
+        //{
+        //    var auth = new JWTAuthenticator();
 
-            Assert.IsTrue(LoginWithTryTimes(auth, 5));
-            Assert.IsTrue(Logout(auth));   
-        }
+        //    Assert.IsTrue(LoginWithTryTimes(auth, 5));
+        //    Assert.IsTrue(Logout(auth));   
+        //}
 
         [TestMethod()]
         public void AuthorizeTestInvalidJWTnull()
@@ -168,35 +169,35 @@ namespace WebexSDK.Tests
             Assert.IsFalse(rspOfauth.IsSuccess);
         }
 
+        //#
+        //[TestMethod()]
+        //public void AccessTokenTest()
+        //{
+        //    var completion = new ManualResetEvent(false);
+        //    var repOfaccessToken = new WebexApiEventArgs<string>();
 
-        [TestMethod()]
-        public void AccessTokenTest()
-        {
-            var completion = new ManualResetEvent(false);
-            var repOfaccessToken = new WebexApiEventArgs<string>();
-
-            var auth = new JWTAuthenticator();
-            Assert.IsTrue(LoginWithTryTimes(auth, 5));
+        //    var auth = new JWTAuthenticator();
+        //    Assert.IsTrue(LoginWithTryTimes(auth, 5));
             
-            auth.AccessToken(r =>
-            {
-                repOfaccessToken = r;
-                completion.Set();
-            });
-            if (false == completion.WaitOne(30000))
-            {
-                Assert.Fail();
-                return;
-            }
+        //    auth.AccessToken(r =>
+        //    {
+        //        repOfaccessToken = r;
+        //        completion.Set();
+        //    });
+        //    if (false == completion.WaitOne(30000))
+        //    {
+        //        Assert.Fail();
+        //        return;
+        //    }
 
-            Assert.IsTrue(repOfaccessToken.IsSuccess);
-            Assert.IsNotNull(repOfaccessToken.Data);
-            Assert.IsNull(repOfaccessToken.Error);
+        //    Assert.IsTrue(repOfaccessToken.IsSuccess);
+        //    Assert.IsNotNull(repOfaccessToken.Data);
+        //    Assert.IsNull(repOfaccessToken.Error);
 
-            Assert.IsTrue(Logout(auth));
+        //    Assert.IsTrue(Logout(auth));
 
-            Thread.Sleep(30000);
-        }
+        //    Thread.Sleep(30000);
+        //}
 
         //[TestMethod()]
         //public void AccessTokenTestUnexpirAccessToken()
