@@ -46,7 +46,7 @@ namespace WebexSDK.Tests
         private static Webex webex;
         private static Person self;
         private static Phone phone;
-        private static Room myRoom;
+        private static Space mySpace;
         private Call currentCall;
         private CallData callData;
 
@@ -91,8 +91,8 @@ namespace WebexSDK.Tests
 
             Assert.IsTrue(RegisterPhone());
 
-            myRoom = CreateRoom("my test room");
-            Assert.IsNotNull(myRoom);
+            mySpace = CreateSpace("my test space");
+            Assert.IsNotNull(mySpace);
 
             // start testFixtureApp process
             //Assert.IsTrue(StartTestFixtureAppProcess());
@@ -105,10 +105,10 @@ namespace WebexSDK.Tests
         public static void ClassTearDown()
         {
             Console.WriteLine("ClassTearDown");
-            if (myRoom != null)
+            if (mySpace != null)
             {
-                DeleteRoom(myRoom.Id);
-                myRoom = null;
+                DeleteSpace(mySpace.Id);
+                mySpace = null;
             }
 
             //if (testFixtureAppProcess != null && !testFixtureAppProcess.HasExited)
@@ -121,7 +121,7 @@ namespace WebexSDK.Tests
             fixture = null;
             webex = null;
             phone = null;
-            myRoom = null;
+            mySpace = null;
         }
 
         [TestInitialize]
@@ -3304,10 +3304,10 @@ namespace WebexSDK.Tests
         }
 
         [TestMethod()]
-        public void DialWithHydraRoomIdAndHangUpTest()
+        public void DialWithHydraSpaceIdAndHangUpTest()
         {
             currentCall = null;
-            bool result = DialCall(myRoom.Id, MediaOption.AudioVideoShare(), ref currentCall);
+            bool result = DialCall(mySpace.Id, MediaOption.AudioVideoShare(), ref currentCall);
             Assert.IsTrue(result);
             if (currentCall != null)
             {
@@ -3536,11 +3536,11 @@ namespace WebexSDK.Tests
             }
         }
 
-        private static Room CreateRoom(string title)
+        private static Space CreateSpace(string title)
         {
             var completion = new ManualResetEvent(false);
-            var response = new WebexApiEventArgs<Room>();
-            webex.Rooms.Create(title, null, rsp =>
+            var response = new WebexApiEventArgs<Space>();
+            webex.Spaces.Create(title, null, rsp =>
             {
                 response = rsp;
                 completion.Set();
@@ -3559,11 +3559,11 @@ namespace WebexSDK.Tests
             return null;
         }
 
-        private static bool DeleteRoom(string roomId)
+        private static bool DeleteSpace(string spaceId)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs();
-            webex.Rooms.Delete(roomId, rsp =>
+            webex.Spaces.Delete(spaceId, rsp =>
             {
                 response = rsp;
                 completion.Set();
@@ -3582,13 +3582,13 @@ namespace WebexSDK.Tests
             return false;
         }
 
-        private Membership CreateMembership(string roomId, string email, string personId, bool isModerator)
+        private Membership CreateMembership(string spaceId, string email, string personId, bool isModerator)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs<Membership>();
             if (email != null)
             {
-                webex.Memberships.CreateByPersonEmail(roomId, email, isModerator, rsp =>
+                webex.Memberships.CreateByPersonEmail(spaceId, email, isModerator, rsp =>
                 {
                     response = rsp;
                     completion.Set();
@@ -3596,7 +3596,7 @@ namespace WebexSDK.Tests
             }
             else
             {
-                webex.Memberships.CreateByPersonId(roomId, personId, isModerator, rsp =>
+                webex.Memberships.CreateByPersonId(spaceId, personId, isModerator, rsp =>
                 {
                     response = rsp;
                     completion.Set();
@@ -3617,11 +3617,11 @@ namespace WebexSDK.Tests
             return null;
         }
 
-        private List<Membership> ListMembership(string roomId, int? max = null)
+        private List<Membership> ListMembership(string spaceId, int? max = null)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs<List<Membership>>();
-            webex.Memberships.List(roomId, max, rsp =>
+            webex.Memberships.List(spaceId, max, rsp =>
             {
                 response = rsp;
                 completion.Set();

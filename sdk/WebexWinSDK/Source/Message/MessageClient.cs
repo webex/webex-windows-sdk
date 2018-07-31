@@ -34,7 +34,7 @@ namespace WebexSDK
 {
 
     /// <summary>
-    /// Messages are how we communicate in a room. In Webex, each message is displayed on its own line along with a timestamp and sender information. 
+    /// Messages are how we communicate in a space. In Webex, each message is displayed on its own line along with a timestamp and sender information. 
     /// Use this API to list, create, and delete messages. Message can contain plain text, rich text, and a file attachment.
     /// </summary>
     /// <remarks>Since: 0.1.0</remarks>
@@ -72,57 +72,57 @@ namespace WebexSDK
         public Action<MessageEvent> OnEvent;
 
         /// <summary>
-        /// Lists all messages in a room by room Id.
+        /// Lists all messages in a space by space Id.
         /// If present, it includes the associated media content attachment for each message.
         /// The list sorts the messages in descending order by creation date.
         /// </summary>
-        /// <param name="roomId">The identifier of the room.</param>
+        /// <param name="spaceId">The identifier of the space.</param>
         /// <param name="mentionedPeople">Only list messages mentioned self</param>
         /// <param name="before">Only list messages sent only before this date</param>
         /// <param name="max">The maximum number of messages in the response, default is 50</param>
         /// <param name="completionHandler">The completion event handler.</param>
         /// <remarks>Since: 0.1.0</remarks>
-        public void List(string roomId, string mentionedPeople, DateTime before, int? max, Action<WebexApiEventArgs<List<Message>>> completionHandler)
+        public void List(string spaceId, string mentionedPeople, DateTime before, int? max, Action<WebexApiEventArgs<List<Message>>> completionHandler)
         {
-            List(roomId, mentionedPeople, before, null, max, completionHandler);
+            List(spaceId, mentionedPeople, before, null, max, completionHandler);
         }
 
         /// <summary>
-        /// Lists all messages in a room by room Id.
+        /// Lists all messages in a space by space Id.
         /// If present, it includes the associated media content attachment for each message.
         /// The list sorts the messages in descending order by creation date.
         /// </summary>
-        /// <param name="roomId">The identifier of the room.</param>
+        /// <param name="spaceId">The identifier of the space.</param>
         /// <param name="mentionedPeople">Only list messages mentioned self</param>
         /// <param name="beforeMessage">only list messages sent only before this message by id.</param>
         /// <param name="max">The maximum number of messages in the response, default is 50.</param>
         /// <param name="completionHandler">The completion event handler.</param>
         /// <remarks>Since: 0.1.0</remarks>
-        public void List(string roomId, string mentionedPeople, string beforeMessage, int? max, Action<WebexApiEventArgs<List<Message>>> completionHandler)
+        public void List(string spaceId, string mentionedPeople, string beforeMessage, int? max, Action<WebexApiEventArgs<List<Message>>> completionHandler)
         {
-            List(roomId, mentionedPeople, null, beforeMessage, max, completionHandler);
+            List(spaceId, mentionedPeople, null, beforeMessage, max, completionHandler);
         }
 
         /// <summary>
-        /// Posts a plain text message, and optionally, mentions group and a media content attachment, to a room by room Id.
+        /// Posts a plain text message, and optionally, mentions group and a media content attachment, to a space by space Id.
         /// </summary>
-        /// <param name="roomId">The identifier of the room where the message is to be posted.</param>
-        /// <param name="text">The plain text message to be posted to the room.</param>
-        /// <param name="mentions">The mention items to be posted to the room.</param>
-        /// <param name="files">Local file objects to be uploaded to the room.</param>
+        /// <param name="spaceId">The identifier of the space where the message is to be posted.</param>
+        /// <param name="text">The plain text message to be posted to the space.</param>
+        /// <param name="mentions">The mention items to be posted to the space.</param>
+        /// <param name="files">Local file objects to be uploaded to the space.</param>
         /// <param name="completionHandler">The completion event handler.</param>
         /// <remarks>Since: 0.1.0</remarks>
-        public void PostToRoom(string roomId, string text, List<Mention> mentions = null, List<LocalFile> files = null, Action<WebexApiEventArgs<Message>> completionHandler = null)
+        public void PostToSpace(string spaceId, string text, List<Mention> mentions = null, List<LocalFile> files = null, Action<WebexApiEventArgs<Message>> completionHandler = null)
         {
-            Post(roomId, null, text, mentions, files, completionHandler);
+            Post(spaceId, null, text, mentions, files, completionHandler);
         }
 
         /// <summary>
         /// Posts a private 1:1 message in plain text, and optionally, a media content attachment, to a person by person email.
         /// </summary>
         /// <param name="toPerson">The email address or the personId of the recipient when sending a private 1:1 message.</param>
-        /// <param name="text">The plain text message to post to the room.</param>
-        /// <param name="files">Local file objects to be uploaded to the room.</param>
+        /// <param name="text">The plain text message to post to the space.</param>
+        /// <param name="files">Local file objects to be uploaded to the space.</param>
         /// <param name="completionHandler">The completion event handler.</param>
         /// <remarks>Since: 0.1.0</remarks>
         public void PostToPerson(string toPerson, string text, List<LocalFile> files = null, Action<WebexApiEventArgs<Message>> completionHandler = null)
@@ -131,21 +131,21 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// Retrieves the details for a message by room Id and message Id.
+        /// Retrieves the details for a message by space Id and message Id.
         /// </summary>
-        /// <param name="roomId">The identifier of the room.</param>
+        /// <param name="spaceId">The identifier of the space.</param>
         /// <param name="messageId">The identifier of the message.</param>
         /// <param name="completionHandler">The completion event handler.</param>
         /// <remarks>Since: 0.1.0</remarks>
-        public void Get(string roomId, string messageId, Action<WebexApiEventArgs<Message>> completionHandler)
+        public void Get(string spaceId, string messageId, Action<WebexApiEventArgs<Message>> completionHandler)
         {
             string conversationId = null;
             string parsedMessageId = null;
 
-            if (roomId == null
-                || StringExtention.ParseHydraId(roomId, ref conversationId) != StringExtention.HydraIdType.Room)
+            if (spaceId == null
+                || StringExtention.ParseHydraId(spaceId, ref conversationId) != StringExtention.HydraIdType.Space)
             {
-                completionHandler?.Invoke(new WebexApiEventArgs<Message>(false, new WebexError(WebexErrorCode.IllegalOperation, "invalid roomId parameter"), null));
+                completionHandler?.Invoke(new WebexApiEventArgs<Message>(false, new WebexError(WebexErrorCode.IllegalOperation, "invalid spaceId parameter"), null));
                 return;
             }
             
@@ -250,7 +250,7 @@ namespace WebexSDK
             string parsedConversationId = null;
             string parsedMessageId = null;
             if (file == null
-                || StringExtention.ParseHydraId(file.RoomId, ref parsedConversationId) != StringExtention.HydraIdType.Room
+                || StringExtention.ParseHydraId(file.SpaceId, ref parsedConversationId) != StringExtention.HydraIdType.Space
                 || StringExtention.ParseHydraId(file.MessageId, ref parsedMessageId) != StringExtention.HydraIdType.Message)
             {
                 progressHandler?.Invoke(new WebexApiEventArgs<int>(false, new WebexError(WebexErrorCode.IllegalOperation, "invalid file parameter."), 0));
@@ -291,7 +291,7 @@ namespace WebexSDK
             string parsedMessageId = null;
 
             if (file == null
-                || StringExtention.ParseHydraId(file.RoomId, ref parsedConversationId) != StringExtention.HydraIdType.Room
+                || StringExtention.ParseHydraId(file.SpaceId, ref parsedConversationId) != StringExtention.HydraIdType.Space
                 || StringExtention.ParseHydraId(file.MessageId, ref parsedMessageId) != StringExtention.HydraIdType.Message)
             {
                 completionHandler?.Invoke(new WebexApiEventArgs<string>(false, new WebexError(WebexErrorCode.IllegalOperation, "parameter invalid."), null));
@@ -395,16 +395,16 @@ namespace WebexSDK
             return instance;
         }
 
-        private void List(string roomId, string mentionedPeople, DateTime? before, string beforeMessage, int? max, Action<WebexApiEventArgs<List<Message>>> completionHandler)
+        private void List(string spaceId, string mentionedPeople, DateTime? before, string beforeMessage, int? max, Action<WebexApiEventArgs<List<Message>>> completionHandler)
         {
             string conversationId = null;
             string mentionedPeopleId = null;
             string beforeMessageId = null;
 
-            if (StringExtention.ParseHydraId(roomId, ref conversationId) != StringExtention.HydraIdType.Room)
+            if (StringExtention.ParseHydraId(spaceId, ref conversationId) != StringExtention.HydraIdType.Space)
             {
-                SDKLogger.Instance.Error("roomId format is invalid.");
-                completionHandler?.Invoke(new WebexApiEventArgs<List<Message>>(false, new WebexError(WebexErrorCode.IllegalOperation, "invalid roomId parameter"), null));
+                SDKLogger.Instance.Error("spaceId format is invalid.");
+                completionHandler?.Invoke(new WebexApiEventArgs<List<Message>>(false, new WebexError(WebexErrorCode.IllegalOperation, "invalid spaceId parameter"), null));
                 return;
             }
             if (mentionedPeople != null
@@ -425,7 +425,7 @@ namespace WebexSDK
             // default limit max list count
             int? maxCount = (max == null ? 50 : max);
 
-            SDKLogger.Instance.Info($"roomId[{conversationId}] mentionedPeople[{mentionedPeople}] beforeTime[{before}] beforeMessage[{beforeMessage}] Max[{maxCount}]");
+            SDKLogger.Instance.Info($"spaceId[{conversationId}] mentionedPeople[{mentionedPeople}] beforeTime[{before}] beforeMessage[{beforeMessage}] Max[{maxCount}]");
 
             var coversation = m_core_conversationService.getConversation(conversationId);
             var messages = coversation.getMessages();
@@ -559,11 +559,11 @@ namespace WebexSDK
                 case SCFEventType.ConversationIdChanged:
                     // strStatus = "old conversationId"+"new conversationId"
                     {
-                        if (creatOne2OneRoomCompletionHandler.ContainsKey(arrStr[0]))
+                        if (creatOne2OneSpaceCompletionHandler.ContainsKey(arrStr[0]))
                         {
                             SDKLogger.Instance.Debug($"conversationId changed from old [{arrStr[0]}] to new [{arrStr[1]}]");
-                            creatOne2OneRoomCompletionHandler[arrStr[0]].Invoke(arrStr[1]);
-                            creatOne2OneRoomCompletionHandler.Remove(arrStr[0]);
+                            creatOne2OneSpaceCompletionHandler[arrStr[0]].Invoke(arrStr[1]);
+                            creatOne2OneSpaceCompletionHandler.Remove(arrStr[0]);
                         }
                     }
                     break;
@@ -719,13 +719,13 @@ namespace WebexSDK
             m.PersonId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.People, input.getSenderPersonId());
             m.PersonEmail = input.getSenderEmail();
 
-            // RoomId, RoomType
-            m.RoomId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.Room, conversationId);
+            // SpaceId, SpaceType
+            m.SpaceId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.Space, conversationId);
             var conversation = m_core_conversationService?.getConversation(conversationId);
-            m.RoomType = conversation.isOne2One() ? RoomType.Direct : RoomType.Group;
+            m.SpaceType = conversation.isOne2One() ? SpaceType.Direct : SpaceType.Group;
 
             // ToPersonId, ToPersonEmail
-            if (m.RoomType == RoomType.Direct)
+            if (m.SpaceType == SpaceType.Direct)
             {
                 string[] participants = conversation.getParticipants();
                 string toPersonId = null;
@@ -758,7 +758,7 @@ namespace WebexSDK
                 m.Files = new List<RemoteFile>();
                 for (int i = 0;i<contents.Length;i++)
                 {
-                    m.Files.Add(ShareContentToFile(m.RoomId, m.Id, i, contents[i]));
+                    m.Files.Add(ShareContentToFile(m.SpaceId, m.Id, i, contents[i]));
                 }
             }
 
@@ -768,7 +768,7 @@ namespace WebexSDK
 
             return m;
         }
-        private RemoteFile ShareContentToFile(string roomId, string messageId, int fileIndex, SparkNet.SharedContent shareContent)
+        private RemoteFile ShareContentToFile(string spaceId, string messageId, int fileIndex, SparkNet.SharedContent shareContent)
         {
             RemoteFile remoteFile = new RemoteFile();
             remoteFile.Name = shareContent.contentDisplayName;
@@ -776,7 +776,7 @@ namespace WebexSDK
             remoteFile.Size = (ulong)shareContent.fileSize;
             remoteFile.RemoteThumbnail = ToThumbnail(shareContent.thumbnail);
 
-            remoteFile.RoomId = roomId;
+            remoteFile.SpaceId = spaceId;
             remoteFile.MessageId = messageId;
             remoteFile.FileIndex = fileIndex;
 
@@ -799,10 +799,10 @@ namespace WebexSDK
             return outThumbnail;
 
         }
-        private List<string> FilterNormalMessages(string roomId)
+        private List<string> FilterNormalMessages(string spaceId)
         {
             List<string> result = new List<string>();
-            var conversation = m_core_conversationService.getConversation(roomId);
+            var conversation = m_core_conversationService.getConversation(spaceId);
             var originMessages = conversation.getMessages();
 
             for (int i = 0; i < originMessages.Length; i++)
@@ -815,9 +815,9 @@ namespace WebexSDK
             }
             return result;
         }
-        private bool IsNoMoreFetchAble(string roomId)
+        private bool IsNoMoreFetchAble(string spaceId)
         {
-            var conversation = m_core_conversationService.getConversation(roomId);
+            var conversation = m_core_conversationService.getConversation(spaceId);
             var messages = conversation.getMessages();
             string firstMessageId = messages[0];
             var firstMessage = conversation.getMessage(firstMessageId);
@@ -936,15 +936,15 @@ namespace WebexSDK
             return exitedConvId;
         }
 
-        private Dictionary<string, Action<string>> creatOne2OneRoomCompletionHandler = new Dictionary<string, Action<string>>();
-        private void CreateOne2OneRoom(string title, string toPersonId, string toEmail, Action<string> completionHandler)
+        private Dictionary<string, Action<string>> creatOne2OneSpaceCompletionHandler = new Dictionary<string, Action<string>>();
+        private void CreateOne2OneSpace(string title, string toPersonId, string toEmail, Action<string> completionHandler)
         {
             SDKLogger.Instance.Debug($"create one-on-one conversation. title[{title}] toPersonId[{toPersonId}] toEmail[{toEmail}]");
             string tmpConvId = m_core_conversationService.createOneToOneRoom(title, toPersonId, toEmail, true);
-            creatOne2OneRoomCompletionHandler.Add(tmpConvId, completionHandler);
+            creatOne2OneSpaceCompletionHandler.Add(tmpConvId, completionHandler);
         }
 
-        private void GetOrCreatOneOnOneRoom(string toPerson, Action<string> conversationId)
+        private void GetOrCreatOneOnOneSpace(string toPerson, Action<string> conversationId)
         {
             string toPersonId = null;
             string selfId = null;
@@ -974,17 +974,17 @@ namespace WebexSDK
                         return;
                     }
 
-                    CreateOne2OneRoom(toPersonId, toPersonId, "", newConvId =>
+                    CreateOne2OneSpace(toPersonId, toPersonId, "", newConvId =>
                     {
                         if (newConvId != null)
                         {
-                            SDKLogger.Instance.Debug($"CreateOne2OneRoom success conversation id[{newConvId}]");
+                            SDKLogger.Instance.Debug($"CreateOne2OneSpace success conversation id[{newConvId}]");
                             conversationId.Invoke(newConvId);
                             return;
                         }
                         else
                         {
-                            SDKLogger.Instance.Error("CreateOne2OneRoom failed");
+                            SDKLogger.Instance.Error("CreateOne2OneSpace failed");
                             conversationId.Invoke(null);
                             return;
                         }
@@ -1019,15 +1019,15 @@ namespace WebexSDK
                                 return;
                             }
 
-                            CreateOne2OneRoom(toPerson, toPersonId, toPerson, newConvId =>
+                            CreateOne2OneSpace(toPerson, toPersonId, toPerson, newConvId =>
                             {
                                 if (newConvId == null)
                                 {
-                                    SDKLogger.Instance.Error("CreateOne2OneRoom failed");
+                                    SDKLogger.Instance.Error("CreateOne2OneSpace failed");
                                     conversationId.Invoke(null);
                                     return;
                                 }
-                                SDKLogger.Instance.Debug($"CreateOne2OneRoom success conversation id[{newConvId}]");
+                                SDKLogger.Instance.Debug($"CreateOne2OneSpace success conversation id[{newConvId}]");
                                 conversationId.Invoke(newConvId);
                                 return;
                             });
@@ -1044,27 +1044,27 @@ namespace WebexSDK
 
         }
 
-        private void Post(string roomId, string toPerson, string text, List<Mention> mentions, List<LocalFile> files, Action<WebexApiEventArgs<Message>> completionHandler)
+        private void Post(string spaceId, string toPerson, string text, List<Mention> mentions, List<LocalFile> files, Action<WebexApiEventArgs<Message>> completionHandler)
         {
-            if (roomId != null)
+            if (spaceId != null)
             {
                 string conversationId = null;
-                if (StringExtention.ParseHydraId(roomId, ref conversationId) != StringExtention.HydraIdType.Room)
+                if (StringExtention.ParseHydraId(spaceId, ref conversationId) != StringExtention.HydraIdType.Space)
                 {
-                    SDKLogger.Instance.Error($"roomId[{roomId}] is invailid.");
-                    completionHandler?.Invoke(new WebexApiEventArgs<Message>(false, new WebexError(WebexErrorCode.IllegalOperation, "invalid roomId parameter"), null));
+                    SDKLogger.Instance.Error($"spaceId[{spaceId}] is invailid.");
+                    completionHandler?.Invoke(new WebexApiEventArgs<Message>(false, new WebexError(WebexErrorCode.IllegalOperation, "invalid spaceId parameter"), null));
                     return;
                 }
                 SendConversationMsg(conversationId, text, mentions, files, completionHandler);
             }
             else if(toPerson != null)
             {
-                GetOrCreatOneOnOneRoom(toPerson, convId =>
+                GetOrCreatOneOnOneSpace(toPerson, convId =>
                 {
                     if (convId == null)
                     {
-                        SDKLogger.Instance.Error($"can't get or create this one one one room for toPerson[{toPerson}]");
-                        completionHandler?.Invoke(new WebexApiEventArgs<Message>(false, new WebexError(WebexErrorCode.IllegalOperation, "can't get or create this one one one room"), null));
+                        SDKLogger.Instance.Error($"can't get or create this one one one space for toPerson[{toPerson}]");
+                        completionHandler?.Invoke(new WebexApiEventArgs<Message>(false, new WebexError(WebexErrorCode.IllegalOperation, "can't get or create this one one one space"), null));
                         return;
                     }
                     SendConversationMsg(convId, text, mentions, files, completionHandler);
@@ -1131,7 +1131,7 @@ namespace WebexSDK
             if (conv == null || conv.getParticipants().Length == 0)
             {
                 SDKLogger.Instance.Error($"conversation id[{conversationId}] is invalid or no participants.");
-                completionHandler.Invoke(new WebexApiEventArgs<Message>(false, new WebexError(WebexErrorCode.IllegalOperation, "invalid room id"), null));
+                completionHandler.Invoke(new WebexApiEventArgs<Message>(false, new WebexError(WebexErrorCode.IllegalOperation, "invalid space id"), null));
                 return;
             }
 

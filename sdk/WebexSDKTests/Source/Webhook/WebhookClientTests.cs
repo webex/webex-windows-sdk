@@ -37,7 +37,7 @@ namespace WebexSDK.Tests
         private WebexTestFixture fixture;
         private Webex webex;
         private WebhookClient webhooks;
-        private Room myRoom;
+        private Space mySpace;
         private Webhook myWebHook;
 
 
@@ -54,7 +54,7 @@ namespace WebexSDK.Tests
             webhooks = webex.Webhooks;
             Assert.IsNotNull(webhooks);
 
-            myRoom = fixture.CreateRoom("test room");
+            mySpace = fixture.CreateSpace("test space");
             myWebHook = CreateWebHook();
             Assert.IsNotNull(myWebHook);
             Assert.IsNotNull(myWebHook.Id);
@@ -64,9 +64,9 @@ namespace WebexSDK.Tests
         [TestCleanup]
         public void TearDown()
         {
-            if (myRoom != null)
+            if (mySpace != null)
             {
-                fixture.DeleteRoom(myRoom.Id);
+                fixture.DeleteSpace(mySpace.Id);
             }
             if (myWebHook != null)
             {
@@ -137,7 +137,7 @@ namespace WebexSDK.Tests
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs<Webhook>();
-            webhooks.Create("test webhook", "https://example.com/test_webhook", "messages", "created", string.Format("roomId=" + myRoom.Id),null, rsp =>
+            webhooks.Create("test webhook", "https://example.com/test_webhook", "messages", "created", string.Format("roomId=" + mySpace.Id),null, rsp =>
             {
                 response = rsp;
                 completion.Set();

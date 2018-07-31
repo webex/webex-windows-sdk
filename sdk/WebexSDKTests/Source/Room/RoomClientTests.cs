@@ -32,15 +32,15 @@ using System.Threading;
 namespace WebexSDK.Tests
 {
     [TestClass()]
-    public class RoomClientTests
+    public class SpaceClientTests
     {
         private WebexTestFixture fixture;
         private Webex webex;
-        private RoomClient room;
-        private string roomTitle = "room_for_testing";
-        private string updateRoomTitle = "room_for_testing_update";
+        private SpaceClient space;
+        private string spaceTitle = "space_for_testing";
+        private string updateSpaceTitle = "space_for_testing_update";
         private string specialTitle = "@@@ &&&_%%%";
-        private Room myRoomInfo;
+        private Space mySpaceInfo;
 
         [TestInitialize]
         public void SetUp()
@@ -52,211 +52,211 @@ namespace WebexSDK.Tests
             webex = fixture.CreateWebex();
             Assert.IsNotNull(webex);
 
-            room = webex.Rooms;
-            Assert.IsNotNull(room);
+            space = webex.Spaces;
+            Assert.IsNotNull(space);
         }
 
 
         [TestCleanup]
         public void TearDown()
         {
-            if (myRoomInfo != null)
+            if (mySpaceInfo != null)
             {
-                if(DeleteRoom(myRoomInfo.Id) != true)
+                if(DeleteSpace(mySpaceInfo.Id) != true)
                 {
-                    Console.WriteLine("fail to delete room[{0}]", myRoomInfo.Id);
+                    Console.WriteLine("fail to delete space[{0}]", mySpaceInfo.Id);
                 }
             }
         }
 
         [TestMethod()]
-        public void CreateByRoomTitleTest()
+        public void CreateBySpaceTitleTest()
         {
-            myRoomInfo = CreateRoom(roomTitle);
-            Validate(myRoomInfo);
-            Assert.AreEqual(roomTitle, myRoomInfo.Title);
-            Assert.AreEqual(RoomType.Group, myRoomInfo.Type);
+            mySpaceInfo = CreateSpace(spaceTitle);
+            Validate(mySpaceInfo);
+            Assert.AreEqual(spaceTitle, mySpaceInfo.Title);
+            Assert.AreEqual(SpaceType.Group, mySpaceInfo.Type);
         }
 
         [TestMethod()]
-        public void CreateByEmptyRoomTitleTest()
+        public void CreateByEmptySpaceTitleTest()
         {
-            myRoomInfo = CreateRoom("");
-            Assert.IsNotNull(myRoomInfo);
-            Assert.IsNotNull(myRoomInfo.Id);
-            Assert.IsNull(myRoomInfo.Title);
+            mySpaceInfo = CreateSpace("");
+            Assert.IsNotNull(mySpaceInfo);
+            Assert.IsNotNull(mySpaceInfo.Id);
+            Assert.IsNull(mySpaceInfo.Title);
         }
 
         [TestMethod()]
-        public void CreateBySpecialRoomTitleTest()
+        public void CreateBySpecialSpaceTitleTest()
         {
-            myRoomInfo = CreateRoom(specialTitle);
-            Validate(myRoomInfo);
-            Assert.AreEqual(specialTitle, myRoomInfo.Title);
+            mySpaceInfo = CreateSpace(specialTitle);
+            Validate(mySpaceInfo);
+            Assert.AreEqual(specialTitle, mySpaceInfo.Title);
         }
 
         [TestMethod()]
-        public void CreateByRoomTitleAndTeamIdTest()
+        public void CreateBySpaceTitleAndTeamIdTest()
         {
             var myTeam = fixture.CreateTeam("test team");
-            var myRoom = CreateRoom(roomTitle, myTeam.Id);
-            Validate(myRoom);
+            var mySpace = CreateSpace(spaceTitle, myTeam.Id);
+            Validate(mySpace);
         }
 
         [TestMethod()]
         public void GetTest()
         {
-            myRoomInfo = CreateRoom(roomTitle);
-            Validate(myRoomInfo);
+            mySpaceInfo = CreateSpace(spaceTitle);
+            Validate(mySpaceInfo);
 
-            var getRoomInfo = GetRoom(myRoomInfo.Id);
-            Validate(getRoomInfo);
+            var getSpaceInfo = GetSpace(mySpaceInfo.Id);
+            Validate(getSpaceInfo);
 
-            Assert.AreEqual(myRoomInfo.Id, getRoomInfo.Id);
-            Assert.AreEqual(myRoomInfo.Title, getRoomInfo.Title);
+            Assert.AreEqual(mySpaceInfo.Id, getSpaceInfo.Id);
+            Assert.AreEqual(mySpaceInfo.Title, getSpaceInfo.Title);
         }
 
         [TestMethod()]
         public void GetByInvalidIdTest()
         {
-            myRoomInfo = CreateRoom(roomTitle);
-            Validate(myRoomInfo);
+            mySpaceInfo = CreateSpace(spaceTitle);
+            Validate(mySpaceInfo);
 
-            var getRoomInfo = GetRoom("abc");
-            Assert.IsNull(getRoomInfo);
+            var getSpaceInfo = GetSpace("abc");
+            Assert.IsNull(getSpaceInfo);
         }
 
         [TestMethod()]
         public void GetByEmptyIdTest()
         {
-            myRoomInfo = CreateRoom(roomTitle);
-            Validate(myRoomInfo);
+            mySpaceInfo = CreateSpace(spaceTitle);
+            Validate(mySpaceInfo);
 
-            var getRoomInfo = GetRoom("");
-            Assert.IsNotNull(getRoomInfo);
-            Assert.IsNull(getRoomInfo.Id);
-            Assert.IsNull(getRoomInfo.Title);
+            var getSpaceInfo = GetSpace("");
+            Assert.IsNotNull(getSpaceInfo);
+            Assert.IsNull(getSpaceInfo.Id);
+            Assert.IsNull(getSpaceInfo.Title);
         }
 
         [TestMethod()]
-        public void UpdateByRooIdAndTitleTest()
+        public void UpdateBySpaceIdAndTitleTest()
         {
-            myRoomInfo = CreateRoom(roomTitle);
-            Validate(myRoomInfo);
+            mySpaceInfo = CreateSpace(spaceTitle);
+            Validate(mySpaceInfo);
 
-            var newRoom = UpdateRoom(myRoomInfo.Id, updateRoomTitle);
-            Validate(newRoom);
+            var newSpace = UpdateSpace(mySpaceInfo.Id, updateSpaceTitle);
+            Validate(newSpace);
 
-            Assert.AreEqual(updateRoomTitle, newRoom.Title);
+            Assert.AreEqual(updateSpaceTitle, newSpace.Title);
         }
 
         [TestMethod()]
-        public void UpdateByRooIdAndSpecialTitleTest()
+        public void UpdateBySpaceIdAndSpecialTitleTest()
         {
-            myRoomInfo = CreateRoom(roomTitle);
-            Validate(myRoomInfo);
+            mySpaceInfo = CreateSpace(spaceTitle);
+            Validate(mySpaceInfo);
 
-            var newRoom = UpdateRoom(myRoomInfo.Id, specialTitle);
-            Validate(newRoom);
+            var newSpace = UpdateSpace(mySpaceInfo.Id, specialTitle);
+            Validate(newSpace);
 
-            Assert.AreEqual(specialTitle, newRoom.Title);
+            Assert.AreEqual(specialTitle, newSpace.Title);
         }
 
 
         [TestMethod()]
-        public void UpdateByInvalidRoomIdTest()
+        public void UpdateByInvalidSpaceIdTest()
         {
-            myRoomInfo = CreateRoom(roomTitle);
-            Validate(myRoomInfo);
+            mySpaceInfo = CreateSpace(spaceTitle);
+            Validate(mySpaceInfo);
 
-            var newRoom = UpdateRoom("abc", roomTitle);
-            Assert.IsNull(newRoom);
+            var newSpace = UpdateSpace("abc", spaceTitle);
+            Assert.IsNull(newSpace);
         }
 
 
         [TestMethod()]
         public void DeleteTest()
         {
-            myRoomInfo = CreateRoom(roomTitle);
-            Validate(myRoomInfo);
+            mySpaceInfo = CreateSpace(spaceTitle);
+            Validate(mySpaceInfo);
 
-            Assert.IsTrue(DeleteRoom(myRoomInfo.Id));
+            Assert.IsTrue(DeleteSpace(mySpaceInfo.Id));
 
-            Assert.IsNull(GetRoom(myRoomInfo.Id));
+            Assert.IsNull(GetSpace(mySpaceInfo.Id));
        
         }
 
         [TestMethod()]
         public void DeleteByInvalidIdTest()
         {
-            Assert.IsFalse(DeleteRoom("abc"));
+            Assert.IsFalse(DeleteSpace("abc"));
         }
 
         [TestMethod()]
         public void ListTest()
         {
-            myRoomInfo = CreateRoom(roomTitle);
-            Validate(myRoomInfo);
+            mySpaceInfo = CreateSpace(spaceTitle);
+            Validate(mySpaceInfo);
 
-            var lstRoom = ListRooms();
-            Assert.IsNotNull(lstRoom);
-            Validate(lstRoom[0]);
-            Assert.AreEqual(myRoomInfo.Title, lstRoom[0].Title);
-            Assert.AreEqual(myRoomInfo.Id, lstRoom[0].Id);
+            var lstSpace = ListSpaces();
+            Assert.IsNotNull(lstSpace);
+            Validate(lstSpace[0]);
+            Assert.AreEqual(mySpaceInfo.Title, lstSpace[0].Title);
+            Assert.AreEqual(mySpaceInfo.Id, lstSpace[0].Id);
 
         }
 
         [TestMethod()]
         public void ListByMaxCountTest()
         {
-            int roomCount = 11;
-            List<Room> lstRooms = new List<Room>();
-            for (int i = 0; i < roomCount; i++)
+            int spaceCount = 11;
+            List<Space> lstSpaces = new List<Space>();
+            for (int i = 0; i < spaceCount; i++)
             {
-                lstRooms.Add(CreateRoom(string.Format("room#{0}", i)));
+                lstSpaces.Add(CreateSpace(string.Format("space#{0}", i)));
             }
 
-            var lstRoom = ListRooms(null, 10, null);
+            var lstSpace = ListSpaces(null, 10, null);
 
-            for (int i = 0; i < roomCount; i++)
+            for (int i = 0; i < spaceCount; i++)
             {
-                DeleteRoom(lstRooms[i].Id);
+                DeleteSpace(lstSpaces[i].Id);
             }
 
-            Assert.AreEqual(10, lstRoom.Count);
+            Assert.AreEqual(10, lstSpace.Count);
         }
 
         [TestMethod()]
         public void ListByInvalidMaxCountTest()
         {
-            int roomCount = 11;
-            List<Room> lstRooms = new List<Room>();
-            for (int i = 0; i < roomCount; i++)
+            int spaceCount = 11;
+            List<Space> lstSpaces = new List<Space>();
+            for (int i = 0; i < spaceCount; i++)
             {
-                lstRooms.Add(CreateRoom(string.Format("room#{0}", i)));
+                lstSpaces.Add(CreateSpace(string.Format("space#{0}", i)));
             }
 
-            var lstRoom = ListRooms(null, -1, null);
+            var lstSpace = ListSpaces(null, -1, null);
 
-            for (int i = 0; i < roomCount; i++)
+            for (int i = 0; i < spaceCount; i++)
             {
-                DeleteRoom(lstRooms[i].Id);
+                DeleteSpace(lstSpaces[i].Id);
             }
-            Assert.IsNull(lstRoom);
+            Assert.IsNull(lstSpace);
         }
 
         [TestMethod()]
-        public void ListByRoomTypeTest()
+        public void ListBySpaceTypeTest()
         {
-            myRoomInfo = CreateRoom(roomTitle);
-            Validate(myRoomInfo);
+            mySpaceInfo = CreateSpace(spaceTitle);
+            Validate(mySpaceInfo);
 
-            var lstRoom = ListRooms(null, null, RoomType.Group);
-            Assert.IsNotNull(lstRoom);
+            var lstSpace = ListSpaces(null, null, SpaceType.Group);
+            Assert.IsNotNull(lstSpace);
 
-            Validate(lstRoom[0]);
-            Assert.AreEqual(myRoomInfo.Title, lstRoom[0].Title);
-            Assert.AreEqual(myRoomInfo.Id, lstRoom[0].Id);
+            Validate(lstSpace[0]);
+            Assert.AreEqual(mySpaceInfo.Title, lstSpace[0].Title);
+            Assert.AreEqual(mySpaceInfo.Id, lstSpace[0].Id);
         }
 
         [TestMethod()]
@@ -264,72 +264,72 @@ namespace WebexSDK.Tests
         {
             var myTeam = fixture.CreateTeam("test team");
             Assert.IsNotNull(myTeam);
-            var room1 = CreateRoom("room1", myTeam.Id);
-            var room2 = CreateRoom("room2", myTeam.Id);
+            var space1 = CreateSpace("space1", myTeam.Id);
+            var space2 = CreateSpace("space2", myTeam.Id);
 
-            var rooms = ListRooms(myTeam.Id);
-            Assert.IsNotNull(rooms);
-            Assert.IsNotNull(rooms.Find(room => room.Id == room1.Id));
-            Assert.IsNotNull(rooms.Find(room => room.Id == room2.Id));
+            var spaces = ListSpaces(myTeam.Id);
+            Assert.IsNotNull(spaces);
+            Assert.IsNotNull(spaces.Find(space => space.Id == space1.Id));
+            Assert.IsNotNull(spaces.Find(space => space.Id == space2.Id));
 
-            DeleteRoom(room1.Id);
-            DeleteRoom(room2.Id);
+            DeleteSpace(space1.Id);
+            DeleteSpace(space2.Id);
             fixture.DeleteTeam(myTeam.Id);
         }
 
         [TestMethod()]
         public void ListBySortByLastActivityTest()
         {
-            myRoomInfo = CreateRoom(roomTitle);
-            Validate(myRoomInfo);
+            mySpaceInfo = CreateSpace(spaceTitle);
+            Validate(mySpaceInfo);
 
-            var lstRoom = ListRooms(null, null, null, RoomSortType.ByLastActivity);
-            Assert.IsNotNull(lstRoom);
+            var lstSpace = ListSpaces(null, null, null, SpaceSortType.ByLastActivity);
+            Assert.IsNotNull(lstSpace);
 
-            Validate(lstRoom[0]);
-            Assert.AreEqual(myRoomInfo.Title, lstRoom[0].Title);
-            Assert.AreEqual(myRoomInfo.Id, lstRoom[0].Id);
+            Validate(lstSpace[0]);
+            Assert.AreEqual(mySpaceInfo.Title, lstSpace[0].Title);
+            Assert.AreEqual(mySpaceInfo.Id, lstSpace[0].Id);
         }
         [TestMethod()]
         public void ListBySortByIdTest()
         {
-            myRoomInfo = CreateRoom(roomTitle);
-            Validate(myRoomInfo);
+            mySpaceInfo = CreateSpace(spaceTitle);
+            Validate(mySpaceInfo);
 
-            var lstRoom = ListRooms(null, null, null, RoomSortType.ById);
-            Assert.IsNotNull(lstRoom);
-            Assert.IsNotNull(lstRoom.Find(item => item.Id == myRoomInfo.Id));
+            var lstSpace = ListSpaces(null, null, null, SpaceSortType.ById);
+            Assert.IsNotNull(lstSpace);
+            Assert.IsNotNull(lstSpace.Find(item => item.Id == mySpaceInfo.Id));
         }
         [TestMethod()]
         public void ListBySortByCreatedTest()
         {
-            myRoomInfo = CreateRoom(roomTitle);
-            Validate(myRoomInfo);
+            mySpaceInfo = CreateSpace(spaceTitle);
+            Validate(mySpaceInfo);
 
-            var lstRoom = ListRooms(null, null, null, RoomSortType.ByCreated);
-            Assert.IsNotNull(lstRoom);
+            var lstSpace = ListSpaces(null, null, null, SpaceSortType.ByCreated);
+            Assert.IsNotNull(lstSpace);
 
-            Validate(lstRoom[0]);
-            Assert.AreEqual(myRoomInfo.Title, lstRoom[0].Title);
-            Assert.AreEqual(myRoomInfo.Id, lstRoom[0].Id);
+            Validate(lstSpace[0]);
+            Assert.AreEqual(mySpaceInfo.Title, lstSpace[0].Title);
+            Assert.AreEqual(mySpaceInfo.Id, lstSpace[0].Id);
         }
 
-        private void Validate(Room room)
+        private void Validate(Space space)
         {
-            Assert.IsNotNull(room);
-            Assert.IsNotNull(room.Id);
-            Assert.IsNotNull(room.Title);
-            Assert.IsNotNull(room.Type);
-            Assert.IsNotNull(room.IsLocked);
-            Assert.IsNotNull(room.LastActivity);
-            Assert.IsNotNull(room.Created);
+            Assert.IsNotNull(space);
+            Assert.IsNotNull(space.Id);
+            Assert.IsNotNull(space.Title);
+            Assert.IsNotNull(space.Type);
+            Assert.IsNotNull(space.IsLocked);
+            Assert.IsNotNull(space.LastActivity);
+            Assert.IsNotNull(space.Created);
         }
 
-        private Room CreateRoom(string title, string teamId = null)
+        private Space CreateSpace(string title, string teamId = null)
         {
             var completion = new ManualResetEvent(false);
-            var response = new WebexApiEventArgs<Room>();
-            room.Create(title, teamId, rsp =>
+            var response = new WebexApiEventArgs<Space>();
+            space.Create(title, teamId, rsp =>
             {
                 response = rsp;
                 completion.Set();
@@ -348,11 +348,11 @@ namespace WebexSDK.Tests
             return null;
         }
 
-        private Room UpdateRoom(string roomId, string title)
+        private Space UpdateSpace(string spaceId, string title)
         {
             var completion = new ManualResetEvent(false);
-            var response = new WebexApiEventArgs<Room>();
-            room.Update(roomId, title, rsp =>
+            var response = new WebexApiEventArgs<Space>();
+            space.Update(spaceId, title, rsp =>
             {
                 response = rsp;
                 completion.Set();
@@ -371,11 +371,11 @@ namespace WebexSDK.Tests
             return null;
         }
 
-        private Room GetRoom(string roomId)
+        private Space GetSpace(string spaceId)
         {
             var completion = new ManualResetEvent(false);
-            var response = new WebexApiEventArgs<Room>();
-            room.Get(roomId, rsp =>
+            var response = new WebexApiEventArgs<Space>();
+            space.Get(spaceId, rsp =>
             {
                 response = rsp;
                 completion.Set();
@@ -395,11 +395,11 @@ namespace WebexSDK.Tests
         }
 
 
-        private List<Room> ListRooms(string teamId = null, int? max = null, RoomType? roomType = null, RoomSortType? sortby = null)
+        private List<Space> ListSpaces(string teamId = null, int? max = null, SpaceType? spaceType = null, SpaceSortType? sortby = null)
         {
             var completion = new ManualResetEvent(false);
-            var response = new WebexApiEventArgs<List<Room>>();
-            room.List(teamId, max, roomType, sortby, rsp =>
+            var response = new WebexApiEventArgs<List<Space>>();
+            space.List(teamId, max, spaceType, sortby, rsp =>
             {
                 response = rsp;
                 completion.Set();
@@ -418,11 +418,11 @@ namespace WebexSDK.Tests
             return null;
         }
 
-        private bool DeleteRoom(string roomId)
+        private bool DeleteSpace(string spaceId)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs();
-            room.Delete(roomId, rsp =>
+            space.Delete(spaceId, rsp =>
             {
                 response = rsp;
                 completion.Set();

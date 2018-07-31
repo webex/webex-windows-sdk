@@ -38,7 +38,7 @@ namespace WebexSDK
         /// The version number of this Cisco Webex .Net SDK. 
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
-        public const string Version = "1.4.0";
+        public const string Version = "2.0.0";
 
 
         /// <summary>
@@ -89,17 +89,17 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// Gets the rooms, which is an instance of <see cref="RoomClient"/>
-        /// Rooms are virtual meeting places in Cisco Webex where people post messages and collaborate to get work done.
-        /// Use rooms to manage the rooms on behalf of the authenticated user.
+        /// Gets the spaces, which is an instance of <see cref="SpaceClient"/>
+        /// Spaces are virtual meeting places in Cisco Webex where people post messages and collaborate to get work done.
+        /// Use spaces to manage the spaces on behalf of the authenticated user.
         /// </summary>
         /// <value>
-        /// The rooms.
+        /// The spaces.
         /// </value>
         /// <remarks>Since: 0.1.0</remarks>
-        public RoomClient Rooms
+        public SpaceClient Spaces
         {
-            get { return new RoomClient(Authenticator); }
+            get { return new SpaceClient(Authenticator); }
         }
 
         /// <summary>
@@ -119,14 +119,14 @@ namespace WebexSDK
 
         /// <summary>
         /// Gets the memberships, which is an instance of <see cref="MembershipClient"/>
-        /// Memberships represent a person's relationships to rooms.
-        /// Use membership to manage the authenticated user's relationship to rooms.
+        /// Memberships represent a person's relationships to spaces.
+        /// Use membership to manage the authenticated user's relationship to spaces.
         /// </summary>
         /// <value>
         /// The memberships.
         /// </value>
-        /// - see: Rooms API about how to manage rooms.
-        /// - see: Messages API about how post or otherwise manage the content in a room.
+        /// - see: Spaces API about how to manage spaces.
+        /// - see: Messages API about how post or otherwise manage the content in a space.
         /// <remarks>Since: 0.1.0</remarks>
         public MembershipClient Memberships
         {
@@ -135,14 +135,14 @@ namespace WebexSDK
 
         /// <summary>
         /// Gets the messages, which is an instance of <see cref="MessageClient"/>
-        /// Messages are how we communicate in a room.
+        /// Messages are how we communicate in a space.
         /// Use messages to manage the messages on behalf of the authenticated user.
         /// </summary>
         /// <value>
         /// The messages.
         /// </value>
-        /// - see: Rooms API about how to manage rooms.
-        /// - see: Memberships API about how to manage people in a room.
+        /// - see: Spaces API about how to manage spaces.
+        /// - see: Memberships API about how to manage people in a space.
         /// <remarks>Since: 0.1.0</remarks>
         public MessageClient Messages
         {
@@ -156,7 +156,7 @@ namespace WebexSDK
         /// <value>
         /// The webhooks.
         /// </value>
-        /// <example>a new message is posted into a specific room.</example>
+        /// <example>a new message is posted into a specific space.</example>
         /// Use Webhooks to create and manage the webhooks for specific events.
         /// <remarks>Since: 0.1.0</remarks>
         public WebhookClient Webhooks
@@ -166,14 +166,14 @@ namespace WebexSDK
 
         /// <summary>
         /// Gets the teams, which is an instance of <see cref="TeamClient"/>
-        /// Teams are groups of people with a set of rooms that are visible to all members of that team.
+        /// Teams are groups of people with a set of spaces that are visible to all members of that team.
         /// Use teams to create and manage the teams on behalf of the authenticated user.
         /// </summary>
         /// <value>
         /// The teams.
         /// </value>
         /// - see: Team Memberships API about how to manage people in a team.
-        /// - see: Memberships API about how to manage people in a room.
+        /// - see: Memberships API about how to manage people in a space.
         /// <remarks>Since: 0.1.0</remarks>
         public TeamClient Teams
         {
@@ -189,7 +189,7 @@ namespace WebexSDK
         /// The team memberships.
         /// </value>
         /// - see: Teams API about how to manage teams.
-        /// - see: Rooms API about how to manage rooms.
+        /// - see: Spaces API about how to manage spaces.
         /// <remarks>Since: 0.1.0</remarks>
         public TeamMembershipClient TeamMemberships
         {

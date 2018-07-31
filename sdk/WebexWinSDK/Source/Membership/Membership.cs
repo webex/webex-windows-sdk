@@ -64,19 +64,20 @@ namespace WebexSDK
         public string PersonOrgId { get; set; }
 
         /// <summary>
-        /// The id of the room.
+        /// The id of the space.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
-        public string RoomId { get; set; }
+        [RestSharp.Deserializers.DeserializeAs(Name = "roomId")]
+        public string SpaceId { get; set; }
 
         /// <summary>
-        /// Moderator of a room.
+        /// Moderator of a space.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
         public bool IsModerator { get; set; }
 
         /// <summary>
-        /// Monitor of a room.
+        /// Monitor of a space.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
         public bool IsMonitor { get; set; }

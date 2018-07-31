@@ -29,9 +29,9 @@ using System.Text;
 namespace WebexSDK
 {
     /// <summary>
-    /// Memberships represent a person's relationship to a room. 
-    /// Use this API to list members of any room that you're in or create memberships to invite someone to a room. 
-    /// Memberships can also be updated to make someome a moderator or deleted to remove them from the room.
+    /// Memberships represent a person's relationship to a space. 
+    /// Use this API to list members of any space that you're in or create memberships to invite someone to a space. 
+    /// Memberships can also be updated to make someome a moderator or deleted to remove them from the space.
     /// </summary>
     /// <remarks>Since: 0.1.0</remarks>
     public sealed class MembershipClient
@@ -58,7 +58,7 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// Lists all room memberships where the authenticated user belongs.
+        /// Lists all space memberships where the authenticated user belongs.
         /// </summary>
         /// <param name="max">The maximum number of items in the response.</param>
         /// <param name="completionHandler">The completion event handler.</param>
@@ -69,48 +69,48 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// Lists all memberships in the given room by room Id.
+        /// Lists all memberships in the given space by space Id.
         /// </summary>
-        /// <param name="roomId">The identifier of the room where the membership belongs.</param>
+        /// <param name="spaceId">The identifier of the space where the membership belongs.</param>
         /// <param name="max">The maximum number of memberships in the response.</param>
         /// <param name="completionHandler">The completion event handler.</param>
         /// <remarks>Since: 0.1.0</remarks>
-        public void List(string roomId, int? max, Action<WebexApiEventArgs<List<Membership>>> completionHandler)
+        public void List(string spaceId, int? max, Action<WebexApiEventArgs<List<Membership>>> completionHandler)
         {
-            List(roomId, null, null, max, completionHandler);
+            List(spaceId, null, null, max, completionHandler);
         }
 
         /// <summary>
-        /// Lists any room memberships for the given room (by room id) and person (by person id).
+        /// Lists any space memberships for the given space (by space id) and person (by person id).
         /// </summary>
-        /// <param name="roomId">The identifier of the room where the memberships belong.</param>
+        /// <param name="spaceId">The identifier of the space where the memberships belong.</param>
         /// <param name="personId">The identifier of the person who has the memberships.</param>
         /// <param name="completionHandler">The completion event handler.</param>
         /// <remarks>Since: 0.1.0</remarks>
-        public void ListByPersonId(string roomId, string personId, Action<WebexApiEventArgs<List<Membership>>> completionHandler)
+        public void ListByPersonId(string spaceId, string personId, Action<WebexApiEventArgs<List<Membership>>> completionHandler)
         {
-            List(roomId, personId, null, null, completionHandler);
+            List(spaceId, personId, null, null, completionHandler);
         }
 
         /// <summary>
-        /// Lists any room memberships for the given room (by room id) and person (by email address).
+        /// Lists any space memberships for the given space (by space id) and person (by email address).
         /// </summary>
-        /// <param name="roomId">The identifier of the room where the memberships belong.</param>
+        /// <param name="spaceId">The identifier of the space where the memberships belong.</param>
         /// <param name="personEmail">The email address of the person who has the memberships.</param>
         /// <param name="completionHandler">The completion event handler.</param>
         /// <remarks>Since: 0.1.0</remarks>
-        public void ListByPersonEmail(string roomId, string personEmail, Action<WebexApiEventArgs<List<Membership>>> completionHandler)
+        public void ListByPersonEmail(string spaceId, string personEmail, Action<WebexApiEventArgs<List<Membership>>> completionHandler)
         {
-            List(roomId, null, personEmail, null, completionHandler);
+            List(spaceId, null, personEmail, null, completionHandler);
 
         }
 
-        private void List(string roomId, string personId, string personEmail, int? max, Action<WebexApiEventArgs<List<Membership>>> completionHandler)
+        private void List(string spaceId, string personId, string personEmail, int? max, Action<WebexApiEventArgs<List<Membership>>> completionHandler)
         {
             ServiceRequest request = BuildRequest();
             request.Method = HttpMethod.GET;
             request.RootElement = "items";
-            if (roomId != null)         request.AddQueryParameters("roomId", roomId);
+            if (spaceId != null)        request.AddQueryParameters("roomId", spaceId);
             if (personId != null)       request.AddQueryParameters("personId", personId);
             if (personEmail != null)    request.AddQueryParameters("personEmail", personEmail);
             if (max != null)            request.AddQueryParameters("max", max);
@@ -120,18 +120,18 @@ namespace WebexSDK
 
 
         /// <summary>
-        /// Adds a person to a room by person id; optionally making the person a moderator.
+        /// Adds a person to a space by person id; optionally making the person a moderator.
         /// </summary>
-        /// <param name="roomId">The identifier of the room where the person is to be added.</param>
+        /// <param name="spaceId">The identifier of the space where the person is to be added.</param>
         /// <param name="personId">The identifier of the person to be added.</param>
-        /// <param name="isModerator">if set to <c>true</c> [is moderator of the room]. The default is false.</param>
+        /// <param name="isModerator">if set to <c>true</c> [is moderator of the space]. The default is false.</param>
         /// <param name="completionHandler">The completion event handler.</param>
         /// <remarks>Since: 0.1.0</remarks>
-        public void CreateByPersonId(string roomId, string personId, bool? isModerator = false, Action<WebexApiEventArgs<Membership>> completionHandler = null)
+        public void CreateByPersonId(string spaceId, string personId, bool? isModerator = false, Action<WebexApiEventArgs<Membership>> completionHandler = null)
         {
             ServiceRequest request = BuildRequest();
             request.Method = HttpMethod.POST;
-            if (roomId != null) request.AddBodyParameters("roomId", roomId);
+            if (spaceId != null) request.AddBodyParameters("roomId", spaceId);
             if (personId != null) request.AddBodyParameters("personId", personId);
             if (isModerator != null) request.AddBodyParameters("isModerator", isModerator);
 
@@ -139,18 +139,18 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// Adds a person to a room by email address; optionally making the person a moderator.
+        /// Adds a person to a space by email address; optionally making the person a moderator.
         /// </summary>
-        /// <param name="roomId">The identifier of the room where the person is to be added.</param>
+        /// <param name="spaceId">The identifier of the space where the person is to be added.</param>
         /// <param name="personEmail">The email address of the person to be added.</param>
-        /// <param name="isModerator">if set to <c>true</c> [is moderator of the room]. The default is false.</param>
+        /// <param name="isModerator">if set to <c>true</c> [is moderator of the space]. The default is false.</param>
         /// <param name="completionHandler">The completion handler.</param>
         /// <remarks>Since: 0.1.0</remarks>
-        public void CreateByPersonEmail(string roomId, string personEmail, bool? isModerator = false, Action<WebexApiEventArgs<Membership>> completionHandler = null)
+        public void CreateByPersonEmail(string spaceId, string personEmail, bool? isModerator = false, Action<WebexApiEventArgs<Membership>> completionHandler = null)
         {
             ServiceRequest request = BuildRequest();
             request.Method = HttpMethod.POST;
-            if (roomId != null) request.AddBodyParameters("roomId", roomId);
+            if (spaceId != null) request.AddBodyParameters("roomId", spaceId);
             if (personEmail != null) request.AddBodyParameters("personEmail", personEmail);
             if (isModerator != null) request.AddBodyParameters("isModerator", isModerator);
 
@@ -176,7 +176,7 @@ namespace WebexSDK
         /// Updates the properties of a membership by membership id.
         /// </summary>
         /// <param name="membershipId">The identifier of the membership.</param>
-        /// <param name="isModerator">if set to <c>true</c> [is moderator of the room]. The default is false.</param>
+        /// <param name="isModerator">if set to <c>true</c> [is moderator of the space]. The default is false.</param>
         /// <param name="completionHandler">The completion event handler.</param>
         /// <remarks>Since: 0.1.0</remarks>
         public void Update(string membershipId, bool? isModerator, Action<WebexApiEventArgs<Membership>> completionHandler)
@@ -190,7 +190,7 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// Deletes a membership by membership id. It removes the person from the room where the membership belongs.
+        /// Deletes a membership by membership id. It removes the person from the space where the membership belongs.
         /// </summary>
         /// <param name="membershipId">The identifier of the membership.</param>
         /// <param name="completionHandler">The completion event handler.</param>

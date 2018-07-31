@@ -37,7 +37,7 @@ namespace WebexSDK.Tests
         private WebexTestFixture fixture;
         private Webex webex;
         private MembershipClient memberships;
-        private string roomId;
+        private string spaceId;
         private TestUser other;
         private Membership membership;
 
@@ -58,9 +58,9 @@ namespace WebexSDK.Tests
             {
                 other = fixture.CreatUser();
             }
-            var room = fixture.CreateRoom("test room");
-            Assert.IsNotNull(room);
-            roomId = room.Id;
+            var space = fixture.CreateSpace("test space");
+            Assert.IsNotNull(space);
+            spaceId = space.Id;
         }
 
 
@@ -71,9 +71,9 @@ namespace WebexSDK.Tests
             {
                 DeleteMembership(membership.Id);
             }
-            if (roomId != null)
+            if (spaceId != null)
             {
-                fixture.DeleteRoom(roomId);
+                fixture.DeleteSpace(spaceId);
             }
 
             
@@ -87,42 +87,42 @@ namespace WebexSDK.Tests
         }
 
         [TestMethod()]
-        public void ListByRoomIdAndPersonIdTest()
+        public void ListBySpaceIdAndPersonIdTest()
         {
-            membership = CreateMembership(roomId, null, other.PersonId, false);
+            membership = CreateMembership(spaceId, null, other.PersonId, false);
             Assert.IsNotNull(membership);
 
-            var list = ListMembershipByPersonId(roomId, other.PersonId);
+            var list = ListMembershipByPersonId(spaceId, other.PersonId);
             Assert.IsNotNull(list);
             Assert.AreEqual(list[0].PersonId, other.PersonId);
             Assert.AreEqual(list[0].PersonEmail, other.Email);
-            Assert.AreEqual(list[0].RoomId, roomId);
+            Assert.AreEqual(list[0].SpaceId, spaceId);
             Assert.IsFalse(list[0].IsModerator);
             Assert.IsFalse(list[0].IsMonitor);
         }
 
         [TestMethod()]
-        public void ListByRoomIdAndEmailTest()
+        public void ListBySpaceIdAndEmailTest()
         {
-            membership = CreateMembership(roomId, other.Email, null, false);
+            membership = CreateMembership(spaceId, other.Email, null, false);
             Assert.IsNotNull(membership);
 
-            var list = ListMembershipByEmail(roomId, other.Email);
+            var list = ListMembershipByEmail(spaceId, other.Email);
             Assert.IsNotNull(list);
             Assert.AreEqual(list[0].PersonId, other.PersonId);
             Assert.AreEqual(list[0].PersonEmail, other.Email);
-            Assert.AreEqual(list[0].RoomId, roomId);
+            Assert.AreEqual(list[0].SpaceId, spaceId);
             Assert.IsFalse(list[0].IsModerator);
             Assert.IsFalse(list[0].IsMonitor);
         }
 
         [TestMethod()]
-        public void ListByRoomIdTest()
+        public void ListBySpaceIdTest()
         {
-            membership = CreateMembership(roomId, null, other.PersonId, false);
+            membership = CreateMembership(spaceId, null, other.PersonId, false);
             Assert.IsNotNull(membership);
 
-            var list = ListMembership(roomId);
+            var list = ListMembership(spaceId);
             Assert.IsNotNull(list);
 
             var query  = list.Find(membership => membership.PersonId == other.PersonId);
@@ -130,12 +130,12 @@ namespace WebexSDK.Tests
         }
 
         [TestMethod()]
-        public void ListByRoomIdTest1()
+        public void ListBySpaceIdTest1()
         {
-            membership = CreateMembership(roomId, other.Email, null, false);
+            membership = CreateMembership(spaceId, other.Email, null, false);
             Assert.IsNotNull(membership);
 
-            var list = ListMembership(roomId);
+            var list = ListMembership(spaceId);
             Assert.IsNotNull(list);
 
             var query = list.Find(membership => membership.PersonEmail == other.Email);
@@ -146,10 +146,10 @@ namespace WebexSDK.Tests
         [TestMethod()]
         public void CreateByPersonIdTest()
         {
-            membership = CreateMembership(roomId, null, other.PersonId, false);
+            membership = CreateMembership(spaceId, null, other.PersonId, false);
             Validate(membership);
 
-            Assert.AreEqual(roomId, membership.RoomId);
+            Assert.AreEqual(spaceId, membership.SpaceId);
             Assert.AreEqual(other.Email, membership.PersonEmail);
             Assert.AreEqual(other.PersonId, membership.PersonId);
             Assert.IsFalse(membership.IsModerator);
@@ -157,7 +157,7 @@ namespace WebexSDK.Tests
         }
 
         [TestMethod()]
-        public void CreateByPersonIdButInvalidRoomIdTest()
+        public void CreateByPersonIdButInvalidSpaceIdTest()
         {
             membership = CreateMembership("abc", null, other.PersonId, false);
             Assert.IsNull(membership);
@@ -166,17 +166,17 @@ namespace WebexSDK.Tests
         [TestMethod()]
         public void CreateByInvalidPersonIdTest()
         {
-            membership = CreateMembership(roomId, null, "abc", false);
+            membership = CreateMembership(spaceId, null, "abc", false);
             Assert.IsNull(membership);
         }
 
         [TestMethod()]
         public void CreateByPersonEmailTest()
         {
-            membership = CreateMembership(roomId, other.Email, null, false);
+            membership = CreateMembership(spaceId, other.Email, null, false);
             Validate(membership);
 
-            Assert.AreEqual(roomId, membership.RoomId);
+            Assert.AreEqual(spaceId, membership.SpaceId);
             Assert.AreEqual(other.Email, membership.PersonEmail);
             Assert.AreEqual(other.PersonId, membership.PersonId);
             Assert.IsFalse(membership.IsModerator);
@@ -184,7 +184,7 @@ namespace WebexSDK.Tests
         }
 
         [TestMethod()]
-        public void CreateByPersonEmailButInvalidRoomIdTest()
+        public void CreateByPersonEmailButInvalidSpaceIdTest()
         {
             membership = CreateMembership("abc", other.Email, null, false);
             Assert.IsNull(membership);
@@ -193,17 +193,17 @@ namespace WebexSDK.Tests
         [TestMethod()]
         public void CreateByInvalidEmailTest()
         {
-            membership = CreateMembership(roomId, "abc", null, false);
+            membership = CreateMembership(spaceId, "abc", null, false);
             Assert.IsNull(membership);
         }
 
         [TestMethod()]
         public void CreateModeratorPersonIdTest()
         {
-            membership = CreateMembership(roomId, null, other.PersonId, true);
+            membership = CreateMembership(spaceId, null, other.PersonId, true);
             Validate(membership);
 
-            Assert.AreEqual(roomId, membership.RoomId);
+            Assert.AreEqual(spaceId, membership.SpaceId);
             Assert.AreEqual(other.Email, membership.PersonEmail);
             Assert.AreEqual(other.PersonId, membership.PersonId);
             Assert.IsTrue(membership.IsModerator);
@@ -213,10 +213,10 @@ namespace WebexSDK.Tests
         [TestMethod()]
         public void CreateModeratorPersonEmailTest()
         {
-            membership = CreateMembership(roomId, other.Email, null, true);
+            membership = CreateMembership(spaceId, other.Email, null, true);
             Validate(membership);
 
-            Assert.AreEqual(roomId, membership.RoomId);
+            Assert.AreEqual(spaceId, membership.SpaceId);
             Assert.AreEqual(other.Email, membership.PersonEmail);
             Assert.AreEqual(other.PersonId, membership.PersonId);
             Assert.IsTrue(membership.IsModerator);
@@ -226,7 +226,7 @@ namespace WebexSDK.Tests
         [TestMethod()]
         public void GetTest()
         {
-            membership = CreateMembership(roomId, null, other.PersonId, false);
+            membership = CreateMembership(spaceId, null, other.PersonId, false);
             var query = GetMembership(membership.Id);
             Validate(query);
             Assert.AreEqual(membership.Id, query.Id);
@@ -237,7 +237,7 @@ namespace WebexSDK.Tests
         [TestMethod()]
         public void GetInvalidIdTest()
         {
-            membership = CreateMembership(roomId, null, other.PersonId, false);
+            membership = CreateMembership(spaceId, null, other.PersonId, false);
             var query = GetMembership("abc");
             Assert.IsNull(query);
         }
@@ -245,7 +245,7 @@ namespace WebexSDK.Tests
         [TestMethod()]
         public void UpdateTest()
         {
-            membership = CreateMembership(roomId, null, other.PersonId, false);
+            membership = CreateMembership(spaceId, null, other.PersonId, false);
             var query = UpdateMembership(membership.Id, true);
             Validate(query);
             Assert.AreEqual(membership.PersonId, query.PersonId);
@@ -255,7 +255,7 @@ namespace WebexSDK.Tests
         [TestMethod()]
         public void UpdateInvalidIdTest()
         {
-            membership = CreateMembership(roomId, null, other.PersonId, false);
+            membership = CreateMembership(spaceId, null, other.PersonId, false);
             var query = UpdateMembership("abc", true);
             Assert.IsNull(query);
         }
@@ -263,7 +263,7 @@ namespace WebexSDK.Tests
         [TestMethod()]
         public void DeleteTest()
         {
-            membership = CreateMembership(roomId, null, other.PersonId, false);
+            membership = CreateMembership(spaceId, null, other.PersonId, false);
             Validate(membership);
             Assert.IsTrue(DeleteMembership(membership.Id));
 
@@ -273,7 +273,7 @@ namespace WebexSDK.Tests
         [TestMethod()]
         public void DeleteInvalidIdTest()
         {
-            membership = CreateMembership(roomId, null, other.PersonId, false);
+            membership = CreateMembership(spaceId, null, other.PersonId, false);
             Validate(membership);
             Assert.IsFalse(DeleteMembership("abc"));
 
@@ -287,18 +287,18 @@ namespace WebexSDK.Tests
             Assert.IsNotNull(membership.Id);
             Assert.IsNotNull(membership.PersonId);
             Assert.IsNotNull(membership.PersonEmail);
-            Assert.IsNotNull(membership.RoomId);
+            Assert.IsNotNull(membership.SpaceId);
             Assert.IsNotNull(membership.IsMonitor);
             Assert.IsNotNull(membership.IsModerator);
         }
 
-        private Membership CreateMembership(string roomId, string email, string personId, bool isModerator)
+        private Membership CreateMembership(string spaceId, string email, string personId, bool isModerator)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs<Membership>();
             if (email != null)
             {
-                memberships.CreateByPersonEmail(roomId, email, isModerator, rsp =>
+                memberships.CreateByPersonEmail(spaceId, email, isModerator, rsp =>
                 {
                     response = rsp;
                     completion.Set();
@@ -306,7 +306,7 @@ namespace WebexSDK.Tests
             }
             else
             {
-                memberships.CreateByPersonId(roomId, personId, isModerator, rsp =>
+                memberships.CreateByPersonId(spaceId, personId, isModerator, rsp =>
                 {
                     response = rsp;
                     completion.Set();
@@ -374,11 +374,11 @@ namespace WebexSDK.Tests
             return null;
         }
 
-        private List<Membership> ListMembership(string roomId, int? max = null)
+        private List<Membership> ListMembership(string spaceId, int? max = null)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs<List<Membership>>();
-            memberships.List(roomId, max, rsp =>
+            memberships.List(spaceId, max, rsp =>
             {
                 response = rsp;
                 completion.Set();
@@ -397,11 +397,11 @@ namespace WebexSDK.Tests
             return null;
         }
 
-        private List<Membership> ListMembershipByPersonId(string roomId, string personId)
+        private List<Membership> ListMembershipByPersonId(string spaceId, string personId)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs<List<Membership>>();
-            memberships.ListByPersonId(roomId, personId, rsp =>
+            memberships.ListByPersonId(spaceId, personId, rsp =>
             {
                 response = rsp;
                 completion.Set();
@@ -420,11 +420,11 @@ namespace WebexSDK.Tests
             return null;
         }
 
-        private List<Membership> ListMembershipByEmail(string roomId, string email)
+        private List<Membership> ListMembershipByEmail(string spaceId, string email)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs<List<Membership>>();
-            memberships.ListByPersonEmail(roomId, email, rsp =>
+            memberships.ListByPersonEmail(spaceId, email, rsp =>
             {
                 response = rsp;
                 completion.Set();

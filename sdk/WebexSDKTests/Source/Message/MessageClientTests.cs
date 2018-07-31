@@ -43,7 +43,7 @@ namespace WebexSDK.Tests
         private static TestUser other;
         private string text = "test text.";
         private static string fileUrl = null;
-        private static Room myRoom;
+        private static Space mySpace;
         private static readonly string testFixtureApp = "TestFixtureApp";
 
         private readonly static string calleeAddress = ConfigurationManager.AppSettings["TestFixtureAppAddress01"] ?? "";
@@ -70,8 +70,8 @@ namespace WebexSDK.Tests
 
             other = fixture.CreatUser();
 
-            myRoom = CreateRoom("my test room");
-            Assert.IsNotNull(myRoom);
+            mySpace = CreateSpace("my test space");
+            Assert.IsNotNull(mySpace);
 
             if (StringExtention.GetHydraIdType(calleeAddress) == StringExtention.HydraIdType.People)
             {
@@ -86,7 +86,7 @@ namespace WebexSDK.Tests
             else
             {
             }
-            Assert.IsNotNull(CreateMembership(myRoom.Id, null, calleePersonId, false));
+            Assert.IsNotNull(CreateMembership(mySpace.Id, null, calleePersonId, false));
 
             fileUrl = Directory.GetCurrentDirectory() + "\\Resources\\" + "WebexTeams.jpg";
 
@@ -97,16 +97,16 @@ namespace WebexSDK.Tests
         public static void ClassTearDown()
         {
             Console.WriteLine("ClassTearDown");
-            if (myRoom != null)
+            if (mySpace != null)
             {
-                DeleteRoom(myRoom.Id);
-                myRoom = null;
+                DeleteSpace(mySpace.Id);
+                mySpace = null;
             }
 
             fixture = null;
             webex = null;
             messages = null;
-            myRoom = null;
+            mySpace = null;
         }
 
         [TestInitialize]
@@ -127,10 +127,10 @@ namespace WebexSDK.Tests
         [TestMethod()]
         public void ListTest()
         {
-            var msg = PostMsg(myRoom.Id, null, text);
+            var msg = PostMsg(mySpace.Id, null, text);
             Validate(msg);
             Thread.Sleep(60000);
-            var list = ListMsg(myRoom.Id,null, DateTime.UtcNow);
+            var list = ListMsg(mySpace.Id,null, DateTime.UtcNow);
             Assert.IsNotNull(list);
             Assert.IsTrue(list.Count > 0);
         }
@@ -138,11 +138,11 @@ namespace WebexSDK.Tests
         [TestMethod()]
         public void ListByMaxTest()
         {
-            PostMsg(myRoom.Id, null, text);
-            PostMsg(myRoom.Id, null, text);
-            PostMsg(myRoom.Id, null, text);
+            PostMsg(mySpace.Id, null, text);
+            PostMsg(mySpace.Id, null, text);
+            PostMsg(mySpace.Id, null, text);
             Thread.Sleep(60000);
-            var list = ListMsg(myRoom.Id, null, DateTime.UtcNow, 2);
+            var list = ListMsg(mySpace.Id, null, DateTime.UtcNow, 2);
             Assert.IsNotNull(list);
             Assert.IsTrue(list.Count == 2);
         }
@@ -153,15 +153,15 @@ namespace WebexSDK.Tests
             var msg = PostMsg(null, calleePersonId, text);
             Validate(msg);
 
-            var list = ListMsg(msg.RoomId, null, msg.Id, 1000);
+            var list = ListMsg(msg.SpaceId, null, msg.Id, 1000);
             Assert.IsNotNull(list);
             Assert.IsTrue(list.Count > 0);
         }
 
         [TestMethod()]
-        public void ListInvalidRoomIdTest()
+        public void ListInvalidSpaceIdTest()
         {
-            var msg = PostMsg(myRoom.Id, null, text);
+            var msg = PostMsg(mySpace.Id, null, text);
             Validate(msg);
             var list = ListMsg("abc", null, null);
             Assert.IsNull(list);
@@ -170,17 +170,17 @@ namespace WebexSDK.Tests
         [TestMethod()]
         public void ListByBeforeTimeTest()
         {
-            var msg1 = PostMsg(myRoom.Id, null, text);
+            var msg1 = PostMsg(mySpace.Id, null, text);
             Assert.IsNotNull(msg1);
             Console.WriteLine("post first Msg at: {0}", DateTime.UtcNow.ToString("yyyy-MM-dd'T'HH:mm:ss.FFFZ"));
             Thread.Sleep(60000);
             var time1 = DateTime.UtcNow;
             Thread.Sleep(60000);
-            var msg2 = PostMsg(myRoom.Id, null, text);
+            var msg2 = PostMsg(mySpace.Id, null, text);
             Assert.IsNotNull(msg2);
             Console.WriteLine("post second Msg at: {0}", DateTime.UtcNow.ToString("yyyy-MM-dd'T'HH:mm:ss.FFFZ"));
 
-            var list = ListMsg(myRoom.Id, null, time1, null);
+            var list = ListMsg(mySpace.Id, null, time1, null);
             Console.WriteLine("list message before {0}", time1);
 
             Assert.IsNotNull(list);
@@ -192,11 +192,11 @@ namespace WebexSDK.Tests
         [TestMethod()]
         public void ListByBeforeMessageIdTest()
         {
-            var msg1 = PostMsg(myRoom.Id, null, "msg1", null);
-            var msg2 = PostMsg(myRoom.Id, null, "msg2", null);
+            var msg1 = PostMsg(mySpace.Id, null, "msg1", null);
+            var msg2 = PostMsg(mySpace.Id, null, "msg2", null);
            
 
-            var list = ListMsg(myRoom.Id, null, msg2.Id, null);
+            var list = ListMsg(mySpace.Id, null, msg2.Id, null);
             Assert.IsNotNull(list);
             Assert.IsTrue(list.Count > 0);
             Assert.IsNotNull(list.Find(item => item.Id == msg1.Id));
@@ -206,7 +206,7 @@ namespace WebexSDK.Tests
         [TestMethod()]
         public void ListByMentionedPeopleTest()
         {
-            var list = ListMsg(myRoom.Id, "me", null);
+            var list = ListMsg(mySpace.Id, "me", null);
             Assert.IsNotNull(list);
         }
 
@@ -320,64 +320,64 @@ namespace WebexSDK.Tests
         }
 
         [TestMethod()]
-        public void PostToRoomWithTextTest()
+        public void PostToSpaceWithTextTest()
         {
-            var msg = PostMsg(myRoom.Id, null, text);
+            var msg = PostMsg(mySpace.Id, null, text);
             Validate(msg);
             Assert.AreEqual(text, msg.Text);
         }
         //###Comment temporary for Network unstable
         //[TestMethod()]
-        //public void PostToRoomWithFileTest()
+        //public void PostToSpaceWithFileTest()
         //{
         //    var files = new List<LocalFile>();
         //    files.Add(new LocalFile()
         //    {
         //        Path = fileUrl,
         //    });
-        //    var msg = PostMsg(myRoom.Id, null, null, null, files);
+        //    var msg = PostMsg(mySpace.Id, null, null, null, files);
         //    Validate(msg);
         //    Assert.IsNotNull(msg.Files);
         //}
 
         //[TestMethod()]
-        //public void PostToRoomWithTextAndFileTest()
+        //public void PostToSpaceWithTextAndFileTest()
         //{
         //    var files = new List<LocalFile>();
         //    files.Add(new LocalFile()
         //    {
         //        Path = fileUrl,
         //    });
-        //    var msg = PostMsg(myRoom.Id, null, text, null, files);
+        //    var msg = PostMsg(mySpace.Id, null, text, null, files);
         //    Validate(msg);
         //    Assert.AreEqual(text, msg.Text);
         //    Assert.IsNotNull(msg.Files);
         //}
 
         [TestMethod()]
-        public void PostToRoomWithMentionAllTest()
+        public void PostToSpaceWithMentionAllTest()
         {
             var mentions = new List<Mention>();
             mentions.Add(new MentionAll());
-            var msg = PostMsg(myRoom.Id, null, text, mentions);
+            var msg = PostMsg(mySpace.Id, null, text, mentions);
             Validate(msg);
             Assert.AreEqual(text, msg.Text);
             Assert.AreEqual(false, msg.IsSelfMentioned);
         }
 
         [TestMethod()]
-        public void PostToRoomWithMentionPersonTest()
+        public void PostToSpaceWithMentionPersonTest()
         {
             var mentions = new List<Mention>();
             mentions.Add(new MentionPerson(calleePersonId));
-            var msg = PostMsg(myRoom.Id, null, text, mentions);
+            var msg = PostMsg(mySpace.Id, null, text, mentions);
             Validate(msg);
             Assert.AreEqual(text, msg.Text);
             Assert.AreEqual(false, msg.IsSelfMentioned);
         }
 
         [TestMethod()]
-        public void PostToRoomByInvalidIdTest()
+        public void PostToSpaceByInvalidIdTest()
         {
             var msg = PostMsg("abc", null, text);
             Assert.IsNull(msg);
@@ -396,12 +396,12 @@ namespace WebexSDK.Tests
         }
 
         [TestMethod()]
-        public void GetByRoomIdAndMessageIdTest()
+        public void GetBySpaceIdAndMessageIdTest()
         {
             var msg = PostMsg(null, calleePersonId, text);
             Validate(msg);
             Assert.AreEqual(text, msg.Text);
-            var result = GetMsgByRoomIdAndMessageId(msg.RoomId,msg.Id);
+            var result = GetMsgBySpaceIdAndMessageId(msg.SpaceId, msg.Id);
             Validate(result);
             Assert.AreEqual(msg.Id, result.Id);
             Assert.AreEqual(msg.Text, result.Text);
@@ -523,9 +523,9 @@ namespace WebexSDK.Tests
         //}
 
         [TestMethod()]
-        public void ReceiveRoomMessageTest()
+        public void ReceiveSpaceMessageTest()
         {
-            MessageHelper.SetTestMode_RemoteSendRoomMessage(testFixtureApp, myRoom.Id, text);
+            MessageHelper.SetTestMode_RemoteSendSpaceMessage(testFixtureApp, mySpace.Id, text);
             MessageHelper.RunDispatcherLoop();
 
             Assert.IsNotNull(recvedMessage);
@@ -535,9 +535,9 @@ namespace WebexSDK.Tests
         }
 
         [TestMethod()]
-        public void ReceiveRoomMessageWithMentionTest()
+        public void ReceiveSpaceMessageWithMentionTest()
         {
-            MessageHelper.SetTestMode_RemoteSendRoomMessageWithMention(testFixtureApp, myRoom.Id, text, self.Id);
+            MessageHelper.SetTestMode_RemoteSendSpaceMessageWithMention(testFixtureApp, mySpace.Id, text, self.Id);
             MessageHelper.RunDispatcherLoop();
 
             Assert.IsNotNull(recvedMessage);
@@ -546,9 +546,9 @@ namespace WebexSDK.Tests
             Assert.IsTrue(recvedMessage.IsSelfMentioned);
         }
         [TestMethod()]
-        public void ReceiveRoomMessageWithMentionAllTest()
+        public void ReceiveSpaceMessageWithMentionAllTest()
         {
-            MessageHelper.SetTestMode_RemoteSendRoomMessageWithMention(testFixtureApp, myRoom.Id, text, "ALL");
+            MessageHelper.SetTestMode_RemoteSendSpaceMessageWithMention(testFixtureApp, mySpace.Id, text, "ALL");
             MessageHelper.RunDispatcherLoop();
 
             Assert.IsNotNull(recvedMessage);
@@ -563,17 +563,17 @@ namespace WebexSDK.Tests
             Assert.IsNotNull(msg.Id);
             Assert.IsNotNull(msg.PersonEmail);
             Assert.IsNotNull(msg.PersonId);
-            Assert.IsNotNull(msg.RoomId);
+            Assert.IsNotNull(msg.SpaceId);
             Assert.IsNotNull(msg.Text);
         }
 
-        private Message PostMsg(string roomId, string person, string text, List<Mention>mentions=null, List<LocalFile>files=null)
+        private Message PostMsg(string spaceId, string person, string text, List<Mention>mentions=null, List<LocalFile>files=null)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs<Message>();
-            if (roomId != null)
+            if (spaceId != null)
             {
-                webex.Messages.PostToRoom(roomId, text, mentions, files, rsp =>
+                webex.Messages.PostToSpace(spaceId, text, mentions, files, rsp =>
                 {
                     response = rsp;
                     completion.Set();
@@ -630,11 +630,11 @@ namespace WebexSDK.Tests
             return null;
         }
 
-        private Message GetMsgByRoomIdAndMessageId(string roomId, string msgId)
+        private Message GetMsgBySpaceIdAndMessageId(string spaceId, string msgId)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs<Message>();
-            webex.Messages.Get(roomId, msgId, rsp =>
+            webex.Messages.Get(spaceId, msgId, rsp =>
             {
                 response = rsp;
                 completion.Set();
@@ -652,12 +652,12 @@ namespace WebexSDK.Tests
             return null;
         }
 
-        private List<Message> ListMsg(string roomId, string mentionedPeople, DateTime before, int? max = null)
+        private List<Message> ListMsg(string spaceId, string mentionedPeople, DateTime before, int? max = null)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs<List<Message>>();
 
-            webex.Messages.List(roomId, mentionedPeople, before, max, rsp =>
+            webex.Messages.List(spaceId, mentionedPeople, before, max, rsp =>
             {
                 response = rsp;
                 completion.Set();
@@ -677,12 +677,12 @@ namespace WebexSDK.Tests
             return null;
         }
 
-        private List<Message> ListMsg(string roomId, string mentionedPeople, string beforeMessage, int? max = null)
+        private List<Message> ListMsg(string spaceId, string mentionedPeople, string beforeMessage, int? max = null)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs<List<Message>>();
 
-            webex.Messages.List(roomId, mentionedPeople, beforeMessage, max, rsp =>
+            webex.Messages.List(spaceId, mentionedPeople, beforeMessage, max, rsp =>
             {
                 response = rsp;
                 completion.Set();
@@ -773,11 +773,11 @@ namespace WebexSDK.Tests
 
             return false;
         }
-        private static Room CreateRoom(string title)
+        private static Space CreateSpace(string title)
         {
             var completion = new ManualResetEvent(false);
-            var response = new WebexApiEventArgs<Room>();
-            webex.Rooms.Create(title, null, rsp =>
+            var response = new WebexApiEventArgs<Space>();
+            webex.Spaces.Create(title, null, rsp =>
             {
                 response = rsp;
                 completion.Set();
@@ -796,11 +796,11 @@ namespace WebexSDK.Tests
             return null;
         }
 
-        private static bool DeleteRoom(string roomId)
+        private static bool DeleteSpace(string spaceId)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs();
-            webex.Rooms.Delete(roomId, rsp =>
+            webex.Spaces.Delete(spaceId, rsp =>
             {
                 response = rsp;
                 completion.Set();
@@ -818,13 +818,13 @@ namespace WebexSDK.Tests
 
             return false;
         }
-        private static Membership CreateMembership(string roomId, string email, string personId, bool isModerator = false)
+        private static Membership CreateMembership(string spaceId, string email, string personId, bool isModerator = false)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs<Membership>();
             if (email != null)
             {
-                webex.Memberships.CreateByPersonEmail(roomId, email, isModerator, rsp =>
+                webex.Memberships.CreateByPersonEmail(spaceId, email, isModerator, rsp =>
                 {
                     response = rsp;
                     completion.Set();
@@ -832,7 +832,7 @@ namespace WebexSDK.Tests
             }
             else
             {
-                webex.Memberships.CreateByPersonId(roomId, personId, isModerator, rsp =>
+                webex.Memberships.CreateByPersonId(spaceId, personId, isModerator, rsp =>
                 {
                     response = rsp;
                     completion.Set();

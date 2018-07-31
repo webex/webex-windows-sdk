@@ -28,19 +28,19 @@ using System.Text;
 namespace WebexSDK
 {
     /// <summary>
-    /// The enumeration of the types of a room. 
+    /// The enumeration of the types of a space. 
     /// </summary>
     /// <remarks>Since: 0.1.0</remarks>
-    public enum RoomType
+    public enum SpaceType
     {
         /// <summary>
-        /// 1-to-1 room between two people
+        /// 1-to-1 space between two people
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
         Direct,
 
         /// <summary>
-        /// Group room among multiple people
+        /// Group space among multiple people
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
         Group
@@ -50,7 +50,7 @@ namespace WebexSDK
     /// The enumeration of sorting result
     /// </summary>
     /// <remarks>Since: 0.2.0</remarks>
-    public enum RoomSortType
+    public enum SpaceSortType
     {
         /// <summary>
         /// sort result by id
@@ -59,13 +59,13 @@ namespace WebexSDK
         ById,
 
         /// <summary>
-        /// last active room comes first
+        /// last active space comes first
         /// </summary>
         /// <remarks>Since: 0.2.0</remarks>
         ByLastActivity,
 
         /// <summary>
-        /// last created room comes first
+        /// last created space comes first
         /// </summary>
         /// <remarks>Since: 0.2.0</remarks>
         ByCreated
@@ -73,53 +73,53 @@ namespace WebexSDK
     }
 
     /// <summary>
-    /// A data type represents a Room at Cisco Webex cloud.
+    /// A data type represents a Space at Cisco Webex cloud.
     /// </summary>
-    /// note: Room has been renamed to Space in Cisco Webex. 
+    /// note: Space has been renamed to Space in Cisco Webex. 
     /// <remarks>Since: 0.1.0</remarks>
-    public class Room
+    public class Space
     {
         /// <summary>
-        /// The identifier of this room.
+        /// The identifier of this space.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
         public string Id { get; set; }
 
 
         /// <summary>
-        /// The title of this room.
+        /// The title of this space.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
         public string Title { get; set; }
 
         /// <summary>
-        /// The type of this room.
+        /// The type of this space.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
-        public RoomType Type { get; set; }
+        public SpaceType Type { get; set; }
 
 
         /// <summary>
-        /// Indicate if this room is locked.
+        /// Indicate if this space is locked.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
         public bool IsLocked { get; set; }
 
         /// <summary>
-        /// Last activity of this room.
+        /// Last activity of this space.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
         public string LastActivity { get; set; }
 
         /// <summary>
-        /// The timestamp that this room being created.
+        /// The timestamp that this space being created.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
         public DateTime Created { get; set; }
 
 
         /// <summary>
-        /// The team Id that this room associated with.
+        /// The team Id that this space associated with.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
         public string TeamId { get; set; }

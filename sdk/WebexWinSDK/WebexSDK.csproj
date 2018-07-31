@@ -110,8 +110,8 @@
     <Compile Include="Source\Phone\MediaOption.cs" />
     <Compile Include="Source\Phone\Phone.cs" />
     <Compile Include="Source\Phone\ShareSource.cs" />
-    <Compile Include="Source\Room\Room.cs" />
-    <Compile Include="Source\Room\RoomClient.cs" />
+    <Compile Include="Source\Space\Space.cs" />
+    <Compile Include="Source\Space\SpaceClient.cs" />
     <Compile Include="Source\TeamMembership\TeamMembership.cs" />
     <Compile Include="Source\TeamMembership\TeamMembershipClient.cs" />
     <Compile Include="Source\Team\Team.cs" />

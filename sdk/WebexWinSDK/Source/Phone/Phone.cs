@@ -277,19 +277,19 @@ namespace WebexSDK
                 return;
             }
 
-            ConvertToDialAddress(address, (isRoomCall, outputAddress) =>
+            ConvertToDialAddress(address, (isSpaceCall, outputAddress) =>
             {
-                if (isRoomCall)
+                if (isSpaceCall)
                 {
                     if (!m_core_telephoneService.canMakeCall(outputAddress))
                     {
                         //currentCall.init();
                         currentCall = new Call(this);
                         SDKLogger.Instance.Error($"canMakeCall return false. address:{outputAddress}");
-                        completedHandler?.Invoke(new WebexApiEventArgs<Call>(false, new WebexError(WebexErrorCode.IllegalOperation, "maybe room id is invalid"), null));
+                        completedHandler?.Invoke(new WebexApiEventArgs<Call>(false, new WebexError(WebexErrorCode.IllegalOperation, "maybe space id is invalid"), null));
                         return;
                     }
-                    SDKLogger.Instance.Debug($"This is a room call. join call: {outputAddress}");
+                    SDKLogger.Instance.Debug($"This is a space call. join call: {outputAddress}");
                     m_core_telephoneService.joinCall(outputAddress);
                 }
                 else
@@ -398,9 +398,9 @@ namespace WebexSDK
                     //currentCall.init();
                     return;
                 }
-                ConvertToDialAddress(currentCall.CalleeAddress, (isRoomCall, outputAddress) =>
+                ConvertToDialAddress(currentCall.CalleeAddress, (isSpaceCall, outputAddress) =>
                 {
-                    if (isRoomCall)
+                    if (isSpaceCall)
                     {
                         m_core_telephoneService.joinCall(outputAddress);
                     }
@@ -541,18 +541,18 @@ namespace WebexSDK
         private void ConvertToDialAddress(string address, Action<bool, string> completedHandler)
         {
             string outputAddress = address;
-            bool isRoomCall = false;
+            bool isSpaceCall = false;
 
             //hydraID
-            if (ParseHydraId(address, ref isRoomCall, ref outputAddress))
+            if (ParseHydraId(address, ref isSpaceCall, ref outputAddress))
             {
-                completedHandler?.Invoke(isRoomCall, outputAddress);
+                completedHandler?.Invoke(isSpaceCall, outputAddress);
             }
             //email address
             else if (IsValidEmail(address))
             {
                 outputAddress = address;
-                completedHandler?.Invoke(isRoomCall, outputAddress);
+                completedHandler?.Invoke(isSpaceCall, outputAddress);
             }
             //jwt user email convert to user id
             else if (IsJwtUserEmail(address))
@@ -566,25 +566,25 @@ namespace WebexSDK
                         List<Person> persons = result.Data;
                         if (persons.Count != 0)
                         {
-                            ParseHydraId(persons[0].Id, ref isRoomCall, ref outputAddress);
+                            ParseHydraId(persons[0].Id, ref isSpaceCall, ref outputAddress);
                         }
 
-                        completedHandler?.Invoke(isRoomCall, outputAddress);
+                        completedHandler?.Invoke(isSpaceCall, outputAddress);
                     }
                 });
             }
             else
             {
-                completedHandler?.Invoke(isRoomCall, address);
+                completedHandler?.Invoke(isSpaceCall, address);
             }
         }
 
-        private bool ParseHydraId(string address, ref bool isRoom, ref string outputAddress)
+        private bool ParseHydraId(string address, ref bool isSpace, ref string outputAddress)
         {
             string peopleUrl = "ciscospark://us/PEOPLE/";
-            string roomUrl = "ciscospark://us/ROOM/";
+            string spaceUrl = "ciscospark://us/ROOM/";
 
-            isRoom = false;
+            isSpace = false;
             outputAddress = null;
 
             try
@@ -594,10 +594,10 @@ namespace WebexSDK
                 {
                     outputAddress = decodedStr.Substring(peopleUrl.Length);
                 }
-                else if (decodedStr.StartsWith(roomUrl))
+                else if (decodedStr.StartsWith(spaceUrl))
                 {
-                    outputAddress = decodedStr.Substring(roomUrl.Length);
-                    isRoom = true;
+                    outputAddress = decodedStr.Substring(spaceUrl.Length);
+                    isSpace = true;
                 }
                 else
                 {

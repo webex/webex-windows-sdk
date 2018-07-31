@@ -29,7 +29,7 @@ using System.Text;
 namespace WebexSDK
 {
     /// <summary>
-    /// WebhookClient allow your app to be notified via HTTP when a specific event occurs on Webex. For example, your app can register a webhook to be notified when a new message is posted into a specific room
+    /// WebhookClient allow your app to be notified via HTTP when a specific event occurs on Webex. For example, your app can register a webhook to be notified when a new message is posted into a specific space
     /// </summary>
     /// <remarks>Since: 0.1.0</remarks>
     public sealed class WebhookClient

@@ -269,11 +269,11 @@ namespace WebexSDK.Tests
             return CreateUser(adminAccessToken, adminClientId, adminClientSecret);
         }
 
-        public Room CreateRoom(string title)
+        public Space CreateSpace(string title)
         {
             var completion = new ManualResetEvent(false);
-            var response = new WebexApiEventArgs<Room>();
-            webex.Rooms.Create(title, null, rsp =>
+            var response = new WebexApiEventArgs<Space>();
+            webex.Spaces.Create(title, null, rsp =>
             {
                 response = rsp;
                 completion.Set();
@@ -292,11 +292,11 @@ namespace WebexSDK.Tests
             return null;
         }
 
-        public bool DeleteRoom(string roomId)
+        public bool DeleteSpace(string spaceId)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs();
-            webex.Rooms.Delete(roomId, rsp =>
+            webex.Spaces.Delete(spaceId, rsp =>
             {
                 response = rsp;
                 completion.Set();
@@ -315,13 +315,13 @@ namespace WebexSDK.Tests
             return false;
         }
 
-        public Membership CreateMembership(string roomId, string email, string personId, bool isModerator)
+        public Membership CreateMembership(string spaceId, string email, string personId, bool isModerator)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs<Membership>();
             if (email != null)
             {
-                webex.Memberships.CreateByPersonEmail(roomId, email, isModerator, rsp =>
+                webex.Memberships.CreateByPersonEmail(spaceId, email, isModerator, rsp =>
                 {
                     response = rsp;
                     completion.Set();
@@ -329,7 +329,7 @@ namespace WebexSDK.Tests
             }
             else
             {
-                webex.Memberships.CreateByPersonId(roomId, personId, isModerator, rsp =>
+                webex.Memberships.CreateByPersonId(spaceId, personId, isModerator, rsp =>
                 {
                     response = rsp;
                     completion.Set();
@@ -591,14 +591,14 @@ namespace WebexSDK.Tests
         {
             Error,
             People,
-            Room,
+            Space,
             Message,
             Unknow,
         }
         public static HydraIdType GetHydraIdType(string address)
         {
             string peopleUrl = "ciscospark://us/PEOPLE/";
-            string roomUrl = "ciscospark://us/ROOM/";
+            string spaceUrl = "ciscospark://us/ROOM/";
             string messageUrl = "ciscospark://us/MESSAGE/";
 
             HydraIdType result = HydraIdType.Error;
@@ -610,9 +610,9 @@ namespace WebexSDK.Tests
                 {
                     result = HydraIdType.People;
                 }
-                else if (decodedStr.StartsWith(roomUrl))
+                else if (decodedStr.StartsWith(spaceUrl))
                 {
-                    result = HydraIdType.Room;
+                    result = HydraIdType.Space;
                 }
                 else if (decodedStr.StartsWith(messageUrl))
                 {
@@ -806,18 +806,18 @@ namespace WebexSDK.Tests
         {
             MessageHelper.SendMessage(windowName, "SendDirectMessageWithFiles:" + address + ":" + text);
         }
-        public static void SetTestMode_RemoteSendRoomMessage(string windowName, string roomId, string text)
+        public static void SetTestMode_RemoteSendSpaceMessage(string windowName, string spaceId, string text)
         {
-            MessageHelper.SendMessage(windowName, "SendRoomMessage:" + roomId + ":" + text);
+            MessageHelper.SendMessage(windowName, "SendSpaceMessage:" + spaceId + ":" + text);
         }
-        public static void SetTestMode_RemoteSendRoomMessageWithMention(string windowName, string roomId, string text, string mentioned)
+        public static void SetTestMode_RemoteSendSpaceMessageWithMention(string windowName, string spaceId, string text, string mentioned)
         {
-            MessageHelper.SendMessage(windowName, "SendRoomMessage:" + roomId + ":" + text+ ":" + mentioned);
+            MessageHelper.SendMessage(windowName, "SendSpaceMessage:" + spaceId + ":" + text+ ":" + mentioned);
         }
 
         public static void CloseTestFixtureApp(string windowName)
         {
-            MessageHelper.SendMessage(windowName, "CloseApp");
+            //MessageHelper.SendMessage(windowName, "CloseApp");
         }
     }
 

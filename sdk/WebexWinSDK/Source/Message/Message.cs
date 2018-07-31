@@ -41,15 +41,15 @@ namespace WebexSDK
         public string Id { get; set; }
 
         /// <summary>
-        /// The identifier of the room where this message was posted.
+        /// The identifier of the space where this message was posted.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
-        public string RoomId { get; set; }
+        public string SpaceId { get; set; }
 
         /// <summary>
-        /// The type of room, group or direct.
+        /// The type of space, group or direct.
         /// </summary>
-        public RoomType RoomType { get; set; }
+        public SpaceType SpaceType { get; set; }
 
         /// <summary>
         /// The identifier of the person who sent this message.
@@ -221,7 +221,7 @@ namespace WebexSDK
         /// <remarks>Since: 0.1.0</remarks>
         public Thumbnail RemoteThumbnail { get; set; }
 
-        internal string RoomId { get; set; }
+        internal string SpaceId { get; set; }
         internal string MessageId { get; set; }
         internal int FileIndex { get; set; }
     }
@@ -233,7 +233,7 @@ namespace WebexSDK
     {
     }
     /// <summary>
-    /// A data type represents mention one person in the room.
+    /// A data type represents mention one person in the space.
     /// </summary>
     /// <remarks>Since: 0.1.0</remarks>
     public class MentionPerson : Mention
@@ -256,7 +256,7 @@ namespace WebexSDK
         }
     }
     /// <summary>
-    /// A data type represents mention all in the room.
+    /// A data type represents mention all in the space.
     /// </summary>
     /// <remarks>Since: 0.1.0</remarks>
     public class MentionAll : Mention

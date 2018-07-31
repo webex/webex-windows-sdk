@@ -57,22 +57,22 @@ namespace WebexSDK
         {
             Error,
             People,
-            Room,
+            Space,
             Message,
             Unknow,
         }
         public static string EncodeHydraId(HydraIdType type, string address)
         {
             string peopleUrl = "ciscospark://us/PEOPLE/";
-            string roomUrl = "ciscospark://us/ROOM/";
+            string spaceUrl = "ciscospark://us/ROOM/";
             string messageUrl = "ciscospark://us/MESSAGE/";
 
             string result=null;
 
             switch (type)
             {
-                case HydraIdType.Room:
-                    result = Base64UrlEncode(roomUrl + address);
+                case HydraIdType.Space:
+                    result = Base64UrlEncode(spaceUrl + address);
                     break;
                 case HydraIdType.People:
                     result = Base64UrlEncode(peopleUrl + address);
@@ -89,7 +89,7 @@ namespace WebexSDK
         public static HydraIdType ParseHydraId(string address, ref string outputAddress)
         {
             string peopleUrl = "ciscospark://us/PEOPLE/";
-            string roomUrl = "ciscospark://us/ROOM/";
+            string spaceUrl = "ciscospark://us/ROOM/";
             string messageUrl = "ciscospark://us/MESSAGE/";
 
             outputAddress = null;
@@ -103,10 +103,10 @@ namespace WebexSDK
                     outputAddress = decodedStr.Substring(peopleUrl.Length);
                     result = HydraIdType.People;
                 }
-                else if (decodedStr.StartsWith(roomUrl))
+                else if (decodedStr.StartsWith(spaceUrl))
                 {
-                    outputAddress = decodedStr.Substring(roomUrl.Length);
-                    result = HydraIdType.Room;
+                    outputAddress = decodedStr.Substring(spaceUrl.Length);
+                    result = HydraIdType.Space;
                 }
                 else if (decodedStr.StartsWith(messageUrl))
                 {
