@@ -748,7 +748,7 @@ namespace WebexSDK.Tests
             MessageHelper.SendMessage(windowName, "Enable");
             MessageHelper.SendMessage(windowName, "AutoAnswer");
             MessageHelper.SendMessage(windowName, "MuteVideo");
-            MessageHelper.SendMessage(windowName, "ConversationTimer:50000");
+            MessageHelper.SendMessage(windowName, "ConversationTimer:100000");
         }
 
         public static void SetTestMode_CalleeAutoAnswerAndMuteVideoAndUnMuteVideoAndHangupAfter30Seconds(string windowName)
@@ -756,7 +756,7 @@ namespace WebexSDK.Tests
             MessageHelper.SendMessage(windowName, "Enable");
             MessageHelper.SendMessage(windowName, "AutoAnswer");
             MessageHelper.SendMessage(windowName, "MuteVideo:10000");
-            MessageHelper.SendMessage(windowName, "ConversationTimer:50000");
+            MessageHelper.SendMessage(windowName, "ConversationTimer:100000");
         }
 
         public static void SetTestMode_CalleeAutoAnswerAndMuteAudioAndHangupAfter30Seconds(string windowName)
@@ -764,7 +764,7 @@ namespace WebexSDK.Tests
             MessageHelper.SendMessage(windowName, "Enable");
             MessageHelper.SendMessage(windowName, "AutoAnswer");
             MessageHelper.SendMessage(windowName, "MuteAudio");
-            MessageHelper.SendMessage(windowName, "ConversationTimer:30000");
+            MessageHelper.SendMessage(windowName, "ConversationTimer:100000");
         }
 
         public static void SetTestMode_CalleeAutoAnswerAndMuteAudioAndUnMuteAudioAndHangupAfter30Seconds(string windowName)
@@ -772,7 +772,7 @@ namespace WebexSDK.Tests
             MessageHelper.SendMessage(windowName, "Enable");
             MessageHelper.SendMessage(windowName, "AutoAnswer");
             MessageHelper.SendMessage(windowName, "MuteAudio:5000");
-            MessageHelper.SendMessage(windowName, "ConversationTimer:30000");
+            MessageHelper.SendMessage(windowName, "ConversationTimer:100000");
         }
 
         public static void SetTestMode_CalleeAutoAnswerAndStartShareAndHangupAfter30s(string windowName)
@@ -817,7 +817,7 @@ namespace WebexSDK.Tests
 
         public static void CloseTestFixtureApp(string windowName)
         {
-            //MessageHelper.SendMessage(windowName, "CloseApp");
+            MessageHelper.SendMessage(windowName, "CloseApp");
         }
     }
 

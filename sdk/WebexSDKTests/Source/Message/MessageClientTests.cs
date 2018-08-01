@@ -150,6 +150,9 @@ namespace WebexSDK.Tests
         [TestMethod()]
         public void ListPersistMsgTest()
         {
+            PostMsg(null, calleePersonId, text);
+            PostMsg(null, calleePersonId, text);
+            PostMsg(null, calleePersonId, text);
             var msg = PostMsg(null, calleePersonId, text);
             Validate(msg);
 
