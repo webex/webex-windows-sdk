@@ -90,7 +90,7 @@ namespace WebexSDK.Tests
 
             fileUrl = Directory.GetCurrentDirectory() + "\\Resources\\" + "WebexTeams.jpg";
 
-            Thread.Sleep(30000);
+            Thread.Sleep(60000);
         }
 
         [ClassCleanup]
