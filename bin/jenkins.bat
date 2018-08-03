@@ -9,6 +9,8 @@ del sdk\WebexSDKTests\app.config
 copy c:\app.config sdk\WebexSDKTests\app.config
 REM .\bin\nuget.exe update -self
 bin\nuget.exe restore sdk\solutions\WinSDK4Desktop\WinSDK4Desktop.sln -NonInteractive
+REM clear NuGet package cache
+bin\nuget.exe locals all -clear
 
 set SDKNuGetPackage=Cisco.Webex.WindowsSDK.2.0.0-EFT
 echo SDKNuGetPackage is %SDKNuGetPackage%
