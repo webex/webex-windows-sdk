@@ -38,10 +38,10 @@
     <HelpTitle>Webex SDK Docs</HelpTitle>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <VisibleItems>InheritedMembers, ProtectedInternalAsProtected, EditorBrowsableNever, NonBrowsable</VisibleItems>
-    <ProjectSummary>The Cisco Spark Windows SDK makes it easy to integrate secure and convenient Cisco Spark messaging and calling features in your apps.</ProjectSummary>
+    <ProjectSummary>The Cisco Webex Windows SDK makes it easy to integrate secure and convenient Cisco Webex messaging and calling features in your apps.</ProjectSummary>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="True" />
-      <NamespaceSummaryItem name="SparkSDK" isDocumented="True">The Cisco Spark Windows SDK makes it easy to integrate secure and convenient Cisco Spark messaging and calling features in your apps.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="WebexSDK" isDocumented="True">The Cisco Webex Windows SDK makes it easy to integrate secure and convenient Cisco Webex messaging and calling features in your apps.</NamespaceSummaryItem>
     </NamespaceSummaries>
     <FooterText>
     </FooterText>
