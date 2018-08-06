@@ -683,17 +683,6 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// Set local share view to display.
-        /// </summary>
-        /// <param name="handle">the local share dispaly window handle</param>
-        /// <remarks>Since: 0.1.0</remarks>
-        public void SetLoalShareView(IntPtr handle)
-        {
-            SDKLogger.Instance.Debug($"handle:{handle}");
-            m_core_telephoneService.setView(this.CallId, handle, TrackType.LocalShare);
-        }
-
-        /// <summary>
         /// Set remote share view to display.
         /// </summary>
         /// <param name="handle">the remote share dispaly window handle</param>
@@ -724,17 +713,6 @@ namespace WebexSDK
         {
             SDKLogger.Instance.Debug($"handle:{handle}");
             m_core_telephoneService.updateView(this.CallId, handle, TrackType.Local);
-        }
-
-        /// <summary>
-        /// Update local share view to display when video window is resized.
-        /// </summary>
-        /// <param name="handle">the local share dispaly window handle</param>
-        /// <remarks>Since: 0.1.0</remarks>
-        public void UpdateLoalShareView(IntPtr handle)
-        {
-            SDKLogger.Instance.Debug($"handle:{handle}");
-            m_core_telephoneService.updateView(this.CallId, handle, TrackType.LocalShare);
         }
 
         /// <summary>
