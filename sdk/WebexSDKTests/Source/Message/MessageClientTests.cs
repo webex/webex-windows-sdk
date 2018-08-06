@@ -122,7 +122,7 @@ namespace WebexSDK.Tests
             messages.OnEvent -= ReceiveMessageEvent;
             recvedMessage = null;
             deletedMessageId = null;
-    }
+        }
 
         [TestMethod()]
         public void ListTest()
@@ -155,7 +155,7 @@ namespace WebexSDK.Tests
             PostMsg(null, calleePersonId, text);
             var msg = PostMsg(null, calleePersonId, text);
             Validate(msg);
-
+            Thread.Sleep(5000);
             var list = ListMsg(msg.SpaceId, null, msg.Id, 1000);
             Assert.IsNotNull(list);
             Assert.IsTrue(list.Count > 0);

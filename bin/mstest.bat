@@ -4,11 +4,7 @@ setlocal enabledelayedexpansion
 pushd .
 cd sdk\binary\[build]\bin\x86\Release\
 
-rmdir /Q testApp
-mkdir testApp
-copy *.* testApp\
 del /Q vstest_error_log.txt
-
 rmdir /s /q TestResults
 set PATH=%PATH%;%CD%;
 "%VS150COMNTOOLS%..\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" WebexSDKTests.dll /InIsolation /EnableCodeCoverage /Logger:trx /Settings:..\..\..\..\..\..\sdk\WebexSDKTests\CodeCoverage.runsettings 2>vstest_error_log.txt

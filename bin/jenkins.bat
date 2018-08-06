@@ -14,8 +14,8 @@ bin\nuget.exe locals all -clear
 
 set SDKNuGetPackage=Cisco.Webex.WindowsSDK.2.0.0-EFT
 echo SDKNuGetPackage is %SDKNuGetPackage%
-echo copy scf libraries to sdk\solutions\WinSDK4Desktop\packages\%SDKNuGetPackage%\
-copy /y spark-client-framework\scfLibrary\Release\*.dll sdk\solutions\WinSDK4Desktop\packages\%SDKNuGetPackage%\
+echo copy scf libraries to sdk\solutions\WinSDK4Desktop\packages\%SDKNuGetPackage%\lib\native\
+copy /y spark-client-framework\scfLibrary\Release\*.dll sdk\solutions\WinSDK4Desktop\packages\%SDKNuGetPackage%\lib\native\
 if not %errorlevel% == 0 ( 
 	echo update scf libraries failed.
 	goto EXIT 
