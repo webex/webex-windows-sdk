@@ -1,6 +1,6 @@
 # Cisco Webex Windows SDK
 
-[![NuGet](https://img.shields.io/nuget/v/Nuget.Core.svg)](https://www.nuget.org/packages/Cisco.Webex.WindowsSDK/)
+[![NuGet version (Cisco.Webex.WindowsSDK)](https://img.shields.io/nuget/v/Cisco.Webex.WindowsSDK.svg?style=flat-square)](https://www.nuget.org/packages/Cisco.Webex.WindowsSDK/)
 [![Build status](https://ci.appveyor.com/api/projects/status/k7bu14htnvcxkdwd/branch/master?svg=true)](https://ci.appveyor.com/project/ciscowebex/webex-windows-sdk/branch/master)
 [![LICENSE](https://img.shields.io/github/license/webex/webex-windows-sdk.svg)](https://github.com/webex/webex-windows-sdk/blob/master/LICENSE)
 > The Cisco Webex™ Windows SDK
