@@ -29,7 +29,7 @@ Included items must then not match any entries in the exclude list to remain inc
             <!-- Match assembly file paths: -->  
             <ModulePaths>  
               <Include>  
-                <ModulePath>.*\WebexSDK.dll$</ModulePath>  
+                <ModulePath>.*WebexSDK.dll$</ModulePath>  
                 <!--<ModulePath>.*\.exe$</ModulePath>-->  
               </Include>  
               <Exclude>  

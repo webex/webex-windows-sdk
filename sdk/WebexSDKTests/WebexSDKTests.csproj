@@ -110,7 +110,7 @@
     <Compile Include="Source\Message\MessageClientTests.cs" />
     <Compile Include="Source\Person\PersonClientTests.cs" />
     <Compile Include="Source\Phone\PhoneTests.cs" />
-    <Compile Include="Source\Room\RoomClientTests.cs" />
+    <Compile Include="Source\Space\SpaceClientTests.cs" />
     <Compile Include="Source\WebexTestFixture.cs" />
     <Compile Include="Source\TeamMembership\TeamMembershipClientTests.cs" />
     <Compile Include="Source\Team\TeamClientTests.cs" />
