@@ -6,10 +6,10 @@
     <authors>Cisco</authors>
     <owners>Cisco</owners>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <licenseUrl>https://github.com/ciscowebex/webex-windows-sdk/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/ciscowebex/webex-windows-sdk</projectUrl>
+    <licenseUrl>https://github.com/webex/webex-windows-sdk/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/webex/webex-windows-sdk</projectUrl>
     <description>Cisco Webex SDK on Windows, WME version 8.0.2</description>
-    <releaseNotes>Added end to end encrypted message.</releaseNotes>
+    <releaseNotes>Rebranding from spark to webex. Support multi-stream.</releaseNotes>
     <copyright>Copyright ©2018 Cisco Corporation</copyright>
     <tags>Webex Video Audio Call Message</tags>
     <dependencies>
