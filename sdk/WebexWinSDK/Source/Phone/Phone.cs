@@ -711,14 +711,15 @@ namespace WebexSDK
                     OnVideoTrackPersonChanged((TrackType)error, status);
                     break;
                 case SCFEventType.RemoteVideoCountChanged:
-                    if (error >= 0)
+                    int newCount = error;
+                    if (newCount >= 0)
                     {
-                        if (currentCall?.RemoteVideosCount != error)
+                        if (currentCall?.RemoteVideosCount != newCount)
                         {
-                            currentCall.RemoteVideosCount = error;
-                            SDKLogger.Instance.Debug($"remote auxiliary videos count changed to {error}");
-                            currentCall?.TrigerOnMediaChanged(new RemoteAuxVideosCountChangedEvent(currentCall, error));
-                        }        
+                            currentCall.RemoteVideosCount = newCount;
+                            SDKLogger.Instance.Debug($"remote auxiliary videos count changed to {newCount}");
+                            currentCall?.TrigerOnMediaChanged(new RemoteAuxVideosCountChangedEvent(currentCall, newCount));
+                        }
                     }
                     break;
                 case SCFEventType.IsAuxVideoStreamInUseChanged:

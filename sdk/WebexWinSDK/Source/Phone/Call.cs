@@ -927,7 +927,25 @@ namespace WebexSDK
         internal void TrigerOnCallMembershipChanged(CallMembershipChangedEvent callMembershipEvent)
         {
             SDKLogger.Instance.Info($"event[{callMembershipEvent.GetType().Name}] callmerbship[{callMembershipEvent.CallMembership.Email}]");
+            if (callMembershipEvent is CallMembershipLeftEvent)
+            {
+                CheckAuxVideoPersonChange();
+            }
             OnCallMembershipChanged?.Invoke(callMembershipEvent);
+        }
+        private void CheckAuxVideoPersonChange()
+        {
+            if (RemoteAuxVideos != null && RemoteAuxVideos.Count > 0)
+            {
+                foreach (var item in RemoteAuxVideos)
+                {
+                    if (item.IsInUse && item.Person == null)
+                    {
+                        SDKLogger.Instance.Debug($"{item.track} change to no person.");
+                        TrigerOnMediaChanged(new RemoteAuxVideoPersonChangedEvent(this, item));
+                    }
+                }
+            }
         }
 
         internal void TrigerOnSelectShareSource( ShareSourceType type)
@@ -1042,7 +1060,7 @@ namespace WebexSDK
                     string contactId = this.currentCall.m_core_telephoneService.getContact(this.currentCall.CallId, (TrackType)track);
                     if (contactId == null || contactId.Length == 0)
                     {
-                        SDKLogger.Instance.Error($"get contactID by trackType[{track}] failed.");
+                        SDKLogger.Instance.Debug($"trackType[{track}] has no person.");
                         return null;
                     }
                     var trackPersonId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.People, contactId);
