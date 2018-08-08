@@ -942,6 +942,7 @@ namespace WebexSDK
                     if (item.IsInUse && item.Person == null)
                     {
                         SDKLogger.Instance.Debug($"{item.track} change to no person.");
+                        item.IsInUse = false;
                         TrigerOnMediaChanged(new RemoteAuxVideoPersonChangedEvent(this, item));
                     }
                 }

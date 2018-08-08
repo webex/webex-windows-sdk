@@ -2738,7 +2738,7 @@ namespace WebexSDK.Tests
 
             currentCall = null;
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
-            CallMembership peroson = null;
+            List<CallMembership> perosons = new List<CallMembership>();
 
             phone.Dial(calleeAddress, MediaOption.AudioVideoShare(), r =>
             {
@@ -2764,7 +2764,7 @@ namespace WebexSDK.Tests
                         if (callMediaChangedEvent is RemoteAuxVideoPersonChangedEvent)
                         {
                             mediaEvents.Add(callMediaChangedEvent);
-                            peroson = ((RemoteAuxVideoPersonChangedEvent)callMediaChangedEvent).RemoteAuxVideo.Person;
+                            perosons.Add(((RemoteAuxVideoPersonChangedEvent)callMediaChangedEvent).RemoteAuxVideo.Person);
                         }
                     };
                 }
@@ -2779,11 +2779,13 @@ namespace WebexSDK.Tests
 
             MessageHelper.RunDispatcherLoop();
 
-            Assert.AreEqual(1, mediaEvents.Count);
+            Assert.AreEqual(2, mediaEvents.Count);
 
             var remoteAuxVideoPersonChangedEvent = mediaEvents[0] as RemoteAuxVideoPersonChangedEvent;
-            Assert.IsNotNull(peroson);
-            Assert.IsNotNull(peroson.Email);
+            Assert.IsNotNull(perosons[0]);
+            Assert.IsNotNull(perosons[0].Email);
+            remoteAuxVideoPersonChangedEvent = mediaEvents[1] as RemoteAuxVideoPersonChangedEvent;
+            Assert.IsNull(perosons[1]);
         }
 
         [TestMethod()]
