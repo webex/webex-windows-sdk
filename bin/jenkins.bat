@@ -40,7 +40,7 @@ if not %errorlevel% == 0 (
 
 popd
 
-REM call bin\mstest.bat
+call bin\mstest.bat
 
 call bin\packageNuGet.bat
 
