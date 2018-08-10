@@ -750,7 +750,20 @@ namespace WebexSDK
                 if (find != null)
                 {
                     SDKLogger.Instance.Debug($"{trackType} person changed");
-                    currentCall?.TrigerOnMediaChanged(new RemoteAuxVideoPersonChangedEvent(currentCall, find));
+                    var oldperson = find.Person;
+
+                    string contactId = m_core_telephoneService.getContact(callId, trackType);
+                    if (contactId == null || contactId.Length == 0)
+                    {
+                        SDKLogger.Instance.Debug($"trackType[{trackType}] has no person.");
+                        find.person = null;
+                    }
+                    else
+                    {
+                        var trackPersonId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.People, contactId);
+                        find.person = this.currentCall.Memberships.Find(x => x.PersonId == trackPersonId);
+                    }
+                    currentCall?.TrigerOnMediaChanged(new RemoteAuxVideoPersonChangedEvent(oldperson, find.Person, currentCall, find));
                 }      
             }
         }

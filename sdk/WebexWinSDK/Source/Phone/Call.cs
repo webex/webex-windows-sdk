@@ -929,21 +929,24 @@ namespace WebexSDK
             SDKLogger.Instance.Info($"event[{callMembershipEvent.GetType().Name}] callmerbship[{callMembershipEvent.CallMembership.Email}]");
             if (callMembershipEvent is CallMembershipLeftEvent)
             {
-                CheckAuxVideoPersonChange();
+                var leftperson = callMembershipEvent as CallMembershipLeftEvent;
+                CheckAuxVideoPersonChange(leftperson.CallMembership);
             }
             OnCallMembershipChanged?.Invoke(callMembershipEvent);
         }
-        private void CheckAuxVideoPersonChange()
+        private void CheckAuxVideoPersonChange(CallMembership leftPerson)
         {
             if (RemoteAuxVideos != null && RemoteAuxVideos.Count > 0)
             {
                 foreach (var item in RemoteAuxVideos)
                 {
-                    if (item.IsInUse && item.Person == null)
+                    if (item.IsInUse && item.Person.PersonId == leftPerson.PersonId)
                     {
                         SDKLogger.Instance.Debug($"{item.track} change to no person.");
+                        var oldperson = item.Person;
+                        item.person = null;
                         item.IsInUse = false;
-                        TrigerOnMediaChanged(new RemoteAuxVideoPersonChangedEvent(this, item));
+                        TrigerOnMediaChanged(new RemoteAuxVideoPersonChangedEvent(oldperson, item.Person, this, item));
                     }
                 }
             }
@@ -1045,7 +1048,7 @@ namespace WebexSDK
                     }
                 }
             }
-
+            internal CallMembership person;
             /// <summary>
             /// Gets the person represented this auxiliary video.
             /// </summary>
@@ -1054,18 +1057,7 @@ namespace WebexSDK
             {
                 get
                 {
-                    if (this.currentCall == null)
-                    {
-                        return null;
-                    }
-                    string contactId = this.currentCall.m_core_telephoneService.getContact(this.currentCall.CallId, (TrackType)track);
-                    if (contactId == null || contactId.Length == 0)
-                    {
-                        SDKLogger.Instance.Debug($"trackType[{track}] has no person.");
-                        return null;
-                    }
-                    var trackPersonId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.People, contactId);
-                    return this.currentCall.Memberships.Find(x => x.PersonId == trackPersonId);
+                    return this.person;
                 }
             }
 

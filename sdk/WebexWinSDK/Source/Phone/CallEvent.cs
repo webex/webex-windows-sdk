@@ -234,9 +234,21 @@ namespace WebexSDK
     /// <remarks>Since: 2.0.0</remarks>
     public class RemoteAuxVideoPersonChangedEvent : RemoteAuxVideoChangedEvent
     {
-        internal RemoteAuxVideoPersonChangedEvent(Call call, Call.RemoteAuxVideo remoteAuxVideo)
+        /// <summary>
+        /// The new person represented this auxiliary video
+        /// </summary>
+        /// <remarks>Since: 2.0.0</remarks>
+        public CallMembership FromPerson { get; internal set; }
+        /// <summary>
+        /// The former person represented this auxiliary video
+        /// </summary>
+        public CallMembership ToPerson { get; internal set; }
+
+        internal RemoteAuxVideoPersonChangedEvent(CallMembership oldperson, CallMembership newperson, Call call, Call.RemoteAuxVideo remoteAuxVideo)
             : base(call, remoteAuxVideo)
         {
+            FromPerson = oldperson;
+            ToPerson = newperson;
         }
     }
 
