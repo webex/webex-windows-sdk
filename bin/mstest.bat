@@ -25,8 +25,9 @@ if not '%errorlevel%' == '0' (
 CALL set "test=!!vstest_error:%abort_flag%=!!"
 echo !test!
 if "!test!"=="!vstest_error!" (
+	"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\Team Tools\Dynamic Code Coverage Tools\CodeCoverage.exe" analyze /output:TestResults\VisualStudio.coveragexml "TestResults\*.coverage"
      ..\..\..\..\..\..\bin\CoverageConverter.exe /in:TestResults/*.coverage /out:TestResults/vstest.coveragexml
-	 "%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\CodeCoverage.exe" analyze /output:TestResults\VisualStudio.coveragexml TestResults\*.coverage"
+	 
 ) else ( 
      rmdir /s /q TestResults
      echo "don't calculate coverage because the test process exited unexpectly"
@@ -35,8 +36,8 @@ if "!test!"=="!vstest_error!" (
     (call ) 
     echo %errorlevel%
 ) else (
+"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\Team Tools\Dynamic Code Coverage Tools\CodeCoverage.exe" analyze /output:TestResults\VisualStudio.coveragexml "TestResults\*.coverage"
 ..\..\..\..\..\..\bin\CoverageConverter.exe /in:TestResults/*.coverage /out:TestResults/vstest.coveragexml
-"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\CodeCoverage.exe" analyze /output:TestResults\VisualStudio.coveragexml TestResults\*.coverage"
 )
 echo %errorlevel%
 popd
