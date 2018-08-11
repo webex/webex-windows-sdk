@@ -9,6 +9,12 @@ rmdir /s /q TestResults
 set PATH=%PATH%;%CD%;
 "%VS150COMNTOOLS%..\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" WebexSDKTests.dll /InIsolation /EnableCodeCoverage /Logger:trx /Settings:..\..\..\..\..\..\sdk\WebexSDKTests\CodeCoverage.runsettings 2>vstest_error_log.txt
 
+for /f "delims=" %%i in ('dir/s/b TestResults\*.coverage') do (
+set coverageFile=%%i
+goto b)
+:b
+echo coverageFile: %coverageFile%
+
 echo vstest.console.exe exit code is %errorlevel%
 set "abort_flag=the execution process exited unexpectedly"
 
@@ -25,7 +31,7 @@ if not '%errorlevel%' == '0' (
 CALL set "test=!!vstest_error:%abort_flag%=!!"
 echo !test!
 if "!test!"=="!vstest_error!" (
-	"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\Team Tools\Dynamic Code Coverage Tools\CodeCoverage.exe" analyze /output:TestResults\VisualStudio.coveragexml "TestResults\*.coverage"
+	"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\Team Tools\Dynamic Code Coverage Tools\CodeCoverage.exe" analyze /output:TestResults\VisualStudio.coveragexml "%coverageFile%"
      ..\..\..\..\..\..\bin\CoverageConverter.exe /in:TestResults/*.coverage /out:TestResults/vstest.coveragexml
 	 
 ) else ( 
@@ -36,7 +42,7 @@ if "!test!"=="!vstest_error!" (
     (call ) 
     echo %errorlevel%
 ) else (
-"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\Team Tools\Dynamic Code Coverage Tools\CodeCoverage.exe" analyze /output:TestResults\VisualStudio.coveragexml "TestResults\*.coverage"
+"%ProgramFiles(x86)%\Microsoft Visual Studio\2017\Enterprise\Team Tools\Dynamic Code Coverage Tools\CodeCoverage.exe" analyze /output:TestResults\VisualStudio.coveragexml "%coverageFile%"
 ..\..\..\..\..\..\bin\CoverageConverter.exe /in:TestResults/*.coverage /out:TestResults/vstest.coveragexml
 )
 echo %errorlevel%
