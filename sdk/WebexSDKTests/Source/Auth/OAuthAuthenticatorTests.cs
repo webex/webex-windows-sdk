@@ -65,7 +65,7 @@ namespace WebexSDK.Tests
                 
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 Assert.Fail();
             }
@@ -88,7 +88,7 @@ namespace WebexSDK.Tests
 
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 Assert.Fail();
             }

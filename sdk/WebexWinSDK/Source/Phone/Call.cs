@@ -71,12 +71,12 @@ namespace WebexSDK
         internal Call(Phone phone)
         {
             this.phone = phone;
-            init();
+            Init();
             m_core = SCFCore.Instance.m_core;
             m_core_telephoneService = SCFCore.Instance.m_core_telephoneService;
         }
 
-        internal void init()
+        internal void Init()
         {
             CallId = null;
             CalleeAddress = null;
@@ -124,12 +124,12 @@ namespace WebexSDK
             /// the width of the video render view dimensions.
             /// </summary>
             /// <remarks>Since: 0.1.0</remarks>
-            public uint Width;
+            public uint Width { get; set; }
             /// <summary>
             /// the height of video render view dimensions.
             /// </summary>
             /// <remarks>Since: 0.1.0</remarks>
-            public uint Height;
+            public uint Height { get; set; }
         }
 
         /// <summary>
@@ -399,7 +399,15 @@ namespace WebexSDK
         {
             get
             {
-                if (m_core_telephoneService?.getVideoSize(CallId, TrackType.Local, ref localVideoViewSize.Width, ref localVideoViewSize.Height) != true)
+                uint width = 0;
+                uint height = 0;
+                if (m_core_telephoneService != null && m_core_telephoneService.getVideoSize(CallId, TrackType.Local, ref width, ref height))
+                {
+                    localVideoViewSize.Width = width;
+                    localVideoViewSize.Height = height;
+                    SdkLogger.Instance.Debug($"get local video view size: width[{width}] height[{height}]");
+                }
+                else
                 {
                     SdkLogger.Instance.Error("get local video view size error.");
                 }
@@ -415,7 +423,15 @@ namespace WebexSDK
         {
             get
             {
-                if (m_core_telephoneService?.getVideoSize(CallId, TrackType.Remote, ref remoteVideoViewSize.Width, ref remoteVideoViewSize.Height) != true)
+                uint width = 0;
+                uint height = 0;
+                if (m_core_telephoneService != null && m_core_telephoneService.getVideoSize(CallId, TrackType.Remote, ref width, ref height))
+                {
+                    remoteVideoViewSize.Width = width;
+                    remoteVideoViewSize.Height = height;
+                    SdkLogger.Instance.Debug($"get remote video view size: width[{width}] height[{height}]");
+                }
+                else
                 {
                     SdkLogger.Instance.Error("get remote video view size error.");
                 }
@@ -431,7 +447,15 @@ namespace WebexSDK
         {
             get
             {
-                if (m_core_telephoneService?.getVideoSize(CallId, TrackType.RemoteShare, ref remoteShareViewSize.Width, ref remoteShareViewSize.Height) != true)
+                uint width = 0;
+                uint height = 0;
+                if (m_core_telephoneService != null && m_core_telephoneService.getVideoSize(CallId, TrackType.RemoteShare, ref width, ref height))
+                {
+                    remoteShareViewSize.Width = width;
+                    remoteShareViewSize.Height = height;
+                    SdkLogger.Instance.Debug($"get remote share view size: width[{width}] height[{height}]");
+                }
+                else
                 {
                     SdkLogger.Instance.Error("get remote  share view size error.");
                 }
@@ -773,10 +797,10 @@ namespace WebexSDK
             }
             RemoteAuxVideos.Remove(remoteAuxVideo);
 
-            SdkLogger.Instance.Error($"unsubscribe track[{remoteAuxVideo?.track}]");
-            if (remoteAuxVideo.track >= TrackType.RemoteAux1 && remoteAuxVideo.track <= TrackType.RemoteAux4)
+            SdkLogger.Instance.Error($"unsubscribe track[{remoteAuxVideo?.Track}]");
+            if (remoteAuxVideo.Track >= TrackType.RemoteAux1 && remoteAuxVideo.Track <= TrackType.RemoteAux4)
             {
-                m_core_telephoneService.unSubscribeAuxVideo(this.CallId, remoteAuxVideo.track);
+                m_core_telephoneService.unSubscribeAuxVideo(this.CallId, remoteAuxVideo.Track);
             }
         }
 
@@ -880,78 +904,42 @@ namespace WebexSDK
         {
             SdkLogger.Instance.Debug($"trigerOnMediaChanged: {mediaChangedEvent.GetType().Name}");
 
-            if (mediaChangedEvent is ReceivingVideoEvent)
+            if (mediaChangedEvent is ReceivingVideoEvent receivingVideoEvent)
             {
-                var mediaEvent = mediaChangedEvent as ReceivingVideoEvent;
-                if (mediaEvent != null)
-                {
-                    isReceivingVideo = mediaEvent.IsReceiving;
-                }
+                isReceivingVideo = receivingVideoEvent.IsReceiving;
             }
-            else if (mediaChangedEvent is ReceivingAudioEvent)
+            else if (mediaChangedEvent is ReceivingAudioEvent receivingAudioEvent)
             {
-                var mediaEvent = mediaChangedEvent as ReceivingAudioEvent;
-                if (mediaEvent != null)
-                {
-                    isReceivingAudio = mediaEvent.IsReceiving;
-                }
+                isReceivingAudio = receivingAudioEvent.IsReceiving;
             }
-            else if (mediaChangedEvent is SendingVideoEvent)
+            else if (mediaChangedEvent is SendingVideoEvent sendingVideoEvent)
             {
-                var mediaEvent = mediaChangedEvent as SendingVideoEvent;
-                if (mediaEvent != null)
-                {
-                    isSendingVideo = mediaEvent.IsSending;
-                }
+                isSendingVideo = sendingVideoEvent.IsSending;
             }
-            else if (mediaChangedEvent is SendingAudioEvent)
+            else if (mediaChangedEvent is SendingAudioEvent sendingAudioEvent)
             {
-                var mediaEvent = mediaChangedEvent as SendingAudioEvent;
-                if (mediaEvent != null)
-                {
-                    isSendingAudio = mediaEvent.IsSending;
-                }
+                isSendingAudio = sendingAudioEvent.IsSending;
             }
-            else if (mediaChangedEvent is RemoteSendingAudioEvent)
+            else if (mediaChangedEvent is RemoteSendingAudioEvent remoteSendingAudioEvent)
             {
-                var mediaEvent = mediaChangedEvent as RemoteSendingAudioEvent;
-                if (mediaEvent != null)
-                {
-                    IsRemoteSendingAudio = mediaEvent.IsSending;
-                }
+                IsRemoteSendingAudio = remoteSendingAudioEvent.IsSending;
             }
-            else if (mediaChangedEvent is RemoteSendingVideoEvent)
+            else if (mediaChangedEvent is RemoteSendingVideoEvent remoteSendingVideoEvent)
             {
-                var mediaEvent = mediaChangedEvent as RemoteSendingVideoEvent;
-                if (mediaEvent != null)
-                {
-                    IsRemoteSendingVideo = mediaEvent.IsSending;
-                }
+                IsRemoteSendingVideo = remoteSendingVideoEvent.IsSending;
             }
-            else if (mediaChangedEvent is RemoteSendingShareEvent)
+            else if (mediaChangedEvent is RemoteSendingShareEvent remoteSendingShareEvent)
             {
-                var mediaEvent = mediaChangedEvent as RemoteSendingShareEvent;
-                if (mediaEvent != null)
-                {
-                    IsRemoteSendingShare = mediaEvent.IsSending;
-                    isReceivingShare = IsRemoteSendingShare;
-                }
+                IsRemoteSendingShare = remoteSendingShareEvent.IsSending;
+                isReceivingShare = IsRemoteSendingShare;
             }
-            else if (mediaChangedEvent is ReceivingShareEvent)
+            else if (mediaChangedEvent is ReceivingShareEvent receivingShareEvent)
             {
-                var mediaEvent = mediaChangedEvent as ReceivingShareEvent;
-                if (mediaEvent != null)
-                {
-                    isReceivingShare = mediaEvent.IsReceiving;
-                }
+                isReceivingShare = receivingShareEvent.IsReceiving;
             }
-            else if (mediaChangedEvent is SendingShareEvent)
+            else if (mediaChangedEvent is SendingShareEvent sendingShareEvent)
             {
-                var mediaEvent = mediaChangedEvent as SendingShareEvent;
-                if (mediaEvent != null)
-                {
-                    IsSendingShare = mediaEvent.IsSending;
-                }
+                IsSendingShare = sendingShareEvent.IsSending;
             }
 
             OnMediaChanged?.Invoke(mediaChangedEvent);
@@ -975,7 +963,7 @@ namespace WebexSDK
                 {
                     if (item.IsInUse && item.Person.PersonId == leftPerson.PersonId)
                     {
-                        SdkLogger.Instance.Debug($"{item.track} change to no person.");
+                        SdkLogger.Instance.Debug($"{item.Track} change to no person.");
                         var oldperson = item.Person;
                         item.person = null;
                         item.IsInUse = false;
@@ -1035,9 +1023,9 @@ namespace WebexSDK
                 if (!HandleList.Contains(handle))
                 {
                     HandleList.Add(handle);
-                    if(track > TrackType.Unknown)
+                    if(Track > TrackType.Unknown)
                     {
-                        this.currentCall?.m_core_telephoneService.setView(currentCall.CallId, handle, track);
+                        this.currentCall?.m_core_telephoneService.setView(currentCall.CallId, handle, Track);
                     }
                 }
             }
@@ -1055,9 +1043,9 @@ namespace WebexSDK
                 if (HandleList.Contains(handle))
                 {
                     HandleList.Remove(handle);
-                    if (track > TrackType.Unknown)
+                    if (Track > TrackType.Unknown)
                     {
-                        this.currentCall?.m_core_telephoneService.removeView(currentCall.CallId, handle, track);
+                        this.currentCall?.m_core_telephoneService.removeView(currentCall.CallId, handle, Track);
                     }
                 }
             }
@@ -1073,9 +1061,9 @@ namespace WebexSDK
                     return;
                 }
 
-                if (HandleList.Contains(handle) && track > TrackType.Unknown)
+                if (HandleList.Contains(handle) && Track > TrackType.Unknown)
                 {
-                    this.currentCall?.m_core_telephoneService.updateView(currentCall.CallId, handle, track);
+                    this.currentCall?.m_core_telephoneService.updateView(currentCall.CallId, handle, Track);
                 }
             }
             internal CallMembership person;
@@ -1128,7 +1116,7 @@ namespace WebexSDK
                 set
                 {
                     SdkLogger.Instance.Info($"{value}");
-                    this.currentCall.m_core_telephoneService?.muteRemoteVideo(this.currentCall.CallId, !value, track);
+                    this.currentCall.m_core_telephoneService?.muteRemoteVideo(this.currentCall.CallId, !value, Track);
                     isReceivingVideo = value;
                 }
             }
@@ -1143,15 +1131,24 @@ namespace WebexSDK
             {
                 get
                 {
-                    if (this.currentCall.m_core_telephoneService?.getVideoSize(this.currentCall.CallId, track, ref remoteAuxVideoSize.Width, ref remoteAuxVideoSize.Height) != true)
+                    uint width = 0;
+                    uint height = 0;
+                    if (currentCall != null && currentCall.m_core_telephoneService != null
+                        && currentCall.m_core_telephoneService.getVideoSize(this.currentCall.CallId, Track, ref width, ref height))
                     {
-                        SdkLogger.Instance.Error($"get remote track[{track}] video view size error.");
+                        remoteAuxVideoSize.Width = width;
+                        remoteAuxVideoSize.Height = height;
+                        SdkLogger.Instance.Debug($"get remote track[{Track}] video view size: width[{width}] height[{height}]");
+                    }
+                    else
+                    {
+                        SdkLogger.Instance.Error($"get remote track[{Track}] video view size error.");
                     }
                     return remoteAuxVideoSize;
                 }
             }
 
-            internal SparkNet.TrackType track { get; set; }
+            internal SparkNet.TrackType Track { get; set; }
             internal bool IsInUse { get; set; }
             private readonly Call currentCall;
             private RemoteAuxVideo() { }

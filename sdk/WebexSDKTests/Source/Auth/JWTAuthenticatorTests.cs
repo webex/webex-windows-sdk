@@ -70,7 +70,7 @@ namespace WebexSDK.Tests
                 completion.Set();
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 Assert.Fail();
                 return;
@@ -93,7 +93,7 @@ namespace WebexSDK.Tests
                 completion.Set();
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 Assert.Fail();
                 return;
@@ -117,7 +117,7 @@ namespace WebexSDK.Tests
                 completion.Set();
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 Assert.Fail();
                 return;
@@ -139,7 +139,7 @@ namespace WebexSDK.Tests
                 completion.Set();
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 Assert.Fail();
                 return;
@@ -161,7 +161,7 @@ namespace WebexSDK.Tests
                 completion.Set();
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 Assert.Fail();
                 return;
@@ -184,7 +184,7 @@ namespace WebexSDK.Tests
         //        repOfaccessToken = r;
         //        completion.Set();
         //    });
-        //    if (false == completion.WaitOne(30000))
+        //    if (!completion.WaitOne(30000))
         //    {
         //        Assert.Fail();
         //        return;
@@ -213,7 +213,7 @@ namespace WebexSDK.Tests
         //        repOfaccessToken = r;
         //        completion.Set();
         //    });
-        //    if (false == completion.WaitOne(30000))
+        //    if (!completion.WaitOne(30000))
         //    {
         //        Assert.Fail();
         //        return;
@@ -233,7 +233,7 @@ namespace WebexSDK.Tests
         //        newAccessToken = r;
         //        completion.Set();
         //    });
-        //    if (false == completion.WaitOne(30000))
+        //    if (!completion.WaitOne(30000))
         //    {
         //        Assert.Fail();
         //        return;
@@ -270,7 +270,7 @@ namespace WebexSDK.Tests
                 completion.Set();
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 Assert.Fail();
                 return false;
@@ -293,7 +293,7 @@ namespace WebexSDK.Tests
                 response = r;
                 completion.Set();
             });
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 Console.WriteLine("jwt login: timeout");
                 return false ;

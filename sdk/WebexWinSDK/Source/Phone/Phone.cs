@@ -280,7 +280,6 @@ namespace WebexSDK
                 {
                     if (!m_core_telephoneService.canMakeCall(outputAddress))
                     {
-                        //currentCall.init();
                         currentCall = new Call(this);
                         SdkLogger.Instance.Error($"canMakeCall return false. address:{outputAddress}");
                         completedHandler?.Invoke(new WebexApiEventArgs<Call>(false, new WebexError(WebexErrorCode.IllegalOperation, "maybe space id is invalid"), null));
@@ -387,7 +386,6 @@ namespace WebexSDK
                     SdkLogger.Instance.Warn("reject video codec license");
                     currentCall = new Call(this);
                     DialCompletedHandler?.Invoke(new WebexApiEventArgs<Call>(false, new WebexError(WebexErrorCode.RequireH264, ""), null));
-                    //currentCall.init();
                     return;
                 }
                 ConvertToDialAddress(currentCall.CalleeAddress, (isSpaceCall, outputAddress) =>
@@ -484,12 +482,13 @@ namespace WebexSDK
             var list = new List<WebexSDK.AVIODevice>();
             foreach (var d in devices)
             {
-                WebexSDK.AVIODevice item = new WebexSDK.AVIODevice();
-                item.DefaultDevice = d.defaultDevice;
-                item.Id = d.id;
-                item.Name = d.name;
-                item.Type = (WebexSDK.AVIODeviceType)d.type;
-                //item.logString = d.logString;
+                WebexSDK.AVIODevice item = new WebexSDK.AVIODevice
+                {
+                    DefaultDevice = d.defaultDevice,
+                    Id = d.id,
+                    Name = d.name,
+                    Type = (WebexSDK.AVIODeviceType)d.type
+                };
                 list.Add(item);
                 d.Dispose();
             }   
@@ -738,7 +737,7 @@ namespace WebexSDK
             }
             else if (trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
             {
-                var find = currentCall?.RemoteAuxVideos.Find(x =>(x.track == trackType));
+                var find = currentCall?.RemoteAuxVideos.Find(x =>(x.Track == trackType));
                 if (find != null)
                 {
                     SdkLogger.Instance.Debug($"{trackType} person changed");
@@ -766,7 +765,7 @@ namespace WebexSDK
             
             if (trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
             {
-                var find = currentCall?.RemoteAuxVideos.Find(x => (x.track == trackType));
+                var find = currentCall?.RemoteAuxVideos.Find(x => (x.Track == trackType));
                 if (find != null && find.IsInUse != isInUse)
                 {
                     find.IsInUse = isInUse;
@@ -787,7 +786,7 @@ namespace WebexSDK
                     currentCall.TrigerOnMediaChanged(new SendingVideoEvent(currentCall, isStreaming));
                 }
             }
-            if (trackType == TrackType.Remote)
+            else if (trackType == TrackType.Remote)
             {
                 if (currentCall != null && currentCall.IsRemoteSendingVideo != isStreaming)
                 {
@@ -797,7 +796,7 @@ namespace WebexSDK
             }
             else if (trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
             {
-                var find = currentCall?.RemoteAuxVideos.Find(x => (x.track == trackType));
+                var find = currentCall?.RemoteAuxVideos.Find(x => (x.Track == trackType));
                 if (find != null && find.IsSendingVideo != isStreaming)
                 {
                     find.IsSendingVideo = isStreaming;
@@ -1171,11 +1170,11 @@ namespace WebexSDK
                     }
                     else if (videoTrackType >= TrackType.RemoteAux1 && videoTrackType < TrackType.LocalShare)
                     {
-                        var find = currentCall?.RemoteAuxVideos.Find(x =>(x.track == 0));
+                        var find = currentCall?.RemoteAuxVideos.Find(x =>(x.Track == 0));
 
                         if (find != null && currentCall.CallId != null)
                         {
-                            find.track = videoTrackType;
+                            find.Track = videoTrackType;
                             foreach (var item in find.HandleList)
                             {
                                 m_core_telephoneService.setView(currentCall.CallId, item, videoTrackType);
@@ -1211,7 +1210,7 @@ namespace WebexSDK
             }
             else if (trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
             {
-                var find = currentCall?.RemoteAuxVideos.Find(x =>(x.track == trackType));
+                var find = currentCall?.RemoteAuxVideos.Find(x =>(x.Track == trackType));
                 if (find != null && currentCall.CallId != null)
                 {
                     var handleList = new List<IntPtr>(find.HandleList);
@@ -1288,7 +1287,7 @@ namespace WebexSDK
             }
             else if (trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
             {
-                var find = currentCall?.RemoteAuxVideos.Find(x => (x.track == trackType));
+                var find = currentCall?.RemoteAuxVideos.Find(x => (x.Track == trackType));
                 if (find != null)
                 {
                     find.isReceivingVideo = (status != "muted");
@@ -1313,7 +1312,7 @@ namespace WebexSDK
             }
             else if(trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
             {
-                var find = currentCall?.RemoteAuxVideos.Find(x =>(x.track == trackType));
+                var find = currentCall?.RemoteAuxVideos.Find(x =>(x.Track == trackType));
                 if (find != null)
                 {
                     SdkLogger.Instance.Debug($"{trackType} person changed");

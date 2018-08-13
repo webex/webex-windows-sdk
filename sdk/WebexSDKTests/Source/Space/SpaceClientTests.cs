@@ -335,12 +335,12 @@ namespace WebexSDK.Tests
                 completion.Set();
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 return null;
             }
 
-            if (response.IsSuccess == true)
+            if (response.IsSuccess)
             {
                 return response.Data;
             }
@@ -358,12 +358,12 @@ namespace WebexSDK.Tests
                 completion.Set();
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 return null;
             }
 
-            if (response.IsSuccess == true)
+            if (response.IsSuccess)
             {
                 return response.Data;
             }
@@ -381,12 +381,12 @@ namespace WebexSDK.Tests
                 completion.Set();
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 return null;
             }
 
-            if (response.IsSuccess == true)
+            if (response.IsSuccess)
             {
                 return response.Data;
             }
@@ -405,12 +405,12 @@ namespace WebexSDK.Tests
                 completion.Set();
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 return null;
             }
 
-            if (response.IsSuccess == true)
+            if (response.IsSuccess)
             {
                 return response.Data;
             }
@@ -428,12 +428,12 @@ namespace WebexSDK.Tests
                 completion.Set();
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 return false;
             }
 
-            if (response.IsSuccess == true)
+            if (response.IsSuccess)
             {
                 return true;
             }

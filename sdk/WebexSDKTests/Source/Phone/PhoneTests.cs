@@ -1369,7 +1369,7 @@ namespace WebexSDK.Tests
                             mediaEvents.Add(callMediaChangedEvent);
                             callData.listIsSendingAudio.Add(currentCall.IsSendingAudio);
 
-                            if (((SendingAudioEvent)callMediaChangedEvent).IsSending == false)
+                            if (!((SendingAudioEvent)callMediaChangedEvent).IsSending)
                             {
                                 Console.WriteLine("local unmute audio");
                                 currentCall.IsSendingAudio = true;
@@ -2385,7 +2385,7 @@ namespace WebexSDK.Tests
                             callData.listIsReceivingShare.Add(currentCall.IsReceivingShare);
                         }
                         if (callMediaChangedEvent is RemoteSendingShareEvent
-                            && ((RemoteSendingShareEvent)callMediaChangedEvent).IsSending == true)
+                            && ((RemoteSendingShareEvent)callMediaChangedEvent).IsSending)
                         {
                             Console.WriteLine("mute remote share");
                             currentCall.IsReceivingShare = false;
@@ -3347,7 +3347,7 @@ namespace WebexSDK.Tests
 
             phone.RequestVideoCodecActivation();
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 phone.DisableVideoCodecActivation(true);
                 Assert.Fail();
@@ -3463,7 +3463,7 @@ namespace WebexSDK.Tests
                 return false;
             }
 
-            if (response.IsSuccess == true)
+            if (response.IsSuccess)
             {
                 Console.WriteLine("registerPhone success.");
                 return true;
@@ -3483,13 +3483,13 @@ namespace WebexSDK.Tests
                 response = rsp;
                 completion.Set();
             });
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 Console.WriteLine("deregister timeout");
                 return false;
             }
 
-            if (response.IsSuccess == true)
+            if (response.IsSuccess)
             {
                 return true;
             }
@@ -3508,7 +3508,7 @@ namespace WebexSDK.Tests
                 completion.Set();
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 Console.WriteLine("dialCall out of time");
                 return false;
@@ -3555,12 +3555,12 @@ namespace WebexSDK.Tests
                 completion.Set();
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 return null;
             }
 
-            if (response.IsSuccess == true)
+            if (response.IsSuccess)
             {
                 return response.Data;
             }
@@ -3578,12 +3578,12 @@ namespace WebexSDK.Tests
                 completion.Set();
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 return false;
             }
 
-            if (response.IsSuccess == true)
+            if (response.IsSuccess)
             {
                 return true;
             }
@@ -3613,12 +3613,12 @@ namespace WebexSDK.Tests
             }
 
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 return null;
             }
 
-            if (response.IsSuccess == true)
+            if (response.IsSuccess)
             {
                 return response.Data;
             }
@@ -3636,12 +3636,12 @@ namespace WebexSDK.Tests
                 completion.Set();
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 return null;
             }
 
-            if (response.IsSuccess == true)
+            if (response.IsSuccess)
             {
                 return response.Data;
             }
@@ -3659,7 +3659,7 @@ namespace WebexSDK.Tests
                 completion.Set();
             });
 
-            if (false == completion.WaitOne(30000))
+            if (!completion.WaitOne(30000))
             {
                 return null;
             }
