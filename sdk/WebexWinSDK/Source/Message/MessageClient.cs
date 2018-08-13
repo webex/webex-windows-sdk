@@ -51,9 +51,9 @@ namespace WebexSDK
             this.authenticator = authenticator;
             RegisterToCore();
         }
-        private Dictionary<string, SessionAction> sessionActions = new Dictionary<string, SessionAction>();
-        private Dictionary<string, MessageAction> messageActions = new Dictionary<string, MessageAction>();
-        private Dictionary<string, FileAction> fileActions = new Dictionary<string, FileAction>();
+        private readonly Dictionary<string, SessionAction> sessionActions = new Dictionary<string, SessionAction>();
+        private readonly Dictionary<string, MessageAction> messageActions = new Dictionary<string, MessageAction>();
+        private readonly Dictionary<string, FileAction> fileActions = new Dictionary<string, FileAction>();
 
         readonly IAuthenticator authenticator;
         private static volatile MessageClient instance = null;
@@ -309,7 +309,7 @@ namespace WebexSDK
                 }
                 catch
                 {
-                    SDKLogger.Instance.Error($"create download path[{path}] failed.");
+                    SdkLogger.Instance.Error($"create download path[{path}] failed.");
                 }
             }
             string name = "thumb-" + Guid.NewGuid().ToString() + "-" + file.Name;
@@ -403,7 +403,7 @@ namespace WebexSDK
 
             if (StringExtention.ParseHydraId(spaceId, ref conversationId) != StringExtention.HydraIdType.Space)
             {
-                SDKLogger.Instance.Error("spaceId format is invalid.");
+                SdkLogger.Instance.Error("spaceId format is invalid.");
                 completionHandler?.Invoke(new WebexApiEventArgs<List<Message>>(false, new WebexError(WebexErrorCode.IllegalOperation, "invalid spaceId parameter"), null));
                 return;
             }
@@ -411,21 +411,21 @@ namespace WebexSDK
                 && mentionedPeople != "me"
                 && StringExtention.ParseHydraId(mentionedPeople, ref mentionedPeopleId) != StringExtention.HydraIdType.People)
             {
-                SDKLogger.Instance.Error("mentionedPeople format is invalid.");
+                SdkLogger.Instance.Error("mentionedPeople format is invalid.");
                 completionHandler?.Invoke(new WebexApiEventArgs<List<Message>>(false, new WebexError(WebexErrorCode.IllegalOperation, "invalid mentionedPeople parameter"), null));
                 return;
             }
             if (beforeMessage != null
                 && StringExtention.ParseHydraId(beforeMessage, ref beforeMessageId) != StringExtention.HydraIdType.Message)
             {
-                SDKLogger.Instance.Error("before message id is invalid.");
+                SdkLogger.Instance.Error("before message id is invalid.");
                 completionHandler?.Invoke(new WebexApiEventArgs<List<Message>>(false, new WebexError(WebexErrorCode.IllegalOperation, "invalid beforeMessage parameter"), null));
                 return;
             }
             // default limit max list count
             int? maxCount = (max == null ? 50 : max);
 
-            SDKLogger.Instance.Info($"spaceId[{conversationId}] mentionedPeople[{mentionedPeople}] beforeTime[{before}] beforeMessage[{beforeMessage}] Max[{maxCount}]");
+            SdkLogger.Instance.Info($"spaceId[{conversationId}] mentionedPeople[{mentionedPeople}] beforeTime[{before}] beforeMessage[{beforeMessage}] Max[{maxCount}]");
 
             var coversation = m_core_conversationService.getConversation(conversationId);
             var messages = coversation.getMessages();
@@ -434,14 +434,14 @@ namespace WebexSDK
             List<Message> listMsg;
             if (IsFetchEnough(conversationId, mentionedPeopleId, before, beforeMessageId, maxCount, out listMsg))
             {
-                SDKLogger.Instance.Info($"Successe list {listMsg.Count} messages");
+                SdkLogger.Instance.Info($"Successe list {listMsg.Count} messages");
                 completionHandler?.Invoke(new WebexApiEventArgs<List<Message>>(true, null, listMsg));
             }
             else
             {
                 if (sessionActions.ContainsKey(conversationId) && sessionActions[conversationId].list != null)
                 {
-                    SDKLogger.Instance.Error("last list operation hasn't finished");
+                    SdkLogger.Instance.Error("last list operation hasn't finished");
                     completionHandler?.Invoke(new WebexApiEventArgs<List<Message>>(false, new WebexError(WebexErrorCode.IllegalOperation, "last list operation hasn't finished"), null));
                     return;
                 }
@@ -461,7 +461,7 @@ namespace WebexSDK
                     });
                 }
 
-                SDKLogger.Instance.Debug("Fetch more message. first message [firstMessageId]");
+                SdkLogger.Instance.Debug("Fetch more message. first message [firstMessageId]");
                 m_core_conversationService.fetchMoreMessage(conversationId, firstMessageId, true);
             }
 
@@ -479,13 +479,13 @@ namespace WebexSDK
             {
                 return;
             }
-            SDKLogger.Instance.Debug($"arrived message type is {msgType.ToString()} [{messageId}]");
+            SdkLogger.Instance.Debug($"arrived message type is {msgType.ToString()} [{messageId}]");
 
             if (type == SCFEventType.MessageArrived)
             {
                 if (msgType == SparkNet.MessageType.NormalMessage)
                 {
-                    SDKLogger.Instance.Info($"receive a message [{arrivedMsg.getGuid()}]");
+                    SdkLogger.Instance.Info($"receive a message [{arrivedMsg.getGuid()}]");
                     OnEvent?.Invoke(new MessageArrived(toMessage(conversationId, arrivedMsg)));
                 }
             }
@@ -512,7 +512,7 @@ namespace WebexSDK
 
         private void OnCoreCallBackMessage(SCFEventType type, int error, string status)
         {
-            SDKLogger.Instance.Debug("event type:{0}, error[{1}], status:{2}", type.ToString(), error, status);
+            SdkLogger.Instance.Debug("event type:{0}, error[{1}], status:{2}", type.ToString(), error, status);
             string[] arrStr = status.Trim().Split(' ');
             switch (type)
             {
@@ -540,7 +540,7 @@ namespace WebexSDK
                                 List<Message> listMsg;
                                 if (IsFetchEnough(listAction.conversationId, listAction.mentionedPeople, listAction.before, listAction.beforeMessageId, listAction.listMessageCount, out listMsg))
                                 {
-                                    SDKLogger.Instance.Info($"List {listMsg.Count} messages.");
+                                    SdkLogger.Instance.Info($"List {listMsg.Count} messages.");
                                     listAction.listCompletionHandler?.Invoke(new WebexApiEventArgs<List<Message>>(true, null, listMsg));
                                     sessionActions[conversationId].list = null;
                                     if (IsSessionActionIsNull(sessionActions[conversationId]))
@@ -561,7 +561,7 @@ namespace WebexSDK
                     {
                         if (creatOne2OneSpaceCompletionHandler.ContainsKey(arrStr[0]))
                         {
-                            SDKLogger.Instance.Debug($"conversationId changed from old [{arrStr[0]}] to new [{arrStr[1]}]");
+                            SdkLogger.Instance.Debug($"conversationId changed from old [{arrStr[0]}] to new [{arrStr[1]}]");
                             creatOne2OneSpaceCompletionHandler[arrStr[0]].Invoke(arrStr[1]);
                             creatOne2OneSpaceCompletionHandler.Remove(arrStr[0]);
                         }
@@ -575,7 +575,7 @@ namespace WebexSDK
                         if (messageActions.ContainsKey(arrStr[2]))
                         {
                             var message = toMessage(arrStr[0], arrivedMsg);
-                            SDKLogger.Instance.Debug($"message id changed from old [{arrStr[2]}] to new [{arrStr[1]}]");
+                            SdkLogger.Instance.Debug($"message id changed from old [{arrStr[2]}] to new [{arrStr[1]}]");
                             messageActions[arrStr[2]].postCompletionHandler?.Invoke(new WebexApiEventArgs<Message>(true, null, message));
                             messageActions[arrStr[2]].postCompletionHandler = null;
                             if (IsMessageActionIsNull(messageActions[arrStr[2]]))
@@ -593,7 +593,7 @@ namespace WebexSDK
                         if (fileActions.ContainsKey(fileId))
                         {
                             var progress = Convert.ToInt32(arrStr[3]);
-                            SDKLogger.Instance.Info($"{fileId} download progress is {progress}");
+                            SdkLogger.Instance.Info($"{fileId} download progress is {progress}");
                             fileActions[fileId].downloadProgressHandler?.Invoke(new WebexApiEventArgs<int>(true, null, progress));
                         }
                     }
@@ -606,7 +606,7 @@ namespace WebexSDK
                         if (fileActions.ContainsKey(fileId))
                         {
                             var progress = Convert.ToInt32(arrStr[3]);
-                            SDKLogger.Instance.Info($"{fileId} upload progress is {progress}");
+                            SdkLogger.Instance.Info($"{fileId} upload progress is {progress}");
                             fileActions[fileId].uploadProgressHandler?.Invoke(new WebexApiEventArgs<int>(true, null, progress));
                             if (progress == 100)
                             {
@@ -625,7 +625,7 @@ namespace WebexSDK
                         string fileId = getFileId(arrStr[0], arrStr[1], arrStr[2]);
                         if (fileActions.ContainsKey(fileId))
                         {
-                            SDKLogger.Instance.Info($"{fileId} download complete");
+                            SdkLogger.Instance.Info($"{fileId} download complete");
                             fileActions[fileId].downloadProgressHandler = null;
                             if (IsFileActionIsNull(fileActions[fileId]))
                             {
@@ -640,7 +640,7 @@ namespace WebexSDK
                         string fileId = getFileId(arrStr[0], arrStr[1], arrStr[2]);
                         if (fileActions.ContainsKey(fileId))
                         {
-                            SDKLogger.Instance.Error($"{fileId} download faild for {arrStr[3]}.");
+                            SdkLogger.Instance.Error($"{fileId} download faild for {arrStr[3]}.");
                             fileActions[fileId].downloadProgressHandler?.Invoke(new WebexApiEventArgs<int>(false, new WebexError(WebexErrorCode.ServiceFailed, arrStr[3]), 0));
                             fileActions[fileId].downloadProgressHandler = null;
                             if (IsFileActionIsNull(fileActions[fileId]))
@@ -659,14 +659,14 @@ namespace WebexSDK
                             var action = fileActions[fileId].downloadThumbnailAction;
                             SparkNet.Image image = m_core_imageService?.getContentThumbnailImage(arrStr[0], arrStr[1], Convert.ToInt32(arrStr[2]));
 
-                            if (SaveImageToLocal(image.imageBuffer, action.path))
+                            if (image != null && SaveImageToLocal(image.imageBuffer, action.path))
                             {
-                                SDKLogger.Instance.Info($"[{fileId}] success download thumbnail to {action.path}");
+                                SdkLogger.Instance.Info($"[{fileId}] success download thumbnail to {action.path}");
                                 action.completionHandler?.Invoke(new WebexApiEventArgs<string>(true, null, action.path));
                             }
                             else
                             {
-                                SDKLogger.Instance.Error($"[{fileId}] save thumbnail failed");
+                                SdkLogger.Instance.Error($"[{fileId}] save thumbnail failed");
                                 action.completionHandler?.Invoke(new WebexApiEventArgs<string>(false, new WebexError(WebexErrorCode.IllegalOperation, "save failed"), action.path));
                             }
                             fileActions[fileId].downloadThumbnailAction = null;
@@ -684,7 +684,7 @@ namespace WebexSDK
                         string fileId = getFileId(arrStr[0], arrStr[1], arrStr[2]);
                         if (fileActions.ContainsKey(fileId) && fileActions[fileId].downloadThumbnailAction != null)
                         {
-                            SDKLogger.Instance.Error($"[{fileId}] download thumbnail failed");
+                            SdkLogger.Instance.Error($"[{fileId}] download thumbnail failed");
                             var action = fileActions[fileId].downloadThumbnailAction;
                             action.completionHandler?.Invoke(new WebexApiEventArgs<string>(false, new WebexError(WebexErrorCode.ServiceFailed, arrStr[3]), action.path));
                             fileActions[fileId].downloadThumbnailAction = null;
@@ -721,8 +721,13 @@ namespace WebexSDK
 
             // SpaceId, SpaceType
             m.SpaceId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.Space, conversationId);
+            m.SpaceType = SpaceType.Direct;
             var conversation = m_core_conversationService?.getConversation(conversationId);
-            m.SpaceType = conversation.isOne2One() ? SpaceType.Direct : SpaceType.Group;
+            if (conversation != null)
+            {
+                m.SpaceType = conversation.isOne2One() ? SpaceType.Direct : SpaceType.Group;
+            }
+            
 
             // ToPersonId, ToPersonEmail
             if (m.SpaceType == SpaceType.Direct)
@@ -841,7 +846,7 @@ namespace WebexSDK
                 string selfid = "";//TODO, get self personId
                 if (mentionedPeople != "me" && mentionedPeople != selfid)
                 {
-                    SDKLogger.Instance.Error("can only list mentioned caller messages.");
+                    SdkLogger.Instance.Error("can only list mentioned caller messages.");
                     return true;
                 }
                 string[] mentions = m_core_conversationService.getMentions(conversationId);
@@ -862,7 +867,7 @@ namespace WebexSDK
 
                 if (endIndex == allMessages.Count)
                 {
-                    SDKLogger.Instance.Error("doesn't find this message by id");
+                    SdkLogger.Instance.Error("doesn't find this message by id");
                     return true;
                 }
             }
@@ -879,9 +884,9 @@ namespace WebexSDK
             }
             else
             {
-                SDKLogger.Instance.Debug("both before time and before message are not set");
+                SdkLogger.Instance.Debug("both before time and before message are not set");
             }
-            SDKLogger.Instance.Debug($"endIndex[{endIndex}]");
+            SdkLogger.Instance.Debug($"endIndex[{endIndex}]");
 
             // BeginIndex
             int beginIndex = 0;
@@ -901,7 +906,7 @@ namespace WebexSDK
                 }
                 beginIndex = endIndex > max.Value ? endIndex- max.Value : 0;
             }
-            SDKLogger.Instance.Debug($"beginIndex[{endIndex}]");
+            SdkLogger.Instance.Debug($"beginIndex[{endIndex}]");
 
             // Add items in [BeginIndex, EndIndex) to list of Message
             for (int i = beginIndex; i < endIndex; i++)
@@ -939,7 +944,7 @@ namespace WebexSDK
         private Dictionary<string, Action<string>> creatOne2OneSpaceCompletionHandler = new Dictionary<string, Action<string>>();
         private void CreateOne2OneSpace(string title, string toPersonId, string toEmail, Action<string> completionHandler)
         {
-            SDKLogger.Instance.Debug($"create one-on-one conversation. title[{title}] toPersonId[{toPersonId}] toEmail[{toEmail}]");
+            SdkLogger.Instance.Debug($"create one-on-one conversation. title[{title}] toPersonId[{toPersonId}] toEmail[{toEmail}]");
             string tmpConvId = m_core_conversationService.createOneToOneRoom(title, toPersonId, toEmail, true);
             creatOne2OneSpaceCompletionHandler.Add(tmpConvId, completionHandler);
         }
@@ -960,7 +965,7 @@ namespace WebexSDK
                 {
                     if (!rsp.IsSuccess)
                     {
-                        SDKLogger.Instance.Error($"get self id failed.");
+                        SdkLogger.Instance.Error($"get self id failed.");
                         conversationId.Invoke(null);
                         return;
                     }
@@ -969,7 +974,7 @@ namespace WebexSDK
 
                     if (exitedConvId != null)
                     {
-                        SDKLogger.Instance.Debug($"this conversation has existed. existedConvId [{exitedConvId}]");
+                        SdkLogger.Instance.Debug($"this conversation has existed. existedConvId [{exitedConvId}]");
                         conversationId.Invoke(exitedConvId);
                         return;
                     }
@@ -978,13 +983,13 @@ namespace WebexSDK
                     {
                         if (newConvId != null)
                         {
-                            SDKLogger.Instance.Debug($"CreateOne2OneSpace success conversation id[{newConvId}]");
+                            SdkLogger.Instance.Debug($"CreateOne2OneSpace success conversation id[{newConvId}]");
                             conversationId.Invoke(newConvId);
                             return;
                         }
                         else
                         {
-                            SDKLogger.Instance.Error("CreateOne2OneSpace failed");
+                            SdkLogger.Instance.Error("CreateOne2OneSpace failed");
                             conversationId.Invoke(null);
                             return;
                         }
@@ -1006,7 +1011,7 @@ namespace WebexSDK
                         {
                             if (!rsp.IsSuccess)
                             {
-                                SDKLogger.Instance.Error($"get self id failed.");
+                                SdkLogger.Instance.Error($"get self id failed.");
                                 conversationId.Invoke(null);
                                 return;
                             }
@@ -1014,7 +1019,7 @@ namespace WebexSDK
                             var exitedConvId = FindExistedConversation(selfId, toPersonId);
                             if (exitedConvId != null)
                             {
-                                SDKLogger.Instance.Debug($"this conversation has existed. exitedConvId [{exitedConvId}]");
+                                SdkLogger.Instance.Debug($"this conversation has existed. exitedConvId [{exitedConvId}]");
                                 conversationId.Invoke(exitedConvId);
                                 return;
                             }
@@ -1023,11 +1028,11 @@ namespace WebexSDK
                             {
                                 if (newConvId == null)
                                 {
-                                    SDKLogger.Instance.Error("CreateOne2OneSpace failed");
+                                    SdkLogger.Instance.Error("CreateOne2OneSpace failed");
                                     conversationId.Invoke(null);
                                     return;
                                 }
-                                SDKLogger.Instance.Debug($"CreateOne2OneSpace success conversation id[{newConvId}]");
+                                SdkLogger.Instance.Debug($"CreateOne2OneSpace success conversation id[{newConvId}]");
                                 conversationId.Invoke(newConvId);
                                 return;
                             });
@@ -1035,7 +1040,7 @@ namespace WebexSDK
                     }
                     else
                     {
-                        SDKLogger.Instance.Error($"get to person id failed.");
+                        SdkLogger.Instance.Error($"get to person id failed.");
                         conversationId.Invoke(null);
                         return;
                     }
@@ -1051,7 +1056,7 @@ namespace WebexSDK
                 string conversationId = null;
                 if (StringExtention.ParseHydraId(spaceId, ref conversationId) != StringExtention.HydraIdType.Space)
                 {
-                    SDKLogger.Instance.Error($"spaceId[{spaceId}] is invailid.");
+                    SdkLogger.Instance.Error($"spaceId[{spaceId}] is invailid.");
                     completionHandler?.Invoke(new WebexApiEventArgs<Message>(false, new WebexError(WebexErrorCode.IllegalOperation, "invalid spaceId parameter"), null));
                     return;
                 }
@@ -1063,7 +1068,7 @@ namespace WebexSDK
                 {
                     if (convId == null)
                     {
-                        SDKLogger.Instance.Error($"can't get or create this one one one space for toPerson[{toPerson}]");
+                        SdkLogger.Instance.Error($"can't get or create this one one one space for toPerson[{toPerson}]");
                         completionHandler?.Invoke(new WebexApiEventArgs<Message>(false, new WebexError(WebexErrorCode.IllegalOperation, "can't get or create this one one one space"), null));
                         return;
                     }
@@ -1085,7 +1090,7 @@ namespace WebexSDK
                 }
                 catch(Exception e)
                 {
-                    SDKLogger.Instance.Error($"{e.Message}");
+                    SdkLogger.Instance.Error($"{e.Message}");
                 }      
             }
             return thumbNail;
@@ -1130,7 +1135,7 @@ namespace WebexSDK
             var conv = m_core_conversationService.getConversation(conversationId);
             if (conv == null || conv.getParticipants().Length == 0)
             {
-                SDKLogger.Instance.Error($"conversation id[{conversationId}] is invalid or no participants.");
+                SdkLogger.Instance.Error($"conversation id[{conversationId}] is invalid or no participants.");
                 completionHandler.Invoke(new WebexApiEventArgs<Message>(false, new WebexError(WebexErrorCode.IllegalOperation, "invalid space id"), null));
                 return;
             }
@@ -1169,7 +1174,7 @@ namespace WebexSDK
             
             if (MessageValidationResult.NoError == result)
             {
-                SDKLogger.Instance.Debug($"send message success. tempMessageId[{tempMessageId}]");
+                SdkLogger.Instance.Debug($"send message success. tempMessageId[{tempMessageId}]");
                 if (messageActions.ContainsKey(tempMessageId))
                 {
                     messageActions[tempMessageId].postCompletionHandler = completionHandler;
@@ -1184,7 +1189,7 @@ namespace WebexSDK
             }
             else
             {
-                SDKLogger.Instance.Error($"send message failed for {result.ToString()}");
+                SdkLogger.Instance.Error($"send message failed for {result.ToString()}");
                 completionHandler.Invoke(new WebexApiEventArgs<Message>(false, new WebexError(WebexErrorCode.IllegalOperation, result.ToString()), null));
             }
         }
@@ -1198,7 +1203,7 @@ namespace WebexSDK
             }
             catch (Exception e)
             {
-                SDKLogger.Instance.Error($"save failed. {e.Message}");
+                SdkLogger.Instance.Error($"save failed. {e.Message}");
                 return false;
             }
             return true;

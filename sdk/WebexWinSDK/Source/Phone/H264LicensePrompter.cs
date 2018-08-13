@@ -56,7 +56,7 @@ namespace WebexSDK
             }
             set
             {
-                SDKLogger.Instance.Info($"set isVideoLicenseActivated to {value}");
+                SdkLogger.Instance.Info($"set isVideoLicenseActivated to {value}");
                 SCFCore.Instance.m_core.setValue("isVideoLicenseActivatedKey", value.ToString());
             }
         }
@@ -71,7 +71,7 @@ namespace WebexSDK
             }
             set
             {
-                SDKLogger.Instance.Info($"set isVideoLicenseActivationDisabled to {value}");
+                SdkLogger.Instance.Info($"set isVideoLicenseActivationDisabled to {value}");
                 SCFCore.Instance.m_core.setValue("isVideoLicenseActivationDisabledKey", value.ToString());
             }
         }

@@ -36,9 +36,9 @@ namespace WebexSDK
     /// <remarks>Since: 0.1.0</remarks>
     public sealed class SSOAuthenticator : OAuthAuthenticator
     {
-        private string email;
-        private string identityProviderUri;
-        private List<KeyValuePair<string, string>> additionalQueryItems;
+        private readonly string email;
+        private readonly string identityProviderUri;
+        private readonly List<KeyValuePair<string, string>> additionalQueryItems;
 
         /// <summary>
         /// Creates a new SSO authentication strategy

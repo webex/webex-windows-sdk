@@ -39,7 +39,7 @@ namespace WebexSDK
     /// </summary>
     public class MessageArrived : MessageEvent
     {
-        private Message message;
+        private readonly Message message;
         internal MessageArrived(Message message)
         {
             this.message = message;
@@ -57,7 +57,7 @@ namespace WebexSDK
     /// </summary>
     public class MessageDeleted : MessageEvent
     {
-        private string messageId;
+        private readonly string messageId;
         internal MessageDeleted(string messageId)
         {
             this.messageId = messageId;

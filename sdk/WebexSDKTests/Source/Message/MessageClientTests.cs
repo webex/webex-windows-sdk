@@ -130,7 +130,7 @@ namespace WebexSDK.Tests
             var msg = PostMsg(mySpace.Id, null, text);
             Validate(msg);
             Thread.Sleep(60000);
-            var list = ListMsg(mySpace.Id,null, DateTime.UtcNow);
+            var list = ListMsg(mySpace.Id, null, DateTime.UtcNow);
             Assert.IsNotNull(list);
             Assert.IsTrue(list.Count > 0);
         }
@@ -197,7 +197,7 @@ namespace WebexSDK.Tests
         {
             var msg1 = PostMsg(mySpace.Id, null, "msg1", null);
             var msg2 = PostMsg(mySpace.Id, null, "msg2", null);
-           
+
 
             var list = ListMsg(mySpace.Id, null, msg2.Id, null);
             Assert.IsNotNull(list);
@@ -461,7 +461,7 @@ namespace WebexSDK.Tests
 
         [TestMethod()]
         public void ReceiveDirectMessageTest()
-        {    
+        {
             MessageHelper.SetTestMode_RemoteSendDirectMessage(testFixtureApp, self.Id, text);
             MessageHelper.RunDispatcherLoop();
 
@@ -570,7 +570,7 @@ namespace WebexSDK.Tests
             Assert.IsNotNull(msg.Text);
         }
 
-        private Message PostMsg(string spaceId, string person, string text, List<Mention>mentions=null, List<LocalFile>files=null)
+        private Message PostMsg(string spaceId, string person, string text, List<Mention> mentions = null, List<LocalFile> files = null)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs<Message>();
@@ -728,7 +728,7 @@ namespace WebexSDK.Tests
             return false;
         }
 
-        private bool DownloadFile( RemoteFile file, string to)
+        private bool DownloadFile(RemoteFile file, string to)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs();
@@ -878,7 +878,7 @@ namespace WebexSDK.Tests
                     return persons[0];
                 }
                 return null;
-                
+
             }
 
             return null;

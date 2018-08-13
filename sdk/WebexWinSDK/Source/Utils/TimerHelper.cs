@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 
 namespace WebexSDK
 {
-    internal class TimerHelper
+    internal static class TimerHelper
     {
         public static System.Timers.Timer StartTimer(int interval, System.Timers.ElapsedEventHandler timeOutCallback)
         {

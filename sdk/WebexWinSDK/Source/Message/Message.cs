@@ -238,7 +238,7 @@ namespace WebexSDK
     /// <remarks>Since: 0.1.0</remarks>
     public class MentionPerson : Mention
     {
-        private string personId;
+        private readonly string personId;
         /// <summary>
         /// The constructor of the MentionPerson
         /// </summary>

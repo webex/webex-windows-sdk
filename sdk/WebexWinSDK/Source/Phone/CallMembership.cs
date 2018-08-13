@@ -172,7 +172,7 @@ namespace WebexSDK
             public string state;
             public string url;
         }
-        private Call currentCall;
+        private readonly Call currentCall;
         internal CallMembership() { }
         internal CallMembership(Call currentCall) : base()
         {

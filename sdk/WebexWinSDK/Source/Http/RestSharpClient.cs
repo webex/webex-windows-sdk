@@ -35,7 +35,7 @@ namespace WebexSDK
         {
             if (serviceRequest == null)
             {
-                SDKLogger.Instance.Error("serviceRequest is null.");
+                SdkLogger.Instance.Error("serviceRequest is null.");
                 completedhandler?.Invoke(new ServiceRequest.Response<T>() { StatusCode = 0});
                 return;
             }
@@ -75,7 +75,7 @@ namespace WebexSDK
             };
             
 
-            SDKLogger.Instance.Info($"http request[{serviceRequest.Method.ToString()}]: {serviceRequest.BaseUri + request.Resource}" );
+            SdkLogger.Instance.Info($"http request[{serviceRequest.Method.ToString()}]: {serviceRequest.BaseUri + request.Resource}" );
             client.ExecuteAsync<T>(request, response =>
             {
                 var r = new ServiceRequest.Response<T>();

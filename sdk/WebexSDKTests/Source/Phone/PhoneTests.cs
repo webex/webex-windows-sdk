@@ -37,7 +37,7 @@ using System.Configuration;
 
 namespace WebexSDK.Tests
 {
-   
+
 
     [TestClass()]
     public class PhoneTests
@@ -54,7 +54,7 @@ namespace WebexSDK.Tests
         private readonly string calleeAddress = ConfigurationManager.AppSettings["TestFixtureAppAddress01"] ?? "";
         private static readonly string testFixtureApp = "TestFixtureApp";
 
-        
+
 
         private static bool StartTestFixtureAppProcess()
         {
@@ -366,7 +366,7 @@ namespace WebexSDK.Tests
                     MessageHelper.BreakLoop();
                 }
             });
-            
+
 
             MessageHelper.RunDispatcherLoop();
             Assert.IsTrue(ringSignal);
@@ -1634,7 +1634,7 @@ namespace WebexSDK.Tests
         //                        {
         //                            Console.WriteLine($"stop share success is {StopShareResult.IsSuccess}");
         //                        });
-                                
+
         //                    }
         //                }
         //            };
@@ -1841,7 +1841,7 @@ namespace WebexSDK.Tests
         //        Assert.AreEqual(2, callData.listIsSendingShare.Count);
         //        Assert.IsTrue(callData.listIsSendingShare[1]);
         //    }
-            
+
         //    var mediaevent = mediaEvents[0] as SendingShareEvent;
         //    Assert.IsNotNull(mediaevent);
         //    Assert.IsTrue(mediaevent.IsSending);        
@@ -2099,7 +2099,7 @@ namespace WebexSDK.Tests
             Assert.IsTrue(callData.listIsReceivingAudio[1]);
         }
 
-        
+
         [TestMethod()]
         public void OutgoingMediaChangedCameraSwitchedEventTest()
         {
@@ -2139,7 +2139,7 @@ namespace WebexSDK.Tests
                         Console.WriteLine("onConnected");
                         Console.WriteLine("switch camera");
                         phone.SelectAVIODevice(switchtoCamera);
-                        
+
                     };
                     currentCall.OnMediaChanged += (callMediaChangedEvent) =>
                     {
@@ -2240,7 +2240,7 @@ namespace WebexSDK.Tests
         }
 
 
-        
+
         [TestMethod()]
         public void OutgoingMediaChangedRemoteSendingShareEventStartTest()
         {
@@ -3142,7 +3142,7 @@ namespace WebexSDK.Tests
                             mediaEvents.Add(callMediaChangedEvent);
                             var receivingAuxVideoEvent = callMediaChangedEvent as ReceivingAuxVideoEvent;
                             receivingAuxVideos.Add(receivingAuxVideoEvent.RemoteAuxVideo.IsReceivingVideo);
-                            if(receivingAuxVideoEvent.RemoteAuxVideo.IsReceivingVideo ==  false)
+                            if (receivingAuxVideoEvent.RemoteAuxVideo.IsReceivingVideo == false)
                             {
                                 receivingAuxVideoEvent.RemoteAuxVideo.IsReceivingVideo = true;
                             }
@@ -3714,5 +3714,5 @@ namespace WebexSDK.Tests
         }
     }
 
-    
+
 }

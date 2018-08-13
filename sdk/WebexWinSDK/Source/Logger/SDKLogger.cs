@@ -31,16 +31,16 @@ using SparkNet;
 
 namespace WebexSDK
 {
-    internal sealed class SDKLogger
+    internal sealed class SdkLogger
     {
         public ILogger Logger { get; set; }
         private LogLevel console = LogLevel.Debug;
 
 
-        private static volatile SDKLogger instance = null;
+        private static volatile SdkLogger instance = null;
         private static readonly object lockHelper = new object();
 
-        public static SDKLogger Instance
+        public static SdkLogger Instance
         {
             get
             {
@@ -50,7 +50,7 @@ namespace WebexSDK
                     {
                         if (null == instance)
                         {
-                            instance = new SDKLogger();
+                            instance = new SdkLogger();
                         }
                     }
 

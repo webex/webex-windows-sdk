@@ -47,8 +47,6 @@ namespace WebexSDK
 
     internal class JWTAuthClient
     {
-        const string jwtAuthUri = "https://api.ciscospark.com/v1/jwt/login";
-
         public void FetchTokenFromJWTAsync(string jwt, IAuthenticator authenticator,Action<WebexApiEventArgs<JWTAccessTokenInfo>> completionHandler)
         {
             var request = new ServiceRequest(authenticator);

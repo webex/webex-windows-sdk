@@ -118,7 +118,7 @@ namespace WebexSDK
             this.jwt = jwt;
             if (SCFCore.Instance.m_core.setValue("jwtKey", jwt) == false)
             {
-                SDKLogger.Instance.Error("store jwt failed.");
+                SdkLogger.Instance.Error("store jwt failed.");
                 completionHandler?.Invoke(new WebexApiEventArgs(false, null));
                 return;
             }
@@ -177,13 +177,13 @@ namespace WebexSDK
                 return;
             }
 
-            SDKLogger.Instance.Debug("get an new access token");
+            SdkLogger.Instance.Debug("get an new access token");
 
 
             // check JWT if valid.
             if (null == GetUnexpiredJwt())
             {
-                SDKLogger.Instance.Error("the jwt has expired.");
+                SdkLogger.Instance.Error("the jwt has expired.");
                 completionHandler(new WebexApiEventArgs<string>(false, null, null));
                 return;
             }
@@ -206,13 +206,13 @@ namespace WebexSDK
                         SetAccessTokenToCore(rspToken, rspExpiresIn);
                     }
 
-                    SDKLogger.Instance.Info("get jwt access token success.");
+                    SdkLogger.Instance.Info("get jwt access token success.");
                     // Callback to User
                     completionHandler(new WebexApiEventArgs<string>(true, null, this.jwtAccessTokenStore.token));
                     return;
                 }
 
-                SDKLogger.Instance.Error("fetch jwt token failed");
+                SdkLogger.Instance.Error("fetch jwt token failed");
                 // Callback to User
                 completionHandler(new WebexApiEventArgs<string>(false, null, null));
                 return;
@@ -228,12 +228,12 @@ namespace WebexSDK
         /// <remarks>Since: 0.1.7</remarks>
         public void RefreshToken(Action<WebexApiEventArgs<string>> completionHandler)
         {
-            SDKLogger.Instance.Debug("get an new access token");
+            SdkLogger.Instance.Debug("get an new access token");
 
             // check JWT if valid.
             if (null == GetUnexpiredJwt())
             {
-                SDKLogger.Instance.Error("the jwt has expired.");
+                SdkLogger.Instance.Error("the jwt has expired.");
                 completionHandler(new WebexApiEventArgs<string>(false, null, null));
                 return;
             }
@@ -256,13 +256,13 @@ namespace WebexSDK
                         SetAccessTokenToCore(rspToken, rspExpiresIn);
                     }
 
-                    SDKLogger.Instance.Info("get jwt access token success.");
+                    SdkLogger.Instance.Info("get jwt access token success.");
                     // Callback to User
                     completionHandler(new WebexApiEventArgs<string>(true, null, this.jwtAccessTokenStore.token));
                     return;
                 }
 
-                SDKLogger.Instance.Error("fetch jwt token failed");
+                SdkLogger.Instance.Error("fetch jwt token failed");
                 // Callback to User
                 completionHandler(new WebexApiEventArgs<string>(false, null, null));
                 return;
@@ -275,7 +275,7 @@ namespace WebexSDK
             string[] segments = jwt.Split('.');
             if (segments.Length != 3)
             {
-                SDKLogger.Instance.Error("jwt formate is invalid.");
+                SdkLogger.Instance.Error("jwt formate is invalid.");
                 return null;
             }
 
@@ -288,7 +288,7 @@ namespace WebexSDK
             }
             catch
             {
-                SDKLogger.Instance.Error("deserialize jwt fail.");
+                SdkLogger.Instance.Error("deserialize jwt fail.");
                 return null;
             }
 
@@ -317,14 +317,14 @@ namespace WebexSDK
         {
             if (null == this.jwt)
             {
-                SDKLogger.Instance.Error("jwt is null.");
+                SdkLogger.Instance.Error("jwt is null.");
                 return null;
             }
 
             Dictionary<string, string> payload = PayloadFor(this.jwt);
             if (null == payload)
             {
-                SDKLogger.Instance.Error("jwt payload is null");
+                SdkLogger.Instance.Error("jwt payload is null");
                 return null;
             }
 
@@ -336,7 +336,7 @@ namespace WebexSDK
 
                 if (expTime < DateTime.Now)
                 {
-                    SDKLogger.Instance.Error("JWT has expired at {0}", expTime);
+                    SdkLogger.Instance.Error("JWT has expired at {0}", expTime);
                     return null;
                 }
             }
@@ -370,17 +370,17 @@ namespace WebexSDK
             switch (type)
             {
                 case SCFEventType.AccessTokenLoginCallback:
-                    SDKLogger.Instance.Debug("event type: AccessTokenLoginCallback");
+                    SdkLogger.Instance.Debug("event type: AccessTokenLoginCallback");
                     if (error == 0)
                     {
-                        SDKLogger.Instance.Info("Log in success");
+                        SdkLogger.Instance.Info("Log in success");
                         isAuthorized = true;
                         AuthorizeAction?.Invoke(new WebexApiEventArgs(true, null));
                         AuthorizeAction = null;
                     }
                     else
                     {
-                        SDKLogger.Instance.Info("Log in failed");
+                        SdkLogger.Instance.Info("Log in failed");
                         isAuthorized = false;
 
                         AuthorizeAction?.Invoke(new WebexApiEventArgs(false, null));

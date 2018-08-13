@@ -121,7 +121,7 @@ namespace WebexSDK
         {
             if (null == authCode)
             {
-                SDKLogger.Instance.Error("auth code is null.");
+                SdkLogger.Instance.Error("auth code is null.");
                 if (completionHandler != null) completionHandler(new WebexApiEventArgs(false, null));
                 return;
             }
@@ -213,7 +213,7 @@ namespace WebexSDK
 
         private void OnCoreCallBack(SCFEventType type, int error, string status)
         {
-            SDKLogger.Instance.Debug("event type:{0}, error[{1}], status:{2}", type.ToString(), error, status);
+            SdkLogger.Instance.Debug("event type:{0}, error[{1}], status:{2}", type.ToString(), error, status);
             switch (type)
             {
                 case SCFEventType.AccessTokenRefreshed:
@@ -225,14 +225,14 @@ namespace WebexSDK
 
                         this.accessTokenStore = new AccessToken(rspToken, rspExpiresIn);
 
-                        SDKLogger.Instance.Info("access token refreshed");
+                        SdkLogger.Instance.Info("access token refreshed");
 
                         this.AccessTokenAction?.Invoke(new WebexApiEventArgs<string>(true, null, this.accessTokenStore.token));
                         this.AccessTokenAction = null;                   
                     }
                     else
                     {
-                        SDKLogger.Instance.Error("access token failed");
+                        SdkLogger.Instance.Error("access token failed");
                         this.AccessTokenAction?.Invoke(new WebexApiEventArgs<string>(false, null, null));
                         this.AccessTokenAction = null;
 
@@ -249,7 +249,7 @@ namespace WebexSDK
                         m_core.getAccessToken(ref rspToken, ref rspExpiresIn);
 
                         this.accessTokenStore = new AccessToken(rspToken, rspExpiresIn);
-                        SDKLogger.Instance.Info("Log in success");
+                        SdkLogger.Instance.Info("Log in success");
 
                         this.AuthorizeAction?.Invoke(new WebexApiEventArgs(true, null));
                         this.AuthorizeAction = null;
@@ -258,7 +258,7 @@ namespace WebexSDK
                     else
                     {
                         this.isAuthorized = false;
-                        SDKLogger.Instance.Error("Log in failed. error:{0}, status:{1}", error, status);
+                        SdkLogger.Instance.Error("Log in failed. error:{0}, status:{1}", error, status);
      
                         this.AuthorizeAction?.Invoke(new WebexApiEventArgs(false, null));
                         this.AuthorizeAction = null;
@@ -275,7 +275,7 @@ namespace WebexSDK
                         m_core.getAccessToken(ref rspToken, ref rspExpiresIn);
 
                         this.accessTokenStore = new AccessToken(rspToken, rspExpiresIn);
-                        SDKLogger.Instance.Info("RefreshTokenLogin in success");
+                        SdkLogger.Instance.Info("RefreshTokenLogin in success");
 
                         this.AuthorizedAction?.Invoke(new WebexApiEventArgs(true, null));
                         this.AuthorizedAction = null;
@@ -284,7 +284,7 @@ namespace WebexSDK
                     else
                     {
                         this.isAuthorized = false;
-                        SDKLogger.Instance.Info("RefreshTokenLogin in failed. error:{0}, status:{1}", error, status);
+                        SdkLogger.Instance.Info("RefreshTokenLogin in failed. error:{0}, status:{1}", error, status);
                         this.AuthorizedAction?.Invoke(new WebexApiEventArgs(false, null));
                         this.AuthorizedAction = null;
                     }
@@ -297,7 +297,7 @@ namespace WebexSDK
 
         private string GetUnexpiredAccessToken()
         {
-            if (false == this.isAuthorized || null == accessTokenStore)
+            if (!this.isAuthorized || null == accessTokenStore)
             {
                 return null;
             }

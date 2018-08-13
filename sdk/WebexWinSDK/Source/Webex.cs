@@ -47,7 +47,8 @@ namespace WebexSDK
         /// <remarks>Since: 0.1.0</remarks>
         public ILogger Logger
         {
-            set { SDKLogger.Instance.Logger = value; }
+            get { return SdkLogger.Instance.Logger; }
+            set { SdkLogger.Instance.Logger = value; }
         }
 
         /// <summary>
@@ -59,8 +60,8 @@ namespace WebexSDK
         /// <remarks>Since: 0.1.0</remarks>
         public LogLevel ConsoleLogger
         {
-            get { return SDKLogger.Instance.Console; }
-            set { SDKLogger.Instance.Console = value; }
+            get { return SdkLogger.Instance.Console; }
+            set { SdkLogger.Instance.Console = value; }
         }
 
         /// <summary>
