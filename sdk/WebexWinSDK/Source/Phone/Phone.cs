@@ -572,8 +572,10 @@ namespace WebexSDK
 
         private bool ParseHydraId(string address, ref bool isSpace, ref string outputAddress)
         {
+#pragma warning disable S1075 // URIs should not be hardcoded
             string peopleUrl = "ciscospark://us/PEOPLE/";
             string spaceUrl = "ciscospark://us/ROOM/";
+#pragma warning restore S1075 // URIs should not be hardcoded
 
             isSpace = false;
             outputAddress = null;
@@ -671,10 +673,6 @@ namespace WebexSDK
                 case SCFEventType.AudioMutedStateChanged:
                     OnAudioMutedStateChanged((SparkNet.TrackType)error, status);
                     break;
-                // replaced by IsVideoStreamingChanged
-                //case SCFEventType.VideoMutedStateChanged:
-                //    OnVideoMutedStateChanged((SparkNet.TrackType)error, status);
-                //    break;
                 case SCFEventType.MuteRemoteAudioDone:
                     OnMuteRemoteAudioDone((SparkNet.TrackType)error, status);
                     break;
@@ -995,7 +993,6 @@ namespace WebexSDK
                     {
                         currentCall.ReleaseReason = new OtherConnected(currentCall);
                         currentCall?.TrigerOnDisconnected(currentCall.ReleaseReason);
-                        //currentCall?.init();
                         currentCall = new Call(this);
                         return false;
                     }
@@ -1237,42 +1234,6 @@ namespace WebexSDK
             }
         }
 
-        // replace by OnIsVideoStreamingChanged
-        //private void OnVideoMutedStateChanged(SparkNet.TrackType trackType, string status)
-        //{
-        //    SdkLogger.Instance.Debug($"{trackType.ToString()} video is {status}");
-        //    bool isSending = !(status == "muted");
-
-        //    if (trackType == TrackType.Local)
-        //    {
-        //        if (currentCall != null && currentCall?.IsSendingVideo != isSending)
-        //        {
-        //            currentCall.isSendingVideo = isSending;
-        //            currentCall.TrigerOnMediaChanged(new SendingVideoEvent(currentCall, isSending));
-        //        }
-        //    }
-        //    else if (trackType == TrackType.Remote)
-        //    {
-        //        if (currentCall != null && currentCall.IsRemoteSendingVideo != isSending)
-        //        {
-        //            currentCall.IsRemoteSendingVideo = isSending;
-        //            currentCall.TrigerOnMediaChanged(new RemoteSendingVideoEvent(currentCall, isSending));
-        //        }
-        //    }
-        //    else if (trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
-        //    {
-        //        var find = currentCall?.RemoteAuxVideos.Find(x => (x.track == trackType));
-        //        if (find != null)
-        //        {
-        //            if (find.IsSendingVideo != isSending)
-        //            {
-        //                find.IsSendingVideo = isSending;
-        //                currentCall?.TrigerOnMediaChanged(new RemoteAuxSendingVideoEvent(currentCall, find));
-        //            }
-        //        }
-        //    }
-        //}
-
         private void OnMuteRemoteAudioDone(SparkNet.TrackType trackType, string status)
         {
             SdkLogger.Instance.Debug($"local {status} remote audio done. {trackType}");
@@ -1425,12 +1386,8 @@ namespace WebexSDK
                         result = new CallError(currentCall, new WebexError(WebexErrorCode.ServiceFailed, reason));
                     }
                     break;
-                case "dialTimeoutReached":
-                case "cancelledByLocalError":             
-                case "endedByReconnectTimeout":
-                case "wirelessShareTimeoutReached":
-                case "networkUnavailable":
                 default:
+                    SdkLogger.Instance.Debug($"[{currentCall?.CallId}] reason: {reason}");
                     result = new CallError(currentCall, new WebexError(WebexErrorCode.ServiceFailed, reason));
                     break;
             }

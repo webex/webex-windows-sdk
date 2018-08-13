@@ -65,7 +65,9 @@ namespace WebexSDK
     /// Audio and video IO device.
     /// </summary>
     /// <remarks>Since: 0.1.0</remarks>
+#pragma warning disable S101 // Types should be named in camel case
     public class AVIODevice
+#pragma warning restore S101 // Types should be named in camel case
     {
         /// <summary>
         /// If this is default device.

@@ -122,7 +122,7 @@ namespace WebexSDK
             if (null == authCode)
             {
                 SdkLogger.Instance.Error("auth code is null.");
-                if (completionHandler != null) completionHandler(new WebexApiEventArgs(false, null));
+                completionHandler?.Invoke(new WebexApiEventArgs(false, null));
                 return;
             }
             AuthorizeAction = completionHandler;

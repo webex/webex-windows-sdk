@@ -28,7 +28,9 @@ using System.Threading;
 
 namespace WebexSDK
 {
+#pragma warning disable S101 // Types should be named in camel case
     internal class JWTAccessToken
+#pragma warning restore S101 // Types should be named in camel case
     {
         public readonly string token;
         public int tokenExpirationSinceNow;
@@ -45,13 +47,17 @@ namespace WebexSDK
 
     }
 
+#pragma warning disable S101 // Types should be named in camel case
     internal class JWTAuthClient
+#pragma warning restore S101 // Types should be named in camel case
     {
         public void FetchTokenFromJWTAsync(string jwt, IAuthenticator authenticator,Action<WebexApiEventArgs<JWTAccessTokenInfo>> completionHandler)
         {
-            var request = new ServiceRequest(authenticator);
-            request.Method = HttpMethod.POST;
-            request.Resource = "jwt/login";
+            var request = new ServiceRequest(authenticator)
+            {
+                Method = HttpMethod.POST,
+                Resource = "jwt/login"
+            };
             request.AddHeaders("Authorization", jwt);
             request.AddBodyParameters("Content-Type", "text/plain");
             request.AddBodyParameters("Cache-Control", "no-cache");

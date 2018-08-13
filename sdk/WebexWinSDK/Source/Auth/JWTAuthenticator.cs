@@ -36,7 +36,9 @@ namespace WebexSDK
     /// </summary>
     /// <seealso cref="IAuthenticator" />
     /// <remarks>Since: 0.1.0</remarks>
+#pragma warning disable S101 // Types should be named in camel case
     public sealed class JWTAuthenticator : IAuthenticator
+#pragma warning restore S101 // Types should be named in camel case
     {
         private bool isRegisteredToCore = false;
         private string jwt;
@@ -325,8 +327,7 @@ namespace WebexSDK
                 return null;
             }
 
-            string expUtcTime;
-            if (payload.TryGetValue("exp", out expUtcTime))
+            if (payload.TryGetValue("exp", out string expUtcTime))
             {
                 DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
                 DateTime expTime = startTime.AddSeconds(double.Parse(expUtcTime));
@@ -392,7 +393,9 @@ namespace WebexSDK
         }
 
     }
+#pragma warning disable S101 // Types should be named in camel case
     internal class JWTAccessTokenInfo
+#pragma warning restore S101 // Types should be named in camel case
     {
         public string Token { get; set; }
 

@@ -197,8 +197,6 @@ namespace WebexSDK
             get { return new TeamMembershipClient(Authenticator); }
         }
 
-        readonly SCFCore m_core;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Webex"/>,with an Authenticator class.
         /// </summary>
@@ -207,12 +205,17 @@ namespace WebexSDK
         public Webex(IAuthenticator authenticator)
         {
             this.Authenticator = authenticator;
-            m_core =  SCFCore.Instance;
+            if (SCFCore.Instance != null)
+            {
+                Console.WriteLine("scf inited.");
+            }
         }
 
     }
 
+#pragma warning disable S101 // Types should be named in camel case
     internal sealed class SCFCore
+#pragma warning restore S101 // Types should be named in camel case
     {
         private static volatile SCFCore instance = null;
         private static readonly object lockHelper = new object();
@@ -224,7 +227,6 @@ namespace WebexSDK
         public SparkNet.ImageService m_core_imageService;
         private SCFCore()
         {
-            Console.WriteLine("scf core init");
             m_core = new SparkNet.CoreFramework();
             string strCurUserLogDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             strCurUserLogDir += "\\" + System.Diagnostics.Process.GetCurrentProcess().ProcessName + "\\";

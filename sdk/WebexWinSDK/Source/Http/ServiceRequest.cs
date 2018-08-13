@@ -59,6 +59,7 @@ namespace WebexSDK
         public string AccessToken { get; set; }
         public IServiceRequestClient ClientHandler { get; set; }
 
+#pragma warning disable S2223 // Non-constant static fields should not be visible
         // 401 options
         public static int MAX_401_RETRIES = 2;                  // Max 401 retries times
 
@@ -68,10 +69,10 @@ namespace WebexSDK
         public static int MAX_RETRYAFTER_SECONDS = 3600;        // Max value supported in 'retry-after' header on a 429 response
         public static int DEFAULT_RETRYAFTER_SECONDS = 60;      // Default value supported in 'retry-after' header on a 429 response
 
+#pragma warning restore S2223 // Non-constant static fields should not be visible
+
         public int m401RetryCount = 0;
         public int m429RetryCount = 0;
-        private System.Timers.Timer m429RetryAfterTimer;
-
         public ServiceRequest()
         {
             Method = HttpMethod.GET;
@@ -226,7 +227,7 @@ namespace WebexSDK
 
             // start timer after retryAfter seconds and retry request
             SdkLogger.Instance.Debug($"start timer: {retryAfter} seconds.");
-            m429RetryAfterTimer = TimerHelper.StartTimer(retryAfter * 1000, (o, e) =>
+            TimerHelper.StartTimer(retryAfter * 1000, (o, e) =>
             {
                 m429RetryCount++;
                 SdkLogger.Instance.Debug("429 retry began.");

@@ -78,10 +78,12 @@ namespace WebexSDK
             SdkLogger.Instance.Info($"http request[{serviceRequest.Method.ToString()}]: {serviceRequest.BaseUri + request.Resource}" );
             client.ExecuteAsync<T>(request, response =>
             {
-                var r = new ServiceRequest.Response<T>();
-                r.StatusCode = (int)response.StatusCode;
-                r.StatusDescription = response.StatusDescription;
-                r.Headers = new List<KeyValuePair<string, object>>();
+                var r = new ServiceRequest.Response<T>
+                {
+                    StatusCode = (int)response.StatusCode,
+                    StatusDescription = response.StatusDescription,
+                    Headers = new List<KeyValuePair<string, object>>()
+                };
                 foreach (var i in response.Headers)
                 {
                     r.Headers.Add(new KeyValuePair<string, object>(i.Name, i.Value));

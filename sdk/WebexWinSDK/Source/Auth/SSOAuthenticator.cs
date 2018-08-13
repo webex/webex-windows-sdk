@@ -34,7 +34,9 @@ namespace WebexSDK
     /// See: [Cisco Webex Integration](https://developer.webex.com/authentication.html)
     /// </summary>
     /// <remarks>Since: 0.1.0</remarks>
+#pragma warning disable S101 // Types should be named in camel case
     public sealed class SSOAuthenticator : OAuthAuthenticator
+#pragma warning restore S101 // Types should be named in camel case
     {
         private readonly string email;
         private readonly string identityProviderUri;

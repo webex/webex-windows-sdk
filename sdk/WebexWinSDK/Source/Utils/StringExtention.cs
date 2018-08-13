@@ -62,11 +62,13 @@ namespace WebexSDK
         }
         public static string EncodeHydraId(HydraIdType type, string address)
         {
+#pragma warning disable S1075 // URIs should not be hardcoded
             string peopleUrl = "ciscospark://us/PEOPLE/";
             string spaceUrl = "ciscospark://us/ROOM/";
             string messageUrl = "ciscospark://us/MESSAGE/";
+#pragma warning restore S1075 // URIs should not be hardcoded
 
-            string result=null;
+            string result =null;
 
             switch (type)
             {
@@ -87,9 +89,11 @@ namespace WebexSDK
         }
         public static HydraIdType ParseHydraId(string address, ref string outputAddress)
         {
+#pragma warning disable S1075 // URIs should not be hardcoded
             string peopleUrl = "ciscospark://us/PEOPLE/";
             string spaceUrl = "ciscospark://us/ROOM/";
             string messageUrl = "ciscospark://us/MESSAGE/";
+#pragma warning restore S1075 // URIs should not be hardcoded
 
             outputAddress = null;
             HydraIdType result;
