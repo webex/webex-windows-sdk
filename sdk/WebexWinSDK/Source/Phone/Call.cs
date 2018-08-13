@@ -499,11 +499,11 @@ namespace WebexSDK
         public CallMembership To {
             get
             {
-                if (IsGroup == false)
+                if (!IsGroup)
                 {
                     return Memberships.Find(item =>
                     {
-                        return item.IsInitiator != true;
+                        return !item.IsInitiator;
                     });
                 }
                 else
@@ -644,7 +644,7 @@ namespace WebexSDK
         public void SendDtmf(string dtmf, Action<WebexApiEventArgs> completedHandler)
         {
             string strValidDtmf = "";
-            if (IsSendingDTMFEnabled != true)
+            if (!IsSendingDTMFEnabled)
             {
                 SdkLogger.Instance.Info($"this call[{CallId}] is not support dtmf");
                 completedHandler?.Invoke(new WebexApiEventArgs(false, new WebexError(WebexErrorCode.UnsupportedDTMF,"")));
@@ -880,47 +880,44 @@ namespace WebexSDK
         {
             SdkLogger.Instance.Debug($"trigerOnMediaChanged: {mediaChangedEvent.GetType().Name}");
 
-            if (mediaChangedEvent is ReceivingVideoEvent)
+            if ((mediaChangedEvent as ReceivingVideoEvent) != null)
             {
                 isReceivingVideo = ((ReceivingVideoEvent)mediaChangedEvent).IsReceiving;
             }
-            else if (mediaChangedEvent is ReceivingAudioEvent)
+            else if ((mediaChangedEvent as ReceivingAudioEvent) != null)
             {
                 isReceivingAudio = ((ReceivingAudioEvent)mediaChangedEvent).IsReceiving;
             }
-            else if (mediaChangedEvent is SendingVideoEvent)
+            else if ((mediaChangedEvent as SendingVideoEvent) != null)
             {
                 isSendingVideo = ((SendingVideoEvent)mediaChangedEvent).IsSending;
             }
-            else if (mediaChangedEvent is SendingAudioEvent)
+            else if ((mediaChangedEvent as SendingAudioEvent) != null)
             {
                 isSendingAudio = ((SendingAudioEvent)mediaChangedEvent).IsSending;
             }
-            else if (mediaChangedEvent is RemoteSendingAudioEvent)
+            else if ((mediaChangedEvent as RemoteSendingAudioEvent) != null)
             {
                 IsRemoteSendingAudio = ((RemoteSendingAudioEvent)mediaChangedEvent).IsSending;
             }
-            else if (mediaChangedEvent is RemoteSendingVideoEvent)
+            else if ((mediaChangedEvent as RemoteSendingVideoEvent) != null)
             {
                 IsRemoteSendingVideo = ((RemoteSendingVideoEvent)mediaChangedEvent).IsSending;
             }
-            else if (mediaChangedEvent is RemoteSendingShareEvent)
+            else if ((mediaChangedEvent as RemoteSendingShareEvent) != null)
             {
                 IsRemoteSendingShare = ((RemoteSendingShareEvent)mediaChangedEvent).IsSending;
                 isReceivingShare = IsRemoteSendingShare;
             }
-            else if (mediaChangedEvent is ReceivingShareEvent)
+            else if ((mediaChangedEvent as ReceivingShareEvent) != null)
             {
                 isReceivingShare = ((ReceivingShareEvent)mediaChangedEvent).IsReceiving;
             }
-            else if (mediaChangedEvent is SendingShareEvent)
+            else if ((mediaChangedEvent as SendingShareEvent) != null)
             {
                 IsSendingShare = ((SendingShareEvent)mediaChangedEvent).IsSending;
             }
-            else
-            {
 
-            }
             OnMediaChanged?.Invoke(mediaChangedEvent);
         }
 
@@ -1004,7 +1001,7 @@ namespace WebexSDK
                     HandleList.Add(handle);
                     if(track > TrackType.Unknown)
                     {
-                        this.currentCall?.m_core_telephoneService.setView(currentCall.CallId, handle, (SparkNet.TrackType)track);
+                        this.currentCall?.m_core_telephoneService.setView(currentCall.CallId, handle, track);
                     }
                 }
             }
@@ -1024,7 +1021,7 @@ namespace WebexSDK
                     HandleList.Remove(handle);
                     if (track > TrackType.Unknown)
                     {
-                        this.currentCall?.m_core_telephoneService.removeView(currentCall.CallId, handle, (SparkNet.TrackType)track);
+                        this.currentCall?.m_core_telephoneService.removeView(currentCall.CallId, handle, track);
                     }
                 }
             }
@@ -1040,12 +1037,9 @@ namespace WebexSDK
                     return;
                 }
 
-                if (HandleList.Contains(handle))
+                if (HandleList.Contains(handle) && track > TrackType.Unknown)
                 {
-                    if (track > TrackType.Unknown)
-                    {
-                        this.currentCall?.m_core_telephoneService.updateView(currentCall.CallId, handle, (SparkNet.TrackType)track);
-                    }
+                    this.currentCall?.m_core_telephoneService.updateView(currentCall.CallId, handle, track);
                 }
             }
             internal CallMembership person;
@@ -1098,7 +1092,7 @@ namespace WebexSDK
                 set
                 {
                     SdkLogger.Instance.Info($"{value}");
-                    this.currentCall.m_core_telephoneService?.muteRemoteVideo(this.currentCall.CallId, !value, (TrackType)track);
+                    this.currentCall.m_core_telephoneService?.muteRemoteVideo(this.currentCall.CallId, !value, track);
                     isReceivingVideo = value;
                 }
             }
@@ -1113,7 +1107,7 @@ namespace WebexSDK
             {
                 get
                 {
-                    if (this.currentCall.m_core_telephoneService?.getVideoSize(this.currentCall.CallId, (TrackType)track, ref remoteAuxVideoSize.Width, ref remoteAuxVideoSize.Height) != true)
+                    if (this.currentCall.m_core_telephoneService?.getVideoSize(this.currentCall.CallId, track, ref remoteAuxVideoSize.Width, ref remoteAuxVideoSize.Height) != true)
                     {
                         SdkLogger.Instance.Error($"get remote track[{track}] video view size error.");
                     }
@@ -1123,7 +1117,7 @@ namespace WebexSDK
 
             internal SparkNet.TrackType track { get; set; }
             internal bool IsInUse { get; set; }
-            private Call currentCall;
+            private readonly Call currentCall;
             private RemoteAuxVideo() { }
             internal RemoteAuxVideo(Call currentCall)
                 :base()

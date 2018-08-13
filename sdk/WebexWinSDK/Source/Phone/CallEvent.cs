@@ -119,7 +119,7 @@ namespace WebexSDK
     /// <remarks>Since: 0.1.0</remarks>
     public abstract class CallMembershipChangedEvent : CallEvent
     {
-        private CallMembership callMembership;
+        private readonly CallMembership callMembership;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CallMembershipChangedEvent"/> class.
@@ -183,7 +183,7 @@ namespace WebexSDK
     /// <remarks>Since: 2.0.0</remarks>
     public class ActiveSpeakerChangedEvent : MediaChangedEvent
     {
-        private CallMembership activeSpeaker;
+        private readonly CallMembership activeSpeaker;
         internal ActiveSpeakerChangedEvent(Call call, CallMembership activeSpeaker)
             : base(call)
         {
@@ -208,7 +208,7 @@ namespace WebexSDK
     /// <remarks>Since: 2.0.0</remarks>
     public class RemoteAuxVideosCountChangedEvent : MediaChangedEvent
     {
-        private int count;
+        private readonly int count;
         internal RemoteAuxVideosCountChangedEvent(Call call, int count)
             : base(call)
         {
@@ -258,7 +258,7 @@ namespace WebexSDK
     /// <remarks>Since: 0.1.0</remarks>
     public class RemoteSendingVideoEvent : MediaChangedEvent
     {
-        private bool isSending;
+        private readonly bool isSending;
 
         internal RemoteSendingVideoEvent(Call call, bool sending)
             :base(call)
@@ -281,7 +281,7 @@ namespace WebexSDK
     /// <remarks>Since: 0.1.0</remarks>
     public class RemoteSendingAudioEvent : MediaChangedEvent
     {
-        private bool isSending;
+        private readonly bool isSending;
 
         internal RemoteSendingAudioEvent(Call call, bool sending)
             :base(call)
@@ -305,7 +305,7 @@ namespace WebexSDK
     /// <remarks>Since: 0.1.0</remarks>
     public class SendingVideoEvent : MediaChangedEvent
     {
-        private bool isSending;
+        private readonly bool isSending;
 
         internal SendingVideoEvent(Call call, bool sending)
             : base(call)
@@ -329,7 +329,7 @@ namespace WebexSDK
     /// <remarks>Since: 0.1.0</remarks>
     public class SendingAudioEvent : MediaChangedEvent
     {
-        private bool isSending;
+        private readonly bool isSending;
 
         internal SendingAudioEvent(Call call, bool sending)
             : base(call)
@@ -353,7 +353,7 @@ namespace WebexSDK
     /// <remarks>Since: 0.1.0</remarks>
     public class ReceivingVideoEvent : MediaChangedEvent
     {
-        private bool isReceiving;
+        private readonly bool isReceiving;
 
         internal ReceivingVideoEvent(Call call, bool receiving)
             : base(call)
@@ -388,7 +388,7 @@ namespace WebexSDK
     /// <remarks>Since: 0.1.0</remarks>
     public class ReceivingAudioEvent : MediaChangedEvent
     {
-        private bool isReceiving;
+        private readonly bool isReceiving;
 
         internal ReceivingAudioEvent(Call call, bool receiving)
             : base(call)
@@ -411,7 +411,7 @@ namespace WebexSDK
     /// <remarks>Since: 0.1.0</remarks>
     public class CameraSwitchedEvent : MediaChangedEvent
     {
-        AVIODevice camera;
+        readonly AVIODevice camera;
 
         internal CameraSwitchedEvent(Call call, AVIODevice camera)
             : base(call)
@@ -434,7 +434,7 @@ namespace WebexSDK
     /// <remarks>Since: 0.1.0</remarks>
     public class SpeakerSwitchedEvent : MediaChangedEvent
     {
-        AVIODevice speaker;
+        readonly AVIODevice speaker;
 
         internal SpeakerSwitchedEvent(Call call, AVIODevice speaker)
             : base(call)
@@ -517,7 +517,7 @@ namespace WebexSDK
     /// <remarks>Since: 0.1.0</remarks>
     public class ReceivingShareEvent : MediaChangedEvent
     {
-        private bool isReceiving;
+        private readonly bool isReceiving;
 
         internal ReceivingShareEvent(Call call, bool receiving)
             : base(call)
@@ -541,7 +541,7 @@ namespace WebexSDK
     /// <remarks>Since: 0.1.0</remarks>
     public class RemoteSendingShareEvent : MediaChangedEvent
     {
-        private bool isSending;
+        private readonly bool isSending;
 
         internal RemoteSendingShareEvent(Call call, bool sending)
             : base(call)
@@ -564,7 +564,7 @@ namespace WebexSDK
     /// <remarks>Since: 0.1.7</remarks>
     public class SendingShareEvent : MediaChangedEvent
     {
-        private bool isSending;
+        private readonly bool isSending;
 
         internal SendingShareEvent(Call call, bool sending)
             : base(call)
@@ -749,7 +749,7 @@ namespace WebexSDK
     /// <remarks>Since: 0.1.0</remarks>
     public class CallError : CallDisconnectedEvent
     {
-        private WebexError error;
+        private readonly WebexError error;
         internal CallError(Call call, WebexError error)
             : base(call)
         {
@@ -769,10 +769,10 @@ namespace WebexSDK
     /// The DTMF capability of this call.
     /// </summary>
     /// <remarks>Since: 0.1.0</remarks>
-    public class CapabilitieDTMF : Capabilities
+    public class CapabilitiesDTMF : Capabilities
     {
-        private bool isEnabled;
-        internal CapabilitieDTMF(Call call, bool isEnabled)
+        private readonly bool isEnabled;
+        internal CapabilitiesDTMF(Call call, bool isEnabled)
             : base(call)
         {
             this.isEnabled = isEnabled;

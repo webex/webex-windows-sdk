@@ -69,7 +69,7 @@ namespace WebexSDK
         /// Message callback event, such as a message arrived or is deleted.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
-        public Action<MessageEvent> OnEvent;
+        public Action<MessageEvent> OnEvent { get; set; }
 
         /// <summary>
         /// Lists all messages in a space by space Id.
@@ -321,12 +321,10 @@ namespace WebexSDK
                 if (SaveImageToLocal(image.imageBuffer, fullPath))
                 {
                     completionHandler?.Invoke(new WebexApiEventArgs<string>(true, null, fullPath));
-                    return;
                 }
                 else
                 {
                     completionHandler?.Invoke(new WebexApiEventArgs<string>(false, new WebexError(WebexErrorCode.IllegalOperation, "save failed."), null));
-                    return;
                 }                
             }
             else
@@ -339,7 +337,6 @@ namespace WebexSDK
                         path = fullPath,
                         completionHandler = completionHandler
                     };
-                    return;
                 }
                 else
                 {
@@ -449,7 +446,7 @@ namespace WebexSDK
                 {
                     sessionActions.Add(conversationId, new SessionAction()
                     {
-                        list = new SessionAction.listAction()
+                        list = new SessionAction.ListAction()
                         {
                             listMessageCount = maxCount,
                             listCompletionHandler = completionHandler,
@@ -732,7 +729,7 @@ namespace WebexSDK
             // ToPersonId, ToPersonEmail
             if (m.SpaceType == SpaceType.Direct)
             {
-                string[] participants = conversation.getParticipants();
+                string[] participants = conversation?.getParticipants();
                 string toPersonId = null;
                 if (participants.Length == 2)
                 {
@@ -941,7 +938,7 @@ namespace WebexSDK
             return exitedConvId;
         }
 
-        private Dictionary<string, Action<string>> creatOne2OneSpaceCompletionHandler = new Dictionary<string, Action<string>>();
+        private readonly Dictionary<string, Action<string>> creatOne2OneSpaceCompletionHandler = new Dictionary<string, Action<string>>();
         private void CreateOne2OneSpace(string title, string toPersonId, string toEmail, Action<string> completionHandler)
         {
             SdkLogger.Instance.Debug($"create one-on-one conversation. title[{title}] toPersonId[{toPersonId}] toEmail[{toEmail}]");
@@ -985,13 +982,11 @@ namespace WebexSDK
                         {
                             SdkLogger.Instance.Debug($"CreateOne2OneSpace success conversation id[{newConvId}]");
                             conversationId.Invoke(newConvId);
-                            return;
                         }
                         else
                         {
                             SdkLogger.Instance.Error("CreateOne2OneSpace failed");
                             conversationId.Invoke(null);
-                            return;
                         }
                     });
 
@@ -1034,7 +1029,6 @@ namespace WebexSDK
                                 }
                                 SdkLogger.Instance.Debug($"CreateOne2OneSpace success conversation id[{newConvId}]");
                                 conversationId.Invoke(newConvId);
-                                return;
                             });
                         });
                     }
@@ -1042,7 +1036,6 @@ namespace WebexSDK
                     {
                         SdkLogger.Instance.Error($"get to person id failed.");
                         conversationId.Invoke(null);
-                        return;
                     }
                 });
             }
@@ -1129,7 +1122,7 @@ namespace WebexSDK
         }
         private void SendConversationMsg(string conversationId, string text, List<Mention> mentions, List<LocalFile> files, Action<WebexApiEventArgs<Message>> completionHandler)
         {
-            SparkNet.MessageValidationResult result = MessageValidationResult.UnknownError;
+            SparkNet.MessageValidationResult result;
             string tempMessageId;
 
             var conv = m_core_conversationService.getConversation(conversationId);
@@ -1239,7 +1232,7 @@ namespace WebexSDK
 
         class SessionAction
         {
-            public class listAction
+            public class ListAction
             {
                 public int? listMessageCount;
                 public Action<WebexApiEventArgs<List<Message>>> listCompletionHandler;
@@ -1248,7 +1241,7 @@ namespace WebexSDK
                 public DateTime? before;
                 public string mentionedPeople;
             }
-            public listAction list;
+            public ListAction list;
 
         }
         class MessageAction

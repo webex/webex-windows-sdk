@@ -197,7 +197,7 @@ namespace WebexSDK
             get { return new TeamMembershipClient(Authenticator); }
         }
 
-        SCFCore m_core;
+        readonly SCFCore m_core;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Webex"/>,with an Authenticator class.

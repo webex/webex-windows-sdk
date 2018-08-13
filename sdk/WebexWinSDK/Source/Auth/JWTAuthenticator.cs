@@ -96,7 +96,7 @@ namespace WebexSDK
         /// <remarks>Since: 0.1.0</remarks>
         public void Authorized(Action<WebexApiEventArgs> completionHandler)
         {
-            if (SCFCore.Instance.m_core.getValue("jwtKey", ref this.jwt) == false
+            if (!SCFCore.Instance.m_core.getValue("jwtKey", ref this.jwt)
                 || this.jwt == null
                 || this.jwt.Length == 0)
             {
@@ -116,7 +116,7 @@ namespace WebexSDK
         {
             // store jwt
             this.jwt = jwt;
-            if (SCFCore.Instance.m_core.setValue("jwtKey", jwt) == false)
+            if (!SCFCore.Instance.m_core.setValue("jwtKey", jwt))
             {
                 SdkLogger.Instance.Error("store jwt failed.");
                 completionHandler?.Invoke(new WebexApiEventArgs(false, null));
@@ -131,12 +131,11 @@ namespace WebexSDK
             // get access token and login core
             AccessToken(response =>
             {
-                if (response.IsSuccess == true)
+                if (response.IsSuccess)
                 {
                     //core login
                     m_core.loginWithAccessToken(jwtAccessTokenStore.token, "", jwtAccessTokenStore.tokenExpirationSinceNow);
                     AuthorizeAction = completionHandler;
-                    return;
                 }
                 else
                 {
@@ -192,7 +191,7 @@ namespace WebexSDK
             this.client.FetchTokenFromJWTAsync(this.jwt, this, (response =>
             {
                 // Success Get AccessToken
-                if (response != null && response.IsSuccess == true && response.Data != null)
+                if (response != null && response.IsSuccess && response.Data != null)
                 {
                     // Store AccessToken
                     string rspToken = response.Data.Token;
@@ -215,7 +214,6 @@ namespace WebexSDK
                 SdkLogger.Instance.Error("fetch jwt token failed");
                 // Callback to User
                 completionHandler(new WebexApiEventArgs<string>(false, null, null));
-                return;
             }));
         }
 
@@ -242,7 +240,7 @@ namespace WebexSDK
             this.client.FetchTokenFromJWTAsync(this.jwt, this, (response =>
             {
                 // Success Get AccessToken
-                if (response != null && response.IsSuccess == true && response.Data != null)
+                if (response != null && response.IsSuccess && response.Data != null)
                 {
                     // Store AccessToken
                     string rspToken = response.Data.Token;
@@ -265,22 +263,22 @@ namespace WebexSDK
                 SdkLogger.Instance.Error("fetch jwt token failed");
                 // Callback to User
                 completionHandler(new WebexApiEventArgs<string>(false, null, null));
-                return;
             }));
         }
 
         // get palyload from JWT
         private static Dictionary<string, string> PayloadFor(string jwt)
         {
+            Dictionary<string, string> result = new Dictionary<string, string>();
+
             string[] segments = jwt.Split('.');
             if (segments.Length != 3)
             {
                 SdkLogger.Instance.Error("jwt formate is invalid.");
-                return null;
+                return result;
             }
 
             byte[] decodeResult;
-            Dictionary<string, string> result;
             try
             {
                 decodeResult = Base64UrlDecode(segments[1]);
@@ -289,7 +287,7 @@ namespace WebexSDK
             catch
             {
                 SdkLogger.Instance.Error("deserialize jwt fail.");
-                return null;
+                return result;
             }
 
             return result;
@@ -307,7 +305,6 @@ namespace WebexSDK
                 case 1: output += "==="; break; // Three pad chars
                 case 2: output += "=="; break; // Two pad chars
                 case 3: output += "="; break; // One pad char
-                default: throw new System.Exception("Illegal base64url string!");
             }
             var converted = Convert.FromBase64String(output); // Standard base64 decoder
             return converted;

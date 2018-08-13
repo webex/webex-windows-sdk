@@ -43,12 +43,7 @@ namespace WebexSDK
 
     internal class ServiceRequest
     {
-        private string baseUri;
-        public string BaseUri
-        {
-            get { return baseUri; }
-            set { baseUri = value; }
-        }
+        public string BaseUri { get; set; }
         public HttpMethod Method { get; set; }
         private string resource;
         public string Resource
@@ -80,7 +75,7 @@ namespace WebexSDK
         public ServiceRequest()
         {
             Method = HttpMethod.GET;
-            baseUri = "https://api.ciscospark.com/v1/";
+            BaseUri = "https://api.ciscospark.com/v1/";
             AccessToken = null;
 
             Headers = new List<KeyValuePair<string, string>>()
@@ -130,7 +125,7 @@ namespace WebexSDK
         {
             Authenticator?.AccessToken(response =>
             {
-                if (response == null || response.IsSuccess == false || response.Data == null)
+                if (response == null || !response.IsSuccess || response.Data == null)
                 {
                     SdkLogger.Instance.Error("ServiceRequest.Execute.accessToken Failed");
                     completedhandler?.Invoke(new WebexApiEventArgs<T>(false, null, default(T)));
@@ -142,7 +137,6 @@ namespace WebexSDK
                 ClientHandler.Execute<T>(this, resp =>
                 {
                     HandleResponse<T>(resp, completedhandler);
-                    return;
                 });
 
             });
@@ -153,9 +147,7 @@ namespace WebexSDK
             ClientHandler.Execute<T>(this, resp =>
             {
                 HandleAuthResponse<T>(resp, completedhandler);
-                return;
             });
-            
         }
 
         private void HandleAuthResponse<T>(ServiceRequest.Response<T> resp, Action<WebexApiEventArgs<T>> completedhandler) where T : new()
@@ -175,7 +167,6 @@ namespace WebexSDK
                 SdkLogger.Instance.Error($"http response error: {resp.StatusCode}");
                 completedhandler?.Invoke(new WebexApiEventArgs<T>(false, new WebexError(WebexErrorCode.ServiceFailed, resp.StatusCode.ToString()), default(T)));
             }
-            return;
         }
 
         private void HandleResponse<T>(ServiceRequest.Response<T> resp, Action<WebexApiEventArgs<T>> completedhandler) where T : new()
@@ -200,12 +191,11 @@ namespace WebexSDK
                 SdkLogger.Instance.Error($"http response error: {resp.StatusCode} {resp.StatusDescription}");
                 completedhandler?.Invoke(new WebexApiEventArgs<T>(false, new WebexError(WebexErrorCode.ServiceFailed, resp.StatusCode.ToString()), default(T)));
             }
-            return;
         }
 
         private int GetRetryAfterValue<T>(ServiceRequest.Response<T> resp) where T : new()
         {
-            int retryAfter = DEFAULT_RETRYAFTER_SECONDS;
+            int retryAfter;
             try
             {
                 var r = resp.Headers.Find(x => x.Key == "Retry-After");

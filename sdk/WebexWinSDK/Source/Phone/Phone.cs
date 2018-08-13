@@ -43,7 +43,7 @@ namespace WebexSDK
         readonly IAuthenticator authenticator;
         private static volatile Phone instance = null;
         private static readonly object lockHelper = new object();
-        private H264LicensePrompter prompter;
+        private readonly H264LicensePrompter prompter;
 
         private Phone(IAuthenticator authenticator)
         {
@@ -67,7 +67,6 @@ namespace WebexSDK
             }
             m_core = SCFCore.Instance.m_core;
             m_core_telephoneService = SCFCore.Instance.m_core_telephoneService;
-            m_core_conversationService = SCFCore.Instance.m_core_conversationService;
             m_core_deviceManager = SCFCore.Instance.m_core_deviceManager;
             m_core.m_CallbackEvent += OnCoreCallBackPhone;
 
@@ -82,7 +81,6 @@ namespace WebexSDK
             m_core.m_CallbackEvent -= OnCoreCallBackPhone;
             m_core = null;
             m_core_telephoneService = null;
-            m_core_conversationService = null;
             m_core_deviceManager = null;
             isRegisteredToCore = false;
             instance = null;
@@ -161,7 +159,6 @@ namespace WebexSDK
 
         private SparkNet.CoreFramework m_core;
         private SparkNet.TelephonyService m_core_telephoneService;
-        private SparkNet.ConversationService m_core_conversationService;
         private SparkNet.DeviceManager m_core_deviceManager;
 
         private event Action<WebexApiEventArgs> RegisterCompletedHandler;
@@ -243,14 +240,14 @@ namespace WebexSDK
                 return;
             }
 
-            if (isMercuryConnected == false)
+            if (!isMercuryConnected)
             {
                 SdkLogger.Instance.Error("phone is not registered");
                 completedHandler(new WebexApiEventArgs<Call>(false, new WebexError(WebexErrorCode.Unregistered, "phone is not registered"), null));
                 return;
             }
 
-            if (currentCall.IsUsed == true)
+            if (currentCall.IsUsed)
             {
                 SdkLogger.Instance.Error("Failure: There are other active calls");
                 completedHandler(new WebexApiEventArgs<Call>(false, new WebexError(WebexErrorCode.IllegalOperation, "There are other active calls"), currentCall));
@@ -315,14 +312,10 @@ namespace WebexSDK
 
         internal bool CheckVideoCodecLicenseActivation(MediaOption option)
         {
-            if (option.HasVideo)
+            if (option.HasVideo && !prompter.Check())
             {
-                if (!prompter.Check())
-                {
-                    return false;
-                }
+                return false;
             }
-
             return true;
         }
 
@@ -369,7 +362,7 @@ namespace WebexSDK
             //continue answer incoming call
             if (currentCall.Direction == Call.CallDirection.Incoming && currentCall.Status == CallStatus.Ringing)
             {
-                if (activate == false)
+                if (!activate)
                 {
                     SdkLogger.Instance.Warn("reject video codec license");
                     currentCall?.TrigerAnswerCompletedHandler(new WebexApiEventArgs(false, new WebexError(WebexErrorCode.RequireH264, "")));
@@ -385,12 +378,11 @@ namespace WebexSDK
                 m_core_telephoneService?.joinCall(currentCall.CallId);
 
                 currentCall?.TrigerAnswerCompletedHandler(new WebexApiEventArgs(true, null));
-                return;
             }
             //continue call out
             else if (currentCall.Direction == Call.CallDirection.Outgoing && currentCall.Status == CallStatus.Initiated)
             {
-                if (activate == false)
+                if (!activate)
                 {
                     SdkLogger.Instance.Warn("reject video codec license");
                     currentCall = new Call(this);
@@ -449,7 +441,7 @@ namespace WebexSDK
             StartCaptureDevice(SparkNet.MediaOption.All);
             CameraPreviewReadyEvent = (isReady) =>
             {
-                if (isReady == true)
+                if (isReady)
                 {
                     m_core_deviceManager.startCameraPreview(handle);
                 }
@@ -515,11 +507,11 @@ namespace WebexSDK
             SdkLogger.Instance.Debug($"select {device.Name}");
             var item = m_core_deviceManager.getDevice(device.Id, (SparkNet.DeviceType)device.Type);
             bool result = m_core_deviceManager.selectDevice(item);
-            if (result == true && item.type == SparkNet.DeviceType.Camera)
+            if (result && item.type == SparkNet.DeviceType.Camera)
             {
                 currentCall?.TrigerOnMediaChanged(new CameraSwitchedEvent(currentCall, device));
             }
-            else if (result == true && item.type == SparkNet.DeviceType.Speaker)
+            else if (result && item.type == SparkNet.DeviceType.Speaker)
             {
                 currentCall?.TrigerOnMediaChanged(new SpeakerSwitchedEvent(currentCall, device));
             }
@@ -633,10 +625,10 @@ namespace WebexSDK
             switch (type)
             {
                 case SCFEventType.ParticipantsChanged:
-                    OnParticipantsChanged(error, status);
+                    OnParticipantsChanged(status);
                     break;
                 case SCFEventType.MercuryStateChange:
-                    OnMercuryStateChange((SparkNet.MercuryState)error, status); ;
+                    OnMercuryStateChange((SparkNet.MercuryState)error); ;
                     break;
                 case SCFEventType.JwtAccessTokenExpired:
                     OnJwtAccessTokenExpired();
@@ -651,7 +643,7 @@ namespace WebexSDK
                     currentCall.CallId = status;
                     break;
                 case SCFEventType.CallDisconnected:
-                    OnCallDisconnected(error, status); ;
+                    OnCallDisconnected(status); ;
                     break;
                 case SCFEventType.CallConnected:
                     if(currentCall != null)
@@ -662,7 +654,7 @@ namespace WebexSDK
                     break;
                 case SCFEventType.CallTerminated:
                 case SCFEventType.CallFailed:
-                    OnCallTerminated(error, status);
+                    OnCallTerminated(status);
                     break;
                 case SCFEventType.RemoteVideoReady:
                 case SCFEventType.LocalVideoReady:
@@ -680,9 +672,10 @@ namespace WebexSDK
                 case SCFEventType.AudioMutedStateChanged:
                     OnAudioMutedStateChanged((SparkNet.TrackType)error, status);
                     break;
-                case SCFEventType.VideoMutedStateChanged:
-                    //OnVideoMutedStateChanged((SparkNet.TrackType)error, status);
-                    break;
+                // replaced by IsVideoStreamingChanged
+                //case SCFEventType.VideoMutedStateChanged:
+                //    OnVideoMutedStateChanged((SparkNet.TrackType)error, status);
+                //    break;
                 case SCFEventType.MuteRemoteAudioDone:
                     OnMuteRemoteAudioDone((SparkNet.TrackType)error, status);
                     break;
@@ -690,7 +683,7 @@ namespace WebexSDK
                     OnMuteRemoteVideoDone((SparkNet.TrackType)error, status);
                     break;
                 case SCFEventType.VideoSizeChanged:
-                    OnVideoSizeChanged((SparkNet.TrackType)error, status);
+                    OnVideoSizeChanged((SparkNet.TrackType)error);
                     break;
                 case SCFEventType.DTMFStatus:
                     OnDTMFStatusChanged((SparkNet.DTMFCapStatus)error, status);
@@ -712,14 +705,13 @@ namespace WebexSDK
                     break;
                 case SCFEventType.RemoteVideoCountChanged:
                     int newCount = error;
-                    if (newCount >= 0)
+                    if (newCount >= 0
+                        && currentCall != null
+                        && currentCall.RemoteVideosCount != newCount)
                     {
-                        if (currentCall != null &&currentCall.RemoteVideosCount != newCount)
-                        {
-                            currentCall.RemoteVideosCount = newCount;
-                            SdkLogger.Instance.Debug($"remote auxiliary videos count changed to {newCount}");
-                            currentCall.TrigerOnMediaChanged(new RemoteAuxVideosCountChangedEvent(currentCall, newCount));
-                        }
+                        currentCall.RemoteVideosCount = newCount;
+                        SdkLogger.Instance.Debug($"remote auxiliary videos count changed to {newCount}");
+                        currentCall.TrigerOnMediaChanged(new RemoteAuxVideosCountChangedEvent(currentCall, newCount));
                     }
                     break;
                 case SCFEventType.IsAuxVideoStreamInUseChanged:
@@ -775,13 +767,10 @@ namespace WebexSDK
             if (trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
             {
                 var find = currentCall?.RemoteAuxVideos.Find(x => (x.track == trackType));
-                if (find != null)
+                if (find != null && find.IsInUse != isInUse)
                 {
-                    if (find.IsInUse != isInUse)
-                    {
-                        find.IsInUse = isInUse;
-                        SdkLogger.Instance.Debug($"callID[{callId}] trackType[{trackType}] InUse[{isInUse}]");
-                    }
+                    find.IsInUse = isInUse;
+                    SdkLogger.Instance.Debug($"callID[{callId}] trackType[{trackType}] InUse[{isInUse}]");
                 }
             }
         }
@@ -826,7 +815,7 @@ namespace WebexSDK
                 currentCall?.TrigerOnMediaChanged(new RemoteSendingAudioEvent(currentCall, true));
             }
         }
-        private void OnParticipantsChanged(int error, string callId)
+        private void OnParticipantsChanged(string callId)
         {
             List<CallMembership> tmpMemberships = new List<CallMembership>();
 
@@ -979,7 +968,7 @@ namespace WebexSDK
             //one2one outgoing call, triger callConnected event when remote participant joined
             if (currentCall?.IsGroup == false && currentCall?.Direction == Call.CallDirection.Outgoing)
             {
-                if (newItem.IsSelf != true)
+                if (!newItem.IsSelf)
                 {
                     currentCall.IsSignallingConnected = true;
                     OnCallConnected();
@@ -987,7 +976,7 @@ namespace WebexSDK
             }
             else
             {
-                if (newItem.IsSelf == true)
+                if (newItem.IsSelf)
                 {
                     bool find = false;
                     foreach (var device in newItem.Devices)
@@ -1015,7 +1004,7 @@ namespace WebexSDK
             }
             return true;
         }
-        private void OnMercuryStateChange(SparkNet.MercuryState state, string status)
+        private void OnMercuryStateChange(SparkNet.MercuryState state)
         {
             SdkLogger.Instance.Info($"state: {state.ToString()}");
             if (state == SparkNet.MercuryState.Connected)
@@ -1062,7 +1051,7 @@ namespace WebexSDK
             }
 
             // outgoing call
-            if (currentCall.IsUsed == true && currentCall.Direction == Call.CallDirection.Outgoing)
+            if (currentCall.IsUsed && currentCall.Direction == Call.CallDirection.Outgoing)
             {
                 currentCall.CallId = callId;
                 m_core_telephoneService.setMediaOption(currentCall.CallId , currentCall.MediaOption.MediaOptionType);
@@ -1125,7 +1114,7 @@ namespace WebexSDK
             currentCall?.TrigerOnConnected();
         }
 
-        private void OnCallDisconnected(int error, string callId)
+        private void OnCallDisconnected(string callId)
         {
             if (callId != currentCall.CallId)
             {
@@ -1147,7 +1136,7 @@ namespace WebexSDK
         }
 
 
-        private void OnCallTerminated(int error, string callId)
+        private void OnCallTerminated(string callId)
         {
             if (callId != currentCall.CallId)
             {
@@ -1182,7 +1171,6 @@ namespace WebexSDK
                     }
                     else if (videoTrackType >= TrackType.RemoteAux1 && videoTrackType < TrackType.LocalShare)
                     {
-                        int index = (int)videoTrackType - (int)TrackType.RemoteAux1;
                         var find = currentCall?.RemoteAuxVideos.Find(x =>(x.track == 0));
 
                         if (find != null && currentCall.CallId != null)
@@ -1243,78 +1231,76 @@ namespace WebexSDK
             {
                 currentCall?.TrigerOnMediaChanged(new SendingAudioEvent(currentCall, isSending));
             }
-            else if (trackType == TrackType.Remote)
+            else if (trackType == TrackType.Remote && currentCall.IsRemoteSendingAudio != isSending)
             {
-                if (currentCall.IsRemoteSendingAudio != isSending)
-                {
-                    currentCall.IsRemoteSendingAudio = isSending;
-                    currentCall?.TrigerOnMediaChanged(new RemoteSendingAudioEvent(currentCall, isSending));
-                }
+                currentCall.IsRemoteSendingAudio = isSending;
+                currentCall?.TrigerOnMediaChanged(new RemoteSendingAudioEvent(currentCall, isSending));
             }
         }
 
-        private void OnVideoMutedStateChanged(SparkNet.TrackType trackType, string status)
-        {
-            SdkLogger.Instance.Debug($"{trackType.ToString()} video is {status}");
-            bool isSending = !(status == "muted");
+        // replace by OnIsVideoStreamingChanged
+        //private void OnVideoMutedStateChanged(SparkNet.TrackType trackType, string status)
+        //{
+        //    SdkLogger.Instance.Debug($"{trackType.ToString()} video is {status}");
+        //    bool isSending = !(status == "muted");
 
-            if (trackType == TrackType.Local)
-            {
-                if (currentCall != null && currentCall?.IsSendingVideo != isSending)
-                {
-                    currentCall.isSendingVideo = isSending;
-                    currentCall.TrigerOnMediaChanged(new SendingVideoEvent(currentCall, isSending));
-                }
-            }
-            else if (trackType == TrackType.Remote)
-            {
-                if (currentCall != null && currentCall.IsRemoteSendingVideo != isSending)
-                {
-                    currentCall.IsRemoteSendingVideo = isSending;
-                    currentCall.TrigerOnMediaChanged(new RemoteSendingVideoEvent(currentCall, isSending));
-                }
-            }
-            else if (trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
-            {
-                var find = currentCall?.RemoteAuxVideos.Find(x => (x.track == trackType));
-                if (find != null)
-                {
-                    if (find.IsSendingVideo != isSending)
-                    {
-                        find.IsSendingVideo = isSending;
-                        currentCall?.TrigerOnMediaChanged(new RemoteAuxSendingVideoEvent(currentCall, find));
-                    }
-                }
-            }
-        }
+        //    if (trackType == TrackType.Local)
+        //    {
+        //        if (currentCall != null && currentCall?.IsSendingVideo != isSending)
+        //        {
+        //            currentCall.isSendingVideo = isSending;
+        //            currentCall.TrigerOnMediaChanged(new SendingVideoEvent(currentCall, isSending));
+        //        }
+        //    }
+        //    else if (trackType == TrackType.Remote)
+        //    {
+        //        if (currentCall != null && currentCall.IsRemoteSendingVideo != isSending)
+        //        {
+        //            currentCall.IsRemoteSendingVideo = isSending;
+        //            currentCall.TrigerOnMediaChanged(new RemoteSendingVideoEvent(currentCall, isSending));
+        //        }
+        //    }
+        //    else if (trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
+        //    {
+        //        var find = currentCall?.RemoteAuxVideos.Find(x => (x.track == trackType));
+        //        if (find != null)
+        //        {
+        //            if (find.IsSendingVideo != isSending)
+        //            {
+        //                find.IsSendingVideo = isSending;
+        //                currentCall?.TrigerOnMediaChanged(new RemoteAuxSendingVideoEvent(currentCall, find));
+        //            }
+        //        }
+        //    }
+        //}
 
         private void OnMuteRemoteAudioDone(SparkNet.TrackType trackType, string status)
         {
-            SdkLogger.Instance.Debug($"local {status} remote audio done");
-            currentCall?.TrigerOnMediaChanged(new ReceivingAudioEvent(currentCall, !(status == "muted")));
+            SdkLogger.Instance.Debug($"local {status} remote audio done. {trackType}");
+            currentCall?.TrigerOnMediaChanged(new ReceivingAudioEvent(currentCall, (status != "muted")));
         }
         private void OnMuteRemoteVideoDone(SparkNet.TrackType trackType, string status)
         {
             SdkLogger.Instance.Debug($"local {status} {trackType.ToString()} video done");
             if (trackType == TrackType.Remote)
             {
-                currentCall?.TrigerOnMediaChanged(new ReceivingVideoEvent(currentCall, !(status == "muted")));
+                currentCall?.TrigerOnMediaChanged(new ReceivingVideoEvent(currentCall, (status != "muted")));
             }
             else if (trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
             {
                 var find = currentCall?.RemoteAuxVideos.Find(x => (x.track == trackType));
                 if (find != null)
                 {
-                    find.isReceivingVideo = !(status == "muted");
+                    find.isReceivingVideo = (status != "muted");
                     currentCall?.TrigerOnMediaChanged(new ReceivingAuxVideoEvent(currentCall, find));
                 }
             }
             else if (trackType == TrackType.RemoteShare)
             {
-                currentCall?.TrigerOnMediaChanged(new ReceivingShareEvent(currentCall, !(status == "muted")));
+                currentCall?.TrigerOnMediaChanged(new ReceivingShareEvent(currentCall, (status != "muted")));
             }
         }
-        private void OnVideoSizeChanged(SparkNet.TrackType trackType, string status)
+        private void OnVideoSizeChanged(SparkNet.TrackType trackType)
         {
             SdkLogger.Instance.Debug($"{trackType.ToString()} video size changed");
             if (trackType == TrackType.Local)
@@ -1337,7 +1323,7 @@ namespace WebexSDK
         }
         private void OnDTMFStatusChanged(SparkNet.DTMFCapStatus dtmfStatus, string status)
         {
-            currentCall?.TrigerOnCapabiltyChanged(new CapabilitieDTMF(currentCall, (dtmfStatus == DTMFCapStatus.Enabled)));
+            currentCall?.TrigerOnCapabiltyChanged(new CapabilitiesDTMF(currentCall, (dtmfStatus == DTMFCapStatus.Enabled)));
         }
 
         private void OnCameraPreviewReady(int error, string status)
@@ -1408,7 +1394,7 @@ namespace WebexSDK
                     if (currentCall.Direction == Call.CallDirection.Incoming
                         && currentCall.Status < CallStatus.Connected)
                     {
-                        if (currentCall.IsLocalRejectOrEndCall == true)
+                        if (currentCall.IsLocalRejectOrEndCall)
                         {
                             result = new LocalDecline(currentCall);
                         }

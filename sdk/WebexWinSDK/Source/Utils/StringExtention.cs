@@ -51,7 +51,7 @@ namespace WebexSDK
         public static string Base64UrlEncode(string input)
         {
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(input);
-            return System.Convert.ToBase64String(plainTextBytes).Replace("=", "").Replace('+', '-').Replace('/', '_'); ;
+            return System.Convert.ToBase64String(plainTextBytes).Replace("=", "").Replace('+', '-').Replace('/', '_');
         }
         public enum HydraIdType
         {
@@ -93,7 +93,7 @@ namespace WebexSDK
             string messageUrl = "ciscospark://us/MESSAGE/";
 
             outputAddress = null;
-            HydraIdType result = HydraIdType.Error;
+            HydraIdType result;
 
             try
             {
