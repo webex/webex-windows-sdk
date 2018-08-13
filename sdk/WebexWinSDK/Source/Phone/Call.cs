@@ -880,42 +880,78 @@ namespace WebexSDK
         {
             SdkLogger.Instance.Debug($"trigerOnMediaChanged: {mediaChangedEvent.GetType().Name}");
 
-            if ((mediaChangedEvent as ReceivingVideoEvent) != null)
+            if (mediaChangedEvent is ReceivingVideoEvent)
             {
-                isReceivingVideo = ((ReceivingVideoEvent)mediaChangedEvent).IsReceiving;
+                var mediaEvent = mediaChangedEvent as ReceivingVideoEvent;
+                if (mediaEvent != null)
+                {
+                    isReceivingVideo = mediaEvent.IsReceiving;
+                }
             }
-            else if ((mediaChangedEvent as ReceivingAudioEvent) != null)
+            else if (mediaChangedEvent is ReceivingAudioEvent)
             {
-                isReceivingAudio = ((ReceivingAudioEvent)mediaChangedEvent).IsReceiving;
+                var mediaEvent = mediaChangedEvent as ReceivingAudioEvent;
+                if (mediaEvent != null)
+                {
+                    isReceivingAudio = mediaEvent.IsReceiving;
+                }
             }
-            else if ((mediaChangedEvent as SendingVideoEvent) != null)
+            else if (mediaChangedEvent is SendingVideoEvent)
             {
-                isSendingVideo = ((SendingVideoEvent)mediaChangedEvent).IsSending;
+                var mediaEvent = mediaChangedEvent as SendingVideoEvent;
+                if (mediaEvent != null)
+                {
+                    isSendingVideo = mediaEvent.IsSending;
+                }
             }
-            else if ((mediaChangedEvent as SendingAudioEvent) != null)
+            else if (mediaChangedEvent is SendingAudioEvent)
             {
-                isSendingAudio = ((SendingAudioEvent)mediaChangedEvent).IsSending;
+                var mediaEvent = mediaChangedEvent as SendingAudioEvent;
+                if (mediaEvent != null)
+                {
+                    isSendingAudio = mediaEvent.IsSending;
+                }
             }
-            else if ((mediaChangedEvent as RemoteSendingAudioEvent) != null)
+            else if (mediaChangedEvent is RemoteSendingAudioEvent)
             {
-                IsRemoteSendingAudio = ((RemoteSendingAudioEvent)mediaChangedEvent).IsSending;
+                var mediaEvent = mediaChangedEvent as RemoteSendingAudioEvent;
+                if (mediaEvent != null)
+                {
+                    IsRemoteSendingAudio = mediaEvent.IsSending;
+                }
             }
-            else if ((mediaChangedEvent as RemoteSendingVideoEvent) != null)
+            else if (mediaChangedEvent is RemoteSendingVideoEvent)
             {
-                IsRemoteSendingVideo = ((RemoteSendingVideoEvent)mediaChangedEvent).IsSending;
+                var mediaEvent = mediaChangedEvent as RemoteSendingVideoEvent;
+                if (mediaEvent != null)
+                {
+                    IsRemoteSendingVideo = mediaEvent.IsSending;
+                }
             }
-            else if ((mediaChangedEvent as RemoteSendingShareEvent) != null)
+            else if (mediaChangedEvent is RemoteSendingShareEvent)
             {
-                IsRemoteSendingShare = ((RemoteSendingShareEvent)mediaChangedEvent).IsSending;
-                isReceivingShare = IsRemoteSendingShare;
+                var mediaEvent = mediaChangedEvent as RemoteSendingShareEvent;
+                if (mediaEvent != null)
+                {
+                    IsRemoteSendingShare = mediaEvent.IsSending;
+                    isReceivingShare = IsRemoteSendingShare;
+                }
             }
-            else if ((mediaChangedEvent as ReceivingShareEvent) != null)
+            else if (mediaChangedEvent is ReceivingShareEvent)
             {
-                isReceivingShare = ((ReceivingShareEvent)mediaChangedEvent).IsReceiving;
+                var mediaEvent = mediaChangedEvent as ReceivingShareEvent;
+                if (mediaEvent != null)
+                {
+                    isReceivingShare = mediaEvent.IsReceiving;
+                }
             }
-            else if ((mediaChangedEvent as SendingShareEvent) != null)
+            else if (mediaChangedEvent is SendingShareEvent)
             {
-                IsSendingShare = ((SendingShareEvent)mediaChangedEvent).IsSending;
+                var mediaEvent = mediaChangedEvent as SendingShareEvent;
+                if (mediaEvent != null)
+                {
+                    IsSendingShare = mediaEvent.IsSending;
+                }
             }
 
             OnMediaChanged?.Invoke(mediaChangedEvent);

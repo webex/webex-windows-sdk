@@ -41,7 +41,7 @@ namespace WebexSDK
         private bool isRegisteredToCore = false;
         private string jwt;
         private JWTAccessToken jwtAccessTokenStore;
-        private JWTAuthClient client;
+        private readonly JWTAuthClient client;
         private bool isAuthorized;
         internal bool MercuryConnected { get; set; }
         private SparkNet.CoreFramework m_core;
@@ -343,7 +343,7 @@ namespace WebexSDK
 
         private string GetUnexpiredAccessToken()
         {
-            if (false == this.isAuthorized || null == jwtAccessTokenStore)
+            if (!this.isAuthorized || null == jwtAccessTokenStore)
             {
                 return null;
             }

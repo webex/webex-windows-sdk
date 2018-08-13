@@ -132,7 +132,7 @@ namespace WebexSDK
                     return;
                 }
 
-                this.AccessToken = (string)response.Data;
+                this.AccessToken = response.Data;
 
                 ClientHandler.Execute<T>(this, resp =>
                 {

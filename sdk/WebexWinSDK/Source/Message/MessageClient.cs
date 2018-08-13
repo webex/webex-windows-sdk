@@ -486,22 +486,19 @@ namespace WebexSDK
                     OnEvent?.Invoke(new MessageArrived(toMessage(conversationId, arrivedMsg)));
                 }
             }
-            else if (type == SCFEventType.MessageChanged)
+            else if (type == SCFEventType.MessageChanged && msgType == SparkNet.MessageType.TombStone)
             {
-                if (msgType == SparkNet.MessageType.TombStone)
+                if (messageActions.ContainsKey(messageId))
                 {
-                    if (messageActions.ContainsKey(messageId))
+                    messageActions[messageId].deleteCompletionHandler?.Invoke(new WebexApiEventArgs(true, null));
+                    messageActions[messageId].deleteCompletionHandler = null;
+                    if (IsMessageActionIsNull(messageActions[messageId]))
                     {
-                        messageActions[messageId].deleteCompletionHandler?.Invoke(new WebexApiEventArgs(true, null));
-                        messageActions[messageId].deleteCompletionHandler = null;
-                        if (IsMessageActionIsNull(messageActions[messageId]))
-                        {
-                            messageActions.Remove(messageId);
-                        }
+                        messageActions.Remove(messageId);
                     }
-                    string msgId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.Message, messageId);
-                    OnEvent?.Invoke(new MessageDeleted(msgId));
                 }
+                string msgId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.Message, messageId);
+                OnEvent?.Invoke(new MessageDeleted(msgId));
             }
             // ignore other type of messages
 
@@ -520,7 +517,6 @@ namespace WebexSDK
                         string conversationId = arrStr[0];
                         string messageId = arrStr[1];
                         var conversation = m_core_conversationService.getConversation(conversationId);
-                        var messages = conversation.getMessages();
 
                         // new message arrived
                         if (arrStr.Length == 2)
@@ -731,7 +727,7 @@ namespace WebexSDK
             {
                 string[] participants = conversation?.getParticipants();
                 string toPersonId = null;
-                if (participants.Length == 2)
+                if (participants != null && participants.Length == 2)
                 {
                     toPersonId = (participants[0] == input.getSenderPersonId()) ? participants[1] : participants[0];
                 }

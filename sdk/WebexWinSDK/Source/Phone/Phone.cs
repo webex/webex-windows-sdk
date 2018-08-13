@@ -628,7 +628,7 @@ namespace WebexSDK
                     OnParticipantsChanged(status);
                     break;
                 case SCFEventType.MercuryStateChange:
-                    OnMercuryStateChange((SparkNet.MercuryState)error); ;
+                    OnMercuryStateChange((SparkNet.MercuryState)error);
                     break;
                 case SCFEventType.JwtAccessTokenExpired:
                     OnJwtAccessTokenExpired();
@@ -643,7 +643,7 @@ namespace WebexSDK
                     currentCall.CallId = status;
                     break;
                 case SCFEventType.CallDisconnected:
-                    OnCallDisconnected(status); ;
+                    OnCallDisconnected(status);
                     break;
                 case SCFEventType.CallConnected:
                     if(currentCall != null)
@@ -686,10 +686,10 @@ namespace WebexSDK
                     OnVideoSizeChanged((SparkNet.TrackType)error);
                     break;
                 case SCFEventType.DTMFStatus:
-                    OnDTMFStatusChanged((SparkNet.DTMFCapStatus)error, status);
+                    OnDTMFStatusChanged((SparkNet.DTMFCapStatus)error);
                     break;
                 case SCFEventType.CameraPreviewReady:
-                    OnCameraPreviewReady(error, status);
+                    OnCameraPreviewReady();
                     break;
                 case SCFEventType.LocalContentSharingStarted:
                 case SCFEventType.LocalContentSharingStop:
@@ -923,7 +923,7 @@ namespace WebexSDK
                 {
                     if (newItem.State == CallMembership.CallState.Joined)
                     {
-                        if(false == ProcessParticipantJoined(newItem))
+                        if(!ProcessParticipantJoined(newItem))
                         {
                             return;
                         }
@@ -1226,7 +1226,7 @@ namespace WebexSDK
         private void OnAudioMutedStateChanged(SparkNet.TrackType trackType, string status)
         {
             SdkLogger.Instance.Debug($"{trackType.ToString()} audio is {status}");
-            bool isSending = !(status == "muted");
+            bool isSending = (status != "muted");
             if (trackType == TrackType.Local)
             {
                 currentCall?.TrigerOnMediaChanged(new SendingAudioEvent(currentCall, isSending));
@@ -1321,12 +1321,12 @@ namespace WebexSDK
                 }                
             }
         }
-        private void OnDTMFStatusChanged(SparkNet.DTMFCapStatus dtmfStatus, string status)
+        private void OnDTMFStatusChanged(SparkNet.DTMFCapStatus dtmfStatus)
         {
             currentCall?.TrigerOnCapabiltyChanged(new CapabilitiesDTMF(currentCall, (dtmfStatus == DTMFCapStatus.Enabled)));
         }
 
-        private void OnCameraPreviewReady(int error, string status)
+        private void OnCameraPreviewReady()
         {
             SdkLogger.Instance.Debug("");
             CameraPreviewReadyEvent?.Invoke(true);
