@@ -512,185 +512,201 @@ namespace WebexSDK
                 case SCFEventType.MessageArrived:
                 case SCFEventType.MessageChanged:
                     // strStatus= "conversationid"+"message ids"
-                    {
-                        string conversationId = arrStr[0];
-                        string messageId = arrStr[1];
-
-                        // new message arrived
-                        if (arrStr.Length == 2)
-                        {
-                            MessageFilter(type, conversationId, messageId);
-                            return;
-                        }
-                        // fetch more message result
-                        else if (sessionActions.ContainsKey(conversationId))
-                        {
-                            var listAction = sessionActions[conversationId].list;
-                            if (listAction != null)
-                            {
-                                if (IsFetchEnough(listAction.conversationId, listAction.mentionedPeople, listAction.before, listAction.beforeMessageId, listAction.listMessageCount, out List<Message> listMsg))
-                                {
-                                    SdkLogger.Instance.Info($"List {listMsg.Count} messages.");
-                                    listAction.listCompletionHandler?.Invoke(new WebexApiEventArgs<List<Message>>(true, null, listMsg));
-                                    sessionActions[conversationId].list = null;
-                                    if (IsSessionActionIsNull(sessionActions[conversationId]))
-                                    {
-                                        sessionActions.Remove(conversationId);
-                                    }
-                                }
-                                else
-                                {
-                                    m_core_conversationService.fetchMoreMessage(listAction.conversationId, arrStr[1], true);
-                                }
-                            }
-                        }
-                    }
+                    OnMessageArrivedAndChanged(type, status);
                     break;
                 case SCFEventType.ConversationIdChanged:
                     // strStatus = "old conversationId"+"new conversationId"
-                    {
-                        if (creatOne2OneSpaceCompletionHandler.ContainsKey(arrStr[0]))
-                        {
-                            SdkLogger.Instance.Debug($"conversationId changed from old [{arrStr[0]}] to new [{arrStr[1]}]");
-                            creatOne2OneSpaceCompletionHandler[arrStr[0]].Invoke(arrStr[1]);
-                            creatOne2OneSpaceCompletionHandler.Remove(arrStr[0]);
-                        }
-                    }
+                    OnConversationIdChanged(arrStr[0], arrStr[1]);
                     break;
                 case SCFEventType.MessageIdChanged:
                     // strStatus= "conversationid"+"new message id"+"old message id"
-                    {
-                        var conversation = m_core_conversationService.getConversation(arrStr[0]);
-                        SparkNet.Message arrivedMsg = conversation.getMessage(arrStr[1]);
-                        if (messageActions.ContainsKey(arrStr[2]))
-                        {
-                            var message = ToMessage(arrStr[0], arrivedMsg);
-                            SdkLogger.Instance.Debug($"message id changed from old [{arrStr[2]}] to new [{arrStr[1]}]");
-                            messageActions[arrStr[2]].postCompletionHandler?.Invoke(new WebexApiEventArgs<Message>(true, null, message));
-                            messageActions[arrStr[2]].postCompletionHandler = null;
-                            if (IsMessageActionIsNull(messageActions[arrStr[2]]))
-                            {
-                                messageActions.Remove(arrStr[2]);
-                            }
-                        }
-                    }
-
+                    OnMessageIdChanged(arrStr[0], arrStr[1], arrStr[2]);
                     break;
                 case SCFEventType.DownloadProgress:
                     // strStatus = "conversationId"+"messageId"+"contentIndex"+"progress"
-                    {
-                        string fileId = GetFileId(arrStr[0], arrStr[1], arrStr[2]);
-                        if (fileActions.ContainsKey(fileId))
-                        {
-                            var progress = Convert.ToInt32(arrStr[3]);
-                            SdkLogger.Instance.Info($"{fileId} download progress is {progress}");
-                            fileActions[fileId].downloadProgressHandler?.Invoke(new WebexApiEventArgs<int>(true, null, progress));
-                        }
-                    }
-
+                    OnDownloadProgress(arrStr[0], arrStr[1], arrStr[2], arrStr[3]);
                     break;
                 case SCFEventType.UploadProgress:
                     // strStatus = "conversationId"+"messageId"+"contentIndex"+"progress"
-                    {
-                        string fileId = GetFileId(arrStr[0], arrStr[1], arrStr[2]);
-                        if (fileActions.ContainsKey(fileId))
-                        {
-                            var progress = Convert.ToInt32(arrStr[3]);
-                            SdkLogger.Instance.Info($"{fileId} upload progress is {progress}");
-                            fileActions[fileId].uploadProgressHandler?.Invoke(new WebexApiEventArgs<int>(true, null, progress));
-                            if (progress == 100)
-                            {
-                                fileActions[fileId].uploadProgressHandler = null;
-                                if (IsFileActionIsNull(fileActions[fileId]))
-                                {
-                                    fileActions.Remove(fileId);
-                                }
-                            }
-                        }
-                    }
+                    OnUploadProgress(arrStr[0], arrStr[1], arrStr[2], arrStr[3]);
                     break;
                 case SCFEventType.DownloadComplete:
                     // strStatus = "conversationId" + "messageId" + "contentIndex" + "downloadFileName"
-                    {
-                        string fileId = GetFileId(arrStr[0], arrStr[1], arrStr[2]);
-                        if (fileActions.ContainsKey(fileId))
-                        {
-                            SdkLogger.Instance.Info($"{fileId} download complete");
-                            fileActions[fileId].downloadProgressHandler = null;
-                            if (IsFileActionIsNull(fileActions[fileId]))
-                            {
-                                fileActions.Remove(fileId);
-                            }
-                        }
-                    }
+                    OnDownloadComplete(arrStr[0], arrStr[1], arrStr[2], arrStr[3]);
                     break;
                 case SCFEventType.DownloadFailed:
                     // strStatus = "conversationId"+"messageId"+"contentIndex"+"errorCode"
-                    {
-                        string fileId = GetFileId(arrStr[0], arrStr[1], arrStr[2]);
-                        if (fileActions.ContainsKey(fileId))
-                        {
-                            SdkLogger.Instance.Error($"{fileId} download faild for {arrStr[3]}.");
-                            fileActions[fileId].downloadProgressHandler?.Invoke(new WebexApiEventArgs<int>(false, new WebexError(WebexErrorCode.ServiceFailed, arrStr[3]), 0));
-                            fileActions[fileId].downloadProgressHandler = null;
-                            if (IsFileActionIsNull(fileActions[fileId]))
-                            {
-                                fileActions.Remove(fileId);
-                            }
-                        }
-                    }
+                    OnDownloadFailed(arrStr[0], arrStr[1], arrStr[2], arrStr[3]);
                     break;
                 case SCFEventType.ThumbnailChanged:
                     // strStatus = "conversationId"+"messageId"+"contentIndex"
-                    {
-                        string fileId = GetFileId(arrStr[0], arrStr[1], arrStr[2]);
-                        if (fileActions.ContainsKey(fileId) && fileActions[fileId].downloadThumbnailAction != null)
-                        {
-                            var action = fileActions[fileId].downloadThumbnailAction;
-                            SparkNet.Image image = m_core_imageService?.getContentThumbnailImage(arrStr[0], arrStr[1], Convert.ToInt32(arrStr[2]));
-
-                            if (image != null && SaveImageToLocal(image.imageBuffer, action.path))
-                            {
-                                SdkLogger.Instance.Info($"[{fileId}] success download thumbnail to {action.path}");
-                                action.completionHandler?.Invoke(new WebexApiEventArgs<string>(true, null, action.path));
-                            }
-                            else
-                            {
-                                SdkLogger.Instance.Error($"[{fileId}] save thumbnail failed");
-                                action.completionHandler?.Invoke(new WebexApiEventArgs<string>(false, new WebexError(WebexErrorCode.IllegalOperation, "save failed"), action.path));
-                            }
-                            fileActions[fileId].downloadThumbnailAction = null;
-                            if (IsFileActionIsNull(fileActions[fileId]))
-                            {
-                                fileActions.Remove(fileId);
-                            }
-                        }
-                    }
-
+                    OnThumbnailChanged(arrStr[0], arrStr[1], arrStr[2]);
                     break;
                 case SCFEventType.ThumbnailDownloadFailed:
                     // strStatus = "conversationId"+"messageId"+"contentIndex"+"errorCode"
-                    {
-                        string fileId = GetFileId(arrStr[0], arrStr[1], arrStr[2]);
-                        if (fileActions.ContainsKey(fileId) && fileActions[fileId].downloadThumbnailAction != null)
-                        {
-                            SdkLogger.Instance.Error($"[{fileId}] download thumbnail failed");
-                            var action = fileActions[fileId].downloadThumbnailAction;
-                            action.completionHandler?.Invoke(new WebexApiEventArgs<string>(false, new WebexError(WebexErrorCode.ServiceFailed, arrStr[3]), action.path));
-                            fileActions[fileId].downloadThumbnailAction = null;
-                            if (IsFileActionIsNull(fileActions[fileId]))
-                            {
-                                fileActions.Remove(fileId);
-                            }
-                        }
-                    }
+                    OnThumbnailDownloadFailed(arrStr[0], arrStr[1], arrStr[2], arrStr[3]);
                     break;
 
                 default:
                     break;
             }
         }
+        private void OnMessageArrivedAndChanged(SCFEventType type, string status)
+        {
+            // strStatus= "conversationid"+"message ids"
+            string[] arrStr = status.Trim().Split(' ');
+            string conversationId = arrStr[0];
+            string messageId = arrStr[1];
 
+            // new message arrived
+            if (arrStr.Length == 2)
+            {
+                MessageFilter(type, conversationId, messageId);
+                return;
+            }
+            // fetch more message result
+            else if (sessionActions.ContainsKey(conversationId))
+            {
+                var listAction = sessionActions[conversationId].list;
+                if (listAction != null)
+                {
+                    if (IsFetchEnough(listAction.conversationId, listAction.mentionedPeople, listAction.before, listAction.beforeMessageId, listAction.listMessageCount, out List<Message> listMsg))
+                    {
+                        SdkLogger.Instance.Info($"List {listMsg.Count} messages.");
+                        listAction.listCompletionHandler?.Invoke(new WebexApiEventArgs<List<Message>>(true, null, listMsg));
+                        sessionActions[conversationId].list = null;
+                        if (IsSessionActionIsNull(sessionActions[conversationId]))
+                        {
+                            sessionActions.Remove(conversationId);
+                        }
+                    }
+                    else
+                    {
+                        m_core_conversationService.fetchMoreMessage(listAction.conversationId, messageId, true);
+                    }
+                }
+            }
+        }
+        private void OnConversationIdChanged(string oldId, string newId)
+        {
+            if (creatOne2OneSpaceCompletionHandler.ContainsKey(oldId))
+            {
+                SdkLogger.Instance.Debug($"conversationId changed from old [{oldId}] to new [{newId}]");
+                creatOne2OneSpaceCompletionHandler[oldId].Invoke(newId);
+                creatOne2OneSpaceCompletionHandler.Remove(oldId);
+            }
+        }
+        private void OnMessageIdChanged(string conversationid, string newId, string oldId)
+        {
+            var conversation = m_core_conversationService.getConversation(conversationid);
+            SparkNet.Message arrivedMsg = conversation.getMessage(newId);
+            if (messageActions.ContainsKey(oldId))
+            {
+                var message = ToMessage(conversationid, arrivedMsg);
+                SdkLogger.Instance.Debug($"message id changed from old [{oldId}] to new [{newId}]");
+                messageActions[oldId].postCompletionHandler?.Invoke(new WebexApiEventArgs<Message>(true, null, message));
+                messageActions[oldId].postCompletionHandler = null;
+                if (IsMessageActionIsNull(messageActions[oldId]))
+                {
+                    messageActions.Remove(oldId);
+                }
+            }
+        }
+        private void OnDownloadProgress(string conversationId, string messageId, string contentIndex, string strProgress)
+        {
+            string fileId = GetFileId(conversationId, messageId, contentIndex);
+            if (fileActions.ContainsKey(fileId))
+            {
+                var progress = Convert.ToInt32(strProgress);
+                SdkLogger.Instance.Info($"{fileId} download progress is {progress}");
+                fileActions[fileId].downloadProgressHandler?.Invoke(new WebexApiEventArgs<int>(true, null, progress));
+            }
+        }
+        private void OnUploadProgress(string conversationId, string messageId, string contentIndex, string strProgress)
+        {
+            string fileId = GetFileId(conversationId, messageId, contentIndex);
+            if (fileActions.ContainsKey(fileId))
+            {
+                var progress = Convert.ToInt32(strProgress);
+                SdkLogger.Instance.Info($"{fileId} upload progress is {progress}");
+                fileActions[fileId].uploadProgressHandler?.Invoke(new WebexApiEventArgs<int>(true, null, progress));
+                if (progress == 100)
+                {
+                    fileActions[fileId].uploadProgressHandler = null;
+                    if (IsFileActionIsNull(fileActions[fileId]))
+                    {
+                        fileActions.Remove(fileId);
+                    }
+                }
+            }
+        }
+        private void OnDownloadComplete(string conversationId, string messageId, string contentIndex, string downloadFileName)
+        {
+            string fileId = GetFileId(conversationId, messageId, contentIndex);
+            if (fileActions.ContainsKey(fileId))
+            {
+                SdkLogger.Instance.Info($"{fileId} {downloadFileName} download complete");
+                fileActions[fileId].downloadProgressHandler = null;
+                if (IsFileActionIsNull(fileActions[fileId]))
+                {
+                    fileActions.Remove(fileId);
+                }
+            }
+        }
+        private void OnDownloadFailed(string conversationId, string messageId, string contentIndex, string errorCode)
+        {
+            string fileId = GetFileId(conversationId, messageId, contentIndex);
+            if (fileActions.ContainsKey(fileId))
+            {
+                SdkLogger.Instance.Error($"{fileId} download faild for {errorCode}.");
+                fileActions[fileId].downloadProgressHandler?.Invoke(new WebexApiEventArgs<int>(false, new WebexError(WebexErrorCode.ServiceFailed, errorCode), 0));
+                fileActions[fileId].downloadProgressHandler = null;
+                if (IsFileActionIsNull(fileActions[fileId]))
+                {
+                    fileActions.Remove(fileId);
+                }
+            }
+        }
+        private void OnThumbnailChanged(string conversationId, string messageId, string contentIndex)
+        {
+            string fileId = GetFileId(conversationId, messageId, contentIndex);
+            if (fileActions.ContainsKey(fileId) && fileActions[fileId].downloadThumbnailAction != null)
+            {
+                var action = fileActions[fileId].downloadThumbnailAction;
+                SparkNet.Image image = m_core_imageService?.getContentThumbnailImage(conversationId, messageId, Convert.ToInt32(contentIndex));
+
+                if (image != null && SaveImageToLocal(image.imageBuffer, action.path))
+                {
+                    SdkLogger.Instance.Info($"[{fileId}] success download thumbnail to {action.path}");
+                    action.completionHandler?.Invoke(new WebexApiEventArgs<string>(true, null, action.path));
+                }
+                else
+                {
+                    SdkLogger.Instance.Error($"[{fileId}] save thumbnail failed");
+                    action.completionHandler?.Invoke(new WebexApiEventArgs<string>(false, new WebexError(WebexErrorCode.IllegalOperation, "save failed"), action.path));
+                }
+                fileActions[fileId].downloadThumbnailAction = null;
+                if (IsFileActionIsNull(fileActions[fileId]))
+                {
+                    fileActions.Remove(fileId);
+                }
+            }
+        }
+        private void OnThumbnailDownloadFailed(string conversationId, string messageId, string contentIndex, string errorCode)
+        {
+            string fileId = GetFileId(conversationId, messageId, contentIndex);
+            if (fileActions.ContainsKey(fileId) && fileActions[fileId].downloadThumbnailAction != null)
+            {
+                SdkLogger.Instance.Error($"[{fileId}] download thumbnail failed");
+                var action = fileActions[fileId].downloadThumbnailAction;
+                action.completionHandler?.Invoke(new WebexApiEventArgs<string>(false, new WebexError(WebexErrorCode.ServiceFailed, errorCode), action.path));
+                fileActions[fileId].downloadThumbnailAction = null;
+                if (IsFileActionIsNull(fileActions[fileId]))
+                {
+                    fileActions.Remove(fileId);
+                }
+            }
+        }
         private Message ToMessage(string conversationId, SparkNet.Message input)
         {
             Message m = new Message();
@@ -709,32 +725,8 @@ namespace WebexSDK
             m.PersonId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.People, input.getSenderPersonId());
             m.PersonEmail = input.getSenderEmail();
 
-            // SpaceId, SpaceType
-            m.SpaceId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.Space, conversationId);
-            m.SpaceType = SpaceType.Direct;
-            var conversation = m_core_conversationService?.getConversation(conversationId);
-            if (conversation != null)
-            {
-                m.SpaceType = conversation.isOne2One() ? SpaceType.Direct : SpaceType.Group;
-            }
-            
-
-            // ToPersonId, ToPersonEmail
-            if (m.SpaceType == SpaceType.Direct)
-            {
-                string[] participants = conversation?.getParticipants();
-                string toPersonId = null;
-                if (participants != null && participants.Length == 2)
-                {
-                    toPersonId = (participants[0] == input.getSenderPersonId()) ? participants[1] : participants[0];
-                }
-                if (toPersonId != null)
-                {
-                    var p = conversation.getParticipant(toPersonId);
-                    m.ToPersonId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.People, p.getGuid());
-                    m.ToPersonEmail = p.getEmail();
-                }
-            }
+            // SpaceId, SpaceType, ToPersonId, ToPersonEmail
+            ToMessageForSpaceTypeAndToPersonIdAndToPersonEmail(ref m, conversationId, input);
 
             // Text
             if (input.getRichText() != null && input.getRichText().Length > 0)
@@ -762,6 +754,34 @@ namespace WebexSDK
             m.IsSelfMentioned = input.isSelfMentioned();
 
             return m;
+        }
+        private void ToMessageForSpaceTypeAndToPersonIdAndToPersonEmail(ref Message m, string conversationId, SparkNet.Message input)
+        {
+            // SpaceId, SpaceType
+            m.SpaceId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.Space, conversationId);
+            m.SpaceType = SpaceType.Direct;
+            var conversation = m_core_conversationService?.getConversation(conversationId);
+            if (conversation != null)
+            {
+                m.SpaceType = conversation.isOne2One() ? SpaceType.Direct : SpaceType.Group;
+            }
+
+            // ToPersonId, ToPersonEmail
+            if (m.SpaceType == SpaceType.Direct)
+            {
+                string[] participants = conversation?.getParticipants();
+                string toPersonId = null;
+                if (participants != null && participants.Length == 2)
+                {
+                    toPersonId = (participants[0] == input.getSenderPersonId()) ? participants[1] : participants[0];
+                }
+                if (toPersonId != null)
+                {
+                    var p = conversation.getParticipant(toPersonId);
+                    m.ToPersonId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.People, p.getGuid());
+                    m.ToPersonEmail = p.getEmail();
+                }
+            }
         }
         private RemoteFile ShareContentToFile(string spaceId, string messageId, int fileIndex, SparkNet.SharedContent shareContent)
         {

@@ -361,6 +361,23 @@ namespace WebexSDK
             //continue answer incoming call
             if (currentCall.Direction == Call.CallDirection.Incoming && currentCall.Status == CallStatus.Ringing)
             {
+                ContinueAnswerIncomingCall(activate);
+            }
+            //continue call out
+            else if (currentCall.Direction == Call.CallDirection.Outgoing && currentCall.Status == CallStatus.Initiated)
+            {
+                ContinueCallOut(activate);
+            }
+        }
+        private void ContinueAnswerIncomingCall(bool activate)
+        {
+            if (currentCall == null)
+            {
+                return;
+            }
+
+            if (currentCall.Direction == Call.CallDirection.Incoming && currentCall.Status == CallStatus.Ringing)
+            {
                 if (!activate)
                 {
                     SdkLogger.Instance.Warn("reject video codec license");
@@ -378,8 +395,14 @@ namespace WebexSDK
 
                 currentCall?.TrigerAnswerCompletedHandler(new WebexApiEventArgs(true, null));
             }
-            //continue call out
-            else if (currentCall.Direction == Call.CallDirection.Outgoing && currentCall.Status == CallStatus.Initiated)
+        }
+        private void ContinueCallOut(bool activate)
+        {
+            if (currentCall == null)
+            {
+                return;
+            }
+            if (currentCall.Direction == Call.CallDirection.Outgoing && currentCall.Status == CallStatus.Initiated)
             {
                 if (!activate)
                 {
@@ -401,7 +424,6 @@ namespace WebexSDK
                 });
             }
         }
-
         /// <summary>
         /// Return the text of the H.264 codec license from Cisco Systems, Inc.
         /// </summary>
@@ -975,31 +997,37 @@ namespace WebexSDK
             {
                 if (newItem.IsSelf)
                 {
-                    bool find = false;
-                    foreach (var device in newItem.Devices)
-                    {
-                        //self and this device join, triger call connected
-                        if (m_core.getDeviceUrl() == device.url
-                            && ConvertToCallMembershipStateEnum(device.state) == CallMembership.CallState.Joined)
-                        {
-                            find = true;
-                            currentCall.IsSignallingConnected = true;
-                            OnCallConnected();
-                            break;
-                        }
-                    }
-                    //self and other device join, triger call release
-                    if (!find)
-                    {
-                        currentCall.ReleaseReason = new OtherConnected(currentCall);
-                        currentCall?.TrigerOnDisconnected(currentCall.ReleaseReason);
-                        currentCall = new Call(this);
-                        return false;
-                    }
+                    return ProcessSelfJoind(newItem);
                 }
             }
             return true;
         }
+        private bool ProcessSelfJoind(CallMembership newItem)
+        {
+            bool find = false;
+            foreach (var device in newItem.Devices)
+            {
+                //self and this device join, triger call connected
+                if (m_core.getDeviceUrl() == device.url
+                    && ConvertToCallMembershipStateEnum(device.state) == CallMembership.CallState.Joined)
+                {
+                    find = true;
+                    currentCall.IsSignallingConnected = true;
+                    OnCallConnected();
+                    break;
+                }
+            }
+            //self and other device join, triger call release
+            if (!find)
+            {
+                currentCall.ReleaseReason = new OtherConnected(currentCall);
+                currentCall?.TrigerOnDisconnected(currentCall.ReleaseReason);
+                currentCall = new Call(this);
+                return false;
+            }
+            return true;
+        }
+
         private void OnMercuryStateChange(SparkNet.MercuryState state)
         {
             SdkLogger.Instance.Info($"state: {state.ToString()}");
@@ -1157,9 +1185,7 @@ namespace WebexSDK
                 case SCFEventType.RemoteVideoReady:       
                     if (videoTrackType == TrackType.Remote)
                     {
-                        if (currentCall != null
-                            && currentCall.MediaOption != null
-                            && currentCall.MediaOption.RemoteViewPtr != null
+                        if (currentCall?.MediaOption?.RemoteViewPtr != null
                             && currentCall.MediaOption.RemoteViewPtr.HasValue)
                         {
                             currentCall.SetRemoteView(currentCall.MediaOption.RemoteViewPtr.Value);
@@ -1180,9 +1206,7 @@ namespace WebexSDK
                     }
                     break;
                 case SCFEventType.LocalVideoReady:
-                    if (currentCall != null
-                        && currentCall.MediaOption != null
-                        && currentCall.MediaOption.LocalViewPtr != null
+                    if (currentCall?.MediaOption?.LocalViewPtr != null
                         && currentCall.MediaOption.LocalViewPtr.HasValue)
                     {
                         currentCall.isSendingAudio = true;
@@ -1332,48 +1356,13 @@ namespace WebexSDK
                     result = new LocalCancel(currentCall);
                     break;
                 case "endedByLocalUser":
-                    if (currentCall.Direction == Call.CallDirection.Incoming
-                        && currentCall.Status < CallStatus.Connected)
-                    {
-                        result = new LocalDecline(currentCall);
-                    }
-                    else if (currentCall.Direction == Call.CallDirection.Outgoing
-                        && currentCall.Status < CallStatus.Connected)
-                    {
-                        result = new LocalCancel(currentCall);
-                    }
-                    else
-                    {
-                        result = new LocalLeft(currentCall);
-                    }
+                    result = ConvertToCallDisconnectReasonTypeEndedByLocalUser();
                     break;
                 case "declinedByRemoteUser":
                     result = new RemoteDecline(currentCall);
                     break;
                 case "endedByRemoteUser":
-                    if (currentCall.Direction == Call.CallDirection.Incoming
-                        && currentCall.Status < CallStatus.Connected)
-                    {
-                        if (currentCall.IsLocalRejectOrEndCall)
-                        {
-                            result = new LocalDecline(currentCall);
-                        }
-                        else
-                        {
-                            result = new OtherDeclined(currentCall);
-                        }
-                        
-                    }
-                    else if (currentCall.Direction == Call.CallDirection.Outgoing
-                        && currentCall.Status < CallStatus.Connected)
-                    {
-                        result = new RemoteDecline(currentCall);
-                    }
-                    else
-                    {
-                        result = new RemoteLeft(currentCall);
-                    }
-                    
+                    result = ConvertToCallDisconnectReasonTypeEndedByRemoteUser();
                     break;
                 case "endedByLocus":
                     if (currentCall.Direction == Call.CallDirection.Incoming
@@ -1392,6 +1381,52 @@ namespace WebexSDK
                     break;
             }
             SdkLogger.Instance.Debug($"convert to {result.GetType().Name}");
+            return result;
+        }
+        private CallDisconnectedEvent ConvertToCallDisconnectReasonTypeEndedByLocalUser()
+        {
+            CallDisconnectedEvent result;
+            if (currentCall.Direction == Call.CallDirection.Incoming
+                && currentCall.Status < CallStatus.Connected)
+            {
+                result = new LocalDecline(currentCall);
+            }
+            else if (currentCall.Direction == Call.CallDirection.Outgoing
+                && currentCall.Status < CallStatus.Connected)
+            {
+                result = new LocalCancel(currentCall);
+            }
+            else
+            {
+                result = new LocalLeft(currentCall);
+            }
+            return result;
+        }
+        private CallDisconnectedEvent ConvertToCallDisconnectReasonTypeEndedByRemoteUser()
+        {
+            CallDisconnectedEvent result;
+            if (currentCall.Direction == Call.CallDirection.Incoming
+                && currentCall.Status < CallStatus.Connected)
+            {
+                if (currentCall.IsLocalRejectOrEndCall)
+                {
+                    result = new LocalDecline(currentCall);
+                }
+                else
+                {
+                    result = new OtherDeclined(currentCall);
+                }
+
+            }
+            else if (currentCall.Direction == Call.CallDirection.Outgoing
+                && currentCall.Status < CallStatus.Connected)
+            {
+                result = new RemoteDecline(currentCall);
+            }
+            else
+            {
+                result = new RemoteLeft(currentCall);
+            }
             return result;
         }
 
