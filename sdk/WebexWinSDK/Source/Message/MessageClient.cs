@@ -1046,46 +1046,45 @@ namespace WebexSDK
             var personClient = new PersonClient(authenticator);
             personClient.List(toPerson, null, null, r =>
             {
-                if (r.IsSuccess && r.Data != null && r.Data.Count > 0)
-                {
-                    var persons = r.Data;
-                    StringExtention.ParseHydraId(persons[0].Id, ref toPersonId);
-
-                    personClient.GetMe(rsp =>
-                    {
-                        if (!rsp.IsSuccess)
-                        {
-                            SdkLogger.Instance.Error($"get self id failed.");
-                            conversationId.Invoke(null);
-                            return;
-                        }
-                        StringExtention.ParseHydraId(rsp.Data.Id, ref selfId);
-                        var exitedConvId = FindExistedConversation(selfId, toPersonId);
-                        if (exitedConvId != null)
-                        {
-                            SdkLogger.Instance.Debug($"this conversation has existed. exitedConvId [{exitedConvId}]");
-                            conversationId.Invoke(exitedConvId);
-                            return;
-                        }
-
-                        CreateOne2OneSpace(toPerson, toPersonId, toPerson, newConvId =>
-                        {
-                            if (newConvId == null)
-                            {
-                                SdkLogger.Instance.Error("CreateOne2OneSpace failed");
-                                conversationId.Invoke(null);
-                                return;
-                            }
-                            SdkLogger.Instance.Debug($"CreateOne2OneSpace success conversation id[{newConvId}]");
-                            conversationId.Invoke(newConvId);
-                        });
-                    });
-                }
-                else
+                if (!r.IsSuccess || r.Data == null || r.Data.Count <= 0)
                 {
                     SdkLogger.Instance.Error($"get to person id failed.");
                     conversationId.Invoke(null);
+                    return;
                 }
+
+                var persons = r.Data;
+                StringExtention.ParseHydraId(persons[0].Id, ref toPersonId);
+
+                personClient.GetMe(rsp =>
+                {
+                    if (!rsp.IsSuccess)
+                    {
+                        SdkLogger.Instance.Error($"get self id failed.");
+                        conversationId.Invoke(null);
+                        return;
+                    }
+                    StringExtention.ParseHydraId(rsp.Data.Id, ref selfId);
+                    var exitedConvId = FindExistedConversation(selfId, toPersonId);
+                    if (exitedConvId != null)
+                    {
+                        SdkLogger.Instance.Debug($"this conversation has existed. exitedConvId [{exitedConvId}]");
+                        conversationId.Invoke(exitedConvId);
+                        return;
+                    }
+
+                    CreateOne2OneSpace(toPerson, toPersonId, toPerson, newConvId =>
+                    {
+                        if (newConvId == null)
+                        {
+                            SdkLogger.Instance.Error("CreateOne2OneSpace failed");
+                            conversationId.Invoke(null);
+                            return;
+                        }
+                        SdkLogger.Instance.Debug($"CreateOne2OneSpace success conversation id[{newConvId}]");
+                        conversationId.Invoke(newConvId);
+                    });
+                });
             });
         }
         private void Post(string spaceId, string toPerson, string text, List<Mention> mentions, List<LocalFile> files, Action<WebexApiEventArgs<Message>> completionHandler)
