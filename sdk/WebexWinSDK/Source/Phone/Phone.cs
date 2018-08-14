@@ -83,6 +83,10 @@ namespace WebexSDK
             m_core_telephoneService = null;
             m_core_deviceManager = null;
             isRegisteredToCore = false;
+            DestoryInstance();
+        }
+        static void DestoryInstance()
+        {
             instance = null;
         }
 
@@ -940,31 +944,12 @@ namespace WebexSDK
 
                 if (findMembership == null || findMembership.State != newItem.State)
                 {
-                    if (newItem.State == CallMembership.CallState.Joined)
-                    {
-                        if(!ProcessParticipantJoined(newItem))
-                        {
-                            return;
-                        }
-                        currentCall?.TrigerOnCallMembershipChanged(new CallMembershipJoinedEvent(currentCall,newItem));
-                    }
-                    else if (newItem.State == CallMembership.CallState.Declined)
-                    {
-                        currentCall?.TrigerOnCallMembershipChanged(new CallMembershipDeclinedEvent(currentCall, newItem));
-
-                    }
-                    else if (newItem.State == CallMembership.CallState.Left)
-                    {
-                        currentCall?.TrigerOnCallMembershipChanged(new CallMembershipLeftEvent(currentCall, newItem));
-
-                    }
-
-                    if (findMembership == null)
-                    {
-                        continue;
-                    }
+                    CompareParticipantsCallStateChanged(newItem);
                 }
-
+                if (findMembership == null)
+                {
+                    continue;
+                }
                 if (findMembership.IsSendingAudio != newItem.IsSendingAudio)
                 {
                     currentCall?.TrigerOnCallMembershipChanged(new CallMembershipSendingAudioEvent(currentCall, newItem));
@@ -981,7 +966,27 @@ namespace WebexSDK
                 }
             }
         }
+        private void CompareParticipantsCallStateChanged(CallMembership newItem)
+        {
+            if (newItem.State == CallMembership.CallState.Joined)
+            {
+                if (!ProcessParticipantJoined(newItem))
+                {
+                    return;
+                }
+                currentCall?.TrigerOnCallMembershipChanged(new CallMembershipJoinedEvent(currentCall, newItem));
+            }
+            else if (newItem.State == CallMembership.CallState.Declined)
+            {
+                currentCall?.TrigerOnCallMembershipChanged(new CallMembershipDeclinedEvent(currentCall, newItem));
 
+            }
+            else if (newItem.State == CallMembership.CallState.Left)
+            {
+                currentCall?.TrigerOnCallMembershipChanged(new CallMembershipLeftEvent(currentCall, newItem));
+
+            }
+        }
         private bool ProcessParticipantJoined(CallMembership newItem)
         {
             //one2one outgoing call, triger callConnected event when remote participant joined
@@ -1182,39 +1187,47 @@ namespace WebexSDK
             SdkLogger.Instance.Debug($"{type.ToString()} {videoTrackType.ToString()}");
             switch (type)
             {
-                case SCFEventType.RemoteVideoReady:       
-                    if (videoTrackType == TrackType.Remote)
-                    {
-                        if (currentCall?.MediaOption?.RemoteViewPtr != null
-                            && currentCall.MediaOption.RemoteViewPtr.HasValue)
-                        {
-                            currentCall.SetRemoteView(currentCall.MediaOption.RemoteViewPtr.Value);
-                        }
-                    }
-                    else if (videoTrackType >= TrackType.RemoteAux1 && videoTrackType < TrackType.LocalShare)
-                    {
-                        var find = currentCall?.RemoteAuxVideos.Find(x =>(x.Track == 0));
-
-                        if (find != null && currentCall.CallId != null)
-                        {
-                            find.Track = videoTrackType;
-                            foreach (var item in find.HandleList)
-                            {
-                                m_core_telephoneService.setView(currentCall.CallId, item, videoTrackType);
-                            }
-                        }
-                    }
+                case SCFEventType.RemoteVideoReady:
+                    OnRemoteVideoReady(videoTrackType);
                     break;
                 case SCFEventType.LocalVideoReady:
-                    if (currentCall?.MediaOption?.LocalViewPtr != null
-                        && currentCall.MediaOption.LocalViewPtr.HasValue)
-                    {
-                        currentCall.isSendingAudio = true;
-                        currentCall.SetLocalView(currentCall.MediaOption.LocalViewPtr.Value);
-                    }
+                    OnLocalVideoReady();
                     break;
                 default:
                     break;
+            }
+        }
+        private void OnRemoteVideoReady(SparkNet.TrackType videoTrackType)
+        {
+            if (videoTrackType == TrackType.Remote)
+            {
+                if (currentCall?.MediaOption?.RemoteViewPtr != null
+                    && currentCall.MediaOption.RemoteViewPtr.HasValue)
+                {
+                    currentCall.SetRemoteView(currentCall.MediaOption.RemoteViewPtr.Value);
+                }
+            }
+            else if (videoTrackType >= TrackType.RemoteAux1 && videoTrackType < TrackType.LocalShare)
+            {
+                var find = currentCall?.RemoteAuxVideos.Find(x => (x.Track == 0));
+
+                if (find != null && currentCall.CallId != null)
+                {
+                    find.Track = videoTrackType;
+                    foreach (var item in find.HandleList)
+                    {
+                        m_core_telephoneService.setView(currentCall.CallId, item, videoTrackType);
+                    }
+                }
+            }
+        }
+        private void OnLocalVideoReady()
+        {
+            if (currentCall?.MediaOption?.LocalViewPtr != null
+                && currentCall.MediaOption.LocalViewPtr.HasValue)
+            {
+                currentCall.isSendingAudio = true;
+                currentCall.SetLocalView(currentCall.MediaOption.LocalViewPtr.Value);
             }
         }
         private void OnRemoteVideoStop(SparkNet.TrackType trackType)

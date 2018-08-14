@@ -375,6 +375,10 @@ namespace WebexSDK
             m_core.m_CallbackEvent -= OnCoreCallBackMessage;
             m_core = null;
             m_core_conversationService = null;
+            DestoryInstance();
+        }
+        static void DestoryInstance()
+        {
             instance = null;
         }
         internal static MessageClient GetInstance(IAuthenticator authenticator)
@@ -811,7 +815,7 @@ namespace WebexSDK
                 Height = thumbnail.height,
                 Width = thumbnail.width,
 
-                Mime = "image/png"//TODO get real mime
+                Mime = "image/png"//need get real mime
             };
 
 
@@ -857,7 +861,7 @@ namespace WebexSDK
 
             if (mentionedPeople != null)
             {
-                string selfid = "";//TODO, get self personId
+                string selfid = "";//get self personId. now only support string "me"
                 if (mentionedPeople != "me" && mentionedPeople != selfid)
                 {
                     SdkLogger.Instance.Error("can only list mentioned caller messages.");
@@ -871,7 +875,34 @@ namespace WebexSDK
                 allMessages = FilterNormalMessages(conversationId);
             }
 
+            // EndIndex
             int endIndex = allMessages.Count;
+            if (IsFetchEnoughCheckEndIndex(conversationId, beforetime, beforeMessageId, allMessages, ref endIndex))
+            {
+                return true;
+            }
+
+            // BeginIndex
+            int beginIndex = 0;
+            if (!IsFetchEnoughCheckBeginIndex(max, isNoMoreFetchAble, endIndex, ref beginIndex))
+            {
+                return false;
+            }
+
+            // Add items in [BeginIndex, EndIndex) to list of Message
+            for (int i = beginIndex; i < endIndex; i++)
+            {
+                listMsg.Add(ToMessage(conversationId, conversation.getMessage(allMessages[i])));
+            }
+
+            // the index 0 is the newest message
+            listMsg.Reverse();
+
+            return true;
+        }
+        bool IsFetchEnoughCheckEndIndex(string conversationId, DateTime? beforetime, string beforeMessageId, List<string> allMessages, ref int endIndex)
+        {
+            var conversation = m_core_conversationService.getConversation(conversationId);
             if (beforeMessageId != null)
             {
                 for (endIndex = 0; endIndex < allMessages.Count; endIndex++)
@@ -901,9 +932,10 @@ namespace WebexSDK
                 SdkLogger.Instance.Debug("both before time and before message are not set");
             }
             SdkLogger.Instance.Debug($"endIndex[{endIndex}]");
-
-            // BeginIndex
-            int beginIndex = 0;
+            return false;
+        }
+        private bool IsFetchEnoughCheckBeginIndex(int? max, bool isNoMoreFetchAble, int endIndex, ref int beginIndex)
+        {
             if (max == null)
             {
                 if (!isNoMoreFetchAble)
@@ -918,22 +950,11 @@ namespace WebexSDK
                 {
                     return false;
                 }
-                beginIndex = endIndex > max.Value ? endIndex- max.Value : 0;
+                beginIndex = endIndex > max.Value ? endIndex - max.Value : 0;
             }
             SdkLogger.Instance.Debug($"beginIndex[{endIndex}]");
-
-            // Add items in [BeginIndex, EndIndex) to list of Message
-            for (int i = beginIndex; i < endIndex; i++)
-            {
-                listMsg.Add(ToMessage(conversationId, conversation.getMessage(allMessages[i])));
-            }
-
-            // the index 0 is the newest message
-            listMsg.Reverse();
-
             return true;
         }
-
         private string FindExistedConversation(string selfId, string toPersonId)
         {
             string exitedConvId = null;
@@ -966,7 +987,6 @@ namespace WebexSDK
         private void GetOrCreatOneOnOneSpace(string toPerson, Action<string> conversationId)
         {
             string toPersonId = null;
-            string selfId = null;
             if (toPerson == null)
             {
                 conversationId.Invoke(null);
@@ -974,91 +994,100 @@ namespace WebexSDK
             }
             if (StringExtention.ParseHydraId(toPerson, ref toPersonId) == StringExtention.HydraIdType.People)
             {
-                var personClient = new PersonClient(authenticator);
-                personClient.GetMe(rsp =>
-                {
-                    if (!rsp.IsSuccess)
-                    {
-                        SdkLogger.Instance.Error($"get self id failed.");
-                        conversationId.Invoke(null);
-                        return;
-                    }
-                    StringExtention.ParseHydraId(rsp.Data.Id, ref selfId);
-                    var exitedConvId = FindExistedConversation(selfId, toPersonId);
-
-                    if (exitedConvId != null)
-                    {
-                        SdkLogger.Instance.Debug($"this conversation has existed. existedConvId [{exitedConvId}]");
-                        conversationId.Invoke(exitedConvId);
-                        return;
-                    }
-
-                    CreateOne2OneSpace(toPersonId, toPersonId, "", newConvId =>
-                    {
-                        if (newConvId != null)
-                        {
-                            SdkLogger.Instance.Debug($"CreateOne2OneSpace success conversation id[{newConvId}]");
-                            conversationId.Invoke(newConvId);
-                        }
-                        else
-                        {
-                            SdkLogger.Instance.Error("CreateOne2OneSpace failed");
-                            conversationId.Invoke(null);
-                        }
-                    });
-
-                });
+                GetOrCreatOneOnOneSpaceByPersonId(toPersonId, conversationId);
             }
             else if (toPerson.Contains("@"))
             {
-                var personClient = new PersonClient(authenticator);
-                personClient.List(toPerson, null, null, r =>
+                GetOrCreatOneOnOneSpaceByEmail(toPerson, conversationId);
+            }
+        }
+        private void GetOrCreatOneOnOneSpaceByPersonId(string toPersonId, Action<string> conversationId)
+        {
+            string selfId = null;
+            var personClient = new PersonClient(authenticator);
+            personClient.GetMe(rsp =>
+            {
+                if (!rsp.IsSuccess)
                 {
-                    if (r.IsSuccess && r.Data != null && r.Data.Count > 0)
+                    SdkLogger.Instance.Error($"get self id failed.");
+                    conversationId.Invoke(null);
+                    return;
+                }
+                StringExtention.ParseHydraId(rsp.Data.Id, ref selfId);
+                var exitedConvId = FindExistedConversation(selfId, toPersonId);
+
+                if (exitedConvId != null)
+                {
+                    SdkLogger.Instance.Debug($"this conversation has existed. existedConvId [{exitedConvId}]");
+                    conversationId.Invoke(exitedConvId);
+                    return;
+                }
+
+                CreateOne2OneSpace(toPersonId, toPersonId, "", newConvId =>
+                {
+                    if (newConvId != null)
                     {
-                        var persons = r.Data;
-                        StringExtention.ParseHydraId(persons[0].Id, ref toPersonId);
-
-                        personClient.GetMe(rsp =>
-                        {
-                            if (!rsp.IsSuccess)
-                            {
-                                SdkLogger.Instance.Error($"get self id failed.");
-                                conversationId.Invoke(null);
-                                return;
-                            }
-                            StringExtention.ParseHydraId(rsp.Data.Id, ref selfId);
-                            var exitedConvId = FindExistedConversation(selfId, toPersonId);
-                            if (exitedConvId != null)
-                            {
-                                SdkLogger.Instance.Debug($"this conversation has existed. exitedConvId [{exitedConvId}]");
-                                conversationId.Invoke(exitedConvId);
-                                return;
-                            }
-
-                            CreateOne2OneSpace(toPerson, toPersonId, toPerson, newConvId =>
-                            {
-                                if (newConvId == null)
-                                {
-                                    SdkLogger.Instance.Error("CreateOne2OneSpace failed");
-                                    conversationId.Invoke(null);
-                                    return;
-                                }
-                                SdkLogger.Instance.Debug($"CreateOne2OneSpace success conversation id[{newConvId}]");
-                                conversationId.Invoke(newConvId);
-                            });
-                        });
+                        SdkLogger.Instance.Debug($"CreateOne2OneSpace success conversation id[{newConvId}]");
+                        conversationId.Invoke(newConvId);
                     }
                     else
                     {
-                        SdkLogger.Instance.Error($"get to person id failed.");
+                        SdkLogger.Instance.Error("CreateOne2OneSpace failed");
                         conversationId.Invoke(null);
                     }
                 });
-            }
 
+            });
         }
+        private void GetOrCreatOneOnOneSpaceByEmail(string toPerson, Action<string> conversationId)
+        {
+            string toPersonId = null;
+            string selfId = null;
+            var personClient = new PersonClient(authenticator);
+            personClient.List(toPerson, null, null, r =>
+            {
+                if (r.IsSuccess && r.Data != null && r.Data.Count > 0)
+                {
+                    var persons = r.Data;
+                    StringExtention.ParseHydraId(persons[0].Id, ref toPersonId);
 
+                    personClient.GetMe(rsp =>
+                    {
+                        if (!rsp.IsSuccess)
+                        {
+                            SdkLogger.Instance.Error($"get self id failed.");
+                            conversationId.Invoke(null);
+                            return;
+                        }
+                        StringExtention.ParseHydraId(rsp.Data.Id, ref selfId);
+                        var exitedConvId = FindExistedConversation(selfId, toPersonId);
+                        if (exitedConvId != null)
+                        {
+                            SdkLogger.Instance.Debug($"this conversation has existed. exitedConvId [{exitedConvId}]");
+                            conversationId.Invoke(exitedConvId);
+                            return;
+                        }
+
+                        CreateOne2OneSpace(toPerson, toPersonId, toPerson, newConvId =>
+                        {
+                            if (newConvId == null)
+                            {
+                                SdkLogger.Instance.Error("CreateOne2OneSpace failed");
+                                conversationId.Invoke(null);
+                                return;
+                            }
+                            SdkLogger.Instance.Debug($"CreateOne2OneSpace success conversation id[{newConvId}]");
+                            conversationId.Invoke(newConvId);
+                        });
+                    });
+                }
+                else
+                {
+                    SdkLogger.Instance.Error($"get to person id failed.");
+                    conversationId.Invoke(null);
+                }
+            });
+        }
         private void Post(string spaceId, string toPerson, string text, List<Mention> mentions, List<LocalFile> files, Action<WebexApiEventArgs<Message>> completionHandler)
         {
             if (spaceId != null)
@@ -1154,28 +1183,7 @@ namespace WebexSDK
 
             if (files != null && files.Count > 0)
             {
-                SparkNet.FileData[] arrFiles = new SparkNet.FileData[files.Count];
-                for (int i = 0;i< files.Count;i++)
-                {
-                    arrFiles[i] = new SparkNet.FileData(files[i].Path, ConvertToThumbNailImage(files[i].LocalThumbnail));
-                }
-                result = m_core_conversationService.sendConversationContent(conversationId, text, ToMentionInfoArray(mentions), arrFiles, out tempMessageId);
-
-                for (int i = 0; i < files.Count; i++)
-                {
-                    string fileId = GetFileId(conversationId, tempMessageId, i);
-                    if (fileActions.ContainsKey(fileId))
-                    {
-                        fileActions[fileId].uploadProgressHandler = files[i].UploadProgressHandler;
-                    }
-                    else
-                    {
-                        fileActions.Add(fileId, new FileAction()
-                        {
-                            uploadProgressHandler = files[i].UploadProgressHandler
-                        });
-                    }
-                }
+                result = SendConversationMsgWithFile(conversationId, text, mentions, files, out tempMessageId);
             }
             else
             {
@@ -1203,7 +1211,32 @@ namespace WebexSDK
                 completionHandler.Invoke(new WebexApiEventArgs<Message>(false, new WebexError(WebexErrorCode.IllegalOperation, result.ToString()), null));
             }
         }
+        private MessageValidationResult SendConversationMsgWithFile(string conversationId, string text, List<Mention> mentions, List<LocalFile> files, out string tempMessageId)
+        {
+            SparkNet.FileData[] arrFiles = new SparkNet.FileData[files.Count];
+            for (int i = 0; i < files.Count; i++)
+            {
+                arrFiles[i] = new SparkNet.FileData(files[i].Path, ConvertToThumbNailImage(files[i].LocalThumbnail));
+            }
+            SparkNet.MessageValidationResult result = m_core_conversationService.sendConversationContent(conversationId, text, ToMentionInfoArray(mentions), arrFiles, out tempMessageId);
 
+            for (int i = 0; i < files.Count; i++)
+            {
+                string fileId = GetFileId(conversationId, tempMessageId, i);
+                if (fileActions.ContainsKey(fileId))
+                {
+                    fileActions[fileId].uploadProgressHandler = files[i].UploadProgressHandler;
+                }
+                else
+                {
+                    fileActions.Add(fileId, new FileAction()
+                    {
+                        uploadProgressHandler = files[i].UploadProgressHandler
+                    });
+                }
+            }
+            return result;
+        }
         private bool SaveImageToLocal(byte[] ImageBuffer, string path)
         {
             var image = ConvertByteArrayToImage(ImageBuffer);

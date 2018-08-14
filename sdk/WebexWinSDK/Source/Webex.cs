@@ -266,6 +266,10 @@ namespace WebexSDK
             MessageClient.GetInstance(null).UnRegisterToCore();
             m_core.exit();
             m_core.Dispose();
+            DestoryInstance();
+        }
+        static void DestoryInstance()
+        {
             instance = null;
         }
     }

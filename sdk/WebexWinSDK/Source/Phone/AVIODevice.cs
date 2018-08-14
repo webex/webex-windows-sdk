@@ -32,6 +32,7 @@ namespace WebexSDK
     /// audio and video IO device type.
     /// </summary>
     /// <remarks>Since: 0.1.0</remarks>
+#pragma warning disable S2342 // Rename this enumeration to match the regular expression
     public enum AVIODeviceType
     {
         /// <summary>
@@ -60,7 +61,7 @@ namespace WebexSDK
         /// <remarks>Since: 0.1.0</remarks>
         Ringer = 4
     }
-
+#pragma warning restore S2342 // Rename this enumeration to match the regular expression
     /// <summary>
     /// Audio and video IO device.
     /// </summary>
