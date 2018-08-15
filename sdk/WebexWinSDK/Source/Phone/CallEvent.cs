@@ -183,23 +183,21 @@ namespace WebexSDK
     /// <remarks>Since: 2.0.0</remarks>
     public class ActiveSpeakerChangedEvent : MediaChangedEvent
     {
-        private readonly CallMembership activeSpeaker;
-        internal ActiveSpeakerChangedEvent(Call call, CallMembership activeSpeaker)
-            : base(call)
-        {
-            this.activeSpeaker = activeSpeaker;
-        }
-
         /// <summary>
-        /// The active speaker now.
+        /// The former active person.
         /// </summary>
         /// <remarks>Since: 2.0.0</remarks>
-        public CallMembership ActiveSpeaker
+        public CallMembership FromPerson { get; internal set; }
+        /// <summary>
+        /// The new active person.
+        /// </summary>
+        /// <remarks>Since: 2.0.0</remarks>
+        public CallMembership ToPerson { get; internal set; }
+        internal ActiveSpeakerChangedEvent(Call call, CallMembership activeSpeaker, CallMembership oldperson)
+            : base(call)
         {
-            get
-            {
-                return this.activeSpeaker;
-            }
+            FromPerson = oldperson;
+            ToPerson = activeSpeaker;
         }
     }
     /// <summary>
@@ -242,6 +240,7 @@ namespace WebexSDK
         /// <summary>
         /// The former person represented this auxiliary video
         /// </summary>
+        /// <remarks>Since: 2.0.0</remarks>
         public CallMembership ToPerson { get; internal set; }
 
         internal RemoteAuxVideoPersonChangedEvent(CallMembership oldperson, CallMembership newperson, Call call, Call.RemoteAuxVideo remoteAuxVideo)

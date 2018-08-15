@@ -462,6 +462,7 @@ namespace WebexSDK
                 return remoteShareViewSize;
             }
         }
+        internal CallMembership activeSpeaker;
         /// <summary>
         /// Gets the acitve speaker in this call. It would be changed dynamically in the meeting.
         /// </summary>
@@ -470,14 +471,7 @@ namespace WebexSDK
         {
             get
             {
-                string contactId = m_core_telephoneService.getContact(this.CallId, TrackType.Remote);
-                if (contactId == null || contactId.Length == 0)
-                {
-                    SdkLogger.Instance.Error($"get contactID by Remote Track failed.");
-                    return null;
-                }
-                var trackPersonId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.People, contactId);
-                return Memberships.Find(x => x.PersonId == trackPersonId);
+                return this.activeSpeaker;
             }
         }
 

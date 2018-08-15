@@ -757,7 +757,20 @@ namespace WebexSDK
             if (trackType == TrackType.Remote)
             {
                 SdkLogger.Instance.Debug("active speaker changed");
-                currentCall?.TrigerOnMediaChanged(new ActiveSpeakerChangedEvent(currentCall, currentCall.ActiveSpeaker));
+                var oldperson = currentCall.ActiveSpeaker;
+
+                string contactId = m_core_telephoneService.getContact(callId, TrackType.Remote);
+                if (contactId == null || contactId.Length == 0)
+                {
+                    SdkLogger.Instance.Error($"get contactID by Remote Track failed.");
+                    currentCall.activeSpeaker = null;
+                }
+                else
+                {
+                    var trackPersonId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.People, contactId);
+                    currentCall.activeSpeaker = currentCall?.Memberships?.Find(x => x.PersonId == trackPersonId);
+                }
+                currentCall?.TrigerOnMediaChanged(new ActiveSpeakerChangedEvent(currentCall, currentCall.ActiveSpeaker, oldperson));
             }
             else if (trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
             {
