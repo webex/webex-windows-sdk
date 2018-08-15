@@ -1,0 +1,14 @@
+{
+  "ServerUri": "https://sonarcloud.io",
+  "Organization": {
+    "Key": "webex-mobile-sdk",
+    "Name": "Webex Mobile SDK"
+  },
+  "ProjectKey": "webex-windows-sdk",
+  "Profiles": {
+    "CSharp": {
+      "ProfileKey": "AWT-nDMXwwz6RC9wCCgp",
+      "ProfileTimestamp": "2018-07-18T18:34:53+08:00"
+    }
+  }
+}
