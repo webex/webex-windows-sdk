@@ -3222,7 +3222,7 @@ namespace WebexSDK.Tests
 
             var activeSpeakerChangedEvent = mediaEvents[0] as ActiveSpeakerChangedEvent;
             Assert.IsNotNull(activeSpeakerChangedEvent);
-            Assert.IsNotNull(activeSpeakerChangedEvent.ActiveSpeaker);
+            Assert.IsNotNull(activeSpeakerChangedEvent.ToPerson);
             Assert.IsTrue(isActiveSpeaker);
         }
 
