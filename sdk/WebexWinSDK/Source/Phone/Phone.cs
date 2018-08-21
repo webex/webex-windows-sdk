@@ -722,20 +722,8 @@ namespace WebexSDK
                 case SCFEventType.EnumeratedAppShareSourcesCallback:
                     OnRemoteContentSharingStateChanged(type);
                     break;
-
                 case SCFEventType.VideoTrackPersonChanged:
                     OnVideoTrackPersonChanged((TrackType)error, status);
-                    break;
-                case SCFEventType.RemoteVideoCountChanged:
-                    int newCount = error;
-                    if (newCount >= 0
-                        && currentCall != null
-                        && currentCall.RemoteVideosCount != newCount)
-                    {
-                        currentCall.RemoteVideosCount = newCount;
-                        SdkLogger.Instance.Debug($"remote auxiliary videos count changed to {newCount}");
-                        currentCall.TrigerOnMediaChanged(new RemoteAuxVideosCountChangedEvent(currentCall, newCount));
-                    }
                     break;
                 case SCFEventType.IsAuxVideoStreamInUseChanged:
                     OnIsAuxVideoStreamInUseChanged((TrackType)error, status);
@@ -881,6 +869,12 @@ namespace WebexSDK
 
             foreach (var item in participants)
             {
+                //filter
+                if(item.email == null || item.email.Length == 0)
+                {
+                    continue;
+                }
+
                 var tmpCallMembership = new CallMembership(currentCall)
                 {
                     IsInitiator = item.creator,
@@ -981,23 +975,40 @@ namespace WebexSDK
         }
         private void CompareParticipantsCallStateChanged(CallMembership newItem)
         {
+            if (currentCall == null)
+            {
+                return;
+            }
             if (newItem.State == CallMembership.CallState.Joined)
             {
                 if (!ProcessParticipantJoined(newItem))
                 {
                     return;
                 }
-                currentCall?.TrigerOnCallMembershipChanged(new CallMembershipJoinedEvent(currentCall, newItem));
+
+                currentCall.TrigerOnCallMembershipChanged(new CallMembershipJoinedEvent(currentCall, newItem));
+                currentCall.JoinedCallMembershipCount++;
+                if (currentCall.JoinedCallMembershipCount >= 3)
+                {
+                    currentCall.TrigerOnMediaChanged(new RemoteAuxVideosCountChangedEvent(currentCall, currentCall.JoinedCallMembershipCount - 2));
+                }
+
             }
             else if (newItem.State == CallMembership.CallState.Declined)
             {
                 currentCall?.TrigerOnCallMembershipChanged(new CallMembershipDeclinedEvent(currentCall, newItem));
-
             }
             else if (newItem.State == CallMembership.CallState.Left)
             {
-                currentCall?.TrigerOnCallMembershipChanged(new CallMembershipLeftEvent(currentCall, newItem));
-
+                currentCall.TrigerOnCallMembershipChanged(new CallMembershipLeftEvent(currentCall, newItem));
+                if (currentCall.JoinedCallMembershipCount > 0)
+                {
+                    currentCall.JoinedCallMembershipCount--;
+                }
+                if (currentCall.JoinedCallMembershipCount >= 2)
+                {
+                    currentCall.TrigerOnMediaChanged(new RemoteAuxVideosCountChangedEvent(currentCall, currentCall.JoinedCallMembershipCount - 2));
+                }
             }
         }
         private bool ProcessParticipantJoined(CallMembership newItem)

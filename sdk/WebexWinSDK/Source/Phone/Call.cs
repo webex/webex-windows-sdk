@@ -63,8 +63,7 @@ namespace WebexSDK
         private CallStatus status;
         private CallDirection direction;
         private List<CallMembership> memberships;
-        internal int RemoteVideosCount { get; set; }
-
+        internal int JoinedCallMembershipCount = 0;
 
 
 
@@ -488,7 +487,6 @@ namespace WebexSDK
             internal set { memberships = value; }
         }
 
-
         /// <summary>
         /// Gets the initiator of this call.
         /// </summary>
@@ -758,7 +756,7 @@ namespace WebexSDK
         /// <remarks>Since: 2.0.0</remarks>
         public RemoteAuxVideo SubscribeRemoteAuxVideo(IntPtr handle)
         {
-            if (RemoteVideosCount > 0 || Status == CallStatus.Connected)
+            if (JoinedCallMembershipCount > 2 || Status == CallStatus.Connected)
             {
                 if (RemoteAuxVideos.Count >= 4)
                 {
