@@ -41,6 +41,7 @@ namespace WebexSDK.Tests
     public class AssemblyFixture
     {
         private static readonly string testFixtureApp = "TestFixtureApp";
+        private static readonly string thirdpart = "thirdpart";
 
         [AssemblyInitialize]
         public static void AssemblySetup(TestContext context)
@@ -50,6 +51,7 @@ namespace WebexSDK.Tests
 
             MessageHelper.Init();
             MessageHelper.CloseTestFixtureApp(testFixtureApp);
+            MessageHelper.CloseTestFixtureApp(thirdpart);
             Thread.Sleep(50000);
         }
 
@@ -58,6 +60,7 @@ namespace WebexSDK.Tests
         {
             Console.WriteLine("Assembly Cleanup.");
             MessageHelper.CloseTestFixtureApp(testFixtureApp);
+            MessageHelper.CloseTestFixtureApp(thirdpart);
             WebexTestFixture.Instance.UnLoad();
             Thread.Sleep(15000);
         }
@@ -650,7 +653,7 @@ namespace WebexSDK.Tests
             }
             if (proxy2 == null)
             {
-                proxy2 = new WebexSDKTests.ServiceReference.TestFixtureServiceClient("TestFixtureService1");
+                proxy2 = new WebexSDKTests.ServiceReference.TestFixtureServiceClient("TestFixtureService2");
             }
             if (proxy2.State != System.ServiceModel.CommunicationState.Opened || proxy2.State != System.ServiceModel.CommunicationState.Opening)
             {
@@ -751,6 +754,12 @@ namespace WebexSDK.Tests
             MessageHelper.SendMessage(windowName, "AutoAnswer");
             MessageHelper.SendMessage(windowName, "ConversationTimer:30000");
         }
+        public static void SetTestMode_CalleeAutoAnswerAndHangupAfter100Seconds(string windowName)
+        {
+            MessageHelper.SendMessage(windowName, "Enable");
+            MessageHelper.SendMessage(windowName, "AutoAnswer");
+            MessageHelper.SendMessage(windowName, "ConversationTimer:100000");
+        }
 
         public static void SetTestMode_CalleeAutoDecline(string windowName)
         {
@@ -832,7 +841,7 @@ namespace WebexSDK.Tests
 
         public static void CloseTestFixtureApp(string windowName)
         {
-            //MessageHelper.SendMessage(windowName, "CloseApp");
+            MessageHelper.SendMessage(windowName, "CloseApp");
         }
     }
 

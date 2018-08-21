@@ -51,8 +51,10 @@ namespace WebexSDK.Tests
         private CallData callData;
 
         //private static Process testFixtureAppProcess = null;
-        private readonly string calleeAddress = ConfigurationManager.AppSettings["TestFixtureAppAddress01"] ?? "";
+        private readonly static string calleeAddress = ConfigurationManager.AppSettings["TestFixtureAppAddress01"] ?? "";
+        private readonly static string thirdpartAddress = ConfigurationManager.AppSettings["TestFixtureAppAddress02"] ?? "";
         private static readonly string testFixtureApp = "TestFixtureApp";
+        private static readonly string thirdpart = "thirdpart";
 
 
 
@@ -84,15 +86,17 @@ namespace WebexSDK.Tests
 
             self = GetMe();
 
+            mySpace = CreateSpace("my test space");
+            Assert.IsNotNull(mySpace);
+            CreateMembership(mySpace.Id, calleeAddress, null, false);
+            CreateMembership(mySpace.Id, thirdpartAddress, null, false);
+
             phone = webex.Phone;
             Assert.IsNotNull(phone);
 
             phone.DisableVideoCodecActivation(true);
 
             Assert.IsTrue(RegisterPhone());
-
-            mySpace = CreateSpace("my test space");
-            Assert.IsNotNull(mySpace);
 
             // start testFixtureApp process
             //Assert.IsTrue(StartTestFixtureAppProcess());
@@ -2490,13 +2494,14 @@ namespace WebexSDK.Tests
             //2. callee: answer
             //3. callee: hangup
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
             List<Call.RemoteAuxVideo> remoteAuxVideos = new List<Call.RemoteAuxVideo>();
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
             List<bool> remoteAuxSendingVideos = new List<bool>();
 
-            phone.Dial(calleeAddress, MediaOption.AudioVideoShare(), r =>
+            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
             {
                 if (r.IsSuccess)
                 {
@@ -2529,6 +2534,14 @@ namespace WebexSDK.Tests
                             var remoteAuxSendingVideoEvent = callMediaChangedEvent as RemoteAuxSendingVideoEvent;
                             remoteAuxSendingVideos.Add(remoteAuxSendingVideoEvent.RemoteAuxVideo.IsSendingVideo);
                         }
+                        if(callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
+                        {
+                            if(auxCount.Count == 0)
+                            {
+                                currentCall.Hangup(rsp =>
+                                { });
+                            }
+                        }
                     };
                 }
                 else
@@ -2555,12 +2568,13 @@ namespace WebexSDK.Tests
             //2. callee: answer
             //3. callee: hangup
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
             int remoteAuxVideoCount = 0;
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
 
-            phone.Dial(calleeAddress, MediaOption.AudioVideoShare(), r =>
+            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
             {
                 if (r.IsSuccess)
                 {
@@ -2589,6 +2603,14 @@ namespace WebexSDK.Tests
                         {
                             mediaEvents.Add(callMediaChangedEvent);
                         }
+                        if(callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
+                        {
+                            if(auxCount.Count == 0)
+                            {
+                                currentCall.Hangup(rsp =>
+                                { });
+                            }
+                        }
                     };
                 }
                 else
@@ -2615,12 +2637,13 @@ namespace WebexSDK.Tests
             //2. callee: answer
             //3. callee: hangup
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
             List<Call.RemoteAuxVideo> remoteAuxVideos = new List<Call.RemoteAuxVideo>();
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
 
-            phone.Dial(calleeAddress, MediaOption.AudioVideoShare(), r =>
+            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
             {
                 if (r.IsSuccess)
                 {
@@ -2655,6 +2678,14 @@ namespace WebexSDK.Tests
                         {
                             mediaEvents.Add(callMediaChangedEvent);
                         }
+                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
+                        {
+                            if (auxCount.Count == 0)
+                            {
+                                currentCall.Hangup(rsp =>
+                                { });
+                            }
+                        }
                     };
                 }
                 else
@@ -2680,11 +2711,12 @@ namespace WebexSDK.Tests
             //2. callee: answer
             //3. callee: hangup
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
 
-            phone.Dial(calleeAddress, MediaOption.AudioVideoShare(), r =>
+            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
             {
                 if (r.IsSuccess)
                 {
@@ -2705,6 +2737,14 @@ namespace WebexSDK.Tests
                         {
                             mediaEvents.Add(callMediaChangedEvent);
                             currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
+                        }
+                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
+                        {
+                            if (auxCount.Count == 0)
+                            {
+                                currentCall.Hangup(rsp =>
+                                { });
+                            }
                         }
                     };
                 }
@@ -2737,12 +2777,13 @@ namespace WebexSDK.Tests
             //2. callee: answer
             //3. callee: hangup
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
             List<CallMembership> perosons = new List<CallMembership>();
 
-            phone.Dial(calleeAddress, MediaOption.AudioVideoShare(), r =>
+            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
             {
                 if (r.IsSuccess)
                 {
@@ -2759,9 +2800,17 @@ namespace WebexSDK.Tests
                     currentCall.OnMediaChanged += (callMediaChangedEvent) =>
                     {
                         Console.WriteLine($"event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent)
+                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
                         {
-                            currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
+                            if(auxCount.Count > 0)
+                            {
+                                currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
+                            }
+                            else if (auxCount.Count == 0)
+                            {
+                                currentCall.Hangup(rsp =>
+                                { });
+                            }
                         }
                         if (callMediaChangedEvent is RemoteAuxVideoPersonChangedEvent)
                         {
@@ -2798,11 +2847,12 @@ namespace WebexSDK.Tests
             //2. callee: answer
             //3. callee: hangup
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
 
-            phone.Dial(calleeAddress, MediaOption.AudioVideoShare(), r =>
+            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
             {
                 if (r.IsSuccess)
                 {
@@ -2819,9 +2869,17 @@ namespace WebexSDK.Tests
                     currentCall.OnMediaChanged += (callMediaChangedEvent) =>
                     {
                         Console.WriteLine($"event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent)
+                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
                         {
-                            currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
+                            if (auxCount.Count > 0)
+                            {
+                                currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
+                            }
+                            else if (auxCount.Count == 0)
+                            {
+                                currentCall.Hangup(rsp =>
+                                { });
+                            }
                         }
                         if (callMediaChangedEvent is RemoteAuxVideoSizeChangedEvent)
                         {
@@ -2857,12 +2915,13 @@ namespace WebexSDK.Tests
             //2. callee: answer
             //3. callee: hangup
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
             List<bool> remoteAuxSendingVideos = new List<bool>();
 
-            phone.Dial(calleeAddress, MediaOption.AudioVideoShare(), r =>
+            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
             {
                 if (r.IsSuccess)
                 {
@@ -2879,9 +2938,18 @@ namespace WebexSDK.Tests
                     currentCall.OnMediaChanged += (callMediaChangedEvent) =>
                     {
                         Console.WriteLine($"event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent)
+                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
                         {
                             currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
+                            if (auxCount.Count > 0)
+                            {
+                                currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
+                            }
+                            else if (auxCount.Count == 0)
+                            {
+                                currentCall.Hangup(rsp =>
+                                { });
+                            }
                         }
                         if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)
                         {
@@ -2915,13 +2983,14 @@ namespace WebexSDK.Tests
             //2. callee: answer
             //2. callee: mute
             //3. callee: hangup
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter100Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
             List<bool> remoteAuxSendingVideos = new List<bool>();
 
-            phone.Dial(calleeAddress, MediaOption.AudioVideoShare(), r =>
+            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
             {
                 if (r.IsSuccess)
                 {
@@ -2938,9 +3007,17 @@ namespace WebexSDK.Tests
                     currentCall.OnMediaChanged += (callMediaChangedEvent) =>
                     {
                         Console.WriteLine($"{DateTime.Now} event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent)
+                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
                         {
-                            currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
+                            if (auxCount.Count > 0)
+                            {
+                                currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
+                            }
+                            else if (auxCount.Count == 0)
+                            {
+                                currentCall.Hangup(rsp =>
+                                { });
+                            }
                         }
                         if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)
                         {
@@ -2975,13 +3052,13 @@ namespace WebexSDK.Tests
             //2. callee: answer
             //2. callee: mute
             //3. callee: hangup
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndUnMuteVideoAndHangupAfter30Seconds(testFixtureApp);
-
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter100Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndUnMuteVideoAndHangupAfter30Seconds(thirdpart);
             currentCall = null;
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
             List<bool> remoteAuxSendingVideos = new List<bool>();
 
-            phone.Dial(calleeAddress, MediaOption.AudioVideoShare(), r =>
+            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
             {
                 if (r.IsSuccess)
                 {
@@ -2998,9 +3075,17 @@ namespace WebexSDK.Tests
                     currentCall.OnMediaChanged += (callMediaChangedEvent) =>
                     {
                         Console.WriteLine($"{DateTime.Now} event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent)
+                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
                         {
-                            currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
+                            if (auxCount.Count > 0)
+                            {
+                                currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
+                            }
+                            else if (auxCount.Count == 0)
+                            {
+                                currentCall.Hangup(rsp =>
+                                { });
+                            }
                         }
                         if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)
                         {
@@ -3038,12 +3123,13 @@ namespace WebexSDK.Tests
             //3. caller: mute remote aux1
             //4. callee: hangup
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
             List<bool> receivingAuxVideos = new List<bool>();
 
-            phone.Dial(calleeAddress, MediaOption.AudioVideoShare(), r =>
+            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
             {
                 if (r.IsSuccess)
                 {
@@ -3060,9 +3146,17 @@ namespace WebexSDK.Tests
                     currentCall.OnMediaChanged += (callMediaChangedEvent) =>
                     {
                         Console.WriteLine($"event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent)
+                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
                         {
-                            currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
+                            if (auxCount.Count > 0)
+                            {
+                                currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
+                            }
+                            else if (auxCount.Count == 0)
+                            {
+                                currentCall.Hangup(rsp =>
+                                { });
+                            }
                         }
                         if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)
                         {
@@ -3105,12 +3199,13 @@ namespace WebexSDK.Tests
             //4. caller: unmute remote aux1
             //5. callee: hangup
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
             List<bool> receivingAuxVideos = new List<bool>();
 
-            phone.Dial(calleeAddress, MediaOption.AudioVideoShare(), r =>
+            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
             {
                 if (r.IsSuccess)
                 {
@@ -3127,9 +3222,17 @@ namespace WebexSDK.Tests
                     currentCall.OnMediaChanged += (callMediaChangedEvent) =>
                     {
                         Console.WriteLine($"event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent)
+                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
                         {
-                            currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
+                            if (auxCount.Count > 0)
+                            {
+                                currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
+                            }
+                            else if (auxCount.Count == 0)
+                            {
+                                currentCall.Hangup(rsp =>
+                                { });
+                            }
                         }
                         if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)
                         {
@@ -3591,7 +3694,7 @@ namespace WebexSDK.Tests
             return false;
         }
 
-        private Membership CreateMembership(string spaceId, string email, string personId, bool isModerator)
+        private static Membership CreateMembership(string spaceId, string email, string personId, bool isModerator)
         {
             var completion = new ManualResetEvent(false);
             var response = new WebexApiEventArgs<Membership>();
