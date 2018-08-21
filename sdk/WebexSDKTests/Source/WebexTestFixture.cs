@@ -635,17 +635,26 @@ namespace WebexSDK.Tests
 
     public class MessageHelper
     {
-        private static WebexSDKTests.ServiceReference.TestFixtureServiceClient proxy;
+        private static WebexSDKTests.ServiceReference.TestFixtureServiceClient proxy1;
+        private static WebexSDKTests.ServiceReference.TestFixtureServiceClient proxy2;
 
         public static void Init()
         {
-            if (proxy == null)
+            if (proxy1 == null)
             {
-                proxy = new WebexSDKTests.ServiceReference.TestFixtureServiceClient();
+                proxy1 = new WebexSDKTests.ServiceReference.TestFixtureServiceClient("TestFixtureService1");
             }
-            if (proxy.State != System.ServiceModel.CommunicationState.Opened || proxy.State != System.ServiceModel.CommunicationState.Opening)
+            if (proxy1.State != System.ServiceModel.CommunicationState.Opened || proxy1.State != System.ServiceModel.CommunicationState.Opening)
             {
-                proxy.Open();
+                proxy1.Open();
+            }
+            if (proxy2 == null)
+            {
+                proxy2 = new WebexSDKTests.ServiceReference.TestFixtureServiceClient("TestFixtureService1");
+            }
+            if (proxy2.State != System.ServiceModel.CommunicationState.Opened || proxy2.State != System.ServiceModel.CommunicationState.Opening)
+            {
+                proxy2.Open();
             }
         }
 
@@ -725,8 +734,14 @@ namespace WebexSDK.Tests
         {
             StackTrace st = new StackTrace(true);
             StackFrame sf = st.GetFrame(2);
-
-            MessageHelper.proxy.SendCommandMsg(sf.GetMethod().Name + ":" + strMsg);
+            if (windowName == "thirdpart")
+            {
+                MessageHelper.proxy2.SendCommandMsg(sf.GetMethod().Name + ":" + strMsg);
+            }
+            else
+            {
+                MessageHelper.proxy1.SendCommandMsg(sf.GetMethod().Name + ":" + strMsg);
+            }
             Thread.Sleep(500);
         }
 
@@ -817,7 +832,7 @@ namespace WebexSDK.Tests
 
         public static void CloseTestFixtureApp(string windowName)
         {
-            MessageHelper.SendMessage(windowName, "CloseApp");
+            //MessageHelper.SendMessage(windowName, "CloseApp");
         }
     }
 
