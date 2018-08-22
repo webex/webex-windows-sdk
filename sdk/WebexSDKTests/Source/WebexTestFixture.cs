@@ -698,8 +698,8 @@ namespace WebexSDK.Tests
         public static void RunDispatcherLoop()
         {
             MSG msg = new MSG();
-            // max loop time 2 minute
-            var t = TimerHelper.StartTimer(120000, (o, e) =>
+            // max loop time 2.5 minute
+            var t = TimerHelper.StartTimer(150000, (o, e) =>
             {
                 breakLoopSignal = true;
             });
@@ -767,7 +767,7 @@ namespace WebexSDK.Tests
             MessageHelper.SendMessage(windowName, "AutoDecline");
         }
 
-        public static void SetTestMode_CalleeAutoAnswerAndMuteVideoAndHangupAfter30Seconds(string windowName)
+        public static void SetTestMode_CalleeAutoAnswerAndMuteVideoAndHangupAfter100Seconds(string windowName)
         {
             MessageHelper.SendMessage(windowName, "Enable");
             MessageHelper.SendMessage(windowName, "AutoAnswer");
@@ -775,7 +775,7 @@ namespace WebexSDK.Tests
             MessageHelper.SendMessage(windowName, "ConversationTimer:100000");
         }
 
-        public static void SetTestMode_CalleeAutoAnswerAndMuteVideoAndUnMuteVideoAndHangupAfter30Seconds(string windowName)
+        public static void SetTestMode_CalleeAutoAnswerAndMuteVideoAndUnMuteVideoAndHangupAfter100Seconds(string windowName)
         {
             MessageHelper.SendMessage(windowName, "Enable");
             MessageHelper.SendMessage(windowName, "AutoAnswer");
@@ -783,7 +783,7 @@ namespace WebexSDK.Tests
             MessageHelper.SendMessage(windowName, "ConversationTimer:100000");
         }
 
-        public static void SetTestMode_CalleeAutoAnswerAndMuteAudioAndHangupAfter30Seconds(string windowName)
+        public static void SetTestMode_CalleeAutoAnswerAndMuteAudioAndHangupAfter100Seconds(string windowName)
         {
             MessageHelper.SendMessage(windowName, "Enable");
             MessageHelper.SendMessage(windowName, "AutoAnswer");
@@ -791,7 +791,7 @@ namespace WebexSDK.Tests
             MessageHelper.SendMessage(windowName, "ConversationTimer:100000");
         }
 
-        public static void SetTestMode_CalleeAutoAnswerAndMuteAudioAndUnMuteAudioAndHangupAfter30Seconds(string windowName)
+        public static void SetTestMode_CalleeAutoAnswerAndMuteAudioAndUnMuteAudioAndHangupAfter100Seconds(string windowName)
         {
             MessageHelper.SendMessage(windowName, "Enable");
             MessageHelper.SendMessage(windowName, "AutoAnswer");

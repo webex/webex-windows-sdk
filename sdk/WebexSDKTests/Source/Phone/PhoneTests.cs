@@ -153,6 +153,8 @@ namespace WebexSDK.Tests
             {
                 Console.WriteLine($"Error: call is not disconnected in the end. CallStatus:{currentCall.Status.ToString()} CallDirection:{currentCall.Direction.ToString()}");
                 HangupCall(currentCall, 2000);
+                MessageHelper.CloseTestFixtureApp(testFixtureApp);
+                MessageHelper.CloseTestFixtureApp(thirdpart);
                 MessageHelper.RunDispatcherLoop();
             }
             Thread.Sleep(10000);
@@ -558,7 +560,7 @@ namespace WebexSDK.Tests
             //2. callee: answer
             //3. callee: mute video
             //4. callee: hangup
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndHangupAfter100Seconds(testFixtureApp);
 
             currentCall = null;
             List<CallMembership> callee = new List<CallMembership>();
@@ -607,7 +609,7 @@ namespace WebexSDK.Tests
             //3. callee: mute video
             //4. callee: unmte video
             //5. callee: hangup
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndUnMuteVideoAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndUnMuteVideoAndHangupAfter100Seconds(testFixtureApp);
 
             currentCall = null;
             List<CallMembership> callee = new List<CallMembership>();
@@ -658,7 +660,7 @@ namespace WebexSDK.Tests
             //2. callee: answer
             //3. callee: mute audio
             //4. callee: hangup
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteAudioAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteAudioAndHangupAfter100Seconds(testFixtureApp);
 
             currentCall = null;
             List<CallMembership> callee = new List<CallMembership>();
@@ -708,7 +710,7 @@ namespace WebexSDK.Tests
             //3. callee: mute audio
             //4. callee: unmute audio
             //5. callee: hangup
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteAudioAndUnMuteAudioAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteAudioAndUnMuteAudioAndHangupAfter100Seconds(testFixtureApp);
 
             currentCall = null;
             List<CallMembership> callee = new List<CallMembership>();
@@ -905,7 +907,7 @@ namespace WebexSDK.Tests
             //2. callee: answer
             //3. callee: mute video
             //4. callee: hangup
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndHangupAfter100Seconds(testFixtureApp);
 
             currentCall = null;
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
@@ -966,7 +968,7 @@ namespace WebexSDK.Tests
             //3. callee: mute video
             //4. callee: unmute video
             //4. callee: hangup
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndUnMuteVideoAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndUnMuteVideoAndHangupAfter100Seconds(testFixtureApp);
 
             currentCall = null;
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
@@ -1032,7 +1034,7 @@ namespace WebexSDK.Tests
             //2. callee: answer
             //3. callee: mute audio
             //4. callee: hangup
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteAudioAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteAudioAndHangupAfter100Seconds(testFixtureApp);
 
             currentCall = null;
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
@@ -1090,7 +1092,7 @@ namespace WebexSDK.Tests
             //3. callee: mute audio
             //4. callee: unmute audio
             //4. callee: hangup
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteAudioAndUnMuteAudioAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteAudioAndUnMuteAudioAndHangupAfter100Seconds(testFixtureApp);
 
             currentCall = null;
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
@@ -2984,7 +2986,7 @@ namespace WebexSDK.Tests
             //2. callee: mute
             //3. callee: hangup
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter100Seconds(testFixtureApp);
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndHangupAfter30Seconds(thirdpart);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndHangupAfter100Seconds(thirdpart);
 
             currentCall = null;
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
@@ -3053,7 +3055,7 @@ namespace WebexSDK.Tests
             //2. callee: mute
             //3. callee: hangup
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter100Seconds(testFixtureApp);
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndUnMuteVideoAndHangupAfter30Seconds(thirdpart);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndUnMuteVideoAndHangupAfter100Seconds(thirdpart);
             currentCall = null;
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
             List<bool> remoteAuxSendingVideos = new List<bool>();
