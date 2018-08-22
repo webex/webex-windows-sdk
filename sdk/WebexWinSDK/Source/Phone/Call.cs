@@ -64,6 +64,8 @@ namespace WebexSDK
         private CallDirection direction;
         private List<CallMembership> memberships;
         internal int JoinedCallMembershipCount = 0;
+        internal int RemoteAuxVideoCount = 0;
+        internal int RemoteAuxVideoAccurateCount = 0;
 
 
 
@@ -750,7 +752,7 @@ namespace WebexSDK
 
         /// <summary>
         /// Subscribe a new remote auxiliary video with a view handle. The Maximum of auxiliary videos you can subscribe is 4 currently.
-        /// You can invoke this API When receive RemoteAuxVideosCountChangedEvent event or when the call status is connected.
+        /// You can invoke this API When receive RemoteAuxVideosCountChangedEvent event.
         /// </summary>
         /// <param name="handle">the remote auxiliary dispaly window handle</param>
         /// <returns>The subscribed remote auxiliary video instance. Returen null if subscribing failed.</returns>
@@ -762,9 +764,9 @@ namespace WebexSDK
                 SdkLogger.Instance.Error("one2one call cannot subscribe remote auxiliary video.");
                 return null;
             }
-            if(Status != CallStatus.Connected)
+            if (RemoteAuxVideoAccurateCount == 0 && Status != CallStatus.Connected)
             {
-                SdkLogger.Instance.Error("call status is not connected.");
+                SdkLogger.Instance.Error("You can invoke this API When receive RemoteAuxVideosCountChangedEvent event.");
                 return null;
             }
             if (RemoteAuxVideos.Count >= 4)

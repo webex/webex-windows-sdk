@@ -734,6 +734,9 @@ namespace WebexSDK
                 case SCFEventType.IsAudioStreamingChanged:
                     OnIsAudioStreamingChanged((TrackType)error, status);
                     break;
+                case SCFEventType.RemoteVideoCountChanged:
+                    OnRemoteVideoCountChanged(error, status);
+                    break;
                 default:
                     break;
             }
@@ -837,6 +840,32 @@ namespace WebexSDK
             {
                 currentCall.IsRemoteSendingAudio = true;
                 currentCall?.TrigerOnMediaChanged(new RemoteSendingAudioEvent(currentCall, true));
+            }
+        }
+        private void OnRemoteVideoCountChanged(int count, string callId)
+        {
+            if (currentCall == null)
+            {
+                return;
+            }
+            SdkLogger.Instance.Debug($"callID[{callId}] count[{count}]");
+            currentCall.RemoteAuxVideoCount = count;
+            OnRemoteAuxVideosCountChanged();
+        }
+
+        private void OnRemoteAuxVideosCountChanged()
+        {
+            if (currentCall == null || currentCall.JoinedCallMembershipCount <= 2)
+            {
+                return;
+            }
+
+            SdkLogger.Instance.Debug($"JoinedCallMembershipCount:{currentCall.JoinedCallMembershipCount} RemoteAuxVideoCount: {currentCall.RemoteAuxVideoCount}");
+            int min = Math.Min(currentCall.JoinedCallMembershipCount-2, currentCall.RemoteAuxVideoCount);
+            if(min > currentCall.RemoteAuxVideoAccurateCount)
+            {
+                currentCall.RemoteAuxVideoAccurateCount = min;
+                currentCall.TrigerOnMediaChanged(new RemoteAuxVideosCountChangedEvent(currentCall, min));
             }
         }
         private void OnParticipantsChanged(string callId)
@@ -990,7 +1019,7 @@ namespace WebexSDK
                 currentCall.JoinedCallMembershipCount++;
                 if (currentCall.JoinedCallMembershipCount >= 3)
                 {
-                    currentCall.TrigerOnMediaChanged(new RemoteAuxVideosCountChangedEvent(currentCall, currentCall.JoinedCallMembershipCount - 2));
+                    OnRemoteAuxVideosCountChanged();
                 }
 
             }
