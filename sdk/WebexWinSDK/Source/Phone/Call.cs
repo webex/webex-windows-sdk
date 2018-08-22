@@ -750,29 +750,34 @@ namespace WebexSDK
 
         /// <summary>
         /// Subscribe a new remote auxiliary video with a view handle. The Maximum of auxiliary videos you can subscribe is 4 currently.
+        /// You can invoke this API When receive RemoteAuxVideosCountChangedEvent event or when the call status is connected.
         /// </summary>
         /// <param name="handle">the remote auxiliary dispaly window handle</param>
-        /// <returns>The subscribed remote auxiliary video instance. Returen null if subscribing failed or exceeding the limited count.</returns>
+        /// <returns>The subscribed remote auxiliary video instance. Returen null if subscribing failed.</returns>
         /// <remarks>Since: 2.0.0</remarks>
         public RemoteAuxVideo SubscribeRemoteAuxVideo(IntPtr handle)
         {
-            if (JoinedCallMembershipCount > 2 || Status == CallStatus.Connected)
+            if (!IsGroup)
             {
-                if (RemoteAuxVideos.Count >= 4)
-                {
-                    SdkLogger.Instance.Error("max count of remote auxiliary view is 4");
-                    return null;
-                }
-                m_core_telephoneService.subscribeAuxVideo(this.CallId);
-
-                var newRemoteAuxView = new RemoteAuxVideo(this);
-                newRemoteAuxView.AddViewHandle(handle);
-                RemoteAuxVideos.Add(newRemoteAuxView);
-                return newRemoteAuxView;
+                SdkLogger.Instance.Error("one2one call cannot subscribe remote auxiliary video.");
+                return null;
             }
+            if(Status != CallStatus.Connected)
+            {
+                SdkLogger.Instance.Error("call status is not connected.");
+                return null;
+            }
+            if (RemoteAuxVideos.Count >= 4)
+            {
+                SdkLogger.Instance.Error("max count of remote auxiliary view is 4");
+                return null;
+            }
+            m_core_telephoneService.subscribeAuxVideo(this.CallId);
 
-            SdkLogger.Instance.Error("subscribe remote auxiliary video only can be invoked when call is connected or receive RemoteAuxVideosCountChangedEvent event.");
-            return null;
+            var newRemoteAuxView = new RemoteAuxVideo(this);
+            newRemoteAuxView.AddViewHandle(handle);
+            RemoteAuxVideos.Add(newRemoteAuxView);
+            return newRemoteAuxView;
         }
 
         /// <summary>
