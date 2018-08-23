@@ -855,17 +855,18 @@ namespace WebexSDK
 
         private void OnRemoteAuxVideosCountChanged()
         {
-            if (currentCall == null || currentCall.JoinedCallMembershipCount <= 2)
+            if (currentCall == null || currentCall.JoinedCallMembershipCount < 2)
             {
                 return;
             }
 
             SdkLogger.Instance.Debug($"JoinedCallMembershipCount:{currentCall.JoinedCallMembershipCount} RemoteAuxVideoCount: {currentCall.RemoteAuxVideoCount}");
             int min = Math.Min(currentCall.JoinedCallMembershipCount-2, currentCall.RemoteAuxVideoCount);
-            if(min > currentCall.RemoteAuxVideoAccurateCount)
+            if(min != currentCall.RemoteAuxVideoAccurateCount)
             {
                 currentCall.RemoteAuxVideoAccurateCount = min;
                 currentCall.TrigerOnMediaChanged(new RemoteAuxVideosCountChangedEvent(currentCall, min));
+                SdkLogger.Instance.Debug($"RemoteAuxVideoAccurateCount: {currentCall.RemoteAuxVideoAccurateCount}");
             }
         }
         private void OnParticipantsChanged(string callId)
@@ -1036,7 +1037,7 @@ namespace WebexSDK
                 }
                 if (currentCall.JoinedCallMembershipCount >= 2)
                 {
-                    currentCall.TrigerOnMediaChanged(new RemoteAuxVideosCountChangedEvent(currentCall, currentCall.JoinedCallMembershipCount - 2));
+                    OnRemoteAuxVideosCountChanged();
                 }
             }
         }

@@ -752,7 +752,7 @@ namespace WebexSDK
 
         /// <summary>
         /// Subscribe a new remote auxiliary video with a view handle. The Maximum of auxiliary videos you can subscribe is 4 currently.
-        /// You can invoke this API When receive RemoteAuxVideosCountChangedEvent event.
+        /// You can invoke this API When receive RemoteAuxVideosCountChangedEvent event or call status is connected.
         /// </summary>
         /// <param name="handle">the remote auxiliary dispaly window handle</param>
         /// <returns>The subscribed remote auxiliary video instance. Returen null if subscribing failed.</returns>
