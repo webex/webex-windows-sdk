@@ -65,9 +65,6 @@ namespace WebexSDK
         private List<CallMembership> memberships;
         internal int JoinedCallMembershipCount = 0;
         internal int RemoteAuxVideoCount = 0;
-        internal int RemoteAuxVideoAccurateCount = 0;
-
-
 
         internal Call(Phone phone)
         {
@@ -532,6 +529,18 @@ namespace WebexSDK
         }
 
         /// <summary>
+        /// Gets the count of availabe remote auxiliary videos now.
+        /// </summary>
+        /// <remarks>Since: 2.0.0</remarks>
+        public int RemoteAvailabeAuxVideoCount { get; internal set; }
+
+        /// <summary>
+        /// Gets the list of RemoteAuxVideo which has been subscribed.
+        /// </summary>
+        /// <remarks>Since: 2.0.0</remarks>
+        public List<RemoteAuxVideo> RemoteAuxVideos { get; internal set; }
+
+        /// <summary>
         /// Acknowledge (without answering) an incoming call.
         /// Will cause the initiator's Call instance to emit the ringing event.
         /// </summary>
@@ -543,7 +552,6 @@ namespace WebexSDK
             //scf auto return back an acknowledge message to caller.
             completedHandler?.Invoke(new WebexApiEventArgs(true, null));
         }
-
 
         /// <summary>
         /// Answers this call.
@@ -745,12 +753,6 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// Gets the list of RemoteAuxVideo which has been subscribed.
-        /// </summary>
-        /// <remarks>Since: 2.0.0</remarks>
-        public List<RemoteAuxVideo> RemoteAuxVideos { get; internal set; }
-
-        /// <summary>
         /// Subscribe a new remote auxiliary video with a view handle. The Maximum of auxiliary videos you can subscribe is 4 currently.
         /// You can invoke this API When receive RemoteAuxVideosCountChangedEvent event or call status is connected.
         /// </summary>
@@ -764,7 +766,7 @@ namespace WebexSDK
                 SdkLogger.Instance.Error("one2one call cannot subscribe remote auxiliary video.");
                 return null;
             }
-            if (RemoteAuxVideoAccurateCount == 0 && Status != CallStatus.Connected)
+            if (RemoteAvailabeAuxVideoCount == 0 && Status != CallStatus.Connected)
             {
                 SdkLogger.Instance.Error("You can invoke this API When receive RemoteAuxVideosCountChangedEvent event.");
                 return null;
