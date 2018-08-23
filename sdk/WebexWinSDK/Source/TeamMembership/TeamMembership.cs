@@ -64,7 +64,7 @@ namespace WebexSDK
         /// <remarks>Since: 0.1.0</remarks>
         public string PersonDisplayName { get; set; }
         /// <summary>
-        /// The oganization id of the person is in.
+        /// The organization id of the person is in.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
         public string PersonOrgId { get; set; }
@@ -77,7 +77,7 @@ namespace WebexSDK
         public bool IsModerator { get; set; }
 
         /// <summary>
-        /// The timestamp that the team membership being created.
+        /// The time stamp that the team membership being created.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
         public DateTime Created { get; set; }

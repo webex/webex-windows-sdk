@@ -226,7 +226,7 @@ namespace WebexSDK
         internal int FileIndex { get; set; }
     }
     /// <summary>
-    /// A abstact data type represents mention.
+    /// A abstract data type represents mention.
     /// </summary>
     /// <remarks>Since: 0.1.0</remarks>
     public abstract class Mention
@@ -248,7 +248,7 @@ namespace WebexSDK
             this.personId = personId;
         }
         /// <summary>
-        /// Gets the persond id who is mentioned.
+        /// Gets the person id who is mentioned.
         /// </summary>
         public string PersonId
         {

@@ -31,7 +31,7 @@ namespace WebexSDK
     /// <summary>
     /// Memberships represent a person's relationship to a space. 
     /// Use this API to list members of any space that you're in or create memberships to invite someone to a space. 
-    /// Memberships can also be updated to make someome a moderator or deleted to remove them from the space.
+    /// Memberships can also be updated to make someone a moderator or deleted to remove them from the space.
     /// </summary>
     /// <remarks>Since: 0.1.0</remarks>
     public sealed class MembershipClient

@@ -58,7 +58,7 @@ namespace WebexSDK
         public string Avatar { get; set; }
 
         /// <summary>
-        /// The timestamp that this person being created.
+        /// The time stamp that this person being created.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
         public DateTime Created { get; set; }

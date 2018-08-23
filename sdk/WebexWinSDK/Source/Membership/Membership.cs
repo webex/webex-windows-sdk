@@ -83,7 +83,7 @@ namespace WebexSDK
         public bool IsMonitor { get; set; }
 
         /// <summary>
-        /// The timestamp that the membership being created.
+        /// The time stamp that the membership being created.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
         public DateTime Created { get; set; }

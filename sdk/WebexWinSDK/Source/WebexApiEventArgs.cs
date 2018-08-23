@@ -58,7 +58,7 @@ namespace WebexSDK
         /// Initializes a new instance of the <see cref="WebexApiEventArgs"/> class.
         /// </summary>
         /// <param name="isSuccess">if set to <c>true</c> [success].</param>
-        /// <param name="error">The error value if the successis is false, `null` otherwise. <see cref="WebexError"/></param>
+        /// <param name="error">The error value if the success is false, `null` otherwise. <see cref="WebexError"/></param>
         /// <remarks>Since: 0.1.0</remarks>
         public WebexApiEventArgs(bool isSuccess, WebexError error)
         {
@@ -112,8 +112,8 @@ namespace WebexSDK
         /// Initializes a new instance of the <see cref="WebexApiEventArgs{T}"/> class.
         /// </summary>
         /// <param name="isSuccess">if set to <c>true</c> [success].</param>
-        /// <param name="error">The error value if the successis is false, `null` otherwise. <see cref="WebexError"/></param>
-        /// <param name="data">The data if the successis is true, 'null' otherwise.</param>
+        /// <param name="error">The error value if the success is false, `null` otherwise. <see cref="WebexError"/></param>
+        /// <param name="data">The data if the success is true, 'null' otherwise.</param>
         /// <remarks>Since: 0.1.0</remarks>
         public WebexApiEventArgs(bool isSuccess, WebexError error, T data):base(isSuccess,error)
         {

@@ -66,7 +66,7 @@ namespace WebexSDK
             {
                 console = value;
                 
-                //set core loglevel
+                //set core log level
                 SCFCore.Instance.m_core.setLogLevel((SCFLogLevel)value);
             }
         }

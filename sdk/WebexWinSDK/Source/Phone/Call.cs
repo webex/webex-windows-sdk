@@ -529,7 +529,7 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// Gets the count of availabe remote auxiliary videos now.
+        /// Gets the count of available remote auxiliary videos now.
         /// </summary>
         /// <remarks>Since: 2.0.0</remarks>
         public int RemoteAvailableAuxVideoCount { get; internal set; }
@@ -564,8 +564,8 @@ namespace WebexSDK
         {
             if (Direction != CallDirection.Incoming)
             {
-                SdkLogger.Instance.Error($"[{CallId}]: Failure: Unsupport function for outgoing call.");
-                completedHandler?.Invoke(new WebexApiEventArgs(false, new WebexError(WebexErrorCode.IllegalOperation, "Unsupport function for outgoing call")));
+                SdkLogger.Instance.Error($"[{CallId}]: Failure: Unsupported function for outgoing call.");
+                completedHandler?.Invoke(new WebexApiEventArgs(false, new WebexError(WebexErrorCode.IllegalOperation, "Unsupported function for outgoing call")));
             }
 
             if (Status > CallStatus.Ringing)
@@ -610,8 +610,8 @@ namespace WebexSDK
         {
             if (Direction != CallDirection.Incoming)
             {
-                SdkLogger.Instance.Error($"[{CallId}]: Unsupport function for outgoing call");
-                completedHandler?.Invoke(new WebexApiEventArgs(false, new WebexError(WebexErrorCode.IllegalOperation, "Unsupport function for outgoing call")));
+                SdkLogger.Instance.Error($"[{CallId}]: Unsupported function for outgoing call");
+                completedHandler?.Invoke(new WebexApiEventArgs(false, new WebexError(WebexErrorCode.IllegalOperation, "Unsupported function for outgoing call")));
             }
 
             if (Status > CallStatus.Ringing)
@@ -664,7 +664,7 @@ namespace WebexSDK
         /// <summary>
         /// Sends DTMF events to the remote party. Valid DTMF events are 0-9, *, #, a-d, and A-D.
         /// </summary>
-        /// <param name="dtmf">any combination of valid DTMF events matching regex mattern "^[0-9#\*abcdABCD]+$"</param>
+        /// <param name="dtmf">any combination of valid DTMF events matching regex pattern "^[0-9#\*abcdABCD]+$"</param>
         /// <param name="completedHandler">The completed event handler.</param>
         /// <remarks>Since: 0.1.0</remarks>
         public void SendDtmf(string dtmf, Action<WebexApiEventArgs> completedHandler)
@@ -689,7 +689,7 @@ namespace WebexSDK
         /// <summary>
         /// Set remote video to display
         /// </summary>
-        /// <param name="handle"> the video dispaly window handle</param>
+        /// <param name="handle"> the video display window handle</param>
         /// <remarks>Since: 0.1.0</remarks>
         public void SetRemoteView(IntPtr handle)
         {
@@ -700,7 +700,7 @@ namespace WebexSDK
         /// <summary>
         /// Set local view to display.
         /// </summary>
-        /// <param name="handle">the local video dispaly window handle</param>
+        /// <param name="handle">the local video display window handle</param>
         /// <remarks>Since: 0.1.0</remarks>
         public void SetLocalView(IntPtr handle)
         {
@@ -711,7 +711,7 @@ namespace WebexSDK
         /// <summary>
         /// Set remote share view to display.
         /// </summary>
-        /// <param name="handle">the remote share dispaly window handle</param>
+        /// <param name="handle">the remote share display window handle</param>
         /// <remarks>Since: 0.1.0</remarks>
         public void SetRemoteShareView(IntPtr handle)
         {
@@ -722,7 +722,7 @@ namespace WebexSDK
         /// <summary>
         /// Update remote video to display when video window is resized.
         /// </summary>
-        /// <param name="handle"> the video dispaly window handle</param>
+        /// <param name="handle"> the video display window handle</param>
         /// <remarks>Since: 0.1.0</remarks>
         public void UpdateRemoteView(IntPtr handle)
         {
@@ -733,7 +733,7 @@ namespace WebexSDK
         /// <summary>
         /// Update local view to display when video window is resized.
         /// </summary>
-        /// <param name="handle">the local video dispaly window handle</param>
+        /// <param name="handle">the local video display window handle</param>
         /// <remarks>Since: 0.1.0</remarks>
         public void UpdateLocalView(IntPtr handle)
         {
@@ -744,7 +744,7 @@ namespace WebexSDK
         /// <summary>
         /// Update remote share view to display when video window is resized.
         /// </summary>
-        /// <param name="handle">the remote share dispaly window handle</param>
+        /// <param name="handle">the remote share display window handle</param>
         /// <remarks>Since: 0.1.0</remarks>
         public void UpdateRemoteShareView(IntPtr handle)
         {
@@ -756,8 +756,8 @@ namespace WebexSDK
         /// Subscribe a new remote auxiliary video with a view handle. The Maximum of auxiliary videos you can subscribe is 4 currently.
         /// You can invoke this API When receive RemoteAuxVideosCountChangedEvent event or call status is connected.
         /// </summary>
-        /// <param name="handle">the remote auxiliary dispaly window handle</param>
-        /// <returns>The subscribed remote auxiliary video instance. Returen null if subscribing failed.</returns>
+        /// <param name="handle">the remote auxiliary display window handle</param>
+        /// <returns>The subscribed remote auxiliary video instance. Return null if subscribing failed.</returns>
         /// <remarks>Since: 2.0.0</remarks>
         public RemoteAuxVideo SubscribeRemoteAuxVideo(IntPtr handle)
         {
@@ -850,7 +850,7 @@ namespace WebexSDK
             if (sourceId == null)
             {
                 SdkLogger.Instance.Error("source is null or source id is null");
-                completedHandler?.Invoke(new WebexApiEventArgs(false, new WebexError(WebexErrorCode.IllegalOperation, "share soure is invalid.")));
+                completedHandler?.Invoke(new WebexApiEventArgs(false, new WebexError(WebexErrorCode.IllegalOperation, "share source is invalid.")));
                 return;
             }
             SdkLogger.Instance.Debug($"{sourceId}");
@@ -948,7 +948,7 @@ namespace WebexSDK
 
         internal void TrigerOnCallMembershipChanged(CallMembershipChangedEvent callMembershipEvent)
         {
-            SdkLogger.Instance.Info($"event[{callMembershipEvent.GetType().Name}] callmerbship[{callMembershipEvent.CallMembership.Email}]");
+            SdkLogger.Instance.Info($"event[{callMembershipEvent.GetType().Name}] callmembership[{callMembershipEvent.CallMembership.Email}]");
             if (callMembershipEvent is CallMembershipLeftEvent)
             {
                 var leftperson = callMembershipEvent as CallMembershipLeftEvent;

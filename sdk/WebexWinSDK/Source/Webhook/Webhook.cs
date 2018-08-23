@@ -86,7 +86,7 @@ namespace WebexSDK
         public string Status { get; set; }
 
         /// <summary>
-        /// The Secret use to generate payload signiture.
+        /// The Secret use to generate payload signature.
         /// </summary>
         public string Secret { get; set; }
 

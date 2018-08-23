@@ -37,7 +37,7 @@ namespace WebexSDK
         /// <summary>
         /// log a message.
         /// </summary>
-        /// <param name="msg">the mesage to be logged</param>
+        /// <param name="msg">the message to be logged</param>
         /// <remarks>Since: 0.1.0</remarks>
         void Log(string msg);
     }

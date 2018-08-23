@@ -434,7 +434,7 @@ namespace WebexSDK
 
             if (IsFetchEnough(conversationId, mentionedPeopleId, before, beforeMessageId, maxCount, out List<Message> listMsg))
             {
-                SdkLogger.Instance.Info($"Successe list {listMsg.Count} messages");
+                SdkLogger.Instance.Info($"Success list {listMsg.Count} messages");
                 completionHandler?.Invoke(new WebexApiEventArgs<List<Message>>(true, null, listMsg));
             }
             else
@@ -515,7 +515,7 @@ namespace WebexSDK
             {
                 case SCFEventType.MessageArrived:
                 case SCFEventType.MessageChanged:
-                    // strStatus= "conversationid"+"message ids"
+                    // strStatus= "conversationId"+"message ids"
                     OnMessageArrivedAndChanged(type, status);
                     break;
                 case SCFEventType.ConversationIdChanged:
@@ -523,7 +523,7 @@ namespace WebexSDK
                     OnConversationIdChanged(arrStr[0], arrStr[1]);
                     break;
                 case SCFEventType.MessageIdChanged:
-                    // strStatus= "conversationid"+"new message id"+"old message id"
+                    // strStatus= "conversationId"+"new message id"+"old message id"
                     OnMessageIdChanged(arrStr[0], arrStr[1], arrStr[2]);
                     break;
                 case SCFEventType.DownloadProgress:
@@ -557,7 +557,7 @@ namespace WebexSDK
         }
         private void OnMessageArrivedAndChanged(SCFEventType type, string status)
         {
-            // strStatus= "conversationid"+"message ids"
+            // strStatus= "conversationId"+"message ids"
             string[] arrStr = status.Trim().Split(' ');
             string conversationId = arrStr[0];
             string messageId = arrStr[1];
@@ -662,7 +662,7 @@ namespace WebexSDK
             string fileId = GetFileId(conversationId, messageId, contentIndex);
             if (fileActions.ContainsKey(fileId))
             {
-                SdkLogger.Instance.Error($"{fileId} download faild for {errorCode}.");
+                SdkLogger.Instance.Error($"{fileId} download failed for {errorCode}.");
                 fileActions[fileId].downloadProgressHandler?.Invoke(new WebexApiEventArgs<int>(false, new WebexError(WebexErrorCode.ServiceFailed, errorCode), 0));
                 fileActions[fileId].downloadProgressHandler = null;
                 if (IsFileActionIsNull(fileActions[fileId]))
@@ -1094,7 +1094,7 @@ namespace WebexSDK
                 string conversationId = null;
                 if (StringExtention.ParseHydraId(spaceId, ref conversationId) != StringExtention.HydraIdType.Space)
                 {
-                    SdkLogger.Instance.Error($"spaceId[{spaceId}] is invailid.");
+                    SdkLogger.Instance.Error($"spaceId[{spaceId}] is invalid.");
                     completionHandler?.Invoke(new WebexApiEventArgs<Message>(false, new WebexError(WebexErrorCode.IllegalOperation, "invalid spaceId parameter"), null));
                     return;
                 }
@@ -1106,7 +1106,7 @@ namespace WebexSDK
                 {
                     if (convId == null)
                     {
-                        SdkLogger.Instance.Error($"can't get or create this one one one space for toPerson[{toPerson}]");
+                        SdkLogger.Instance.Error($"can't get or create this one-on-one space for toPerson[{toPerson}]");
                         completionHandler?.Invoke(new WebexApiEventArgs<Message>(false, new WebexError(WebexErrorCode.IllegalOperation, "can't get or create this one one one space"), null));
                         return;
                     }

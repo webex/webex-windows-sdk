@@ -83,10 +83,10 @@ namespace WebexSDK
 
 
         /// <summary>
-        /// Gets the preson identifier.
+        /// Gets the person identifier.
         /// </summary>
         /// <value>
-        /// The preson identifier.
+        /// The person identifier.
         /// </value>
         /// <remarks>Since: 0.1.0</remarks>
         public string PersonId { get; set; }

@@ -125,7 +125,7 @@ namespace WebexSDK
         /// Initializes a new instance of the <see cref="CallMembershipChangedEvent"/> class.
         /// </summary>
         /// <param name="call">current call instance.</param>
-        /// <param name="callMembership">This callmemership.</param>
+        /// <param name="callMembership">This callmembership.</param>
         /// <remarks>Since: 0.1.0</remarks>
         protected CallMembershipChangedEvent(Call call, CallMembership callMembership)
             : base(call)
@@ -201,7 +201,7 @@ namespace WebexSDK
         }
     }
     /// <summary>
-    /// The available remote auxiliary video count is changed. You can subuscribe or unsubscribe auxiliary videos when this event.
+    /// The available remote auxiliary video count is changed. You can subscribe or unsubscribe auxiliary videos when this event.
     /// </summary>
     /// <remarks>Since: 2.0.0</remarks>
     public class RemoteAuxVideosCountChangedEvent : MediaChangedEvent
@@ -214,7 +214,7 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// The availiable remote auxliary video count.
+        /// The available remote auxiliary video count.
         /// </summary>
         /// <remarks>Since: 2.0.0</remarks>
         public int Count
@@ -337,7 +337,7 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// True if the local party now is sending aduio. Otherwise false.
+        /// True if the local party now is sending audio. Otherwise false.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
         public bool IsSending

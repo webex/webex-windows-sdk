@@ -218,7 +218,7 @@ namespace WebexSDK
         /// Makes a call to an intended recipient on behalf of the authenticated user.
         /// </summary>
         /// <remarks>
-        /// It supports the following address formats for the receipient:
+        /// It supports the following address formats for the recipient:
         ///  * Webex URI: e.g. webex:shenning@cisco.com
         ///  * SIP / SIPS URI: e.g. sip:1234@care.acme.com
         ///  * Tropo URI: e.g. tropo:999123456
@@ -336,7 +336,7 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// Prevents Cisco Webex SDK from poping up an Alert for the end user to approve the use of H.264 video codec license from Cisco Systems, Inc.
+        /// Prevents Cisco Webex SDK from popping up an Alert for the end user to approve the use of H.264 video codec license from Cisco Systems, Inc.
         /// </summary>
         /// <param name="disable">True means disable otherwise false</param>
         /// - attention: The function is expected to be called only by Cisco internal applications. 3rd-party applications should NOT call this function.
@@ -457,7 +457,7 @@ namespace WebexSDK
         /// <summary>
         /// Render a preview of the local party before the call is answered.
         /// </summary>
-        /// <param name="handle">The preview dispaly window handle</param>
+        /// <param name="handle">The preview display window handle</param>
         /// <remarks>Since: 0.1.0</remarks>
         public void StartPreview(IntPtr handle)
         {
@@ -475,7 +475,7 @@ namespace WebexSDK
         /// <summary>
         /// Stop rendering the preview of the local party.
         /// </summary>
-        /// <param name="handle">The preview dispaly window handle</param>
+        /// <param name="handle">The preview display window handle</param>
         /// <remarks>Since: 0.1.0</remarks>
         public void StopPreview(IntPtr handle)
         {
@@ -487,7 +487,7 @@ namespace WebexSDK
         /// <summary>
         /// Update the preview when video window is resized.
         /// </summary>
-        /// <param name="handle">The preview dispaly window handle</param>
+        /// <param name="handle">The preview display window handle</param>
         /// <remarks>Since: 0.1.0</remarks>
         public void UpdatePreview(IntPtr handle)
         {
@@ -1043,7 +1043,7 @@ namespace WebexSDK
         }
         private bool ProcessParticipantJoined(CallMembership newItem)
         {
-            //one2one outgoing call, triger callConnected event when remote participant joined
+            //one2one outgoing call, trigger callConnected event when remote participant joined
             if (currentCall?.IsGroup == false && currentCall?.Direction == Call.CallDirection.Outgoing)
             {
                 if (!newItem.IsSelf)
@@ -1066,7 +1066,7 @@ namespace WebexSDK
             bool find = false;
             foreach (var device in newItem.Devices)
             {
-                //self and this device join, triger call connected
+                //self and this device join, trigger call connected
                 if (m_core.getDeviceUrl() == device.url
                     && ConvertToCallMembershipStateEnum(device.state) == CallMembership.CallState.Joined)
                 {
@@ -1076,7 +1076,7 @@ namespace WebexSDK
                     break;
                 }
             }
-            //self and other device join, triger call release
+            //self and other device join, trigger call release
             if (!find)
             {
                 currentCall.ReleaseReason = new OtherConnected(currentCall);

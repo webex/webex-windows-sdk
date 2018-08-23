@@ -112,7 +112,7 @@ namespace WebexSDK
         public string LastActivity { get; set; }
 
         /// <summary>
-        /// The timestamp that this space being created.
+        /// The time stamp that this space being created.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
         public DateTime Created { get; set; }
