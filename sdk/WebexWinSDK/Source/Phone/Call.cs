@@ -462,7 +462,7 @@ namespace WebexSDK
         }
         internal CallMembership activeSpeaker;
         /// <summary>
-        /// Gets the acitve speaker in this call. It would be changed dynamically in the meeting.
+        /// Gets the active speaker in this call. It would be changed dynamically in the meeting.
         /// </summary>
         /// <remarks>Since: 2.0.0</remarks>
         public CallMembership ActiveSpeaker
@@ -532,7 +532,7 @@ namespace WebexSDK
         /// Gets the count of availabe remote auxiliary videos now.
         /// </summary>
         /// <remarks>Since: 2.0.0</remarks>
-        public int RemoteAvailabeAuxVideoCount { get; internal set; }
+        public int RemoteAvailableAuxVideoCount { get; internal set; }
 
         /// <summary>
         /// Gets the list of RemoteAuxVideo which has been subscribed.
@@ -766,7 +766,7 @@ namespace WebexSDK
                 SdkLogger.Instance.Error("one2one call cannot subscribe remote auxiliary video.");
                 return null;
             }
-            if (RemoteAvailabeAuxVideoCount == 0 && Status != CallStatus.Connected)
+            if (RemoteAvailableAuxVideoCount == 0 && Status != CallStatus.Connected)
             {
                 SdkLogger.Instance.Error("You can invoke this API When receive RemoteAuxVideosCountChangedEvent event.");
                 return null;

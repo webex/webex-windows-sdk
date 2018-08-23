@@ -862,11 +862,11 @@ namespace WebexSDK
 
             SdkLogger.Instance.Debug($"JoinedCallMembershipCount:{currentCall.JoinedCallMembershipCount} RemoteAuxVideoCount: {currentCall.RemoteAuxVideoCount}");
             int min = Math.Min(currentCall.JoinedCallMembershipCount-2, currentCall.RemoteAuxVideoCount);
-            if(min != currentCall.RemoteAvailabeAuxVideoCount)
+            if(min != currentCall.RemoteAvailableAuxVideoCount)
             {
-                currentCall.RemoteAvailabeAuxVideoCount = min;
+                currentCall.RemoteAvailableAuxVideoCount = min;
                 currentCall.TrigerOnMediaChanged(new RemoteAuxVideosCountChangedEvent(currentCall, min));
-                SdkLogger.Instance.Debug($"RemoteAuxVideoAccurateCount: {currentCall.RemoteAvailabeAuxVideoCount}");
+                SdkLogger.Instance.Debug($"RemoteAuxVideoAccurateCount: {currentCall.RemoteAvailableAuxVideoCount}");
             }
         }
         private void OnParticipantsChanged(string callId)
