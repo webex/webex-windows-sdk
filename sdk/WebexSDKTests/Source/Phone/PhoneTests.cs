@@ -3274,7 +3274,7 @@ namespace WebexSDK.Tests
 
             currentCall = null;
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
-            bool isActiveSpeaker = false;
+            List<bool> isActiveSpeaker = new List<bool>();
 
             phone.Dial(calleeAddress, MediaOption.AudioVideoShare(), r =>
             {
@@ -3297,7 +3297,7 @@ namespace WebexSDK.Tests
                         if (callMediaChangedEvent is ActiveSpeakerChangedEvent)
                         {
                             mediaEvents.Add(callMediaChangedEvent);
-                            isActiveSpeaker = currentCall.To.IsActiveSpeaker;
+                            isActiveSpeaker.Add(currentCall.To.IsActiveSpeaker);
                         }
                     };
                 }
@@ -3317,7 +3317,7 @@ namespace WebexSDK.Tests
             var activeSpeakerChangedEvent = mediaEvents[0] as ActiveSpeakerChangedEvent;
             Assert.IsNotNull(activeSpeakerChangedEvent);
             Assert.IsNotNull(activeSpeakerChangedEvent.ToPerson);
-            Assert.IsTrue(isActiveSpeaker);
+            Assert.IsTrue(isActiveSpeaker[0]);
         }
 
         [TestMethod()]
