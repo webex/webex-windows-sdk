@@ -1,0 +1,1153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title="AccessToken method">
+    <HelpKINode Title="IAuthenticator.AccessToken Method " Url="html/M_WebexSDK_IAuthenticator_AccessToken.htm" />
+    <HelpKINode Title="JWTAuthenticator.AccessToken Method " Url="html/M_WebexSDK_JWTAuthenticator_AccessToken.htm" />
+    <HelpKINode Title="OAuthAuthenticator.AccessToken Method " Url="html/M_WebexSDK_OAuthAuthenticator_AccessToken.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Acknowledge method" Url="html/M_WebexSDK_Call_Acknowledge.htm" />
+  <HelpKINode Title="ActivateVideoCodecLicense method" Url="html/M_WebexSDK_Phone_ActivateVideoCodecLicense.htm" />
+  <HelpKINode Title="ActiveSpeaker property" Url="html/P_WebexSDK_Call_ActiveSpeaker.htm" />
+  <HelpKINode Title="ActiveSpeakerChangedEvent class">
+    <HelpKINode Title="ActiveSpeakerChangedEvent Class" Url="html/T_WebexSDK_ActiveSpeakerChangedEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_ActiveSpeakerChangedEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ActiveSpeakerChangedEvent.FromPerson property" Url="html/P_WebexSDK_ActiveSpeakerChangedEvent_FromPerson.htm" />
+  <HelpKINode Title="ActiveSpeakerChangedEvent.ToPerson property" Url="html/P_WebexSDK_ActiveSpeakerChangedEvent_ToPerson.htm" />
+  <HelpKINode Title="AddViewHandle method" Url="html/M_WebexSDK_Call_RemoteAuxVideo_AddViewHandle.htm" />
+  <HelpKINode Title="Answer method" Url="html/M_WebexSDK_Call_Answer.htm" />
+  <HelpKINode Title="Application enumeration member" Url="html/T_WebexSDK_ShareSourceType.htm" />
+  <HelpKINode Title="AudioMaxBandwidth property" Url="html/P_WebexSDK_Phone_AudioMaxBandwidth.htm" />
+  <HelpKINode Title="AudioOnly method" Url="html/M_WebexSDK_MediaOption_AudioOnly.htm" />
+  <HelpKINode Title="AudioVideo method" Url="html/M_WebexSDK_MediaOption_AudioVideo.htm" />
+  <HelpKINode Title="AudioVideoShare method" Url="html/M_WebexSDK_MediaOption_AudioVideoShare.htm" />
+  <HelpKINode Title="Authenticator property" Url="html/P_WebexSDK_Webex_Authenticator.htm" />
+  <HelpKINode Title="AuthorizationUrl property">
+    <HelpKINode Title="OAuthAuthenticator.AuthorizationUrl Property " Url="html/P_WebexSDK_OAuthAuthenticator_AuthorizationUrl.htm" />
+    <HelpKINode Title="SSOAuthenticator.AuthorizationUrl Property " Url="html/P_WebexSDK_SSOAuthenticator_AuthorizationUrl.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Authorize method" Url="html/M_WebexSDK_OAuthAuthenticator_Authorize.htm" />
+  <HelpKINode Title="Authorized method">
+    <HelpKINode Title="IAuthenticator.Authorized Method " Url="html/M_WebexSDK_IAuthenticator_Authorized.htm" />
+    <HelpKINode Title="JWTAuthenticator.Authorized Method " Url="html/M_WebexSDK_JWTAuthenticator_Authorized.htm" />
+    <HelpKINode Title="OAuthAuthenticator.Authorized Method " Url="html/M_WebexSDK_OAuthAuthenticator_Authorized.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AuthorizeWith method" Url="html/M_WebexSDK_JWTAuthenticator_AuthorizeWith.htm" />
+  <HelpKINode Title="Avatar property" Url="html/P_WebexSDK_Person_Avatar.htm" />
+  <HelpKINode Title="AVIODevice class">
+    <HelpKINode Title="AVIODevice Class" Url="html/T_WebexSDK_AVIODevice.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_AVIODevice__ctor.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_AVIODevice.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AVIODevice.AVIODevice constructor" Url="html/M_WebexSDK_AVIODevice__ctor.htm" />
+  <HelpKINode Title="AVIODevice.DefaultDevice property" Url="html/P_WebexSDK_AVIODevice_DefaultDevice.htm" />
+  <HelpKINode Title="AVIODevice.Id property" Url="html/P_WebexSDK_AVIODevice_Id.htm" />
+  <HelpKINode Title="AVIODevice.Name property" Url="html/P_WebexSDK_AVIODevice_Name.htm" />
+  <HelpKINode Title="AVIODevice.Type property" Url="html/P_WebexSDK_AVIODevice_Type.htm" />
+  <HelpKINode Title="AVIODeviceType enumeration" Url="html/T_WebexSDK_AVIODeviceType.htm" />
+  <HelpKINode Title="ByCreated enumeration member" Url="html/T_WebexSDK_SpaceSortType.htm" />
+  <HelpKINode Title="ById enumeration member" Url="html/T_WebexSDK_SpaceSortType.htm" />
+  <HelpKINode Title="ByLastActivity enumeration member" Url="html/T_WebexSDK_SpaceSortType.htm" />
+  <HelpKINode Title="Call class">
+    <HelpKINode Title="Call Class" Url="html/T_WebexSDK_Call.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_WebexSDK_Call.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WebexSDK_Call.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_Call.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Call property" Url="html/P_WebexSDK_CallEvent_Call.htm" />
+  <HelpKINode Title="Call.Acknowledge method" Url="html/M_WebexSDK_Call_Acknowledge.htm" />
+  <HelpKINode Title="Call.ActiveSpeaker property" Url="html/P_WebexSDK_Call_ActiveSpeaker.htm" />
+  <HelpKINode Title="Call.Answer method" Url="html/M_WebexSDK_Call_Answer.htm" />
+  <HelpKINode Title="Call.CallDirection enumeration" Url="html/T_WebexSDK_Call_CallDirection.htm" />
+  <HelpKINode Title="Call.Direction property" Url="html/P_WebexSDK_Call_Direction.htm" />
+  <HelpKINode Title="Call.FetchShareSources method" Url="html/M_WebexSDK_Call_FetchShareSources.htm" />
+  <HelpKINode Title="Call.From property" Url="html/P_WebexSDK_Call_From.htm" />
+  <HelpKINode Title="Call.Hangup method" Url="html/M_WebexSDK_Call_Hangup.htm" />
+  <HelpKINode Title="Call.IsReceivingAudio property" Url="html/P_WebexSDK_Call_IsReceivingAudio.htm" />
+  <HelpKINode Title="Call.IsReceivingShare property" Url="html/P_WebexSDK_Call_IsReceivingShare.htm" />
+  <HelpKINode Title="Call.IsReceivingVideo property" Url="html/P_WebexSDK_Call_IsReceivingVideo.htm" />
+  <HelpKINode Title="Call.IsRemoteSendingAudio property" Url="html/P_WebexSDK_Call_IsRemoteSendingAudio.htm" />
+  <HelpKINode Title="Call.IsRemoteSendingShare property" Url="html/P_WebexSDK_Call_IsRemoteSendingShare.htm" />
+  <HelpKINode Title="Call.IsRemoteSendingVideo property" Url="html/P_WebexSDK_Call_IsRemoteSendingVideo.htm" />
+  <HelpKINode Title="Call.IsSendingAudio property" Url="html/P_WebexSDK_Call_IsSendingAudio.htm" />
+  <HelpKINode Title="Call.IsSendingDTMFEnabled property" Url="html/P_WebexSDK_Call_IsSendingDTMFEnabled.htm" />
+  <HelpKINode Title="Call.IsSendingShare property" Url="html/P_WebexSDK_Call_IsSendingShare.htm" />
+  <HelpKINode Title="Call.IsSendingVideo property" Url="html/P_WebexSDK_Call_IsSendingVideo.htm" />
+  <HelpKINode Title="Call.LocalVideoViewSize property" Url="html/P_WebexSDK_Call_LocalVideoViewSize.htm" />
+  <HelpKINode Title="Call.Memberships property" Url="html/P_WebexSDK_Call_Memberships.htm" />
+  <HelpKINode Title="Call.OnCallMembershipChanged event" Url="html/E_WebexSDK_Call_OnCallMembershipChanged.htm" />
+  <HelpKINode Title="Call.OnCapabilitiesChanged event" Url="html/E_WebexSDK_Call_OnCapabilitiesChanged.htm" />
+  <HelpKINode Title="Call.OnConnected event" Url="html/E_WebexSDK_Call_OnConnected.htm" />
+  <HelpKINode Title="Call.OnDisconnected event" Url="html/E_WebexSDK_Call_OnDisconnected.htm" />
+  <HelpKINode Title="Call.OnMediaChanged event" Url="html/E_WebexSDK_Call_OnMediaChanged.htm" />
+  <HelpKINode Title="Call.OnRinging event" Url="html/E_WebexSDK_Call_OnRinging.htm" />
+  <HelpKINode Title="Call.Reject method" Url="html/M_WebexSDK_Call_Reject.htm" />
+  <HelpKINode Title="Call.RemoteAuxVideo class" Url="html/T_WebexSDK_Call_RemoteAuxVideo.htm" />
+  <HelpKINode Title="Call.RemoteAuxVideo.AddViewHandle method" Url="html/M_WebexSDK_Call_RemoteAuxVideo_AddViewHandle.htm" />
+  <HelpKINode Title="Call.RemoteAuxVideo.HandleList property" Url="html/P_WebexSDK_Call_RemoteAuxVideo_HandleList.htm" />
+  <HelpKINode Title="Call.RemoteAuxVideo.IsReceivingVideo property" Url="html/P_WebexSDK_Call_RemoteAuxVideo_IsReceivingVideo.htm" />
+  <HelpKINode Title="Call.RemoteAuxVideo.IsSendingVideo property" Url="html/P_WebexSDK_Call_RemoteAuxVideo_IsSendingVideo.htm" />
+  <HelpKINode Title="Call.RemoteAuxVideo.Person property" Url="html/P_WebexSDK_Call_RemoteAuxVideo_Person.htm" />
+  <HelpKINode Title="Call.RemoteAuxVideo.RemoteAuxVideoSize property" Url="html/P_WebexSDK_Call_RemoteAuxVideo_RemoteAuxVideoSize.htm" />
+  <HelpKINode Title="Call.RemoteAuxVideo.RemoveViewHandle method" Url="html/M_WebexSDK_Call_RemoteAuxVideo_RemoveViewHandle.htm" />
+  <HelpKINode Title="Call.RemoteAuxVideo.UpdateViewHandle method" Url="html/M_WebexSDK_Call_RemoteAuxVideo_UpdateViewHandle.htm" />
+  <HelpKINode Title="Call.RemoteAuxVideos property" Url="html/P_WebexSDK_Call_RemoteAuxVideos.htm" />
+  <HelpKINode Title="Call.RemoteAvailableAuxVideoCount property" Url="html/P_WebexSDK_Call_RemoteAvailableAuxVideoCount.htm" />
+  <HelpKINode Title="Call.RemoteShareViewSize property" Url="html/P_WebexSDK_Call_RemoteShareViewSize.htm" />
+  <HelpKINode Title="Call.RemoteVideoViewSize property" Url="html/P_WebexSDK_Call_RemoteVideoViewSize.htm" />
+  <HelpKINode Title="Call.SendDtmf method" Url="html/M_WebexSDK_Call_SendDtmf.htm" />
+  <HelpKINode Title="Call.SendFeedbackWith method" Url="html/M_WebexSDK_Call_SendFeedbackWith.htm" />
+  <HelpKINode Title="Call.SetLocalView method" Url="html/M_WebexSDK_Call_SetLocalView.htm" />
+  <HelpKINode Title="Call.SetRemoteShareView method" Url="html/M_WebexSDK_Call_SetRemoteShareView.htm" />
+  <HelpKINode Title="Call.SetRemoteView method" Url="html/M_WebexSDK_Call_SetRemoteView.htm" />
+  <HelpKINode Title="Call.StartShare method" Url="html/M_WebexSDK_Call_StartShare.htm" />
+  <HelpKINode Title="Call.Status property" Url="html/P_WebexSDK_Call_Status.htm" />
+  <HelpKINode Title="Call.StopShare method" Url="html/M_WebexSDK_Call_StopShare.htm" />
+  <HelpKINode Title="Call.SubscribeRemoteAuxVideo method" Url="html/M_WebexSDK_Call_SubscribeRemoteAuxVideo.htm" />
+  <HelpKINode Title="Call.To property" Url="html/P_WebexSDK_Call_To.htm" />
+  <HelpKINode Title="Call.UnsubscribeRemoteAuxVideo method" Url="html/M_WebexSDK_Call_UnsubscribeRemoteAuxVideo.htm" />
+  <HelpKINode Title="Call.UpdateLocalView method" Url="html/M_WebexSDK_Call_UpdateLocalView.htm" />
+  <HelpKINode Title="Call.UpdateRemoteShareView method" Url="html/M_WebexSDK_Call_UpdateRemoteShareView.htm" />
+  <HelpKINode Title="Call.UpdateRemoteView method" Url="html/M_WebexSDK_Call_UpdateRemoteView.htm" />
+  <HelpKINode Title="Call.VideoDimensions structure" Url="html/T_WebexSDK_Call_VideoDimensions.htm" />
+  <HelpKINode Title="Call.VideoDimensions.Height property" Url="html/P_WebexSDK_Call_VideoDimensions_Height.htm" />
+  <HelpKINode Title="Call.VideoDimensions.Width property" Url="html/P_WebexSDK_Call_VideoDimensions_Width.htm" />
+  <HelpKINode Title="CallDisconnectedEvent class">
+    <HelpKINode Title="CallDisconnectedEvent Class" Url="html/T_WebexSDK_CallDisconnectedEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_CallDisconnectedEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CallError class">
+    <HelpKINode Title="CallError Class" Url="html/T_WebexSDK_CallError.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_CallError.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CallError.Error property" Url="html/P_WebexSDK_CallError_Error.htm" />
+  <HelpKINode Title="CallEvent class">
+    <HelpKINode Title="CallEvent Class" Url="html/T_WebexSDK_CallEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_CallEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CallEvent.Call property" Url="html/P_WebexSDK_CallEvent_Call.htm" />
+  <HelpKINode Title="CallMembership class">
+    <HelpKINode Title="CallMembership Class" Url="html/T_WebexSDK_CallMembership.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_CallMembership.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CallMembership property" Url="html/P_WebexSDK_CallMembershipChangedEvent_CallMembership.htm" />
+  <HelpKINode Title="CallMembership.CallState enumeration" Url="html/T_WebexSDK_CallMembership_CallState.htm" />
+  <HelpKINode Title="CallMembership.Email property" Url="html/P_WebexSDK_CallMembership_Email.htm" />
+  <HelpKINode Title="CallMembership.IsActiveSpeaker property" Url="html/P_WebexSDK_CallMembership_IsActiveSpeaker.htm" />
+  <HelpKINode Title="CallMembership.IsInitiator property" Url="html/P_WebexSDK_CallMembership_IsInitiator.htm" />
+  <HelpKINode Title="CallMembership.IsSendingAudio property" Url="html/P_WebexSDK_CallMembership_IsSendingAudio.htm" />
+  <HelpKINode Title="CallMembership.IsSendingShare property" Url="html/P_WebexSDK_CallMembership_IsSendingShare.htm" />
+  <HelpKINode Title="CallMembership.IsSendingVideo property" Url="html/P_WebexSDK_CallMembership_IsSendingVideo.htm" />
+  <HelpKINode Title="CallMembership.PersonId property" Url="html/P_WebexSDK_CallMembership_PersonId.htm" />
+  <HelpKINode Title="CallMembership.PhoneNumber property" Url="html/P_WebexSDK_CallMembership_PhoneNumber.htm" />
+  <HelpKINode Title="CallMembership.SipUrl property" Url="html/P_WebexSDK_CallMembership_SipUrl.htm" />
+  <HelpKINode Title="CallMembership.State property" Url="html/P_WebexSDK_CallMembership_State.htm" />
+  <HelpKINode Title="CallMembershipChangedEvent class">
+    <HelpKINode Title="CallMembershipChangedEvent Class" Url="html/T_WebexSDK_CallMembershipChangedEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_CallMembershipChangedEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CallMembershipChangedEvent.CallMembership property" Url="html/P_WebexSDK_CallMembershipChangedEvent_CallMembership.htm" />
+  <HelpKINode Title="CallMembershipDeclinedEvent class">
+    <HelpKINode Title="CallMembershipDeclinedEvent Class" Url="html/T_WebexSDK_CallMembershipDeclinedEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_CallMembershipDeclinedEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CallMembershipJoinedEvent class">
+    <HelpKINode Title="CallMembershipJoinedEvent Class" Url="html/T_WebexSDK_CallMembershipJoinedEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_CallMembershipJoinedEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CallMembershipLeftEvent class">
+    <HelpKINode Title="CallMembershipLeftEvent Class" Url="html/T_WebexSDK_CallMembershipLeftEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_CallMembershipLeftEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CallMembershipSendingAudioEvent class">
+    <HelpKINode Title="CallMembershipSendingAudioEvent Class" Url="html/T_WebexSDK_CallMembershipSendingAudioEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_CallMembershipSendingAudioEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CallMembershipSendingShareEvent class">
+    <HelpKINode Title="CallMembershipSendingShareEvent Class" Url="html/T_WebexSDK_CallMembershipSendingShareEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_CallMembershipSendingShareEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CallMembershipSendingVideoEvent class">
+    <HelpKINode Title="CallMembershipSendingVideoEvent Class" Url="html/T_WebexSDK_CallMembershipSendingVideoEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_CallMembershipSendingVideoEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CallStatus enumeration" Url="html/T_WebexSDK_CallStatus.htm" />
+  <HelpKINode Title="Camera enumeration member" Url="html/T_WebexSDK_AVIODeviceType.htm" />
+  <HelpKINode Title="Camera property" Url="html/P_WebexSDK_CameraSwitchedEvent_Camera.htm" />
+  <HelpKINode Title="CameraSwitchedEvent class">
+    <HelpKINode Title="CameraSwitchedEvent Class" Url="html/T_WebexSDK_CameraSwitchedEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_CameraSwitchedEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CameraSwitchedEvent.Camera property" Url="html/P_WebexSDK_CameraSwitchedEvent_Camera.htm" />
+  <HelpKINode Title="Capabilities class">
+    <HelpKINode Title="Capabilities Class" Url="html/T_WebexSDK_Capabilities.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_Capabilities.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CapabilitiesDTMF class">
+    <HelpKINode Title="CapabilitiesDTMF Class" Url="html/T_WebexSDK_CapabilitiesDTMF.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_CapabilitiesDTMF.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CapabilitiesDTMF.IsEnabled property" Url="html/P_WebexSDK_CapabilitiesDTMF_IsEnabled.htm" />
+  <HelpKINode Title="Connected enumeration member" Url="html/T_WebexSDK_CallStatus.htm" />
+  <HelpKINode Title="ConsoleLogger property" Url="html/P_WebexSDK_Webex_ConsoleLogger.htm" />
+  <HelpKINode Title="Count property" Url="html/P_WebexSDK_RemoteAuxVideosCountChangedEvent_Count.htm" />
+  <HelpKINode Title="Create method">
+    <HelpKINode Title="SpaceClient.Create Method " Url="html/M_WebexSDK_SpaceClient_Create.htm" />
+    <HelpKINode Title="TeamClient.Create Method " Url="html/M_WebexSDK_TeamClient_Create.htm" />
+    <HelpKINode Title="WebhookClient.Create Method " Url="html/M_WebexSDK_WebhookClient_Create.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CreateByEmail method" Url="html/M_WebexSDK_TeamMembershipClient_CreateByEmail.htm" />
+  <HelpKINode Title="CreateById method" Url="html/M_WebexSDK_TeamMembershipClient_CreateById.htm" />
+  <HelpKINode Title="CreateByPersonEmail method" Url="html/M_WebexSDK_MembershipClient_CreateByPersonEmail.htm" />
+  <HelpKINode Title="CreateByPersonId method" Url="html/M_WebexSDK_MembershipClient_CreateByPersonId.htm" />
+  <HelpKINode Title="Created property">
+    <HelpKINode Title="Membership.Created Property " Url="html/P_WebexSDK_Membership_Created.htm" />
+    <HelpKINode Title="Message.Created Property " Url="html/P_WebexSDK_Message_Created.htm" />
+    <HelpKINode Title="Person.Created Property " Url="html/P_WebexSDK_Person_Created.htm" />
+    <HelpKINode Title="Space.Created Property " Url="html/P_WebexSDK_Space_Created.htm" />
+    <HelpKINode Title="Team.Created Property " Url="html/P_WebexSDK_Team_Created.htm" />
+    <HelpKINode Title="TeamMembership.Created Property " Url="html/P_WebexSDK_TeamMembership_Created.htm" />
+    <HelpKINode Title="Webhook.Created Property " Url="html/P_WebexSDK_Webhook_Created.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Data property" Url="html/P_WebexSDK_WebexApiEventArgs_1_Data.htm" />
+  <HelpKINode Title="Deauthorize method">
+    <HelpKINode Title="IAuthenticator.Deauthorize Method " Url="html/M_WebexSDK_IAuthenticator_Deauthorize.htm" />
+    <HelpKINode Title="JWTAuthenticator.Deauthorize Method " Url="html/M_WebexSDK_JWTAuthenticator_Deauthorize.htm" />
+    <HelpKINode Title="OAuthAuthenticator.Deauthorize Method " Url="html/M_WebexSDK_OAuthAuthenticator_Deauthorize.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Debug enumeration member" Url="html/T_WebexSDK_LogLevel.htm" />
+  <HelpKINode Title="Declined enumeration member" Url="html/T_WebexSDK_CallMembership_CallState.htm" />
+  <HelpKINode Title="DefaultDevice property" Url="html/P_WebexSDK_AVIODevice_DefaultDevice.htm" />
+  <HelpKINode Title="Delete method">
+    <HelpKINode Title="MembershipClient.Delete Method " Url="html/M_WebexSDK_MembershipClient_Delete.htm" />
+    <HelpKINode Title="MessageClient.Delete Method " Url="html/M_WebexSDK_MessageClient_Delete.htm" />
+    <HelpKINode Title="SpaceClient.Delete Method " Url="html/M_WebexSDK_SpaceClient_Delete.htm" />
+    <HelpKINode Title="TeamClient.Delete Method " Url="html/M_WebexSDK_TeamClient_Delete.htm" />
+    <HelpKINode Title="TeamMembershipClient.Delete Method " Url="html/M_WebexSDK_TeamMembershipClient_Delete.htm" />
+    <HelpKINode Title="WebhookClient.Delete Method " Url="html/M_WebexSDK_WebhookClient_Delete.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Deregister method" Url="html/M_WebexSDK_Phone_Deregister.htm" />
+  <HelpKINode Title="Desktop enumeration member" Url="html/T_WebexSDK_ShareSourceType.htm" />
+  <HelpKINode Title="Detail enumeration member" Url="html/T_WebexSDK_LogLevel.htm" />
+  <HelpKINode Title="Dial method" Url="html/M_WebexSDK_Phone_Dial.htm" />
+  <HelpKINode Title="Direct enumeration member" Url="html/T_WebexSDK_SpaceType.htm" />
+  <HelpKINode Title="Direction property" Url="html/P_WebexSDK_Call_Direction.htm" />
+  <HelpKINode Title="DisableVideoCodecActivation method" Url="html/M_WebexSDK_Phone_DisableVideoCodecActivation.htm" />
+  <HelpKINode Title="Disconnected enumeration member" Url="html/T_WebexSDK_CallStatus.htm" />
+  <HelpKINode Title="DisplayName property" Url="html/P_WebexSDK_Person_DisplayName.htm" />
+  <HelpKINode Title="DownloadFile method" Url="html/M_WebexSDK_MessageClient_DownloadFile.htm" />
+  <HelpKINode Title="DownloadThumbnail method" Url="html/M_WebexSDK_MessageClient_DownloadThumbnail.htm" />
+  <HelpKINode Title="Email property" Url="html/P_WebexSDK_CallMembership_Email.htm" />
+  <HelpKINode Title="Emails property" Url="html/P_WebexSDK_Person_Emails.htm" />
+  <HelpKINode Title="Error enumeration member" Url="html/T_WebexSDK_LogLevel.htm" />
+  <HelpKINode Title="Error property">
+    <HelpKINode Title="CallError.Error Property " Url="html/P_WebexSDK_CallError_Error.htm" />
+    <HelpKINode Title="WebexApiEventArgs.Error Property " Url="html/P_WebexSDK_WebexApiEventArgs_Error.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ErrorCode property" Url="html/P_WebexSDK_WebexError_ErrorCode.htm" />
+  <HelpKINode Title="Event property" Url="html/P_WebexSDK_Webhook_Event.htm" />
+  <HelpKINode Title="FetchShareSources method" Url="html/M_WebexSDK_Call_FetchShareSources.htm" />
+  <HelpKINode Title="Files property" Url="html/P_WebexSDK_Message_Files.htm" />
+  <HelpKINode Title="Filter property" Url="html/P_WebexSDK_Webhook_Filter.htm" />
+  <HelpKINode Title="FirstName property" Url="html/P_WebexSDK_Person_FirstName.htm" />
+  <HelpKINode Title="From property" Url="html/P_WebexSDK_Call_From.htm" />
+  <HelpKINode Title="FromPerson property">
+    <HelpKINode Title="ActiveSpeakerChangedEvent.FromPerson Property " Url="html/P_WebexSDK_ActiveSpeakerChangedEvent_FromPerson.htm" />
+    <HelpKINode Title="RemoteAuxVideoPersonChangedEvent.FromPerson Property " Url="html/P_WebexSDK_RemoteAuxVideoPersonChangedEvent_FromPerson.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Get method">
+    <HelpKINode Title="MembershipClient.Get Method " Url="html/M_WebexSDK_MembershipClient_Get.htm" />
+    <HelpKINode Title="MessageClient.Get Method " Url="html/Overload_WebexSDK_MessageClient_Get.htm" />
+    <HelpKINode Title="PersonClient.Get Method " Url="html/M_WebexSDK_PersonClient_Get.htm" />
+    <HelpKINode Title="SpaceClient.Get Method " Url="html/M_WebexSDK_SpaceClient_Get.htm" />
+    <HelpKINode Title="TeamClient.Get Method " Url="html/M_WebexSDK_TeamClient_Get.htm" />
+    <HelpKINode Title="TeamMembershipClient.Get Method " Url="html/M_WebexSDK_TeamMembershipClient_Get.htm" />
+    <HelpKINode Title="WebhookClient.Get Method " Url="html/M_WebexSDK_WebhookClient_Get.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GetAVIODevices method" Url="html/M_WebexSDK_Phone_GetAVIODevices.htm" />
+  <HelpKINode Title="GetMe method" Url="html/M_WebexSDK_PersonClient_GetMe.htm" />
+  <HelpKINode Title="Group enumeration member" Url="html/T_WebexSDK_SpaceType.htm" />
+  <HelpKINode Title="HandleList property" Url="html/P_WebexSDK_Call_RemoteAuxVideo_HandleList.htm" />
+  <HelpKINode Title="Hangup method" Url="html/M_WebexSDK_Call_Hangup.htm" />
+  <HelpKINode Title="Height property">
+    <HelpKINode Title="Call.VideoDimensions.Height Property " Url="html/P_WebexSDK_Call_VideoDimensions_Height.htm" />
+    <HelpKINode Title="LocalFile.Thumbnail.Height Property " Url="html/P_WebexSDK_LocalFile_Thumbnail_Height.htm" />
+    <HelpKINode Title="RemoteFile.Thumbnail.Height Property " Url="html/P_WebexSDK_RemoteFile_Thumbnail_Height.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IAuthenticator interface">
+    <HelpKINode Title="IAuthenticator Interface" Url="html/T_WebexSDK_IAuthenticator.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WebexSDK_IAuthenticator.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IAuthenticator.AccessToken method" Url="html/M_WebexSDK_IAuthenticator_AccessToken.htm" />
+  <HelpKINode Title="IAuthenticator.Authorized method" Url="html/M_WebexSDK_IAuthenticator_Authorized.htm" />
+  <HelpKINode Title="IAuthenticator.Deauthorize method" Url="html/M_WebexSDK_IAuthenticator_Deauthorize.htm" />
+  <HelpKINode Title="IAuthenticator.RefreshToken method" Url="html/M_WebexSDK_IAuthenticator_RefreshToken.htm" />
+  <HelpKINode Title="Id property">
+    <HelpKINode Title="AVIODevice.Id Property " Url="html/P_WebexSDK_AVIODevice_Id.htm" />
+    <HelpKINode Title="Membership.Id Property " Url="html/P_WebexSDK_Membership_Id.htm" />
+    <HelpKINode Title="Message.Id Property " Url="html/P_WebexSDK_Message_Id.htm" />
+    <HelpKINode Title="Person.Id Property " Url="html/P_WebexSDK_Person_Id.htm" />
+    <HelpKINode Title="Space.Id Property " Url="html/P_WebexSDK_Space_Id.htm" />
+    <HelpKINode Title="Team.Id Property " Url="html/P_WebexSDK_Team_Id.htm" />
+    <HelpKINode Title="TeamMembership.Id Property " Url="html/P_WebexSDK_TeamMembership_Id.htm" />
+    <HelpKINode Title="Webhook.Id Property " Url="html/P_WebexSDK_Webhook_Id.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Idle enumeration member" Url="html/T_WebexSDK_CallMembership_CallState.htm" />
+  <HelpKINode Title="IllegalOperation enumeration member" Url="html/T_WebexSDK_WebexErrorCode.htm" />
+  <HelpKINode Title="IllegalStatus enumeration member" Url="html/T_WebexSDK_WebexErrorCode.htm" />
+  <HelpKINode Title="ILogger interface">
+    <HelpKINode Title="ILogger Interface" Url="html/T_WebexSDK_ILogger.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WebexSDK_ILogger.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ILogger.Log method" Url="html/M_WebexSDK_ILogger_Log.htm" />
+  <HelpKINode Title="Incoming enumeration member" Url="html/T_WebexSDK_Call_CallDirection.htm" />
+  <HelpKINode Title="Info enumeration member" Url="html/T_WebexSDK_LogLevel.htm" />
+  <HelpKINode Title="Initiated enumeration member" Url="html/T_WebexSDK_CallStatus.htm" />
+  <HelpKINode Title="Invalid enumeration member" Url="html/T_WebexSDK_AVIODeviceType.htm" />
+  <HelpKINode Title="InvalidDTMF enumeration member" Url="html/T_WebexSDK_WebexErrorCode.htm" />
+  <HelpKINode Title="IsActiveSpeaker property" Url="html/P_WebexSDK_CallMembership_IsActiveSpeaker.htm" />
+  <HelpKINode Title="IsEnabled property" Url="html/P_WebexSDK_CapabilitiesDTMF_IsEnabled.htm" />
+  <HelpKINode Title="IsInitiator property" Url="html/P_WebexSDK_CallMembership_IsInitiator.htm" />
+  <HelpKINode Title="IsLocked property" Url="html/P_WebexSDK_Space_IsLocked.htm" />
+  <HelpKINode Title="IsModerator property">
+    <HelpKINode Title="Membership.IsModerator Property " Url="html/P_WebexSDK_Membership_IsModerator.htm" />
+    <HelpKINode Title="TeamMembership.IsModerator Property " Url="html/P_WebexSDK_TeamMembership_IsModerator.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsMonitor property" Url="html/P_WebexSDK_Membership_IsMonitor.htm" />
+  <HelpKINode Title="IsReceiving property">
+    <HelpKINode Title="ReceivingAudioEvent.IsReceiving Property " Url="html/P_WebexSDK_ReceivingAudioEvent_IsReceiving.htm" />
+    <HelpKINode Title="ReceivingShareEvent.IsReceiving Property " Url="html/P_WebexSDK_ReceivingShareEvent_IsReceiving.htm" />
+    <HelpKINode Title="ReceivingVideoEvent.IsReceiving Property " Url="html/P_WebexSDK_ReceivingVideoEvent_IsReceiving.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsReceivingAudio property" Url="html/P_WebexSDK_Call_IsReceivingAudio.htm" />
+  <HelpKINode Title="IsReceivingShare property" Url="html/P_WebexSDK_Call_IsReceivingShare.htm" />
+  <HelpKINode Title="IsReceivingVideo property">
+    <HelpKINode Title="Call.IsReceivingVideo Property " Url="html/P_WebexSDK_Call_IsReceivingVideo.htm" />
+    <HelpKINode Title="Call.RemoteAuxVideo.IsReceivingVideo Property " Url="html/P_WebexSDK_Call_RemoteAuxVideo_IsReceivingVideo.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsRemoteSendingAudio property" Url="html/P_WebexSDK_Call_IsRemoteSendingAudio.htm" />
+  <HelpKINode Title="IsRemoteSendingShare property" Url="html/P_WebexSDK_Call_IsRemoteSendingShare.htm" />
+  <HelpKINode Title="IsRemoteSendingVideo property" Url="html/P_WebexSDK_Call_IsRemoteSendingVideo.htm" />
+  <HelpKINode Title="IsSelfMentioned property" Url="html/P_WebexSDK_Message_IsSelfMentioned.htm" />
+  <HelpKINode Title="IsSending property">
+    <HelpKINode Title="RemoteSendingAudioEvent.IsSending Property " Url="html/P_WebexSDK_RemoteSendingAudioEvent_IsSending.htm" />
+    <HelpKINode Title="RemoteSendingShareEvent.IsSending Property " Url="html/P_WebexSDK_RemoteSendingShareEvent_IsSending.htm" />
+    <HelpKINode Title="RemoteSendingVideoEvent.IsSending Property " Url="html/P_WebexSDK_RemoteSendingVideoEvent_IsSending.htm" />
+    <HelpKINode Title="SendingAudioEvent.IsSending Property " Url="html/P_WebexSDK_SendingAudioEvent_IsSending.htm" />
+    <HelpKINode Title="SendingShareEvent.IsSending Property " Url="html/P_WebexSDK_SendingShareEvent_IsSending.htm" />
+    <HelpKINode Title="SendingVideoEvent.IsSending Property " Url="html/P_WebexSDK_SendingVideoEvent_IsSending.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsSendingAudio property">
+    <HelpKINode Title="Call.IsSendingAudio Property " Url="html/P_WebexSDK_Call_IsSendingAudio.htm" />
+    <HelpKINode Title="CallMembership.IsSendingAudio Property " Url="html/P_WebexSDK_CallMembership_IsSendingAudio.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsSendingDTMFEnabled property" Url="html/P_WebexSDK_Call_IsSendingDTMFEnabled.htm" />
+  <HelpKINode Title="IsSendingShare property">
+    <HelpKINode Title="Call.IsSendingShare Property " Url="html/P_WebexSDK_Call_IsSendingShare.htm" />
+    <HelpKINode Title="CallMembership.IsSendingShare Property " Url="html/P_WebexSDK_CallMembership_IsSendingShare.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsSendingVideo property">
+    <HelpKINode Title="Call.IsSendingVideo Property " Url="html/P_WebexSDK_Call_IsSendingVideo.htm" />
+    <HelpKINode Title="Call.RemoteAuxVideo.IsSendingVideo Property " Url="html/P_WebexSDK_Call_RemoteAuxVideo_IsSendingVideo.htm" />
+    <HelpKINode Title="CallMembership.IsSendingVideo Property " Url="html/P_WebexSDK_CallMembership_IsSendingVideo.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IsSuccess property" Url="html/P_WebexSDK_WebexApiEventArgs_IsSuccess.htm" />
+  <HelpKINode Title="Joined enumeration member" Url="html/T_WebexSDK_CallMembership_CallState.htm" />
+  <HelpKINode Title="JWTAuthenticator class">
+    <HelpKINode Title="JWTAuthenticator Class" Url="html/T_WebexSDK_JWTAuthenticator.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_JWTAuthenticator__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WebexSDK_JWTAuthenticator.htm" />
+  </HelpKINode>
+  <HelpKINode Title="JWTAuthenticator.AccessToken method" Url="html/M_WebexSDK_JWTAuthenticator_AccessToken.htm" />
+  <HelpKINode Title="JWTAuthenticator.Authorized method" Url="html/M_WebexSDK_JWTAuthenticator_Authorized.htm" />
+  <HelpKINode Title="JWTAuthenticator.AuthorizeWith method" Url="html/M_WebexSDK_JWTAuthenticator_AuthorizeWith.htm" />
+  <HelpKINode Title="JWTAuthenticator.Deauthorize method" Url="html/M_WebexSDK_JWTAuthenticator_Deauthorize.htm" />
+  <HelpKINode Title="JWTAuthenticator.JWTAuthenticator constructor" Url="html/M_WebexSDK_JWTAuthenticator__ctor.htm" />
+  <HelpKINode Title="JWTAuthenticator.RefreshToken method" Url="html/M_WebexSDK_JWTAuthenticator_RefreshToken.htm" />
+  <HelpKINode Title="LastActivity property" Url="html/P_WebexSDK_Space_LastActivity.htm" />
+  <HelpKINode Title="LastName property" Url="html/P_WebexSDK_Person_LastName.htm" />
+  <HelpKINode Title="Left enumeration member" Url="html/T_WebexSDK_CallMembership_CallState.htm" />
+  <HelpKINode Title="List method">
+    <HelpKINode Title="MembershipClient.List Method " Url="html/Overload_WebexSDK_MembershipClient_List.htm" />
+    <HelpKINode Title="MessageClient.List Method " Url="html/Overload_WebexSDK_MessageClient_List.htm" />
+    <HelpKINode Title="PersonClient.List Method " Url="html/M_WebexSDK_PersonClient_List.htm" />
+    <HelpKINode Title="SpaceClient.List Method " Url="html/M_WebexSDK_SpaceClient_List.htm" />
+    <HelpKINode Title="TeamClient.List Method " Url="html/M_WebexSDK_TeamClient_List.htm" />
+    <HelpKINode Title="TeamMembershipClient.List Method " Url="html/M_WebexSDK_TeamMembershipClient_List.htm" />
+    <HelpKINode Title="WebhookClient.List Method " Url="html/M_WebexSDK_WebhookClient_List.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ListByPersonEmail method" Url="html/M_WebexSDK_MembershipClient_ListByPersonEmail.htm" />
+  <HelpKINode Title="ListByPersonId method" Url="html/M_WebexSDK_MembershipClient_ListByPersonId.htm" />
+  <HelpKINode Title="LocalCancel class">
+    <HelpKINode Title="LocalCancel Class" Url="html/T_WebexSDK_LocalCancel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_LocalCancel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LocalDecline class">
+    <HelpKINode Title="LocalDecline Class" Url="html/T_WebexSDK_LocalDecline.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_LocalDecline.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LocalFile class">
+    <HelpKINode Title="LocalFile Class" Url="html/T_WebexSDK_LocalFile.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_LocalFile__ctor.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_LocalFile.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LocalFile.LocalFile constructor" Url="html/M_WebexSDK_LocalFile__ctor.htm" />
+  <HelpKINode Title="LocalFile.LocalThumbnail property" Url="html/P_WebexSDK_LocalFile_LocalThumbnail.htm" />
+  <HelpKINode Title="LocalFile.Mime property" Url="html/P_WebexSDK_LocalFile_Mime.htm" />
+  <HelpKINode Title="LocalFile.Name property" Url="html/P_WebexSDK_LocalFile_Name.htm" />
+  <HelpKINode Title="LocalFile.Path property" Url="html/P_WebexSDK_LocalFile_Path.htm" />
+  <HelpKINode Title="LocalFile.Size property" Url="html/P_WebexSDK_LocalFile_Size.htm" />
+  <HelpKINode Title="LocalFile.Thumbnail class">
+    <HelpKINode Title="LocalFile.Thumbnail Class" Url="html/T_WebexSDK_LocalFile_Thumbnail.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_LocalFile_Thumbnail__ctor.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LocalFile.Thumbnail.Height property" Url="html/P_WebexSDK_LocalFile_Thumbnail_Height.htm" />
+  <HelpKINode Title="LocalFile.Thumbnail.Mime property" Url="html/P_WebexSDK_LocalFile_Thumbnail_Mime.htm" />
+  <HelpKINode Title="LocalFile.Thumbnail.Path property" Url="html/P_WebexSDK_LocalFile_Thumbnail_Path.htm" />
+  <HelpKINode Title="LocalFile.Thumbnail.Size property" Url="html/P_WebexSDK_LocalFile_Thumbnail_Size.htm" />
+  <HelpKINode Title="LocalFile.Thumbnail.Thumbnail constructor" Url="html/M_WebexSDK_LocalFile_Thumbnail__ctor.htm" />
+  <HelpKINode Title="LocalFile.Thumbnail.Width property" Url="html/P_WebexSDK_LocalFile_Thumbnail_Width.htm" />
+  <HelpKINode Title="LocalFile.UploadProgressHandler property" Url="html/P_WebexSDK_LocalFile_UploadProgressHandler.htm" />
+  <HelpKINode Title="LocalLeft class">
+    <HelpKINode Title="LocalLeft Class" Url="html/T_WebexSDK_LocalLeft.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_LocalLeft.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LocalThumbnail property" Url="html/P_WebexSDK_LocalFile_LocalThumbnail.htm" />
+  <HelpKINode Title="LocalVideoViewSize property" Url="html/P_WebexSDK_Call_LocalVideoViewSize.htm" />
+  <HelpKINode Title="LocalVideoViewSizeChangedEvent class">
+    <HelpKINode Title="LocalVideoViewSizeChangedEvent Class" Url="html/T_WebexSDK_LocalVideoViewSizeChangedEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_LocalVideoViewSizeChangedEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Log method" Url="html/M_WebexSDK_ILogger_Log.htm" />
+  <HelpKINode Title="Logger property" Url="html/P_WebexSDK_Webex_Logger.htm" />
+  <HelpKINode Title="LogLevel enumeration" Url="html/T_WebexSDK_LogLevel.htm" />
+  <HelpKINode Title="MaxBandwidth1080p enumeration member" Url="html/T_WebexSDK_Phone_DefaultBandwidth.htm" />
+  <HelpKINode Title="MaxBandwidth180p enumeration member" Url="html/T_WebexSDK_Phone_DefaultBandwidth.htm" />
+  <HelpKINode Title="MaxBandwidth360p enumeration member" Url="html/T_WebexSDK_Phone_DefaultBandwidth.htm" />
+  <HelpKINode Title="MaxBandwidth720p enumeration member" Url="html/T_WebexSDK_Phone_DefaultBandwidth.htm" />
+  <HelpKINode Title="MaxBandwidth90p enumeration member" Url="html/T_WebexSDK_Phone_DefaultBandwidth.htm" />
+  <HelpKINode Title="MaxBandwidthAudio enumeration member" Url="html/T_WebexSDK_Phone_DefaultBandwidth.htm" />
+  <HelpKINode Title="MaxBandwidthSession enumeration member" Url="html/T_WebexSDK_Phone_DefaultBandwidth.htm" />
+  <HelpKINode Title="MediaChangedEvent class">
+    <HelpKINode Title="MediaChangedEvent Class" Url="html/T_WebexSDK_MediaChangedEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_MediaChangedEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MediaOption class">
+    <HelpKINode Title="MediaOption Class" Url="html/T_WebexSDK_MediaOption.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WebexSDK_MediaOption.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MediaOption.AudioOnly method" Url="html/M_WebexSDK_MediaOption_AudioOnly.htm" />
+  <HelpKINode Title="MediaOption.AudioVideo method" Url="html/M_WebexSDK_MediaOption_AudioVideo.htm" />
+  <HelpKINode Title="MediaOption.AudioVideoShare method" Url="html/M_WebexSDK_MediaOption_AudioVideoShare.htm" />
+  <HelpKINode Title="Membership class">
+    <HelpKINode Title="Membership Class" Url="html/T_WebexSDK_Membership.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_Membership__ctor.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_Membership.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Membership.Created property" Url="html/P_WebexSDK_Membership_Created.htm" />
+  <HelpKINode Title="Membership.Id property" Url="html/P_WebexSDK_Membership_Id.htm" />
+  <HelpKINode Title="Membership.IsModerator property" Url="html/P_WebexSDK_Membership_IsModerator.htm" />
+  <HelpKINode Title="Membership.IsMonitor property" Url="html/P_WebexSDK_Membership_IsMonitor.htm" />
+  <HelpKINode Title="Membership.Membership constructor" Url="html/M_WebexSDK_Membership__ctor.htm" />
+  <HelpKINode Title="Membership.PersonDisplayName property" Url="html/P_WebexSDK_Membership_PersonDisplayName.htm" />
+  <HelpKINode Title="Membership.PersonEmail property" Url="html/P_WebexSDK_Membership_PersonEmail.htm" />
+  <HelpKINode Title="Membership.PersonId property" Url="html/P_WebexSDK_Membership_PersonId.htm" />
+  <HelpKINode Title="Membership.PersonOrgId property" Url="html/P_WebexSDK_Membership_PersonOrgId.htm" />
+  <HelpKINode Title="Membership.SpaceId property" Url="html/P_WebexSDK_Membership_SpaceId.htm" />
+  <HelpKINode Title="MembershipClient class">
+    <HelpKINode Title="MembershipClient Class" Url="html/T_WebexSDK_MembershipClient.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_MembershipClient__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WebexSDK_MembershipClient.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MembershipClient.CreateByPersonEmail method" Url="html/M_WebexSDK_MembershipClient_CreateByPersonEmail.htm" />
+  <HelpKINode Title="MembershipClient.CreateByPersonId method" Url="html/M_WebexSDK_MembershipClient_CreateByPersonId.htm" />
+  <HelpKINode Title="MembershipClient.Delete method" Url="html/M_WebexSDK_MembershipClient_Delete.htm" />
+  <HelpKINode Title="MembershipClient.Get method" Url="html/M_WebexSDK_MembershipClient_Get.htm" />
+  <HelpKINode Title="MembershipClient.List method" Url="html/Overload_WebexSDK_MembershipClient_List.htm" />
+  <HelpKINode Title="MembershipClient.ListByPersonEmail method" Url="html/M_WebexSDK_MembershipClient_ListByPersonEmail.htm" />
+  <HelpKINode Title="MembershipClient.ListByPersonId method" Url="html/M_WebexSDK_MembershipClient_ListByPersonId.htm" />
+  <HelpKINode Title="MembershipClient.MembershipClient constructor" Url="html/M_WebexSDK_MembershipClient__ctor.htm" />
+  <HelpKINode Title="MembershipClient.Update method" Url="html/M_WebexSDK_MembershipClient_Update.htm" />
+  <HelpKINode Title="Memberships property">
+    <HelpKINode Title="Call.Memberships Property " Url="html/P_WebexSDK_Call_Memberships.htm" />
+    <HelpKINode Title="Webex.Memberships Property " Url="html/P_WebexSDK_Webex_Memberships.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Mention class" Url="html/T_WebexSDK_Mention.htm" />
+  <HelpKINode Title="MentionAll class">
+    <HelpKINode Title="MentionAll Class" Url="html/T_WebexSDK_MentionAll.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_MentionAll__ctor.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MentionAll.MentionAll constructor" Url="html/M_WebexSDK_MentionAll__ctor.htm" />
+  <HelpKINode Title="MentionPerson class">
+    <HelpKINode Title="MentionPerson Class" Url="html/T_WebexSDK_MentionPerson.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_MentionPerson__ctor.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_MentionPerson.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MentionPerson.MentionPerson constructor" Url="html/M_WebexSDK_MentionPerson__ctor.htm" />
+  <HelpKINode Title="MentionPerson.PersonId property" Url="html/P_WebexSDK_MentionPerson_PersonId.htm" />
+  <HelpKINode Title="Message class">
+    <HelpKINode Title="Message Class" Url="html/T_WebexSDK_Message.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_Message__ctor.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_Message.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Message property" Url="html/P_WebexSDK_MessageArrived_Message.htm" />
+  <HelpKINode Title="Message.Created property" Url="html/P_WebexSDK_Message_Created.htm" />
+  <HelpKINode Title="Message.Files property" Url="html/P_WebexSDK_Message_Files.htm" />
+  <HelpKINode Title="Message.Id property" Url="html/P_WebexSDK_Message_Id.htm" />
+  <HelpKINode Title="Message.IsSelfMentioned property" Url="html/P_WebexSDK_Message_IsSelfMentioned.htm" />
+  <HelpKINode Title="Message.Message constructor" Url="html/M_WebexSDK_Message__ctor.htm" />
+  <HelpKINode Title="Message.PersonEmail property" Url="html/P_WebexSDK_Message_PersonEmail.htm" />
+  <HelpKINode Title="Message.PersonId property" Url="html/P_WebexSDK_Message_PersonId.htm" />
+  <HelpKINode Title="Message.SpaceId property" Url="html/P_WebexSDK_Message_SpaceId.htm" />
+  <HelpKINode Title="Message.SpaceType property" Url="html/P_WebexSDK_Message_SpaceType.htm" />
+  <HelpKINode Title="Message.Text property" Url="html/P_WebexSDK_Message_Text.htm" />
+  <HelpKINode Title="Message.ToPersonEmail property" Url="html/P_WebexSDK_Message_ToPersonEmail.htm" />
+  <HelpKINode Title="Message.ToPersonId property" Url="html/P_WebexSDK_Message_ToPersonId.htm" />
+  <HelpKINode Title="MessageArrived class">
+    <HelpKINode Title="MessageArrived Class" Url="html/T_WebexSDK_MessageArrived.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_MessageArrived.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MessageArrived.Message property" Url="html/P_WebexSDK_MessageArrived_Message.htm" />
+  <HelpKINode Title="MessageClient class">
+    <HelpKINode Title="MessageClient Class" Url="html/T_WebexSDK_MessageClient.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WebexSDK_MessageClient.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_MessageClient.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MessageClient.Delete method" Url="html/M_WebexSDK_MessageClient_Delete.htm" />
+  <HelpKINode Title="MessageClient.DownloadFile method" Url="html/M_WebexSDK_MessageClient_DownloadFile.htm" />
+  <HelpKINode Title="MessageClient.DownloadThumbnail method" Url="html/M_WebexSDK_MessageClient_DownloadThumbnail.htm" />
+  <HelpKINode Title="MessageClient.Get method" Url="html/Overload_WebexSDK_MessageClient_Get.htm" />
+  <HelpKINode Title="MessageClient.List method" Url="html/Overload_WebexSDK_MessageClient_List.htm" />
+  <HelpKINode Title="MessageClient.OnEvent property" Url="html/P_WebexSDK_MessageClient_OnEvent.htm" />
+  <HelpKINode Title="MessageClient.PostToPerson method" Url="html/M_WebexSDK_MessageClient_PostToPerson.htm" />
+  <HelpKINode Title="MessageClient.PostToSpace method" Url="html/M_WebexSDK_MessageClient_PostToSpace.htm" />
+  <HelpKINode Title="MessageDeleted class">
+    <HelpKINode Title="MessageDeleted Class" Url="html/T_WebexSDK_MessageDeleted.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_MessageDeleted.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MessageDeleted.MessageId property" Url="html/P_WebexSDK_MessageDeleted_MessageId.htm" />
+  <HelpKINode Title="MessageEvent class" Url="html/T_WebexSDK_MessageEvent.htm" />
+  <HelpKINode Title="MessageId property" Url="html/P_WebexSDK_MessageDeleted_MessageId.htm" />
+  <HelpKINode Title="Messages property" Url="html/P_WebexSDK_Webex_Messages.htm" />
+  <HelpKINode Title="Microphone enumeration member" Url="html/T_WebexSDK_AVIODeviceType.htm" />
+  <HelpKINode Title="Mime property">
+    <HelpKINode Title="LocalFile.Mime Property " Url="html/P_WebexSDK_LocalFile_Mime.htm" />
+    <HelpKINode Title="LocalFile.Thumbnail.Mime Property " Url="html/P_WebexSDK_LocalFile_Thumbnail_Mime.htm" />
+    <HelpKINode Title="RemoteFile.Mime Property " Url="html/P_WebexSDK_RemoteFile_Mime.htm" />
+    <HelpKINode Title="RemoteFile.Thumbnail.Mime Property " Url="html/P_WebexSDK_RemoteFile_Thumbnail_Mime.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Name property">
+    <HelpKINode Title="AVIODevice.Name Property " Url="html/P_WebexSDK_AVIODevice_Name.htm" />
+    <HelpKINode Title="LocalFile.Name Property " Url="html/P_WebexSDK_LocalFile_Name.htm" />
+    <HelpKINode Title="RemoteFile.Name Property " Url="html/P_WebexSDK_RemoteFile_Name.htm" />
+    <HelpKINode Title="ShareSource.Name Property " Url="html/P_WebexSDK_ShareSource_Name.htm" />
+    <HelpKINode Title="Team.Name Property " Url="html/P_WebexSDK_Team_Name.htm" />
+    <HelpKINode Title="Webhook.Name Property " Url="html/P_WebexSDK_Webhook_Name.htm" />
+  </HelpKINode>
+  <HelpKINode Title="NickName property" Url="html/P_WebexSDK_Person_NickName.htm" />
+  <HelpKINode Title="Notified enumeration member" Url="html/T_WebexSDK_CallMembership_CallState.htm" />
+  <HelpKINode Title="OAuthAuthenticator class">
+    <HelpKINode Title="OAuthAuthenticator Class" Url="html/T_WebexSDK_OAuthAuthenticator.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_OAuthAuthenticator__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WebexSDK_OAuthAuthenticator.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_OAuthAuthenticator.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OAuthAuthenticator.AccessToken method" Url="html/M_WebexSDK_OAuthAuthenticator_AccessToken.htm" />
+  <HelpKINode Title="OAuthAuthenticator.AuthorizationUrl property" Url="html/P_WebexSDK_OAuthAuthenticator_AuthorizationUrl.htm" />
+  <HelpKINode Title="OAuthAuthenticator.Authorize method" Url="html/M_WebexSDK_OAuthAuthenticator_Authorize.htm" />
+  <HelpKINode Title="OAuthAuthenticator.Authorized method" Url="html/M_WebexSDK_OAuthAuthenticator_Authorized.htm" />
+  <HelpKINode Title="OAuthAuthenticator.Deauthorize method" Url="html/M_WebexSDK_OAuthAuthenticator_Deauthorize.htm" />
+  <HelpKINode Title="OAuthAuthenticator.OAuthAuthenticator constructor" Url="html/M_WebexSDK_OAuthAuthenticator__ctor.htm" />
+  <HelpKINode Title="OAuthAuthenticator.RefreshToken method" Url="html/M_WebexSDK_OAuthAuthenticator_RefreshToken.htm" />
+  <HelpKINode Title="OnCallMembershipChanged event" Url="html/E_WebexSDK_Call_OnCallMembershipChanged.htm" />
+  <HelpKINode Title="OnCapabilitiesChanged event" Url="html/E_WebexSDK_Call_OnCapabilitiesChanged.htm" />
+  <HelpKINode Title="OnConnected event" Url="html/E_WebexSDK_Call_OnConnected.htm" />
+  <HelpKINode Title="OnDisconnected event" Url="html/E_WebexSDK_Call_OnDisconnected.htm" />
+  <HelpKINode Title="OnEvent property" Url="html/P_WebexSDK_MessageClient_OnEvent.htm" />
+  <HelpKINode Title="OnIncoming event" Url="html/E_WebexSDK_Phone_OnIncoming.htm" />
+  <HelpKINode Title="OnMediaChanged event" Url="html/E_WebexSDK_Call_OnMediaChanged.htm" />
+  <HelpKINode Title="OnRequestVideoCodecActivation event" Url="html/E_WebexSDK_Phone_OnRequestVideoCodecActivation.htm" />
+  <HelpKINode Title="OnRinging event" Url="html/E_WebexSDK_Call_OnRinging.htm" />
+  <HelpKINode Title="OrgId property" Url="html/P_WebexSDK_Person_OrgId.htm" />
+  <HelpKINode Title="OtherConnected class">
+    <HelpKINode Title="OtherConnected Class" Url="html/T_WebexSDK_OtherConnected.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_OtherConnected.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OtherDeclined class">
+    <HelpKINode Title="OtherDeclined Class" Url="html/T_WebexSDK_OtherDeclined.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_OtherDeclined.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Outgoing enumeration member" Url="html/T_WebexSDK_Call_CallDirection.htm" />
+  <HelpKINode Title="Path property">
+    <HelpKINode Title="LocalFile.Path Property " Url="html/P_WebexSDK_LocalFile_Path.htm" />
+    <HelpKINode Title="LocalFile.Thumbnail.Path Property " Url="html/P_WebexSDK_LocalFile_Thumbnail_Path.htm" />
+  </HelpKINode>
+  <HelpKINode Title="People property" Url="html/P_WebexSDK_Webex_People.htm" />
+  <HelpKINode Title="Person class">
+    <HelpKINode Title="Person Class" Url="html/T_WebexSDK_Person.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_Person__ctor.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_Person.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Person property" Url="html/P_WebexSDK_Call_RemoteAuxVideo_Person.htm" />
+  <HelpKINode Title="Person.Avatar property" Url="html/P_WebexSDK_Person_Avatar.htm" />
+  <HelpKINode Title="Person.Created property" Url="html/P_WebexSDK_Person_Created.htm" />
+  <HelpKINode Title="Person.DisplayName property" Url="html/P_WebexSDK_Person_DisplayName.htm" />
+  <HelpKINode Title="Person.Emails property" Url="html/P_WebexSDK_Person_Emails.htm" />
+  <HelpKINode Title="Person.FirstName property" Url="html/P_WebexSDK_Person_FirstName.htm" />
+  <HelpKINode Title="Person.Id property" Url="html/P_WebexSDK_Person_Id.htm" />
+  <HelpKINode Title="Person.LastName property" Url="html/P_WebexSDK_Person_LastName.htm" />
+  <HelpKINode Title="Person.NickName property" Url="html/P_WebexSDK_Person_NickName.htm" />
+  <HelpKINode Title="Person.OrgId property" Url="html/P_WebexSDK_Person_OrgId.htm" />
+  <HelpKINode Title="Person.Person constructor" Url="html/M_WebexSDK_Person__ctor.htm" />
+  <HelpKINode Title="Person.Type property" Url="html/P_WebexSDK_Person_Type.htm" />
+  <HelpKINode Title="PersonClient class">
+    <HelpKINode Title="PersonClient Class" Url="html/T_WebexSDK_PersonClient.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_PersonClient__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WebexSDK_PersonClient.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PersonClient.Get method" Url="html/M_WebexSDK_PersonClient_Get.htm" />
+  <HelpKINode Title="PersonClient.GetMe method" Url="html/M_WebexSDK_PersonClient_GetMe.htm" />
+  <HelpKINode Title="PersonClient.List method" Url="html/M_WebexSDK_PersonClient_List.htm" />
+  <HelpKINode Title="PersonClient.PersonClient constructor" Url="html/M_WebexSDK_PersonClient__ctor.htm" />
+  <HelpKINode Title="PersonDisplayName property">
+    <HelpKINode Title="Membership.PersonDisplayName Property " Url="html/P_WebexSDK_Membership_PersonDisplayName.htm" />
+    <HelpKINode Title="TeamMembership.PersonDisplayName Property " Url="html/P_WebexSDK_TeamMembership_PersonDisplayName.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PersonEmail property">
+    <HelpKINode Title="Membership.PersonEmail Property " Url="html/P_WebexSDK_Membership_PersonEmail.htm" />
+    <HelpKINode Title="Message.PersonEmail Property " Url="html/P_WebexSDK_Message_PersonEmail.htm" />
+    <HelpKINode Title="TeamMembership.PersonEmail Property " Url="html/P_WebexSDK_TeamMembership_PersonEmail.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PersonId property">
+    <HelpKINode Title="CallMembership.PersonId Property " Url="html/P_WebexSDK_CallMembership_PersonId.htm" />
+    <HelpKINode Title="Membership.PersonId Property " Url="html/P_WebexSDK_Membership_PersonId.htm" />
+    <HelpKINode Title="MentionPerson.PersonId Property " Url="html/P_WebexSDK_MentionPerson_PersonId.htm" />
+    <HelpKINode Title="Message.PersonId Property " Url="html/P_WebexSDK_Message_PersonId.htm" />
+    <HelpKINode Title="TeamMembership.PersonId Property " Url="html/P_WebexSDK_TeamMembership_PersonId.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PersonOrgId property">
+    <HelpKINode Title="Membership.PersonOrgId Property " Url="html/P_WebexSDK_Membership_PersonOrgId.htm" />
+    <HelpKINode Title="TeamMembership.PersonOrgId Property " Url="html/P_WebexSDK_TeamMembership_PersonOrgId.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Phone class">
+    <HelpKINode Title="Phone Class" Url="html/T_WebexSDK_Phone.htm" />
+    <HelpKINode Title="events" Url="html/Events_T_WebexSDK_Phone.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WebexSDK_Phone.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_Phone.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Phone property" Url="html/P_WebexSDK_Webex_Phone.htm" />
+  <HelpKINode Title="Phone.ActivateVideoCodecLicense method" Url="html/M_WebexSDK_Phone_ActivateVideoCodecLicense.htm" />
+  <HelpKINode Title="Phone.AudioMaxBandwidth property" Url="html/P_WebexSDK_Phone_AudioMaxBandwidth.htm" />
+  <HelpKINode Title="Phone.DefaultBandwidth enumeration" Url="html/T_WebexSDK_Phone_DefaultBandwidth.htm" />
+  <HelpKINode Title="Phone.Deregister method" Url="html/M_WebexSDK_Phone_Deregister.htm" />
+  <HelpKINode Title="Phone.Dial method" Url="html/M_WebexSDK_Phone_Dial.htm" />
+  <HelpKINode Title="Phone.DisableVideoCodecActivation method" Url="html/M_WebexSDK_Phone_DisableVideoCodecActivation.htm" />
+  <HelpKINode Title="Phone.GetAVIODevices method" Url="html/M_WebexSDK_Phone_GetAVIODevices.htm" />
+  <HelpKINode Title="Phone.OnIncoming event" Url="html/E_WebexSDK_Phone_OnIncoming.htm" />
+  <HelpKINode Title="Phone.OnRequestVideoCodecActivation event" Url="html/E_WebexSDK_Phone_OnRequestVideoCodecActivation.htm" />
+  <HelpKINode Title="Phone.Register method" Url="html/M_WebexSDK_Phone_Register.htm" />
+  <HelpKINode Title="Phone.RequestVideoCodecActivation method" Url="html/M_WebexSDK_Phone_RequestVideoCodecActivation.htm" />
+  <HelpKINode Title="Phone.SelectAVIODevice method" Url="html/M_WebexSDK_Phone_SelectAVIODevice.htm" />
+  <HelpKINode Title="Phone.ShareMaxBandwidth property" Url="html/P_WebexSDK_Phone_ShareMaxBandwidth.htm" />
+  <HelpKINode Title="Phone.StartPreview method" Url="html/M_WebexSDK_Phone_StartPreview.htm" />
+  <HelpKINode Title="Phone.StopPreview method" Url="html/M_WebexSDK_Phone_StopPreview.htm" />
+  <HelpKINode Title="Phone.UpdatePreview method" Url="html/M_WebexSDK_Phone_UpdatePreview.htm" />
+  <HelpKINode Title="Phone.VideoCodecLicense property" Url="html/P_WebexSDK_Phone_VideoCodecLicense.htm" />
+  <HelpKINode Title="Phone.VideoCodecLicenseURL property" Url="html/P_WebexSDK_Phone_VideoCodecLicenseURL.htm" />
+  <HelpKINode Title="Phone.VideoMaxBandwidth property" Url="html/P_WebexSDK_Phone_VideoMaxBandwidth.htm" />
+  <HelpKINode Title="PhoneNumber property" Url="html/P_WebexSDK_CallMembership_PhoneNumber.htm" />
+  <HelpKINode Title="PostToPerson method" Url="html/M_WebexSDK_MessageClient_PostToPerson.htm" />
+  <HelpKINode Title="PostToSpace method" Url="html/M_WebexSDK_MessageClient_PostToSpace.htm" />
+  <HelpKINode Title="Reason property" Url="html/P_WebexSDK_WebexError_Reason.htm" />
+  <HelpKINode Title="ReceivingAudioEvent class">
+    <HelpKINode Title="ReceivingAudioEvent Class" Url="html/T_WebexSDK_ReceivingAudioEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_ReceivingAudioEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ReceivingAudioEvent.IsReceiving property" Url="html/P_WebexSDK_ReceivingAudioEvent_IsReceiving.htm" />
+  <HelpKINode Title="ReceivingAuxVideoEvent class">
+    <HelpKINode Title="ReceivingAuxVideoEvent Class" Url="html/T_WebexSDK_ReceivingAuxVideoEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_ReceivingAuxVideoEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ReceivingShareEvent class">
+    <HelpKINode Title="ReceivingShareEvent Class" Url="html/T_WebexSDK_ReceivingShareEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_ReceivingShareEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ReceivingShareEvent.IsReceiving property" Url="html/P_WebexSDK_ReceivingShareEvent_IsReceiving.htm" />
+  <HelpKINode Title="ReceivingVideoEvent class">
+    <HelpKINode Title="ReceivingVideoEvent Class" Url="html/T_WebexSDK_ReceivingVideoEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_ReceivingVideoEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ReceivingVideoEvent.IsReceiving property" Url="html/P_WebexSDK_ReceivingVideoEvent_IsReceiving.htm" />
+  <HelpKINode Title="RefreshToken method">
+    <HelpKINode Title="IAuthenticator.RefreshToken Method " Url="html/M_WebexSDK_IAuthenticator_RefreshToken.htm" />
+    <HelpKINode Title="JWTAuthenticator.RefreshToken Method " Url="html/M_WebexSDK_JWTAuthenticator_RefreshToken.htm" />
+    <HelpKINode Title="OAuthAuthenticator.RefreshToken Method " Url="html/M_WebexSDK_OAuthAuthenticator_RefreshToken.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Register method" Url="html/M_WebexSDK_Phone_Register.htm" />
+  <HelpKINode Title="Reject method" Url="html/M_WebexSDK_Call_Reject.htm" />
+  <HelpKINode Title="RemoteAuxSendingVideoEvent class">
+    <HelpKINode Title="RemoteAuxSendingVideoEvent Class" Url="html/T_WebexSDK_RemoteAuxSendingVideoEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_RemoteAuxSendingVideoEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoteAuxVideo class">
+    <HelpKINode Title="methods" Url="html/Methods_T_WebexSDK_Call_RemoteAuxVideo.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_Call_RemoteAuxVideo.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoteAuxVideo property" Url="html/P_WebexSDK_RemoteAuxVideoChangedEvent_RemoteAuxVideo.htm" />
+  <HelpKINode Title="RemoteAuxVideoChangedEvent class">
+    <HelpKINode Title="RemoteAuxVideoChangedEvent Class" Url="html/T_WebexSDK_RemoteAuxVideoChangedEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_RemoteAuxVideoChangedEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoteAuxVideoChangedEvent.RemoteAuxVideo property" Url="html/P_WebexSDK_RemoteAuxVideoChangedEvent_RemoteAuxVideo.htm" />
+  <HelpKINode Title="RemoteAuxVideoPersonChangedEvent class">
+    <HelpKINode Title="RemoteAuxVideoPersonChangedEvent Class" Url="html/T_WebexSDK_RemoteAuxVideoPersonChangedEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_RemoteAuxVideoPersonChangedEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoteAuxVideoPersonChangedEvent.FromPerson property" Url="html/P_WebexSDK_RemoteAuxVideoPersonChangedEvent_FromPerson.htm" />
+  <HelpKINode Title="RemoteAuxVideoPersonChangedEvent.ToPerson property" Url="html/P_WebexSDK_RemoteAuxVideoPersonChangedEvent_ToPerson.htm" />
+  <HelpKINode Title="RemoteAuxVideos property" Url="html/P_WebexSDK_Call_RemoteAuxVideos.htm" />
+  <HelpKINode Title="RemoteAuxVideosCountChangedEvent class">
+    <HelpKINode Title="RemoteAuxVideosCountChangedEvent Class" Url="html/T_WebexSDK_RemoteAuxVideosCountChangedEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_RemoteAuxVideosCountChangedEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoteAuxVideosCountChangedEvent.Count property" Url="html/P_WebexSDK_RemoteAuxVideosCountChangedEvent_Count.htm" />
+  <HelpKINode Title="RemoteAuxVideoSize property" Url="html/P_WebexSDK_Call_RemoteAuxVideo_RemoteAuxVideoSize.htm" />
+  <HelpKINode Title="RemoteAuxVideoSizeChangedEvent class">
+    <HelpKINode Title="RemoteAuxVideoSizeChangedEvent Class" Url="html/T_WebexSDK_RemoteAuxVideoSizeChangedEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_RemoteAuxVideoSizeChangedEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoteAvailableAuxVideoCount property" Url="html/P_WebexSDK_Call_RemoteAvailableAuxVideoCount.htm" />
+  <HelpKINode Title="RemoteCancel class">
+    <HelpKINode Title="RemoteCancel Class" Url="html/T_WebexSDK_RemoteCancel.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_RemoteCancel.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoteDecline class">
+    <HelpKINode Title="RemoteDecline Class" Url="html/T_WebexSDK_RemoteDecline.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_RemoteDecline.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoteFile class">
+    <HelpKINode Title="RemoteFile Class" Url="html/T_WebexSDK_RemoteFile.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_RemoteFile__ctor.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_RemoteFile.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoteFile.Mime property" Url="html/P_WebexSDK_RemoteFile_Mime.htm" />
+  <HelpKINode Title="RemoteFile.Name property" Url="html/P_WebexSDK_RemoteFile_Name.htm" />
+  <HelpKINode Title="RemoteFile.RemoteFile constructor" Url="html/M_WebexSDK_RemoteFile__ctor.htm" />
+  <HelpKINode Title="RemoteFile.RemoteThumbnail property" Url="html/P_WebexSDK_RemoteFile_RemoteThumbnail.htm" />
+  <HelpKINode Title="RemoteFile.Size property" Url="html/P_WebexSDK_RemoteFile_Size.htm" />
+  <HelpKINode Title="RemoteFile.Thumbnail class">
+    <HelpKINode Title="RemoteFile.Thumbnail Class" Url="html/T_WebexSDK_RemoteFile_Thumbnail.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_RemoteFile_Thumbnail__ctor.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoteFile.Thumbnail.Height property" Url="html/P_WebexSDK_RemoteFile_Thumbnail_Height.htm" />
+  <HelpKINode Title="RemoteFile.Thumbnail.Mime property" Url="html/P_WebexSDK_RemoteFile_Thumbnail_Mime.htm" />
+  <HelpKINode Title="RemoteFile.Thumbnail.Thumbnail constructor" Url="html/M_WebexSDK_RemoteFile_Thumbnail__ctor.htm" />
+  <HelpKINode Title="RemoteFile.Thumbnail.Width property" Url="html/P_WebexSDK_RemoteFile_Thumbnail_Width.htm" />
+  <HelpKINode Title="RemoteLeft class">
+    <HelpKINode Title="RemoteLeft Class" Url="html/T_WebexSDK_RemoteLeft.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_RemoteLeft.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoteSendingAudioEvent class">
+    <HelpKINode Title="RemoteSendingAudioEvent Class" Url="html/T_WebexSDK_RemoteSendingAudioEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_RemoteSendingAudioEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoteSendingAudioEvent.IsSending property" Url="html/P_WebexSDK_RemoteSendingAudioEvent_IsSending.htm" />
+  <HelpKINode Title="RemoteSendingShareEvent class">
+    <HelpKINode Title="RemoteSendingShareEvent Class" Url="html/T_WebexSDK_RemoteSendingShareEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_RemoteSendingShareEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoteSendingShareEvent.IsSending property" Url="html/P_WebexSDK_RemoteSendingShareEvent_IsSending.htm" />
+  <HelpKINode Title="RemoteSendingVideoEvent class">
+    <HelpKINode Title="RemoteSendingVideoEvent Class" Url="html/T_WebexSDK_RemoteSendingVideoEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_RemoteSendingVideoEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoteSendingVideoEvent.IsSending property" Url="html/P_WebexSDK_RemoteSendingVideoEvent_IsSending.htm" />
+  <HelpKINode Title="RemoteShareViewSize property" Url="html/P_WebexSDK_Call_RemoteShareViewSize.htm" />
+  <HelpKINode Title="RemoteShareViewSizeChangedEvent class">
+    <HelpKINode Title="RemoteShareViewSizeChangedEvent Class" Url="html/T_WebexSDK_RemoteShareViewSizeChangedEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_RemoteShareViewSizeChangedEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoteThumbnail property" Url="html/P_WebexSDK_RemoteFile_RemoteThumbnail.htm" />
+  <HelpKINode Title="RemoteVideoViewSize property" Url="html/P_WebexSDK_Call_RemoteVideoViewSize.htm" />
+  <HelpKINode Title="RemoteVideoViewSizeChangedEvent class">
+    <HelpKINode Title="RemoteVideoViewSizeChangedEvent Class" Url="html/T_WebexSDK_RemoteVideoViewSizeChangedEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_RemoteVideoViewSizeChangedEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RemoveViewHandle method" Url="html/M_WebexSDK_Call_RemoteAuxVideo_RemoveViewHandle.htm" />
+  <HelpKINode Title="RequestVideoCodecActivation method" Url="html/M_WebexSDK_Phone_RequestVideoCodecActivation.htm" />
+  <HelpKINode Title="RequireH264 enumeration member" Url="html/T_WebexSDK_WebexErrorCode.htm" />
+  <HelpKINode Title="Resource property" Url="html/P_WebexSDK_Webhook_Resource.htm" />
+  <HelpKINode Title="Ringer enumeration member" Url="html/T_WebexSDK_AVIODeviceType.htm" />
+  <HelpKINode Title="Ringing enumeration member" Url="html/T_WebexSDK_CallStatus.htm" />
+  <HelpKINode Title="Secret property" Url="html/P_WebexSDK_Webhook_Secret.htm" />
+  <HelpKINode Title="SelectAVIODevice method" Url="html/M_WebexSDK_Phone_SelectAVIODevice.htm" />
+  <HelpKINode Title="SendDtmf method" Url="html/M_WebexSDK_Call_SendDtmf.htm" />
+  <HelpKINode Title="SendFeedbackWith method" Url="html/M_WebexSDK_Call_SendFeedbackWith.htm" />
+  <HelpKINode Title="SendingAudioEvent class">
+    <HelpKINode Title="SendingAudioEvent Class" Url="html/T_WebexSDK_SendingAudioEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_SendingAudioEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SendingAudioEvent.IsSending property" Url="html/P_WebexSDK_SendingAudioEvent_IsSending.htm" />
+  <HelpKINode Title="SendingShareEvent class">
+    <HelpKINode Title="SendingShareEvent Class" Url="html/T_WebexSDK_SendingShareEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_SendingShareEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SendingShareEvent.IsSending property" Url="html/P_WebexSDK_SendingShareEvent_IsSending.htm" />
+  <HelpKINode Title="SendingVideoEvent class">
+    <HelpKINode Title="SendingVideoEvent Class" Url="html/T_WebexSDK_SendingVideoEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_SendingVideoEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SendingVideoEvent.IsSending property" Url="html/P_WebexSDK_SendingVideoEvent_IsSending.htm" />
+  <HelpKINode Title="ServiceFailed enumeration member" Url="html/T_WebexSDK_WebexErrorCode.htm" />
+  <HelpKINode Title="SetLocalView method" Url="html/M_WebexSDK_Call_SetLocalView.htm" />
+  <HelpKINode Title="SetRemoteShareView method" Url="html/M_WebexSDK_Call_SetRemoteShareView.htm" />
+  <HelpKINode Title="SetRemoteView method" Url="html/M_WebexSDK_Call_SetRemoteView.htm" />
+  <HelpKINode Title="ShareMaxBandwidth property" Url="html/P_WebexSDK_Phone_ShareMaxBandwidth.htm" />
+  <HelpKINode Title="ShareSource class">
+    <HelpKINode Title="ShareSource Class" Url="html/T_WebexSDK_ShareSource.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_ShareSource__ctor.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_ShareSource.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ShareSource.Name property" Url="html/P_WebexSDK_ShareSource_Name.htm" />
+  <HelpKINode Title="ShareSource.ShareSource constructor" Url="html/M_WebexSDK_ShareSource__ctor.htm" />
+  <HelpKINode Title="ShareSource.SourceId property" Url="html/P_WebexSDK_ShareSource_SourceId.htm" />
+  <HelpKINode Title="ShareSourceType enumeration" Url="html/T_WebexSDK_ShareSourceType.htm" />
+  <HelpKINode Title="SipUrl property" Url="html/P_WebexSDK_CallMembership_SipUrl.htm" />
+  <HelpKINode Title="Size property">
+    <HelpKINode Title="LocalFile.Size Property " Url="html/P_WebexSDK_LocalFile_Size.htm" />
+    <HelpKINode Title="LocalFile.Thumbnail.Size Property " Url="html/P_WebexSDK_LocalFile_Thumbnail_Size.htm" />
+    <HelpKINode Title="RemoteFile.Size Property " Url="html/P_WebexSDK_RemoteFile_Size.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SourceId property" Url="html/P_WebexSDK_ShareSource_SourceId.htm" />
+  <HelpKINode Title="Space class">
+    <HelpKINode Title="Space Class" Url="html/T_WebexSDK_Space.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_Space__ctor.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_Space.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Space.Created property" Url="html/P_WebexSDK_Space_Created.htm" />
+  <HelpKINode Title="Space.Id property" Url="html/P_WebexSDK_Space_Id.htm" />
+  <HelpKINode Title="Space.IsLocked property" Url="html/P_WebexSDK_Space_IsLocked.htm" />
+  <HelpKINode Title="Space.LastActivity property" Url="html/P_WebexSDK_Space_LastActivity.htm" />
+  <HelpKINode Title="Space.Space constructor" Url="html/M_WebexSDK_Space__ctor.htm" />
+  <HelpKINode Title="Space.TeamId property" Url="html/P_WebexSDK_Space_TeamId.htm" />
+  <HelpKINode Title="Space.Title property" Url="html/P_WebexSDK_Space_Title.htm" />
+  <HelpKINode Title="Space.Type property" Url="html/P_WebexSDK_Space_Type.htm" />
+  <HelpKINode Title="SpaceClient class">
+    <HelpKINode Title="SpaceClient Class" Url="html/T_WebexSDK_SpaceClient.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_SpaceClient__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WebexSDK_SpaceClient.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SpaceClient.Create method" Url="html/M_WebexSDK_SpaceClient_Create.htm" />
+  <HelpKINode Title="SpaceClient.Delete method" Url="html/M_WebexSDK_SpaceClient_Delete.htm" />
+  <HelpKINode Title="SpaceClient.Get method" Url="html/M_WebexSDK_SpaceClient_Get.htm" />
+  <HelpKINode Title="SpaceClient.List method" Url="html/M_WebexSDK_SpaceClient_List.htm" />
+  <HelpKINode Title="SpaceClient.SpaceClient constructor" Url="html/M_WebexSDK_SpaceClient__ctor.htm" />
+  <HelpKINode Title="SpaceClient.Update method" Url="html/M_WebexSDK_SpaceClient_Update.htm" />
+  <HelpKINode Title="SpaceId property">
+    <HelpKINode Title="Membership.SpaceId Property " Url="html/P_WebexSDK_Membership_SpaceId.htm" />
+    <HelpKINode Title="Message.SpaceId Property " Url="html/P_WebexSDK_Message_SpaceId.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Spaces property" Url="html/P_WebexSDK_Webex_Spaces.htm" />
+  <HelpKINode Title="SpaceSortType enumeration" Url="html/T_WebexSDK_SpaceSortType.htm" />
+  <HelpKINode Title="SpaceType enumeration" Url="html/T_WebexSDK_SpaceType.htm" />
+  <HelpKINode Title="SpaceType property" Url="html/P_WebexSDK_Message_SpaceType.htm" />
+  <HelpKINode Title="Speaker enumeration member" Url="html/T_WebexSDK_AVIODeviceType.htm" />
+  <HelpKINode Title="Speaker property" Url="html/P_WebexSDK_SpeakerSwitchedEvent_Speaker.htm" />
+  <HelpKINode Title="SpeakerSwitchedEvent class">
+    <HelpKINode Title="SpeakerSwitchedEvent Class" Url="html/T_WebexSDK_SpeakerSwitchedEvent.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_SpeakerSwitchedEvent.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SpeakerSwitchedEvent.Speaker property" Url="html/P_WebexSDK_SpeakerSwitchedEvent_Speaker.htm" />
+  <HelpKINode Title="SSOAuthenticator class">
+    <HelpKINode Title="SSOAuthenticator Class" Url="html/T_WebexSDK_SSOAuthenticator.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_SSOAuthenticator__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WebexSDK_SSOAuthenticator.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_SSOAuthenticator.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SSOAuthenticator.AuthorizationUrl property" Url="html/P_WebexSDK_SSOAuthenticator_AuthorizationUrl.htm" />
+  <HelpKINode Title="SSOAuthenticator.SSOAuthenticator constructor" Url="html/M_WebexSDK_SSOAuthenticator__ctor.htm" />
+  <HelpKINode Title="StartPreview method" Url="html/M_WebexSDK_Phone_StartPreview.htm" />
+  <HelpKINode Title="StartShare method" Url="html/M_WebexSDK_Call_StartShare.htm" />
+  <HelpKINode Title="State property" Url="html/P_WebexSDK_CallMembership_State.htm" />
+  <HelpKINode Title="Status property">
+    <HelpKINode Title="Call.Status Property " Url="html/P_WebexSDK_Call_Status.htm" />
+    <HelpKINode Title="Webhook.Status Property " Url="html/P_WebexSDK_Webhook_Status.htm" />
+  </HelpKINode>
+  <HelpKINode Title="StopPreview method" Url="html/M_WebexSDK_Phone_StopPreview.htm" />
+  <HelpKINode Title="StopShare method" Url="html/M_WebexSDK_Call_StopShare.htm" />
+  <HelpKINode Title="SubscribeRemoteAuxVideo method" Url="html/M_WebexSDK_Call_SubscribeRemoteAuxVideo.htm" />
+  <HelpKINode Title="TargetUrl property" Url="html/P_WebexSDK_Webhook_TargetUrl.htm" />
+  <HelpKINode Title="Team class">
+    <HelpKINode Title="Team Class" Url="html/T_WebexSDK_Team.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_Team__ctor.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_Team.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Team.Created property" Url="html/P_WebexSDK_Team_Created.htm" />
+  <HelpKINode Title="Team.Id property" Url="html/P_WebexSDK_Team_Id.htm" />
+  <HelpKINode Title="Team.Name property" Url="html/P_WebexSDK_Team_Name.htm" />
+  <HelpKINode Title="Team.Team constructor" Url="html/M_WebexSDK_Team__ctor.htm" />
+  <HelpKINode Title="TeamClient class">
+    <HelpKINode Title="TeamClient Class" Url="html/T_WebexSDK_TeamClient.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_TeamClient__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WebexSDK_TeamClient.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TeamClient.Create method" Url="html/M_WebexSDK_TeamClient_Create.htm" />
+  <HelpKINode Title="TeamClient.Delete method" Url="html/M_WebexSDK_TeamClient_Delete.htm" />
+  <HelpKINode Title="TeamClient.Get method" Url="html/M_WebexSDK_TeamClient_Get.htm" />
+  <HelpKINode Title="TeamClient.List method" Url="html/M_WebexSDK_TeamClient_List.htm" />
+  <HelpKINode Title="TeamClient.TeamClient constructor" Url="html/M_WebexSDK_TeamClient__ctor.htm" />
+  <HelpKINode Title="TeamClient.Update method" Url="html/M_WebexSDK_TeamClient_Update.htm" />
+  <HelpKINode Title="TeamId property">
+    <HelpKINode Title="Space.TeamId Property " Url="html/P_WebexSDK_Space_TeamId.htm" />
+    <HelpKINode Title="TeamMembership.TeamId Property " Url="html/P_WebexSDK_TeamMembership_TeamId.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TeamMembership class">
+    <HelpKINode Title="TeamMembership Class" Url="html/T_WebexSDK_TeamMembership.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_TeamMembership__ctor.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_TeamMembership.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TeamMembership.Created property" Url="html/P_WebexSDK_TeamMembership_Created.htm" />
+  <HelpKINode Title="TeamMembership.Id property" Url="html/P_WebexSDK_TeamMembership_Id.htm" />
+  <HelpKINode Title="TeamMembership.IsModerator property" Url="html/P_WebexSDK_TeamMembership_IsModerator.htm" />
+  <HelpKINode Title="TeamMembership.PersonDisplayName property" Url="html/P_WebexSDK_TeamMembership_PersonDisplayName.htm" />
+  <HelpKINode Title="TeamMembership.PersonEmail property" Url="html/P_WebexSDK_TeamMembership_PersonEmail.htm" />
+  <HelpKINode Title="TeamMembership.PersonId property" Url="html/P_WebexSDK_TeamMembership_PersonId.htm" />
+  <HelpKINode Title="TeamMembership.PersonOrgId property" Url="html/P_WebexSDK_TeamMembership_PersonOrgId.htm" />
+  <HelpKINode Title="TeamMembership.TeamId property" Url="html/P_WebexSDK_TeamMembership_TeamId.htm" />
+  <HelpKINode Title="TeamMembership.TeamMembership constructor" Url="html/M_WebexSDK_TeamMembership__ctor.htm" />
+  <HelpKINode Title="TeamMembershipClient class">
+    <HelpKINode Title="TeamMembershipClient Class" Url="html/T_WebexSDK_TeamMembershipClient.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_TeamMembershipClient__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WebexSDK_TeamMembershipClient.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TeamMembershipClient.CreateByEmail method" Url="html/M_WebexSDK_TeamMembershipClient_CreateByEmail.htm" />
+  <HelpKINode Title="TeamMembershipClient.CreateById method" Url="html/M_WebexSDK_TeamMembershipClient_CreateById.htm" />
+  <HelpKINode Title="TeamMembershipClient.Delete method" Url="html/M_WebexSDK_TeamMembershipClient_Delete.htm" />
+  <HelpKINode Title="TeamMembershipClient.Get method" Url="html/M_WebexSDK_TeamMembershipClient_Get.htm" />
+  <HelpKINode Title="TeamMembershipClient.List method" Url="html/M_WebexSDK_TeamMembershipClient_List.htm" />
+  <HelpKINode Title="TeamMembershipClient.TeamMembershipClient constructor" Url="html/M_WebexSDK_TeamMembershipClient__ctor.htm" />
+  <HelpKINode Title="TeamMembershipClient.Update method" Url="html/M_WebexSDK_TeamMembershipClient_Update.htm" />
+  <HelpKINode Title="TeamMemberships property" Url="html/P_WebexSDK_Webex_TeamMemberships.htm" />
+  <HelpKINode Title="Teams property" Url="html/P_WebexSDK_Webex_Teams.htm" />
+  <HelpKINode Title="Text property" Url="html/P_WebexSDK_Message_Text.htm" />
+  <HelpKINode Title="Thumbnail class">
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_LocalFile_Thumbnail.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_RemoteFile_Thumbnail.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Title property" Url="html/P_WebexSDK_Space_Title.htm" />
+  <HelpKINode Title="To property" Url="html/P_WebexSDK_Call_To.htm" />
+  <HelpKINode Title="ToPerson property">
+    <HelpKINode Title="ActiveSpeakerChangedEvent.ToPerson Property " Url="html/P_WebexSDK_ActiveSpeakerChangedEvent_ToPerson.htm" />
+    <HelpKINode Title="RemoteAuxVideoPersonChangedEvent.ToPerson Property " Url="html/P_WebexSDK_RemoteAuxVideoPersonChangedEvent_ToPerson.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ToPersonEmail property" Url="html/P_WebexSDK_Message_ToPersonEmail.htm" />
+  <HelpKINode Title="ToPersonId property" Url="html/P_WebexSDK_Message_ToPersonId.htm" />
+  <HelpKINode Title="Trace enumeration member" Url="html/T_WebexSDK_LogLevel.htm" />
+  <HelpKINode Title="Type property">
+    <HelpKINode Title="AVIODevice.Type Property " Url="html/P_WebexSDK_AVIODevice_Type.htm" />
+    <HelpKINode Title="Person.Type Property " Url="html/P_WebexSDK_Person_Type.htm" />
+    <HelpKINode Title="Space.Type Property " Url="html/P_WebexSDK_Space_Type.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Unknown enumeration member" Url="html/T_WebexSDK_CallMembership_CallState.htm" />
+  <HelpKINode Title="Unregistered enumeration member" Url="html/T_WebexSDK_WebexErrorCode.htm" />
+  <HelpKINode Title="UnsubscribeRemoteAuxVideo method" Url="html/M_WebexSDK_Call_UnsubscribeRemoteAuxVideo.htm" />
+  <HelpKINode Title="UnsupportedDTMF enumeration member" Url="html/T_WebexSDK_WebexErrorCode.htm" />
+  <HelpKINode Title="Update method">
+    <HelpKINode Title="MembershipClient.Update Method " Url="html/M_WebexSDK_MembershipClient_Update.htm" />
+    <HelpKINode Title="SpaceClient.Update Method " Url="html/M_WebexSDK_SpaceClient_Update.htm" />
+    <HelpKINode Title="TeamClient.Update Method " Url="html/M_WebexSDK_TeamClient_Update.htm" />
+    <HelpKINode Title="TeamMembershipClient.Update Method " Url="html/M_WebexSDK_TeamMembershipClient_Update.htm" />
+    <HelpKINode Title="WebhookClient.Update Method " Url="html/M_WebexSDK_WebhookClient_Update.htm" />
+  </HelpKINode>
+  <HelpKINode Title="UpdateLocalView method" Url="html/M_WebexSDK_Call_UpdateLocalView.htm" />
+  <HelpKINode Title="UpdatePreview method" Url="html/M_WebexSDK_Phone_UpdatePreview.htm" />
+  <HelpKINode Title="UpdateRemoteShareView method" Url="html/M_WebexSDK_Call_UpdateRemoteShareView.htm" />
+  <HelpKINode Title="UpdateRemoteView method" Url="html/M_WebexSDK_Call_UpdateRemoteView.htm" />
+  <HelpKINode Title="UpdateViewHandle method" Url="html/M_WebexSDK_Call_RemoteAuxVideo_UpdateViewHandle.htm" />
+  <HelpKINode Title="UploadProgressHandler property" Url="html/P_WebexSDK_LocalFile_UploadProgressHandler.htm" />
+  <HelpKINode Title="Version field" Url="html/F_WebexSDK_Webex_Version.htm" />
+  <HelpKINode Title="VideoCodecLicense property" Url="html/P_WebexSDK_Phone_VideoCodecLicense.htm" />
+  <HelpKINode Title="VideoCodecLicenseURL property" Url="html/P_WebexSDK_Phone_VideoCodecLicenseURL.htm" />
+  <HelpKINode Title="VideoDimensions structure">
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_Call_VideoDimensions.htm" />
+  </HelpKINode>
+  <HelpKINode Title="VideoMaxBandwidth property" Url="html/P_WebexSDK_Phone_VideoMaxBandwidth.htm" />
+  <HelpKINode Title="Warn enumeration member" Url="html/T_WebexSDK_LogLevel.htm" />
+  <HelpKINode Title="Webex class">
+    <HelpKINode Title="Webex Class" Url="html/T_WebexSDK_Webex.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_Webex__ctor.htm" />
+    <HelpKINode Title="fields" Url="html/Fields_T_WebexSDK_Webex.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_Webex.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Webex.Authenticator property" Url="html/P_WebexSDK_Webex_Authenticator.htm" />
+  <HelpKINode Title="Webex.ConsoleLogger property" Url="html/P_WebexSDK_Webex_ConsoleLogger.htm" />
+  <HelpKINode Title="Webex.Logger property" Url="html/P_WebexSDK_Webex_Logger.htm" />
+  <HelpKINode Title="Webex.Memberships property" Url="html/P_WebexSDK_Webex_Memberships.htm" />
+  <HelpKINode Title="Webex.Messages property" Url="html/P_WebexSDK_Webex_Messages.htm" />
+  <HelpKINode Title="Webex.People property" Url="html/P_WebexSDK_Webex_People.htm" />
+  <HelpKINode Title="Webex.Phone property" Url="html/P_WebexSDK_Webex_Phone.htm" />
+  <HelpKINode Title="Webex.Spaces property" Url="html/P_WebexSDK_Webex_Spaces.htm" />
+  <HelpKINode Title="Webex.TeamMemberships property" Url="html/P_WebexSDK_Webex_TeamMemberships.htm" />
+  <HelpKINode Title="Webex.Teams property" Url="html/P_WebexSDK_Webex_Teams.htm" />
+  <HelpKINode Title="Webex.Version field" Url="html/F_WebexSDK_Webex_Version.htm" />
+  <HelpKINode Title="Webex.Webex constructor" Url="html/M_WebexSDK_Webex__ctor.htm" />
+  <HelpKINode Title="Webex.Webhooks property" Url="html/P_WebexSDK_Webex_Webhooks.htm" />
+  <HelpKINode Title="WebexApiEventArgs class">
+    <HelpKINode Title="WebexApiEventArgs Class" Url="html/T_WebexSDK_WebexApiEventArgs.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_WebexSDK_WebexApiEventArgs__ctor.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_WebexApiEventArgs.htm" />
+  </HelpKINode>
+  <HelpKINode Title="WebexApiEventArgs(Of T) class">
+    <HelpKINode Title="WebexApiEventArgs(T) Class" Url="html/T_WebexSDK_WebexApiEventArgs_1.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_WebexSDK_WebexApiEventArgs_1__ctor.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_WebexApiEventArgs_1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="WebexApiEventArgs(Of T).Data property" Url="html/P_WebexSDK_WebexApiEventArgs_1_Data.htm" />
+  <HelpKINode Title="WebexApiEventArgs(Of T).WebexApiEventArgs constructor" Url="html/Overload_WebexSDK_WebexApiEventArgs_1__ctor.htm" />
+  <HelpKINode Title="WebexApiEventArgs.Error property" Url="html/P_WebexSDK_WebexApiEventArgs_Error.htm" />
+  <HelpKINode Title="WebexApiEventArgs.IsSuccess property" Url="html/P_WebexSDK_WebexApiEventArgs_IsSuccess.htm" />
+  <HelpKINode Title="WebexApiEventArgs.WebexApiEventArgs constructor" Url="html/Overload_WebexSDK_WebexApiEventArgs__ctor.htm" />
+  <HelpKINode Title="WebexApiEventArgs&lt;T&gt; class">
+    <HelpKINode Title="WebexApiEventArgs(T) Class" Url="html/T_WebexSDK_WebexApiEventArgs_1.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload_WebexSDK_WebexApiEventArgs_1__ctor.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_WebexApiEventArgs_1.htm" />
+  </HelpKINode>
+  <HelpKINode Title="WebexApiEventArgs&lt;T&gt;.Data property" Url="html/P_WebexSDK_WebexApiEventArgs_1_Data.htm" />
+  <HelpKINode Title="WebexApiEventArgs&lt;T&gt;.WebexApiEventArgs constructor" Url="html/Overload_WebexSDK_WebexApiEventArgs_1__ctor.htm" />
+  <HelpKINode Title="WebexError class">
+    <HelpKINode Title="WebexError Class" Url="html/T_WebexSDK_WebexError.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_WebexError__ctor.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_WebexError.htm" />
+  </HelpKINode>
+  <HelpKINode Title="WebexError.ErrorCode property" Url="html/P_WebexSDK_WebexError_ErrorCode.htm" />
+  <HelpKINode Title="WebexError.Reason property" Url="html/P_WebexSDK_WebexError_Reason.htm" />
+  <HelpKINode Title="WebexError.WebexError constructor" Url="html/M_WebexSDK_WebexError__ctor.htm" />
+  <HelpKINode Title="WebexErrorCode enumeration" Url="html/T_WebexSDK_WebexErrorCode.htm" />
+  <HelpKINode Title="WebexSDK namespace" Url="html/N_WebexSDK.htm" />
+  <HelpKINode Title="WebexSDK.ActiveSpeakerChangedEvent class" Url="html/T_WebexSDK_ActiveSpeakerChangedEvent.htm" />
+  <HelpKINode Title="WebexSDK.AVIODevice class" Url="html/T_WebexSDK_AVIODevice.htm" />
+  <HelpKINode Title="WebexSDK.AVIODeviceType enumeration" Url="html/T_WebexSDK_AVIODeviceType.htm" />
+  <HelpKINode Title="WebexSDK.Call class" Url="html/T_WebexSDK_Call.htm" />
+  <HelpKINode Title="WebexSDK.Call.CallDirection enumeration" Url="html/T_WebexSDK_Call_CallDirection.htm" />
+  <HelpKINode Title="WebexSDK.Call.RemoteAuxVideo class" Url="html/T_WebexSDK_Call_RemoteAuxVideo.htm" />
+  <HelpKINode Title="WebexSDK.Call.VideoDimensions structure" Url="html/T_WebexSDK_Call_VideoDimensions.htm" />
+  <HelpKINode Title="WebexSDK.CallDisconnectedEvent class" Url="html/T_WebexSDK_CallDisconnectedEvent.htm" />
+  <HelpKINode Title="WebexSDK.CallError class" Url="html/T_WebexSDK_CallError.htm" />
+  <HelpKINode Title="WebexSDK.CallEvent class" Url="html/T_WebexSDK_CallEvent.htm" />
+  <HelpKINode Title="WebexSDK.CallMembership class" Url="html/T_WebexSDK_CallMembership.htm" />
+  <HelpKINode Title="WebexSDK.CallMembership.CallState enumeration" Url="html/T_WebexSDK_CallMembership_CallState.htm" />
+  <HelpKINode Title="WebexSDK.CallMembershipChangedEvent class" Url="html/T_WebexSDK_CallMembershipChangedEvent.htm" />
+  <HelpKINode Title="WebexSDK.CallMembershipDeclinedEvent class" Url="html/T_WebexSDK_CallMembershipDeclinedEvent.htm" />
+  <HelpKINode Title="WebexSDK.CallMembershipJoinedEvent class" Url="html/T_WebexSDK_CallMembershipJoinedEvent.htm" />
+  <HelpKINode Title="WebexSDK.CallMembershipLeftEvent class" Url="html/T_WebexSDK_CallMembershipLeftEvent.htm" />
+  <HelpKINode Title="WebexSDK.CallMembershipSendingAudioEvent class" Url="html/T_WebexSDK_CallMembershipSendingAudioEvent.htm" />
+  <HelpKINode Title="WebexSDK.CallMembershipSendingShareEvent class" Url="html/T_WebexSDK_CallMembershipSendingShareEvent.htm" />
+  <HelpKINode Title="WebexSDK.CallMembershipSendingVideoEvent class" Url="html/T_WebexSDK_CallMembershipSendingVideoEvent.htm" />
+  <HelpKINode Title="WebexSDK.CallStatus enumeration" Url="html/T_WebexSDK_CallStatus.htm" />
+  <HelpKINode Title="WebexSDK.CameraSwitchedEvent class" Url="html/T_WebexSDK_CameraSwitchedEvent.htm" />
+  <HelpKINode Title="WebexSDK.Capabilities class" Url="html/T_WebexSDK_Capabilities.htm" />
+  <HelpKINode Title="WebexSDK.CapabilitiesDTMF class" Url="html/T_WebexSDK_CapabilitiesDTMF.htm" />
+  <HelpKINode Title="WebexSDK.IAuthenticator interface" Url="html/T_WebexSDK_IAuthenticator.htm" />
+  <HelpKINode Title="WebexSDK.ILogger interface" Url="html/T_WebexSDK_ILogger.htm" />
+  <HelpKINode Title="WebexSDK.JWTAuthenticator class" Url="html/T_WebexSDK_JWTAuthenticator.htm" />
+  <HelpKINode Title="WebexSDK.LocalCancel class" Url="html/T_WebexSDK_LocalCancel.htm" />
+  <HelpKINode Title="WebexSDK.LocalDecline class" Url="html/T_WebexSDK_LocalDecline.htm" />
+  <HelpKINode Title="WebexSDK.LocalFile class" Url="html/T_WebexSDK_LocalFile.htm" />
+  <HelpKINode Title="WebexSDK.LocalFile.Thumbnail class" Url="html/T_WebexSDK_LocalFile_Thumbnail.htm" />
+  <HelpKINode Title="WebexSDK.LocalLeft class" Url="html/T_WebexSDK_LocalLeft.htm" />
+  <HelpKINode Title="WebexSDK.LocalVideoViewSizeChangedEvent class" Url="html/T_WebexSDK_LocalVideoViewSizeChangedEvent.htm" />
+  <HelpKINode Title="WebexSDK.LogLevel enumeration" Url="html/T_WebexSDK_LogLevel.htm" />
+  <HelpKINode Title="WebexSDK.MediaChangedEvent class" Url="html/T_WebexSDK_MediaChangedEvent.htm" />
+  <HelpKINode Title="WebexSDK.MediaOption class" Url="html/T_WebexSDK_MediaOption.htm" />
+  <HelpKINode Title="WebexSDK.Membership class" Url="html/T_WebexSDK_Membership.htm" />
+  <HelpKINode Title="WebexSDK.MembershipClient class" Url="html/T_WebexSDK_MembershipClient.htm" />
+  <HelpKINode Title="WebexSDK.Mention class" Url="html/T_WebexSDK_Mention.htm" />
+  <HelpKINode Title="WebexSDK.MentionAll class" Url="html/T_WebexSDK_MentionAll.htm" />
+  <HelpKINode Title="WebexSDK.MentionPerson class" Url="html/T_WebexSDK_MentionPerson.htm" />
+  <HelpKINode Title="WebexSDK.Message class" Url="html/T_WebexSDK_Message.htm" />
+  <HelpKINode Title="WebexSDK.MessageArrived class" Url="html/T_WebexSDK_MessageArrived.htm" />
+  <HelpKINode Title="WebexSDK.MessageClient class" Url="html/T_WebexSDK_MessageClient.htm" />
+  <HelpKINode Title="WebexSDK.MessageDeleted class" Url="html/T_WebexSDK_MessageDeleted.htm" />
+  <HelpKINode Title="WebexSDK.MessageEvent class" Url="html/T_WebexSDK_MessageEvent.htm" />
+  <HelpKINode Title="WebexSDK.OAuthAuthenticator class" Url="html/T_WebexSDK_OAuthAuthenticator.htm" />
+  <HelpKINode Title="WebexSDK.OtherConnected class" Url="html/T_WebexSDK_OtherConnected.htm" />
+  <HelpKINode Title="WebexSDK.OtherDeclined class" Url="html/T_WebexSDK_OtherDeclined.htm" />
+  <HelpKINode Title="WebexSDK.Person class" Url="html/T_WebexSDK_Person.htm" />
+  <HelpKINode Title="WebexSDK.PersonClient class" Url="html/T_WebexSDK_PersonClient.htm" />
+  <HelpKINode Title="WebexSDK.Phone class" Url="html/T_WebexSDK_Phone.htm" />
+  <HelpKINode Title="WebexSDK.Phone.DefaultBandwidth enumeration" Url="html/T_WebexSDK_Phone_DefaultBandwidth.htm" />
+  <HelpKINode Title="WebexSDK.ReceivingAudioEvent class" Url="html/T_WebexSDK_ReceivingAudioEvent.htm" />
+  <HelpKINode Title="WebexSDK.ReceivingAuxVideoEvent class" Url="html/T_WebexSDK_ReceivingAuxVideoEvent.htm" />
+  <HelpKINode Title="WebexSDK.ReceivingShareEvent class" Url="html/T_WebexSDK_ReceivingShareEvent.htm" />
+  <HelpKINode Title="WebexSDK.ReceivingVideoEvent class" Url="html/T_WebexSDK_ReceivingVideoEvent.htm" />
+  <HelpKINode Title="WebexSDK.RemoteAuxSendingVideoEvent class" Url="html/T_WebexSDK_RemoteAuxSendingVideoEvent.htm" />
+  <HelpKINode Title="WebexSDK.RemoteAuxVideoChangedEvent class" Url="html/T_WebexSDK_RemoteAuxVideoChangedEvent.htm" />
+  <HelpKINode Title="WebexSDK.RemoteAuxVideoPersonChangedEvent class" Url="html/T_WebexSDK_RemoteAuxVideoPersonChangedEvent.htm" />
+  <HelpKINode Title="WebexSDK.RemoteAuxVideosCountChangedEvent class" Url="html/T_WebexSDK_RemoteAuxVideosCountChangedEvent.htm" />
+  <HelpKINode Title="WebexSDK.RemoteAuxVideoSizeChangedEvent class" Url="html/T_WebexSDK_RemoteAuxVideoSizeChangedEvent.htm" />
+  <HelpKINode Title="WebexSDK.RemoteCancel class" Url="html/T_WebexSDK_RemoteCancel.htm" />
+  <HelpKINode Title="WebexSDK.RemoteDecline class" Url="html/T_WebexSDK_RemoteDecline.htm" />
+  <HelpKINode Title="WebexSDK.RemoteFile class" Url="html/T_WebexSDK_RemoteFile.htm" />
+  <HelpKINode Title="WebexSDK.RemoteFile.Thumbnail class" Url="html/T_WebexSDK_RemoteFile_Thumbnail.htm" />
+  <HelpKINode Title="WebexSDK.RemoteLeft class" Url="html/T_WebexSDK_RemoteLeft.htm" />
+  <HelpKINode Title="WebexSDK.RemoteSendingAudioEvent class" Url="html/T_WebexSDK_RemoteSendingAudioEvent.htm" />
+  <HelpKINode Title="WebexSDK.RemoteSendingShareEvent class" Url="html/T_WebexSDK_RemoteSendingShareEvent.htm" />
+  <HelpKINode Title="WebexSDK.RemoteSendingVideoEvent class" Url="html/T_WebexSDK_RemoteSendingVideoEvent.htm" />
+  <HelpKINode Title="WebexSDK.RemoteShareViewSizeChangedEvent class" Url="html/T_WebexSDK_RemoteShareViewSizeChangedEvent.htm" />
+  <HelpKINode Title="WebexSDK.RemoteVideoViewSizeChangedEvent class" Url="html/T_WebexSDK_RemoteVideoViewSizeChangedEvent.htm" />
+  <HelpKINode Title="WebexSDK.SendingAudioEvent class" Url="html/T_WebexSDK_SendingAudioEvent.htm" />
+  <HelpKINode Title="WebexSDK.SendingShareEvent class" Url="html/T_WebexSDK_SendingShareEvent.htm" />
+  <HelpKINode Title="WebexSDK.SendingVideoEvent class" Url="html/T_WebexSDK_SendingVideoEvent.htm" />
+  <HelpKINode Title="WebexSDK.ShareSource class" Url="html/T_WebexSDK_ShareSource.htm" />
+  <HelpKINode Title="WebexSDK.ShareSourceType enumeration" Url="html/T_WebexSDK_ShareSourceType.htm" />
+  <HelpKINode Title="WebexSDK.Space class" Url="html/T_WebexSDK_Space.htm" />
+  <HelpKINode Title="WebexSDK.SpaceClient class" Url="html/T_WebexSDK_SpaceClient.htm" />
+  <HelpKINode Title="WebexSDK.SpaceSortType enumeration" Url="html/T_WebexSDK_SpaceSortType.htm" />
+  <HelpKINode Title="WebexSDK.SpaceType enumeration" Url="html/T_WebexSDK_SpaceType.htm" />
+  <HelpKINode Title="WebexSDK.SpeakerSwitchedEvent class" Url="html/T_WebexSDK_SpeakerSwitchedEvent.htm" />
+  <HelpKINode Title="WebexSDK.SSOAuthenticator class" Url="html/T_WebexSDK_SSOAuthenticator.htm" />
+  <HelpKINode Title="WebexSDK.Team class" Url="html/T_WebexSDK_Team.htm" />
+  <HelpKINode Title="WebexSDK.TeamClient class" Url="html/T_WebexSDK_TeamClient.htm" />
+  <HelpKINode Title="WebexSDK.TeamMembership class" Url="html/T_WebexSDK_TeamMembership.htm" />
+  <HelpKINode Title="WebexSDK.TeamMembershipClient class" Url="html/T_WebexSDK_TeamMembershipClient.htm" />
+  <HelpKINode Title="WebexSDK.Webex class" Url="html/T_WebexSDK_Webex.htm" />
+  <HelpKINode Title="WebexSDK.WebexApiEventArgs class" Url="html/T_WebexSDK_WebexApiEventArgs.htm" />
+  <HelpKINode Title="WebexSDK.WebexApiEventArgs(Of T) class" Url="html/T_WebexSDK_WebexApiEventArgs_1.htm" />
+  <HelpKINode Title="WebexSDK.WebexApiEventArgs&lt;T&gt; class" Url="html/T_WebexSDK_WebexApiEventArgs_1.htm" />
+  <HelpKINode Title="WebexSDK.WebexError class" Url="html/T_WebexSDK_WebexError.htm" />
+  <HelpKINode Title="WebexSDK.WebexErrorCode enumeration" Url="html/T_WebexSDK_WebexErrorCode.htm" />
+  <HelpKINode Title="WebexSDK.Webhook class" Url="html/T_WebexSDK_Webhook.htm" />
+  <HelpKINode Title="WebexSDK.WebhookClient class" Url="html/T_WebexSDK_WebhookClient.htm" />
+  <HelpKINode Title="Webhook class">
+    <HelpKINode Title="Webhook Class" Url="html/T_WebexSDK_Webhook.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_Webhook__ctor.htm" />
+    <HelpKINode Title="properties" Url="html/Properties_T_WebexSDK_Webhook.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Webhook.Created property" Url="html/P_WebexSDK_Webhook_Created.htm" />
+  <HelpKINode Title="Webhook.Event property" Url="html/P_WebexSDK_Webhook_Event.htm" />
+  <HelpKINode Title="Webhook.Filter property" Url="html/P_WebexSDK_Webhook_Filter.htm" />
+  <HelpKINode Title="Webhook.Id property" Url="html/P_WebexSDK_Webhook_Id.htm" />
+  <HelpKINode Title="Webhook.Name property" Url="html/P_WebexSDK_Webhook_Name.htm" />
+  <HelpKINode Title="Webhook.Resource property" Url="html/P_WebexSDK_Webhook_Resource.htm" />
+  <HelpKINode Title="Webhook.Secret property" Url="html/P_WebexSDK_Webhook_Secret.htm" />
+  <HelpKINode Title="Webhook.Status property" Url="html/P_WebexSDK_Webhook_Status.htm" />
+  <HelpKINode Title="Webhook.TargetUrl property" Url="html/P_WebexSDK_Webhook_TargetUrl.htm" />
+  <HelpKINode Title="Webhook.Webhook constructor" Url="html/M_WebexSDK_Webhook__ctor.htm" />
+  <HelpKINode Title="WebhookClient class">
+    <HelpKINode Title="WebhookClient Class" Url="html/T_WebexSDK_WebhookClient.htm" />
+    <HelpKINode Title="constructor" Url="html/M_WebexSDK_WebhookClient__ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods_T_WebexSDK_WebhookClient.htm" />
+  </HelpKINode>
+  <HelpKINode Title="WebhookClient.Create method" Url="html/M_WebexSDK_WebhookClient_Create.htm" />
+  <HelpKINode Title="WebhookClient.Delete method" Url="html/M_WebexSDK_WebhookClient_Delete.htm" />
+  <HelpKINode Title="WebhookClient.Get method" Url="html/M_WebexSDK_WebhookClient_Get.htm" />
+  <HelpKINode Title="WebhookClient.List method" Url="html/M_WebexSDK_WebhookClient_List.htm" />
+  <HelpKINode Title="WebhookClient.Update method" Url="html/M_WebexSDK_WebhookClient_Update.htm" />
+  <HelpKINode Title="WebhookClient.WebhookClient constructor" Url="html/M_WebexSDK_WebhookClient__ctor.htm" />
+  <HelpKINode Title="Webhooks property" Url="html/P_WebexSDK_Webex_Webhooks.htm" />
+  <HelpKINode Title="Width property">
+    <HelpKINode Title="Call.VideoDimensions.Width Property " Url="html/P_WebexSDK_Call_VideoDimensions_Width.htm" />
+    <HelpKINode Title="LocalFile.Thumbnail.Width Property " Url="html/P_WebexSDK_LocalFile_Thumbnail_Width.htm" />
+    <HelpKINode Title="RemoteFile.Thumbnail.Width Property " Url="html/P_WebexSDK_RemoteFile_Thumbnail_Width.htm" />
+  </HelpKINode>
+</HelpKI>

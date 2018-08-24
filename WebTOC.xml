@@ -1,0 +1,641 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpTOC>
+
+  <HelpTOCNode Id="a38d8e29-4f32-4f48-a326-6ae0e5537d0c" Title="WebexSDK" Url="html/N_WebexSDK.htm">
+    <HelpTOCNode Id="5c3d1c81-f74d-4142-af82-c2f9ac65b2c3" Title="ActiveSpeakerChangedEvent Class" Url="html/T_WebexSDK_ActiveSpeakerChangedEvent.htm">
+      <HelpTOCNode Id="6754a86a-c189-468b-955c-acc766a8964c" Title="ActiveSpeakerChangedEvent Properties" Url="html/Properties_T_WebexSDK_ActiveSpeakerChangedEvent.htm">
+        <HelpTOCNode Title="FromPerson Property " Url="html/P_WebexSDK_ActiveSpeakerChangedEvent_FromPerson.htm" />
+        <HelpTOCNode Title="ToPerson Property " Url="html/P_WebexSDK_ActiveSpeakerChangedEvent_ToPerson.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="57760dd8-dd46-458a-830c-c0819a2d9b45" Title="AVIODevice Class" Url="html/T_WebexSDK_AVIODevice.htm">
+      <HelpTOCNode Title="AVIODevice Constructor " Url="html/M_WebexSDK_AVIODevice__ctor.htm" />
+      <HelpTOCNode Id="f3109d3b-02c2-4155-8b5b-5ef165e1e171" Title="AVIODevice Properties" Url="html/Properties_T_WebexSDK_AVIODevice.htm">
+        <HelpTOCNode Title="DefaultDevice Property " Url="html/P_WebexSDK_AVIODevice_DefaultDevice.htm" />
+        <HelpTOCNode Title="Id Property " Url="html/P_WebexSDK_AVIODevice_Id.htm" />
+        <HelpTOCNode Title="Name Property " Url="html/P_WebexSDK_AVIODevice_Name.htm" />
+        <HelpTOCNode Title="Type Property " Url="html/P_WebexSDK_AVIODevice_Type.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Title="AVIODeviceType Enumeration" Url="html/T_WebexSDK_AVIODeviceType.htm" />
+    <HelpTOCNode Id="9f589937-eeba-4fef-b637-2708fe05c345" Title="Call Class" Url="html/T_WebexSDK_Call.htm">
+      <HelpTOCNode Id="7bb7b7ae-8869-4100-8936-6079b5c7eb5c" Title="Call Properties" Url="html/Properties_T_WebexSDK_Call.htm">
+        <HelpTOCNode Title="ActiveSpeaker Property " Url="html/P_WebexSDK_Call_ActiveSpeaker.htm" />
+        <HelpTOCNode Title="Direction Property " Url="html/P_WebexSDK_Call_Direction.htm" />
+        <HelpTOCNode Title="From Property " Url="html/P_WebexSDK_Call_From.htm" />
+        <HelpTOCNode Title="IsReceivingAudio Property " Url="html/P_WebexSDK_Call_IsReceivingAudio.htm" />
+        <HelpTOCNode Title="IsReceivingShare Property " Url="html/P_WebexSDK_Call_IsReceivingShare.htm" />
+        <HelpTOCNode Title="IsReceivingVideo Property " Url="html/P_WebexSDK_Call_IsReceivingVideo.htm" />
+        <HelpTOCNode Title="IsRemoteSendingAudio Property " Url="html/P_WebexSDK_Call_IsRemoteSendingAudio.htm" />
+        <HelpTOCNode Title="IsRemoteSendingShare Property " Url="html/P_WebexSDK_Call_IsRemoteSendingShare.htm" />
+        <HelpTOCNode Title="IsRemoteSendingVideo Property " Url="html/P_WebexSDK_Call_IsRemoteSendingVideo.htm" />
+        <HelpTOCNode Title="IsSendingAudio Property " Url="html/P_WebexSDK_Call_IsSendingAudio.htm" />
+        <HelpTOCNode Title="IsSendingDTMFEnabled Property " Url="html/P_WebexSDK_Call_IsSendingDTMFEnabled.htm" />
+        <HelpTOCNode Title="IsSendingShare Property " Url="html/P_WebexSDK_Call_IsSendingShare.htm" />
+        <HelpTOCNode Title="IsSendingVideo Property " Url="html/P_WebexSDK_Call_IsSendingVideo.htm" />
+        <HelpTOCNode Title="LocalVideoViewSize Property " Url="html/P_WebexSDK_Call_LocalVideoViewSize.htm" />
+        <HelpTOCNode Title="Memberships Property " Url="html/P_WebexSDK_Call_Memberships.htm" />
+        <HelpTOCNode Title="RemoteAuxVideos Property " Url="html/P_WebexSDK_Call_RemoteAuxVideos.htm" />
+        <HelpTOCNode Title="RemoteAvailableAuxVideoCount Property " Url="html/P_WebexSDK_Call_RemoteAvailableAuxVideoCount.htm" />
+        <HelpTOCNode Title="RemoteShareViewSize Property " Url="html/P_WebexSDK_Call_RemoteShareViewSize.htm" />
+        <HelpTOCNode Title="RemoteVideoViewSize Property " Url="html/P_WebexSDK_Call_RemoteVideoViewSize.htm" />
+        <HelpTOCNode Title="Status Property " Url="html/P_WebexSDK_Call_Status.htm" />
+        <HelpTOCNode Title="To Property " Url="html/P_WebexSDK_Call_To.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="6b88c8a5-98f4-4fd8-80d7-fd12dc022f83" Title="Call Methods" Url="html/Methods_T_WebexSDK_Call.htm">
+        <HelpTOCNode Title="Acknowledge Method " Url="html/M_WebexSDK_Call_Acknowledge.htm" />
+        <HelpTOCNode Title="Answer Method " Url="html/M_WebexSDK_Call_Answer.htm" />
+        <HelpTOCNode Title="FetchShareSources Method " Url="html/M_WebexSDK_Call_FetchShareSources.htm" />
+        <HelpTOCNode Title="Hangup Method " Url="html/M_WebexSDK_Call_Hangup.htm" />
+        <HelpTOCNode Title="Reject Method " Url="html/M_WebexSDK_Call_Reject.htm" />
+        <HelpTOCNode Title="SendDtmf Method " Url="html/M_WebexSDK_Call_SendDtmf.htm" />
+        <HelpTOCNode Title="SendFeedbackWith Method " Url="html/M_WebexSDK_Call_SendFeedbackWith.htm" />
+        <HelpTOCNode Title="SetLocalView Method " Url="html/M_WebexSDK_Call_SetLocalView.htm" />
+        <HelpTOCNode Title="SetRemoteShareView Method " Url="html/M_WebexSDK_Call_SetRemoteShareView.htm" />
+        <HelpTOCNode Title="SetRemoteView Method " Url="html/M_WebexSDK_Call_SetRemoteView.htm" />
+        <HelpTOCNode Title="StartShare Method " Url="html/M_WebexSDK_Call_StartShare.htm" />
+        <HelpTOCNode Title="StopShare Method " Url="html/M_WebexSDK_Call_StopShare.htm" />
+        <HelpTOCNode Title="SubscribeRemoteAuxVideo Method " Url="html/M_WebexSDK_Call_SubscribeRemoteAuxVideo.htm" />
+        <HelpTOCNode Title="UnsubscribeRemoteAuxVideo Method " Url="html/M_WebexSDK_Call_UnsubscribeRemoteAuxVideo.htm" />
+        <HelpTOCNode Title="UpdateLocalView Method " Url="html/M_WebexSDK_Call_UpdateLocalView.htm" />
+        <HelpTOCNode Title="UpdateRemoteShareView Method " Url="html/M_WebexSDK_Call_UpdateRemoteShareView.htm" />
+        <HelpTOCNode Title="UpdateRemoteView Method " Url="html/M_WebexSDK_Call_UpdateRemoteView.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="e9fe93cf-fb33-4860-9864-b21671272a5b" Title="Call Events" Url="html/Events_T_WebexSDK_Call.htm">
+        <HelpTOCNode Title="OnCallMembershipChanged Event" Url="html/E_WebexSDK_Call_OnCallMembershipChanged.htm" />
+        <HelpTOCNode Title="OnCapabilitiesChanged Event" Url="html/E_WebexSDK_Call_OnCapabilitiesChanged.htm" />
+        <HelpTOCNode Title="OnConnected Event" Url="html/E_WebexSDK_Call_OnConnected.htm" />
+        <HelpTOCNode Title="OnDisconnected Event" Url="html/E_WebexSDK_Call_OnDisconnected.htm" />
+        <HelpTOCNode Title="OnMediaChanged Event" Url="html/E_WebexSDK_Call_OnMediaChanged.htm" />
+        <HelpTOCNode Title="OnRinging Event" Url="html/E_WebexSDK_Call_OnRinging.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Title="Call.CallDirection Enumeration" Url="html/T_WebexSDK_Call_CallDirection.htm" />
+    <HelpTOCNode Id="8aea9da4-e04c-4629-a97d-8d844437581e" Title="Call.RemoteAuxVideo Class" Url="html/T_WebexSDK_Call_RemoteAuxVideo.htm">
+      <HelpTOCNode Id="27782e18-03f8-4a6b-80e0-b0d18c0bf2a4" Title="RemoteAuxVideo Properties" Url="html/Properties_T_WebexSDK_Call_RemoteAuxVideo.htm">
+        <HelpTOCNode Title="HandleList Property " Url="html/P_WebexSDK_Call_RemoteAuxVideo_HandleList.htm" />
+        <HelpTOCNode Title="IsReceivingVideo Property " Url="html/P_WebexSDK_Call_RemoteAuxVideo_IsReceivingVideo.htm" />
+        <HelpTOCNode Title="IsSendingVideo Property " Url="html/P_WebexSDK_Call_RemoteAuxVideo_IsSendingVideo.htm" />
+        <HelpTOCNode Title="Person Property " Url="html/P_WebexSDK_Call_RemoteAuxVideo_Person.htm" />
+        <HelpTOCNode Title="RemoteAuxVideoSize Property " Url="html/P_WebexSDK_Call_RemoteAuxVideo_RemoteAuxVideoSize.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="88d123fa-a6eb-458c-b300-655079bbc04b" Title="RemoteAuxVideo Methods" Url="html/Methods_T_WebexSDK_Call_RemoteAuxVideo.htm">
+        <HelpTOCNode Title="AddViewHandle Method " Url="html/M_WebexSDK_Call_RemoteAuxVideo_AddViewHandle.htm" />
+        <HelpTOCNode Title="RemoveViewHandle Method " Url="html/M_WebexSDK_Call_RemoteAuxVideo_RemoveViewHandle.htm" />
+        <HelpTOCNode Title="UpdateViewHandle Method " Url="html/M_WebexSDK_Call_RemoteAuxVideo_UpdateViewHandle.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="f61d6bfc-32a3-42ac-b47b-1ec6c121d7ec" Title="Call.VideoDimensions Structure" Url="html/T_WebexSDK_Call_VideoDimensions.htm">
+      <HelpTOCNode Id="0e50c2b8-77dd-4e09-aa52-230abca92fa8" Title="VideoDimensions Properties" Url="html/Properties_T_WebexSDK_Call_VideoDimensions.htm">
+        <HelpTOCNode Title="Height Property " Url="html/P_WebexSDK_Call_VideoDimensions_Height.htm" />
+        <HelpTOCNode Title="Width Property " Url="html/P_WebexSDK_Call_VideoDimensions_Width.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="08f4cb58-1520-442d-96b4-6171fa37d921" Title="CallDisconnectedEvent Class" Url="html/T_WebexSDK_CallDisconnectedEvent.htm">
+      <HelpTOCNode Title="CallDisconnectedEvent Properties" Url="html/Properties_T_WebexSDK_CallDisconnectedEvent.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="4e611171-e180-413c-9163-ab47d874ff93" Title="CallError Class" Url="html/T_WebexSDK_CallError.htm">
+      <HelpTOCNode Id="5c2d2db4-2b19-4516-ac60-ae8fdef7b349" Title="CallError Properties" Url="html/Properties_T_WebexSDK_CallError.htm">
+        <HelpTOCNode Title="Error Property " Url="html/P_WebexSDK_CallError_Error.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="92437a8c-fa16-4f4b-a8fb-e95d08ab4c8e" Title="CallEvent Class" Url="html/T_WebexSDK_CallEvent.htm">
+      <HelpTOCNode Id="3c452611-d04e-4b46-8fd9-5c785be8bbe3" Title="CallEvent Properties" Url="html/Properties_T_WebexSDK_CallEvent.htm">
+        <HelpTOCNode Title="Call Property " Url="html/P_WebexSDK_CallEvent_Call.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="dde1eacb-9852-40e8-8340-2c8e31ecebc3" Title="CallMembership Class" Url="html/T_WebexSDK_CallMembership.htm">
+      <HelpTOCNode Id="59fe1e73-5e06-4a8d-a959-2b99a9d32b33" Title="CallMembership Properties" Url="html/Properties_T_WebexSDK_CallMembership.htm">
+        <HelpTOCNode Title="Email Property " Url="html/P_WebexSDK_CallMembership_Email.htm" />
+        <HelpTOCNode Title="IsActiveSpeaker Property " Url="html/P_WebexSDK_CallMembership_IsActiveSpeaker.htm" />
+        <HelpTOCNode Title="IsInitiator Property " Url="html/P_WebexSDK_CallMembership_IsInitiator.htm" />
+        <HelpTOCNode Title="IsSendingAudio Property " Url="html/P_WebexSDK_CallMembership_IsSendingAudio.htm" />
+        <HelpTOCNode Title="IsSendingShare Property " Url="html/P_WebexSDK_CallMembership_IsSendingShare.htm" />
+        <HelpTOCNode Title="IsSendingVideo Property " Url="html/P_WebexSDK_CallMembership_IsSendingVideo.htm" />
+        <HelpTOCNode Title="PersonId Property " Url="html/P_WebexSDK_CallMembership_PersonId.htm" />
+        <HelpTOCNode Title="PhoneNumber Property " Url="html/P_WebexSDK_CallMembership_PhoneNumber.htm" />
+        <HelpTOCNode Title="SipUrl Property " Url="html/P_WebexSDK_CallMembership_SipUrl.htm" />
+        <HelpTOCNode Title="State Property " Url="html/P_WebexSDK_CallMembership_State.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Title="CallMembership.CallState Enumeration" Url="html/T_WebexSDK_CallMembership_CallState.htm" />
+    <HelpTOCNode Id="2d06ce35-e8f4-407b-8b03-b4d9da2959ae" Title="CallMembershipChangedEvent Class" Url="html/T_WebexSDK_CallMembershipChangedEvent.htm">
+      <HelpTOCNode Id="967e661a-4914-4f7a-9c96-74c333694730" Title="CallMembershipChangedEvent Properties" Url="html/Properties_T_WebexSDK_CallMembershipChangedEvent.htm">
+        <HelpTOCNode Title="CallMembership Property " Url="html/P_WebexSDK_CallMembershipChangedEvent_CallMembership.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="189def35-c148-4934-9be3-536a611f81a8" Title="CallMembershipDeclinedEvent Class" Url="html/T_WebexSDK_CallMembershipDeclinedEvent.htm">
+      <HelpTOCNode Title="CallMembershipDeclinedEvent Properties" Url="html/Properties_T_WebexSDK_CallMembershipDeclinedEvent.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="f197a171-972e-48f0-9a70-0ec4186b5181" Title="CallMembershipJoinedEvent Class" Url="html/T_WebexSDK_CallMembershipJoinedEvent.htm">
+      <HelpTOCNode Title="CallMembershipJoinedEvent Properties" Url="html/Properties_T_WebexSDK_CallMembershipJoinedEvent.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="44842075-33f5-4eff-af51-211a0950dd82" Title="CallMembershipLeftEvent Class" Url="html/T_WebexSDK_CallMembershipLeftEvent.htm">
+      <HelpTOCNode Title="CallMembershipLeftEvent Properties" Url="html/Properties_T_WebexSDK_CallMembershipLeftEvent.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="f7693f4f-d7f8-4d69-9633-4d910d7f7c56" Title="CallMembershipSendingAudioEvent Class" Url="html/T_WebexSDK_CallMembershipSendingAudioEvent.htm">
+      <HelpTOCNode Title="CallMembershipSendingAudioEvent Properties" Url="html/Properties_T_WebexSDK_CallMembershipSendingAudioEvent.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="0549572b-9e04-481f-ba08-b4cf145988c1" Title="CallMembershipSendingShareEvent Class" Url="html/T_WebexSDK_CallMembershipSendingShareEvent.htm">
+      <HelpTOCNode Title="CallMembershipSendingShareEvent Properties" Url="html/Properties_T_WebexSDK_CallMembershipSendingShareEvent.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="41352817-76af-4e62-b768-7197f6d117e3" Title="CallMembershipSendingVideoEvent Class" Url="html/T_WebexSDK_CallMembershipSendingVideoEvent.htm">
+      <HelpTOCNode Title="CallMembershipSendingVideoEvent Properties" Url="html/Properties_T_WebexSDK_CallMembershipSendingVideoEvent.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Title="CallStatus Enumeration" Url="html/T_WebexSDK_CallStatus.htm" />
+    <HelpTOCNode Id="e2f617c5-d8b6-4dd4-83bd-9a4e0b9e58d6" Title="CameraSwitchedEvent Class" Url="html/T_WebexSDK_CameraSwitchedEvent.htm">
+      <HelpTOCNode Id="e1fb683f-f096-41ab-ab82-ae3861aa1ce3" Title="CameraSwitchedEvent Properties" Url="html/Properties_T_WebexSDK_CameraSwitchedEvent.htm">
+        <HelpTOCNode Title="Camera Property " Url="html/P_WebexSDK_CameraSwitchedEvent_Camera.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="c914ff4c-9368-4870-b679-55bdf651e911" Title="Capabilities Class" Url="html/T_WebexSDK_Capabilities.htm">
+      <HelpTOCNode Title="Capabilities Properties" Url="html/Properties_T_WebexSDK_Capabilities.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="7bf47a60-30fc-46bc-bc62-c47852cc54df" Title="CapabilitiesDTMF Class" Url="html/T_WebexSDK_CapabilitiesDTMF.htm">
+      <HelpTOCNode Id="72f3aaae-9734-45c1-99b9-0b39d313466d" Title="CapabilitiesDTMF Properties" Url="html/Properties_T_WebexSDK_CapabilitiesDTMF.htm">
+        <HelpTOCNode Title="IsEnabled Property " Url="html/P_WebexSDK_CapabilitiesDTMF_IsEnabled.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="871e95dc-29f6-4778-92cf-ed3e04321b37" Title="IAuthenticator Interface" Url="html/T_WebexSDK_IAuthenticator.htm">
+      <HelpTOCNode Id="51b4a063-90ad-43cb-a6fb-fddaccf7145d" Title="IAuthenticator Methods" Url="html/Methods_T_WebexSDK_IAuthenticator.htm">
+        <HelpTOCNode Title="AccessToken Method " Url="html/M_WebexSDK_IAuthenticator_AccessToken.htm" />
+        <HelpTOCNode Title="Authorized Method " Url="html/M_WebexSDK_IAuthenticator_Authorized.htm" />
+        <HelpTOCNode Title="Deauthorize Method " Url="html/M_WebexSDK_IAuthenticator_Deauthorize.htm" />
+        <HelpTOCNode Title="RefreshToken Method " Url="html/M_WebexSDK_IAuthenticator_RefreshToken.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="68bccfe2-4d65-4dfd-abc1-05410542327b" Title="ILogger Interface" Url="html/T_WebexSDK_ILogger.htm">
+      <HelpTOCNode Id="808f23af-f772-43d3-b30d-4150fa31f89c" Title="ILogger Methods" Url="html/Methods_T_WebexSDK_ILogger.htm">
+        <HelpTOCNode Title="Log Method " Url="html/M_WebexSDK_ILogger_Log.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="457e157d-34c7-4aa2-8f98-9a4b18fa8ea7" Title="JWTAuthenticator Class" Url="html/T_WebexSDK_JWTAuthenticator.htm">
+      <HelpTOCNode Title="JWTAuthenticator Constructor " Url="html/M_WebexSDK_JWTAuthenticator__ctor.htm" />
+      <HelpTOCNode Id="da994b2b-6bc9-4ebb-a3af-e331ac6ad589" Title="JWTAuthenticator Methods" Url="html/Methods_T_WebexSDK_JWTAuthenticator.htm">
+        <HelpTOCNode Title="AccessToken Method " Url="html/M_WebexSDK_JWTAuthenticator_AccessToken.htm" />
+        <HelpTOCNode Title="Authorized Method " Url="html/M_WebexSDK_JWTAuthenticator_Authorized.htm" />
+        <HelpTOCNode Title="AuthorizeWith Method " Url="html/M_WebexSDK_JWTAuthenticator_AuthorizeWith.htm" />
+        <HelpTOCNode Title="Deauthorize Method " Url="html/M_WebexSDK_JWTAuthenticator_Deauthorize.htm" />
+        <HelpTOCNode Title="RefreshToken Method " Url="html/M_WebexSDK_JWTAuthenticator_RefreshToken.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="dc200d49-ff99-44c8-a342-0fe403cd2062" Title="LocalCancel Class" Url="html/T_WebexSDK_LocalCancel.htm">
+      <HelpTOCNode Title="LocalCancel Properties" Url="html/Properties_T_WebexSDK_LocalCancel.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="bd8d62b3-aa43-467e-a318-4e6274b00834" Title="LocalDecline Class" Url="html/T_WebexSDK_LocalDecline.htm">
+      <HelpTOCNode Title="LocalDecline Properties" Url="html/Properties_T_WebexSDK_LocalDecline.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="8f43a680-986a-4c42-b105-08d7ed948f43" Title="LocalFile Class" Url="html/T_WebexSDK_LocalFile.htm">
+      <HelpTOCNode Title="LocalFile Constructor " Url="html/M_WebexSDK_LocalFile__ctor.htm" />
+      <HelpTOCNode Id="5fd0ffe8-a1cd-42e3-beba-82dda1316265" Title="LocalFile Properties" Url="html/Properties_T_WebexSDK_LocalFile.htm">
+        <HelpTOCNode Title="LocalThumbnail Property " Url="html/P_WebexSDK_LocalFile_LocalThumbnail.htm" />
+        <HelpTOCNode Title="Mime Property " Url="html/P_WebexSDK_LocalFile_Mime.htm" />
+        <HelpTOCNode Title="Name Property " Url="html/P_WebexSDK_LocalFile_Name.htm" />
+        <HelpTOCNode Title="Path Property " Url="html/P_WebexSDK_LocalFile_Path.htm" />
+        <HelpTOCNode Title="Size Property " Url="html/P_WebexSDK_LocalFile_Size.htm" />
+        <HelpTOCNode Title="UploadProgressHandler Property " Url="html/P_WebexSDK_LocalFile_UploadProgressHandler.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="49d81543-673b-4ec5-92d0-c72c72fb34c0" Title="LocalFile.Thumbnail Class" Url="html/T_WebexSDK_LocalFile_Thumbnail.htm">
+      <HelpTOCNode Title="LocalFile.Thumbnail Constructor " Url="html/M_WebexSDK_LocalFile_Thumbnail__ctor.htm" />
+      <HelpTOCNode Id="6642b695-d372-40b3-99a4-4408f3aa95e1" Title="Thumbnail Properties" Url="html/Properties_T_WebexSDK_LocalFile_Thumbnail.htm">
+        <HelpTOCNode Title="Height Property " Url="html/P_WebexSDK_LocalFile_Thumbnail_Height.htm" />
+        <HelpTOCNode Title="Mime Property " Url="html/P_WebexSDK_LocalFile_Thumbnail_Mime.htm" />
+        <HelpTOCNode Title="Path Property " Url="html/P_WebexSDK_LocalFile_Thumbnail_Path.htm" />
+        <HelpTOCNode Title="Size Property " Url="html/P_WebexSDK_LocalFile_Thumbnail_Size.htm" />
+        <HelpTOCNode Title="Width Property " Url="html/P_WebexSDK_LocalFile_Thumbnail_Width.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="620849e5-7b1a-4e9d-93fc-fe41c4cb2d8d" Title="LocalLeft Class" Url="html/T_WebexSDK_LocalLeft.htm">
+      <HelpTOCNode Title="LocalLeft Properties" Url="html/Properties_T_WebexSDK_LocalLeft.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="ae3241bd-e112-4b43-8fe0-ddeeaa54f953" Title="LocalVideoViewSizeChangedEvent Class" Url="html/T_WebexSDK_LocalVideoViewSizeChangedEvent.htm">
+      <HelpTOCNode Title="LocalVideoViewSizeChangedEvent Properties" Url="html/Properties_T_WebexSDK_LocalVideoViewSizeChangedEvent.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Title="LogLevel Enumeration" Url="html/T_WebexSDK_LogLevel.htm" />
+    <HelpTOCNode Id="0cfbdf86-ee9f-41db-b21d-b64dd06aae6e" Title="MediaChangedEvent Class" Url="html/T_WebexSDK_MediaChangedEvent.htm">
+      <HelpTOCNode Title="MediaChangedEvent Properties" Url="html/Properties_T_WebexSDK_MediaChangedEvent.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="72da05ec-a61f-479e-aac6-1276d8a8086f" Title="MediaOption Class" Url="html/T_WebexSDK_MediaOption.htm">
+      <HelpTOCNode Id="1d484591-23dc-44aa-a8fa-3c76748b4988" Title="MediaOption Methods" Url="html/Methods_T_WebexSDK_MediaOption.htm">
+        <HelpTOCNode Title="AudioOnly Method " Url="html/M_WebexSDK_MediaOption_AudioOnly.htm" />
+        <HelpTOCNode Title="AudioVideo Method " Url="html/M_WebexSDK_MediaOption_AudioVideo.htm" />
+        <HelpTOCNode Title="AudioVideoShare Method " Url="html/M_WebexSDK_MediaOption_AudioVideoShare.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="c6cec5ce-232d-4fb1-9e8a-128e95cd2aa9" Title="Membership Class" Url="html/T_WebexSDK_Membership.htm">
+      <HelpTOCNode Title="Membership Constructor " Url="html/M_WebexSDK_Membership__ctor.htm" />
+      <HelpTOCNode Id="e236d9df-0c1c-4fd2-aaad-b4f7ec18c297" Title="Membership Properties" Url="html/Properties_T_WebexSDK_Membership.htm">
+        <HelpTOCNode Title="Created Property " Url="html/P_WebexSDK_Membership_Created.htm" />
+        <HelpTOCNode Title="Id Property " Url="html/P_WebexSDK_Membership_Id.htm" />
+        <HelpTOCNode Title="IsModerator Property " Url="html/P_WebexSDK_Membership_IsModerator.htm" />
+        <HelpTOCNode Title="IsMonitor Property " Url="html/P_WebexSDK_Membership_IsMonitor.htm" />
+        <HelpTOCNode Title="PersonDisplayName Property " Url="html/P_WebexSDK_Membership_PersonDisplayName.htm" />
+        <HelpTOCNode Title="PersonEmail Property " Url="html/P_WebexSDK_Membership_PersonEmail.htm" />
+        <HelpTOCNode Title="PersonId Property " Url="html/P_WebexSDK_Membership_PersonId.htm" />
+        <HelpTOCNode Title="PersonOrgId Property " Url="html/P_WebexSDK_Membership_PersonOrgId.htm" />
+        <HelpTOCNode Title="SpaceId Property " Url="html/P_WebexSDK_Membership_SpaceId.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="af545557-5ba4-4fc2-9105-7957a8fca1ae" Title="MembershipClient Class" Url="html/T_WebexSDK_MembershipClient.htm">
+      <HelpTOCNode Title="MembershipClient Constructor " Url="html/M_WebexSDK_MembershipClient__ctor.htm" />
+      <HelpTOCNode Id="3857e2eb-9dd8-4a2b-84e4-ffc7a28ddf14" Title="MembershipClient Methods" Url="html/Methods_T_WebexSDK_MembershipClient.htm">
+        <HelpTOCNode Title="CreateByPersonEmail Method " Url="html/M_WebexSDK_MembershipClient_CreateByPersonEmail.htm" />
+        <HelpTOCNode Title="CreateByPersonId Method " Url="html/M_WebexSDK_MembershipClient_CreateByPersonId.htm" />
+        <HelpTOCNode Title="Delete Method " Url="html/M_WebexSDK_MembershipClient_Delete.htm" />
+        <HelpTOCNode Title="Get Method " Url="html/M_WebexSDK_MembershipClient_Get.htm" />
+        <HelpTOCNode Id="f19be545-7b02-4975-8787-4fc8340147f3" Title="List Method " Url="html/Overload_WebexSDK_MembershipClient_List.htm">
+          <HelpTOCNode Title="List Method (Nullable(Int32), Action(WebexApiEventArgs(List(Membership))))" Url="html/M_WebexSDK_MembershipClient_List.htm" />
+          <HelpTOCNode Title="List Method (String, Nullable(Int32), Action(WebexApiEventArgs(List(Membership))))" Url="html/M_WebexSDK_MembershipClient_List_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="ListByPersonEmail Method " Url="html/M_WebexSDK_MembershipClient_ListByPersonEmail.htm" />
+        <HelpTOCNode Title="ListByPersonId Method " Url="html/M_WebexSDK_MembershipClient_ListByPersonId.htm" />
+        <HelpTOCNode Title="Update Method " Url="html/M_WebexSDK_MembershipClient_Update.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Title="Mention Class" Url="html/T_WebexSDK_Mention.htm" />
+    <HelpTOCNode Id="680ab8bf-2234-4501-b245-5309253e350b" Title="MentionAll Class" Url="html/T_WebexSDK_MentionAll.htm">
+      <HelpTOCNode Title="MentionAll Constructor " Url="html/M_WebexSDK_MentionAll__ctor.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="652a3531-521e-4dc4-8b57-c68b82dc37b8" Title="MentionPerson Class" Url="html/T_WebexSDK_MentionPerson.htm">
+      <HelpTOCNode Title="MentionPerson Constructor " Url="html/M_WebexSDK_MentionPerson__ctor.htm" />
+      <HelpTOCNode Id="e9dd4ee7-9f40-4e33-a661-b048aa4f9942" Title="MentionPerson Properties" Url="html/Properties_T_WebexSDK_MentionPerson.htm">
+        <HelpTOCNode Title="PersonId Property " Url="html/P_WebexSDK_MentionPerson_PersonId.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="d1381fc8-b5f9-43d8-ae72-7fa8bcc650ee" Title="Message Class" Url="html/T_WebexSDK_Message.htm">
+      <HelpTOCNode Title="Message Constructor " Url="html/M_WebexSDK_Message__ctor.htm" />
+      <HelpTOCNode Id="3a0ed1cf-8549-4434-af9e-8eab93b7e669" Title="Message Properties" Url="html/Properties_T_WebexSDK_Message.htm">
+        <HelpTOCNode Title="Created Property " Url="html/P_WebexSDK_Message_Created.htm" />
+        <HelpTOCNode Title="Files Property " Url="html/P_WebexSDK_Message_Files.htm" />
+        <HelpTOCNode Title="Id Property " Url="html/P_WebexSDK_Message_Id.htm" />
+        <HelpTOCNode Title="IsSelfMentioned Property " Url="html/P_WebexSDK_Message_IsSelfMentioned.htm" />
+        <HelpTOCNode Title="PersonEmail Property " Url="html/P_WebexSDK_Message_PersonEmail.htm" />
+        <HelpTOCNode Title="PersonId Property " Url="html/P_WebexSDK_Message_PersonId.htm" />
+        <HelpTOCNode Title="SpaceId Property " Url="html/P_WebexSDK_Message_SpaceId.htm" />
+        <HelpTOCNode Title="SpaceType Property " Url="html/P_WebexSDK_Message_SpaceType.htm" />
+        <HelpTOCNode Title="Text Property " Url="html/P_WebexSDK_Message_Text.htm" />
+        <HelpTOCNode Title="ToPersonEmail Property " Url="html/P_WebexSDK_Message_ToPersonEmail.htm" />
+        <HelpTOCNode Title="ToPersonId Property " Url="html/P_WebexSDK_Message_ToPersonId.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="ac3183d0-b753-4bf5-abc1-2d3b018f8c53" Title="MessageArrived Class" Url="html/T_WebexSDK_MessageArrived.htm">
+      <HelpTOCNode Id="f6a8d860-91dd-44cb-aee3-4d4ce6693aa9" Title="MessageArrived Properties" Url="html/Properties_T_WebexSDK_MessageArrived.htm">
+        <HelpTOCNode Title="Message Property " Url="html/P_WebexSDK_MessageArrived_Message.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="d950cc39-8099-4274-a1b8-ffe9355df13d" Title="MessageClient Class" Url="html/T_WebexSDK_MessageClient.htm">
+      <HelpTOCNode Id="3b132d41-9f21-443b-ba93-be10d356361a" Title="MessageClient Properties" Url="html/Properties_T_WebexSDK_MessageClient.htm">
+        <HelpTOCNode Title="OnEvent Property " Url="html/P_WebexSDK_MessageClient_OnEvent.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="ef2285ef-35a8-4cf7-b0a4-b7810b4eecfb" Title="MessageClient Methods" Url="html/Methods_T_WebexSDK_MessageClient.htm">
+        <HelpTOCNode Title="Delete Method " Url="html/M_WebexSDK_MessageClient_Delete.htm" />
+        <HelpTOCNode Title="DownloadFile Method " Url="html/M_WebexSDK_MessageClient_DownloadFile.htm" />
+        <HelpTOCNode Title="DownloadThumbnail Method " Url="html/M_WebexSDK_MessageClient_DownloadThumbnail.htm" />
+        <HelpTOCNode Id="ce3af64f-96c3-4fa7-bb8f-944d839a7b00" Title="Get Method " Url="html/Overload_WebexSDK_MessageClient_Get.htm">
+          <HelpTOCNode Title="Get Method (String, Action(WebexApiEventArgs(Message)))" Url="html/M_WebexSDK_MessageClient_Get.htm" />
+          <HelpTOCNode Title="Get Method (String, String, Action(WebexApiEventArgs(Message)))" Url="html/M_WebexSDK_MessageClient_Get_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Id="e409a31d-e67e-4eb6-b751-636e245c6336" Title="List Method " Url="html/Overload_WebexSDK_MessageClient_List.htm">
+          <HelpTOCNode Title="List Method (String, String, DateTime, Nullable(Int32), Action(WebexApiEventArgs(List(Message))))" Url="html/M_WebexSDK_MessageClient_List.htm" />
+          <HelpTOCNode Title="List Method (String, String, String, Nullable(Int32), Action(WebexApiEventArgs(List(Message))))" Url="html/M_WebexSDK_MessageClient_List_1.htm" />
+        </HelpTOCNode>
+        <HelpTOCNode Title="PostToPerson Method " Url="html/M_WebexSDK_MessageClient_PostToPerson.htm" />
+        <HelpTOCNode Title="PostToSpace Method " Url="html/M_WebexSDK_MessageClient_PostToSpace.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="a4779dcb-28da-4e0b-85ff-d47f3977a3b6" Title="MessageDeleted Class" Url="html/T_WebexSDK_MessageDeleted.htm">
+      <HelpTOCNode Id="50aa2778-6ae6-4e6b-8ce9-3fcd6c17a8ec" Title="MessageDeleted Properties" Url="html/Properties_T_WebexSDK_MessageDeleted.htm">
+        <HelpTOCNode Title="MessageId Property " Url="html/P_WebexSDK_MessageDeleted_MessageId.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Title="MessageEvent Class" Url="html/T_WebexSDK_MessageEvent.htm" />
+    <HelpTOCNode Id="17b3e4a8-8385-44ee-bd15-a37f3346835d" Title="OAuthAuthenticator Class" Url="html/T_WebexSDK_OAuthAuthenticator.htm">
+      <HelpTOCNode Title="OAuthAuthenticator Constructor " Url="html/M_WebexSDK_OAuthAuthenticator__ctor.htm" />
+      <HelpTOCNode Id="ed77a782-358e-46df-b7a1-dc2986326c76" Title="OAuthAuthenticator Properties" Url="html/Properties_T_WebexSDK_OAuthAuthenticator.htm">
+        <HelpTOCNode Title="AuthorizationUrl Property " Url="html/P_WebexSDK_OAuthAuthenticator_AuthorizationUrl.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="5f630d0e-53a4-4c42-99cf-7e3b6d1f019f" Title="OAuthAuthenticator Methods" Url="html/Methods_T_WebexSDK_OAuthAuthenticator.htm">
+        <HelpTOCNode Title="AccessToken Method " Url="html/M_WebexSDK_OAuthAuthenticator_AccessToken.htm" />
+        <HelpTOCNode Title="Authorize Method " Url="html/M_WebexSDK_OAuthAuthenticator_Authorize.htm" />
+        <HelpTOCNode Title="Authorized Method " Url="html/M_WebexSDK_OAuthAuthenticator_Authorized.htm" />
+        <HelpTOCNode Title="Deauthorize Method " Url="html/M_WebexSDK_OAuthAuthenticator_Deauthorize.htm" />
+        <HelpTOCNode Title="RefreshToken Method " Url="html/M_WebexSDK_OAuthAuthenticator_RefreshToken.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="b68369aa-91fc-4a12-b8f7-8feeb471a5bf" Title="OtherConnected Class" Url="html/T_WebexSDK_OtherConnected.htm">
+      <HelpTOCNode Title="OtherConnected Properties" Url="html/Properties_T_WebexSDK_OtherConnected.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="1248c932-8bbb-45aa-93f8-9792cfa62c3b" Title="OtherDeclined Class" Url="html/T_WebexSDK_OtherDeclined.htm">
+      <HelpTOCNode Title="OtherDeclined Properties" Url="html/Properties_T_WebexSDK_OtherDeclined.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="887da24d-a88b-46dd-b8a1-0d230c9527b1" Title="Person Class" Url="html/T_WebexSDK_Person.htm">
+      <HelpTOCNode Title="Person Constructor " Url="html/M_WebexSDK_Person__ctor.htm" />
+      <HelpTOCNode Id="414343f8-7bc5-4e64-92a8-8dae231d48ed" Title="Person Properties" Url="html/Properties_T_WebexSDK_Person.htm">
+        <HelpTOCNode Title="Avatar Property " Url="html/P_WebexSDK_Person_Avatar.htm" />
+        <HelpTOCNode Title="Created Property " Url="html/P_WebexSDK_Person_Created.htm" />
+        <HelpTOCNode Title="DisplayName Property " Url="html/P_WebexSDK_Person_DisplayName.htm" />
+        <HelpTOCNode Title="Emails Property " Url="html/P_WebexSDK_Person_Emails.htm" />
+        <HelpTOCNode Title="FirstName Property " Url="html/P_WebexSDK_Person_FirstName.htm" />
+        <HelpTOCNode Title="Id Property " Url="html/P_WebexSDK_Person_Id.htm" />
+        <HelpTOCNode Title="LastName Property " Url="html/P_WebexSDK_Person_LastName.htm" />
+        <HelpTOCNode Title="NickName Property " Url="html/P_WebexSDK_Person_NickName.htm" />
+        <HelpTOCNode Title="OrgId Property " Url="html/P_WebexSDK_Person_OrgId.htm" />
+        <HelpTOCNode Title="Type Property " Url="html/P_WebexSDK_Person_Type.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="33348341-858a-4c7b-b940-b976f38fc934" Title="PersonClient Class" Url="html/T_WebexSDK_PersonClient.htm">
+      <HelpTOCNode Title="PersonClient Constructor " Url="html/M_WebexSDK_PersonClient__ctor.htm" />
+      <HelpTOCNode Id="3959022b-c234-45a5-90cc-16c96b5395b4" Title="PersonClient Methods" Url="html/Methods_T_WebexSDK_PersonClient.htm">
+        <HelpTOCNode Title="Get Method " Url="html/M_WebexSDK_PersonClient_Get.htm" />
+        <HelpTOCNode Title="GetMe Method " Url="html/M_WebexSDK_PersonClient_GetMe.htm" />
+        <HelpTOCNode Title="List Method " Url="html/M_WebexSDK_PersonClient_List.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="1f58e9d8-9384-4063-93a2-6024f5f04759" Title="Phone Class" Url="html/T_WebexSDK_Phone.htm">
+      <HelpTOCNode Id="46e92f26-b174-41f4-952c-6fdb2d802b87" Title="Phone Properties" Url="html/Properties_T_WebexSDK_Phone.htm">
+        <HelpTOCNode Title="AudioMaxBandwidth Property " Url="html/P_WebexSDK_Phone_AudioMaxBandwidth.htm" />
+        <HelpTOCNode Title="ShareMaxBandwidth Property " Url="html/P_WebexSDK_Phone_ShareMaxBandwidth.htm" />
+        <HelpTOCNode Title="VideoCodecLicense Property " Url="html/P_WebexSDK_Phone_VideoCodecLicense.htm" />
+        <HelpTOCNode Title="VideoCodecLicenseURL Property " Url="html/P_WebexSDK_Phone_VideoCodecLicenseURL.htm" />
+        <HelpTOCNode Title="VideoMaxBandwidth Property " Url="html/P_WebexSDK_Phone_VideoMaxBandwidth.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="10581475-35cc-4383-b1e1-fde621931a4c" Title="Phone Methods" Url="html/Methods_T_WebexSDK_Phone.htm">
+        <HelpTOCNode Title="ActivateVideoCodecLicense Method " Url="html/M_WebexSDK_Phone_ActivateVideoCodecLicense.htm" />
+        <HelpTOCNode Title="Deregister Method " Url="html/M_WebexSDK_Phone_Deregister.htm" />
+        <HelpTOCNode Title="Dial Method " Url="html/M_WebexSDK_Phone_Dial.htm" />
+        <HelpTOCNode Title="DisableVideoCodecActivation Method " Url="html/M_WebexSDK_Phone_DisableVideoCodecActivation.htm" />
+        <HelpTOCNode Title="GetAVIODevices Method " Url="html/M_WebexSDK_Phone_GetAVIODevices.htm" />
+        <HelpTOCNode Title="Register Method " Url="html/M_WebexSDK_Phone_Register.htm" />
+        <HelpTOCNode Title="RequestVideoCodecActivation Method " Url="html/M_WebexSDK_Phone_RequestVideoCodecActivation.htm" />
+        <HelpTOCNode Title="SelectAVIODevice Method " Url="html/M_WebexSDK_Phone_SelectAVIODevice.htm" />
+        <HelpTOCNode Title="StartPreview Method " Url="html/M_WebexSDK_Phone_StartPreview.htm" />
+        <HelpTOCNode Title="StopPreview Method " Url="html/M_WebexSDK_Phone_StopPreview.htm" />
+        <HelpTOCNode Title="UpdatePreview Method " Url="html/M_WebexSDK_Phone_UpdatePreview.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="1096ab8e-1ff6-4f55-a102-250aa0404b07" Title="Phone Events" Url="html/Events_T_WebexSDK_Phone.htm">
+        <HelpTOCNode Title="OnIncoming Event" Url="html/E_WebexSDK_Phone_OnIncoming.htm" />
+        <HelpTOCNode Title="OnRequestVideoCodecActivation Event" Url="html/E_WebexSDK_Phone_OnRequestVideoCodecActivation.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Title="Phone.DefaultBandwidth Enumeration" Url="html/T_WebexSDK_Phone_DefaultBandwidth.htm" />
+    <HelpTOCNode Id="09d7b00c-54da-4498-8935-0bb24aacd3c9" Title="ReceivingAudioEvent Class" Url="html/T_WebexSDK_ReceivingAudioEvent.htm">
+      <HelpTOCNode Id="2a90cc81-622d-460a-97f7-d8c4bd27d7a8" Title="ReceivingAudioEvent Properties" Url="html/Properties_T_WebexSDK_ReceivingAudioEvent.htm">
+        <HelpTOCNode Title="IsReceiving Property " Url="html/P_WebexSDK_ReceivingAudioEvent_IsReceiving.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="c7a737b4-89a3-4345-80d6-5a99af89a447" Title="ReceivingAuxVideoEvent Class" Url="html/T_WebexSDK_ReceivingAuxVideoEvent.htm">
+      <HelpTOCNode Title="ReceivingAuxVideoEvent Properties" Url="html/Properties_T_WebexSDK_ReceivingAuxVideoEvent.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="f0a83f74-13a8-4aae-8a9e-c4a4a6fad3a8" Title="ReceivingShareEvent Class" Url="html/T_WebexSDK_ReceivingShareEvent.htm">
+      <HelpTOCNode Id="b9347bfd-9571-4f0e-bde4-652412198137" Title="ReceivingShareEvent Properties" Url="html/Properties_T_WebexSDK_ReceivingShareEvent.htm">
+        <HelpTOCNode Title="IsReceiving Property " Url="html/P_WebexSDK_ReceivingShareEvent_IsReceiving.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="9033c1ba-5eb0-45ac-8991-8fa8873621f3" Title="ReceivingVideoEvent Class" Url="html/T_WebexSDK_ReceivingVideoEvent.htm">
+      <HelpTOCNode Id="549a7060-6ef3-4377-b5d2-d4aad57898c3" Title="ReceivingVideoEvent Properties" Url="html/Properties_T_WebexSDK_ReceivingVideoEvent.htm">
+        <HelpTOCNode Title="IsReceiving Property " Url="html/P_WebexSDK_ReceivingVideoEvent_IsReceiving.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="c78372f7-d51a-418b-999c-cd486a2e2b53" Title="RemoteAuxSendingVideoEvent Class" Url="html/T_WebexSDK_RemoteAuxSendingVideoEvent.htm">
+      <HelpTOCNode Title="RemoteAuxSendingVideoEvent Properties" Url="html/Properties_T_WebexSDK_RemoteAuxSendingVideoEvent.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="cae1f47f-12f7-49dd-8984-66c64ff42997" Title="RemoteAuxVideoChangedEvent Class" Url="html/T_WebexSDK_RemoteAuxVideoChangedEvent.htm">
+      <HelpTOCNode Id="20469711-ef2c-4d55-a3f3-6fe6f0052885" Title="RemoteAuxVideoChangedEvent Properties" Url="html/Properties_T_WebexSDK_RemoteAuxVideoChangedEvent.htm">
+        <HelpTOCNode Title="RemoteAuxVideo Property " Url="html/P_WebexSDK_RemoteAuxVideoChangedEvent_RemoteAuxVideo.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="dadfd307-b307-435f-bb12-50b4940045c2" Title="RemoteAuxVideoPersonChangedEvent Class" Url="html/T_WebexSDK_RemoteAuxVideoPersonChangedEvent.htm">
+      <HelpTOCNode Id="aeacccf0-2361-4be5-bdc0-941aa976767d" Title="RemoteAuxVideoPersonChangedEvent Properties" Url="html/Properties_T_WebexSDK_RemoteAuxVideoPersonChangedEvent.htm">
+        <HelpTOCNode Title="FromPerson Property " Url="html/P_WebexSDK_RemoteAuxVideoPersonChangedEvent_FromPerson.htm" />
+        <HelpTOCNode Title="ToPerson Property " Url="html/P_WebexSDK_RemoteAuxVideoPersonChangedEvent_ToPerson.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="3abff628-bcbe-4cdd-b6de-539a98172979" Title="RemoteAuxVideosCountChangedEvent Class" Url="html/T_WebexSDK_RemoteAuxVideosCountChangedEvent.htm">
+      <HelpTOCNode Id="a6cb9580-cb0b-45af-acd5-76e749a8bf71" Title="RemoteAuxVideosCountChangedEvent Properties" Url="html/Properties_T_WebexSDK_RemoteAuxVideosCountChangedEvent.htm">
+        <HelpTOCNode Title="Count Property " Url="html/P_WebexSDK_RemoteAuxVideosCountChangedEvent_Count.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="c6c38d16-01a3-4bac-aa5a-91728e4dc2ee" Title="RemoteAuxVideoSizeChangedEvent Class" Url="html/T_WebexSDK_RemoteAuxVideoSizeChangedEvent.htm">
+      <HelpTOCNode Title="RemoteAuxVideoSizeChangedEvent Properties" Url="html/Properties_T_WebexSDK_RemoteAuxVideoSizeChangedEvent.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="d09d124b-17b9-4c4d-9334-19c2800682d7" Title="RemoteCancel Class" Url="html/T_WebexSDK_RemoteCancel.htm">
+      <HelpTOCNode Title="RemoteCancel Properties" Url="html/Properties_T_WebexSDK_RemoteCancel.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="b0e03f22-9ec9-4c97-a201-f69da05584c6" Title="RemoteDecline Class" Url="html/T_WebexSDK_RemoteDecline.htm">
+      <HelpTOCNode Title="RemoteDecline Properties" Url="html/Properties_T_WebexSDK_RemoteDecline.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="8112325b-97a3-4261-b210-f57b384d06a7" Title="RemoteFile Class" Url="html/T_WebexSDK_RemoteFile.htm">
+      <HelpTOCNode Title="RemoteFile Constructor " Url="html/M_WebexSDK_RemoteFile__ctor.htm" />
+      <HelpTOCNode Id="131390c6-71fa-48ab-b392-79253f61a965" Title="RemoteFile Properties" Url="html/Properties_T_WebexSDK_RemoteFile.htm">
+        <HelpTOCNode Title="Mime Property " Url="html/P_WebexSDK_RemoteFile_Mime.htm" />
+        <HelpTOCNode Title="Name Property " Url="html/P_WebexSDK_RemoteFile_Name.htm" />
+        <HelpTOCNode Title="RemoteThumbnail Property " Url="html/P_WebexSDK_RemoteFile_RemoteThumbnail.htm" />
+        <HelpTOCNode Title="Size Property " Url="html/P_WebexSDK_RemoteFile_Size.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="2de7de4b-dbc1-4565-b9d3-a61a49b43633" Title="RemoteFile.Thumbnail Class" Url="html/T_WebexSDK_RemoteFile_Thumbnail.htm">
+      <HelpTOCNode Title="RemoteFile.Thumbnail Constructor " Url="html/M_WebexSDK_RemoteFile_Thumbnail__ctor.htm" />
+      <HelpTOCNode Id="a5b14a49-c70c-429b-a3fa-5319c6457630" Title="Thumbnail Properties" Url="html/Properties_T_WebexSDK_RemoteFile_Thumbnail.htm">
+        <HelpTOCNode Title="Height Property " Url="html/P_WebexSDK_RemoteFile_Thumbnail_Height.htm" />
+        <HelpTOCNode Title="Mime Property " Url="html/P_WebexSDK_RemoteFile_Thumbnail_Mime.htm" />
+        <HelpTOCNode Title="Width Property " Url="html/P_WebexSDK_RemoteFile_Thumbnail_Width.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="bb452189-02f3-41d1-b082-eb05cc545148" Title="RemoteLeft Class" Url="html/T_WebexSDK_RemoteLeft.htm">
+      <HelpTOCNode Title="RemoteLeft Properties" Url="html/Properties_T_WebexSDK_RemoteLeft.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="4a2f1e9d-8c39-4d96-b501-5897dc2b05a2" Title="RemoteSendingAudioEvent Class" Url="html/T_WebexSDK_RemoteSendingAudioEvent.htm">
+      <HelpTOCNode Id="3a294f2d-183b-4274-a44a-08c18d753c57" Title="RemoteSendingAudioEvent Properties" Url="html/Properties_T_WebexSDK_RemoteSendingAudioEvent.htm">
+        <HelpTOCNode Title="IsSending Property " Url="html/P_WebexSDK_RemoteSendingAudioEvent_IsSending.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="9557cb7b-f6cc-44fb-92e8-ea30a7256634" Title="RemoteSendingShareEvent Class" Url="html/T_WebexSDK_RemoteSendingShareEvent.htm">
+      <HelpTOCNode Id="37260e3d-2042-4d58-9699-f203acfef088" Title="RemoteSendingShareEvent Properties" Url="html/Properties_T_WebexSDK_RemoteSendingShareEvent.htm">
+        <HelpTOCNode Title="IsSending Property " Url="html/P_WebexSDK_RemoteSendingShareEvent_IsSending.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="4812851e-8232-4f6c-a494-79fdb38cdde9" Title="RemoteSendingVideoEvent Class" Url="html/T_WebexSDK_RemoteSendingVideoEvent.htm">
+      <HelpTOCNode Id="af46e2a1-7803-421d-9c8a-147b490fd76e" Title="RemoteSendingVideoEvent Properties" Url="html/Properties_T_WebexSDK_RemoteSendingVideoEvent.htm">
+        <HelpTOCNode Title="IsSending Property " Url="html/P_WebexSDK_RemoteSendingVideoEvent_IsSending.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="492820ec-83f2-47a0-848c-b0f5498af594" Title="RemoteShareViewSizeChangedEvent Class" Url="html/T_WebexSDK_RemoteShareViewSizeChangedEvent.htm">
+      <HelpTOCNode Title="RemoteShareViewSizeChangedEvent Properties" Url="html/Properties_T_WebexSDK_RemoteShareViewSizeChangedEvent.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="0c84951d-60c4-4c13-8b36-2d1d29d8b130" Title="RemoteVideoViewSizeChangedEvent Class" Url="html/T_WebexSDK_RemoteVideoViewSizeChangedEvent.htm">
+      <HelpTOCNode Title="RemoteVideoViewSizeChangedEvent Properties" Url="html/Properties_T_WebexSDK_RemoteVideoViewSizeChangedEvent.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="b380f833-6f27-4877-8e52-45bb3be2f6fd" Title="SendingAudioEvent Class" Url="html/T_WebexSDK_SendingAudioEvent.htm">
+      <HelpTOCNode Id="33ef647b-8bac-4d30-82f0-e400437c24df" Title="SendingAudioEvent Properties" Url="html/Properties_T_WebexSDK_SendingAudioEvent.htm">
+        <HelpTOCNode Title="IsSending Property " Url="html/P_WebexSDK_SendingAudioEvent_IsSending.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="fca50e53-b1d1-4a59-97e7-e5fe1f2fe2b5" Title="SendingShareEvent Class" Url="html/T_WebexSDK_SendingShareEvent.htm">
+      <HelpTOCNode Id="48007f2c-eb08-4c7a-aa43-07b8cab416da" Title="SendingShareEvent Properties" Url="html/Properties_T_WebexSDK_SendingShareEvent.htm">
+        <HelpTOCNode Title="IsSending Property " Url="html/P_WebexSDK_SendingShareEvent_IsSending.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="fb94447f-672b-473d-9638-8dcfc8a95521" Title="SendingVideoEvent Class" Url="html/T_WebexSDK_SendingVideoEvent.htm">
+      <HelpTOCNode Id="47cc8d4e-04f5-4775-b524-cb7ae095162b" Title="SendingVideoEvent Properties" Url="html/Properties_T_WebexSDK_SendingVideoEvent.htm">
+        <HelpTOCNode Title="IsSending Property " Url="html/P_WebexSDK_SendingVideoEvent_IsSending.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="68b5dd9e-9198-4b87-9311-3a20d8b685b3" Title="ShareSource Class" Url="html/T_WebexSDK_ShareSource.htm">
+      <HelpTOCNode Title="ShareSource Constructor " Url="html/M_WebexSDK_ShareSource__ctor.htm" />
+      <HelpTOCNode Id="3f475e07-a53b-4a8e-b24f-7c8f13d7d3c8" Title="ShareSource Properties" Url="html/Properties_T_WebexSDK_ShareSource.htm">
+        <HelpTOCNode Title="Name Property " Url="html/P_WebexSDK_ShareSource_Name.htm" />
+        <HelpTOCNode Title="SourceId Property " Url="html/P_WebexSDK_ShareSource_SourceId.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Title="ShareSourceType Enumeration" Url="html/T_WebexSDK_ShareSourceType.htm" />
+    <HelpTOCNode Id="f067fd7f-c82e-426a-a268-9d9ce6047553" Title="Space Class" Url="html/T_WebexSDK_Space.htm">
+      <HelpTOCNode Title="Space Constructor " Url="html/M_WebexSDK_Space__ctor.htm" />
+      <HelpTOCNode Id="9ec7a5e2-5b93-4999-9d9c-219efed62ee0" Title="Space Properties" Url="html/Properties_T_WebexSDK_Space.htm">
+        <HelpTOCNode Title="Created Property " Url="html/P_WebexSDK_Space_Created.htm" />
+        <HelpTOCNode Title="Id Property " Url="html/P_WebexSDK_Space_Id.htm" />
+        <HelpTOCNode Title="IsLocked Property " Url="html/P_WebexSDK_Space_IsLocked.htm" />
+        <HelpTOCNode Title="LastActivity Property " Url="html/P_WebexSDK_Space_LastActivity.htm" />
+        <HelpTOCNode Title="TeamId Property " Url="html/P_WebexSDK_Space_TeamId.htm" />
+        <HelpTOCNode Title="Title Property " Url="html/P_WebexSDK_Space_Title.htm" />
+        <HelpTOCNode Title="Type Property " Url="html/P_WebexSDK_Space_Type.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="3efdcc84-c86b-4465-b4f9-eba483ada51d" Title="SpaceClient Class" Url="html/T_WebexSDK_SpaceClient.htm">
+      <HelpTOCNode Title="SpaceClient Constructor " Url="html/M_WebexSDK_SpaceClient__ctor.htm" />
+      <HelpTOCNode Id="48e71302-8aa8-4021-81df-90df08ac8234" Title="SpaceClient Methods" Url="html/Methods_T_WebexSDK_SpaceClient.htm">
+        <HelpTOCNode Title="Create Method " Url="html/M_WebexSDK_SpaceClient_Create.htm" />
+        <HelpTOCNode Title="Delete Method " Url="html/M_WebexSDK_SpaceClient_Delete.htm" />
+        <HelpTOCNode Title="Get Method " Url="html/M_WebexSDK_SpaceClient_Get.htm" />
+        <HelpTOCNode Title="List Method " Url="html/M_WebexSDK_SpaceClient_List.htm" />
+        <HelpTOCNode Title="Update Method " Url="html/M_WebexSDK_SpaceClient_Update.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Title="SpaceSortType Enumeration" Url="html/T_WebexSDK_SpaceSortType.htm" />
+    <HelpTOCNode Title="SpaceType Enumeration" Url="html/T_WebexSDK_SpaceType.htm" />
+    <HelpTOCNode Id="98966e27-97ab-47f4-8f26-60c0f96101a0" Title="SpeakerSwitchedEvent Class" Url="html/T_WebexSDK_SpeakerSwitchedEvent.htm">
+      <HelpTOCNode Id="24f6d2d0-3b89-4479-bf19-acaa07a461ea" Title="SpeakerSwitchedEvent Properties" Url="html/Properties_T_WebexSDK_SpeakerSwitchedEvent.htm">
+        <HelpTOCNode Title="Speaker Property " Url="html/P_WebexSDK_SpeakerSwitchedEvent_Speaker.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="d372044f-8205-4f6c-b061-0c9b08352235" Title="SSOAuthenticator Class" Url="html/T_WebexSDK_SSOAuthenticator.htm">
+      <HelpTOCNode Title="SSOAuthenticator Constructor " Url="html/M_WebexSDK_SSOAuthenticator__ctor.htm" />
+      <HelpTOCNode Id="0b47356d-f553-4037-8553-a4b8c1397d8e" Title="SSOAuthenticator Properties" Url="html/Properties_T_WebexSDK_SSOAuthenticator.htm">
+        <HelpTOCNode Title="AuthorizationUrl Property " Url="html/P_WebexSDK_SSOAuthenticator_AuthorizationUrl.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Title="SSOAuthenticator Methods" Url="html/Methods_T_WebexSDK_SSOAuthenticator.htm" />
+    </HelpTOCNode>
+    <HelpTOCNode Id="e8484983-bb12-470f-8099-149059283357" Title="Team Class" Url="html/T_WebexSDK_Team.htm">
+      <HelpTOCNode Title="Team Constructor " Url="html/M_WebexSDK_Team__ctor.htm" />
+      <HelpTOCNode Id="2a5c34cb-d646-4513-8cd3-4eb6825374bc" Title="Team Properties" Url="html/Properties_T_WebexSDK_Team.htm">
+        <HelpTOCNode Title="Created Property " Url="html/P_WebexSDK_Team_Created.htm" />
+        <HelpTOCNode Title="Id Property " Url="html/P_WebexSDK_Team_Id.htm" />
+        <HelpTOCNode Title="Name Property " Url="html/P_WebexSDK_Team_Name.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="c6e4cb16-2d08-430a-bb27-dcda448a70e3" Title="TeamClient Class" Url="html/T_WebexSDK_TeamClient.htm">
+      <HelpTOCNode Title="TeamClient Constructor " Url="html/M_WebexSDK_TeamClient__ctor.htm" />
+      <HelpTOCNode Id="89492493-cbbd-4d3c-adbb-5654aac92ef4" Title="TeamClient Methods" Url="html/Methods_T_WebexSDK_TeamClient.htm">
+        <HelpTOCNode Title="Create Method " Url="html/M_WebexSDK_TeamClient_Create.htm" />
+        <HelpTOCNode Title="Delete Method " Url="html/M_WebexSDK_TeamClient_Delete.htm" />
+        <HelpTOCNode Title="Get Method " Url="html/M_WebexSDK_TeamClient_Get.htm" />
+        <HelpTOCNode Title="List Method " Url="html/M_WebexSDK_TeamClient_List.htm" />
+        <HelpTOCNode Title="Update Method " Url="html/M_WebexSDK_TeamClient_Update.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="58cdbef2-3880-4a5b-bbe0-df8cc7cd8dca" Title="TeamMembership Class" Url="html/T_WebexSDK_TeamMembership.htm">
+      <HelpTOCNode Title="TeamMembership Constructor " Url="html/M_WebexSDK_TeamMembership__ctor.htm" />
+      <HelpTOCNode Id="77b042d0-cc21-4915-be0c-7dc8dcd8fc45" Title="TeamMembership Properties" Url="html/Properties_T_WebexSDK_TeamMembership.htm">
+        <HelpTOCNode Title="Created Property " Url="html/P_WebexSDK_TeamMembership_Created.htm" />
+        <HelpTOCNode Title="Id Property " Url="html/P_WebexSDK_TeamMembership_Id.htm" />
+        <HelpTOCNode Title="IsModerator Property " Url="html/P_WebexSDK_TeamMembership_IsModerator.htm" />
+        <HelpTOCNode Title="PersonDisplayName Property " Url="html/P_WebexSDK_TeamMembership_PersonDisplayName.htm" />
+        <HelpTOCNode Title="PersonEmail Property " Url="html/P_WebexSDK_TeamMembership_PersonEmail.htm" />
+        <HelpTOCNode Title="PersonId Property " Url="html/P_WebexSDK_TeamMembership_PersonId.htm" />
+        <HelpTOCNode Title="PersonOrgId Property " Url="html/P_WebexSDK_TeamMembership_PersonOrgId.htm" />
+        <HelpTOCNode Title="TeamId Property " Url="html/P_WebexSDK_TeamMembership_TeamId.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="6f365732-788f-40a5-ad71-eadf1851a38a" Title="TeamMembershipClient Class" Url="html/T_WebexSDK_TeamMembershipClient.htm">
+      <HelpTOCNode Title="TeamMembershipClient Constructor " Url="html/M_WebexSDK_TeamMembershipClient__ctor.htm" />
+      <HelpTOCNode Id="30f111d3-0969-4947-8355-77a344e199fb" Title="TeamMembershipClient Methods" Url="html/Methods_T_WebexSDK_TeamMembershipClient.htm">
+        <HelpTOCNode Title="CreateByEmail Method " Url="html/M_WebexSDK_TeamMembershipClient_CreateByEmail.htm" />
+        <HelpTOCNode Title="CreateById Method " Url="html/M_WebexSDK_TeamMembershipClient_CreateById.htm" />
+        <HelpTOCNode Title="Delete Method " Url="html/M_WebexSDK_TeamMembershipClient_Delete.htm" />
+        <HelpTOCNode Title="Get Method " Url="html/M_WebexSDK_TeamMembershipClient_Get.htm" />
+        <HelpTOCNode Title="List Method " Url="html/M_WebexSDK_TeamMembershipClient_List.htm" />
+        <HelpTOCNode Title="Update Method " Url="html/M_WebexSDK_TeamMembershipClient_Update.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="dd675564-1f9a-4bb6-bec6-db03309ef312" Title="Webex Class" Url="html/T_WebexSDK_Webex.htm">
+      <HelpTOCNode Title="Webex Constructor " Url="html/M_WebexSDK_Webex__ctor.htm" />
+      <HelpTOCNode Id="8dafea0f-df9d-456d-ba14-ddc99e11247f" Title="Webex Properties" Url="html/Properties_T_WebexSDK_Webex.htm">
+        <HelpTOCNode Title="Authenticator Property " Url="html/P_WebexSDK_Webex_Authenticator.htm" />
+        <HelpTOCNode Title="ConsoleLogger Property " Url="html/P_WebexSDK_Webex_ConsoleLogger.htm" />
+        <HelpTOCNode Title="Logger Property " Url="html/P_WebexSDK_Webex_Logger.htm" />
+        <HelpTOCNode Title="Memberships Property " Url="html/P_WebexSDK_Webex_Memberships.htm" />
+        <HelpTOCNode Title="Messages Property " Url="html/P_WebexSDK_Webex_Messages.htm" />
+        <HelpTOCNode Title="People Property " Url="html/P_WebexSDK_Webex_People.htm" />
+        <HelpTOCNode Title="Phone Property " Url="html/P_WebexSDK_Webex_Phone.htm" />
+        <HelpTOCNode Title="Spaces Property " Url="html/P_WebexSDK_Webex_Spaces.htm" />
+        <HelpTOCNode Title="TeamMemberships Property " Url="html/P_WebexSDK_Webex_TeamMemberships.htm" />
+        <HelpTOCNode Title="Teams Property " Url="html/P_WebexSDK_Webex_Teams.htm" />
+        <HelpTOCNode Title="Webhooks Property " Url="html/P_WebexSDK_Webex_Webhooks.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="04c18c50-7bef-4533-b4a6-f306c4cda39e" Title="Webex Fields" Url="html/Fields_T_WebexSDK_Webex.htm">
+        <HelpTOCNode Title="Version Field" Url="html/F_WebexSDK_Webex_Version.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="caf86cf5-29f6-4725-afa0-4c756246c368" Title="WebexApiEventArgs Class" Url="html/T_WebexSDK_WebexApiEventArgs.htm">
+      <HelpTOCNode Id="34f68928-230d-4830-9e8a-167a1f934243" Title="WebexApiEventArgs Constructor " Url="html/Overload_WebexSDK_WebexApiEventArgs__ctor.htm">
+        <HelpTOCNode Title="WebexApiEventArgs Constructor " Url="html/M_WebexSDK_WebexApiEventArgs__ctor.htm" />
+        <HelpTOCNode Title="WebexApiEventArgs Constructor (Boolean, WebexError)" Url="html/M_WebexSDK_WebexApiEventArgs__ctor_1.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="5b2a8ee9-8f40-46bd-928f-54271f82ac9a" Title="WebexApiEventArgs Properties" Url="html/Properties_T_WebexSDK_WebexApiEventArgs.htm">
+        <HelpTOCNode Title="Error Property " Url="html/P_WebexSDK_WebexApiEventArgs_Error.htm" />
+        <HelpTOCNode Title="IsSuccess Property " Url="html/P_WebexSDK_WebexApiEventArgs_IsSuccess.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="3f424e23-8070-47f6-9c2f-662b7df1d08f" Title="WebexApiEventArgs(T) Class" Url="html/T_WebexSDK_WebexApiEventArgs_1.htm">
+      <HelpTOCNode Id="fc285e16-89af-4484-b07e-33bffa0ca868" Title="WebexApiEventArgs(T) Constructor " Url="html/Overload_WebexSDK_WebexApiEventArgs_1__ctor.htm">
+        <HelpTOCNode Title="WebexApiEventArgs(T) Constructor " Url="html/M_WebexSDK_WebexApiEventArgs_1__ctor.htm" />
+        <HelpTOCNode Title="WebexApiEventArgs(T) Constructor (Boolean, WebexError, T)" Url="html/M_WebexSDK_WebexApiEventArgs_1__ctor_1.htm" />
+      </HelpTOCNode>
+      <HelpTOCNode Id="7ea9cdb3-d066-44cd-977c-e5969a1d0c86" Title="WebexApiEventArgs(T) Properties" Url="html/Properties_T_WebexSDK_WebexApiEventArgs_1.htm">
+        <HelpTOCNode Title="Data Property " Url="html/P_WebexSDK_WebexApiEventArgs_1_Data.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="9e4a25e2-7f83-41dc-a29f-0c9edf2deafe" Title="WebexError Class" Url="html/T_WebexSDK_WebexError.htm">
+      <HelpTOCNode Title="WebexError Constructor " Url="html/M_WebexSDK_WebexError__ctor.htm" />
+      <HelpTOCNode Id="c7231275-920b-4446-b8f7-082bb774e351" Title="WebexError Properties" Url="html/Properties_T_WebexSDK_WebexError.htm">
+        <HelpTOCNode Title="ErrorCode Property " Url="html/P_WebexSDK_WebexError_ErrorCode.htm" />
+        <HelpTOCNode Title="Reason Property " Url="html/P_WebexSDK_WebexError_Reason.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Title="WebexErrorCode Enumeration" Url="html/T_WebexSDK_WebexErrorCode.htm" />
+    <HelpTOCNode Id="4aa0ac33-ad7a-45d5-83b9-673a83e53291" Title="Webhook Class" Url="html/T_WebexSDK_Webhook.htm">
+      <HelpTOCNode Title="Webhook Constructor " Url="html/M_WebexSDK_Webhook__ctor.htm" />
+      <HelpTOCNode Id="f54448e3-c793-4bc5-b25e-72a28310da3d" Title="Webhook Properties" Url="html/Properties_T_WebexSDK_Webhook.htm">
+        <HelpTOCNode Title="Created Property " Url="html/P_WebexSDK_Webhook_Created.htm" />
+        <HelpTOCNode Title="Event Property " Url="html/P_WebexSDK_Webhook_Event.htm" />
+        <HelpTOCNode Title="Filter Property " Url="html/P_WebexSDK_Webhook_Filter.htm" />
+        <HelpTOCNode Title="Id Property " Url="html/P_WebexSDK_Webhook_Id.htm" />
+        <HelpTOCNode Title="Name Property " Url="html/P_WebexSDK_Webhook_Name.htm" />
+        <HelpTOCNode Title="Resource Property " Url="html/P_WebexSDK_Webhook_Resource.htm" />
+        <HelpTOCNode Title="Secret Property " Url="html/P_WebexSDK_Webhook_Secret.htm" />
+        <HelpTOCNode Title="Status Property " Url="html/P_WebexSDK_Webhook_Status.htm" />
+        <HelpTOCNode Title="TargetUrl Property " Url="html/P_WebexSDK_Webhook_TargetUrl.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+    <HelpTOCNode Id="f563cf07-32ab-449a-a99c-fb7fbd35204b" Title="WebhookClient Class" Url="html/T_WebexSDK_WebhookClient.htm">
+      <HelpTOCNode Title="WebhookClient Constructor " Url="html/M_WebexSDK_WebhookClient__ctor.htm" />
+      <HelpTOCNode Id="13549b49-55b3-4713-8f64-2ccc318f33e5" Title="WebhookClient Methods" Url="html/Methods_T_WebexSDK_WebhookClient.htm">
+        <HelpTOCNode Title="Create Method " Url="html/M_WebexSDK_WebhookClient_Create.htm" />
+        <HelpTOCNode Title="Delete Method " Url="html/M_WebexSDK_WebhookClient_Delete.htm" />
+        <HelpTOCNode Title="Get Method " Url="html/M_WebexSDK_WebhookClient_Get.htm" />
+        <HelpTOCNode Title="List Method " Url="html/M_WebexSDK_WebhookClient_List.htm" />
+        <HelpTOCNode Title="Update Method " Url="html/M_WebexSDK_WebhookClient_Update.htm" />
+      </HelpTOCNode>
+    </HelpTOCNode>
+  </HelpTOCNode>
+</HelpTOC>
