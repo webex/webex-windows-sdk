@@ -2540,8 +2540,7 @@ namespace WebexSDK.Tests
                         {
                             if(auxCount.Count == 0)
                             {
-                                currentCall.Hangup(rsp =>
-                                { });
+                                HangupCall(currentCall);
                             }
                         }
                     };
@@ -2609,8 +2608,7 @@ namespace WebexSDK.Tests
                         {
                             if(auxCount.Count == 0)
                             {
-                                currentCall.Hangup(rsp =>
-                                { });
+                                HangupCall(currentCall);
                             }
                         }
                     };
@@ -2684,8 +2682,7 @@ namespace WebexSDK.Tests
                         {
                             if (auxCount.Count == 0)
                             {
-                                currentCall.Hangup(rsp =>
-                                { });
+                                HangupCall(currentCall);
                             }
                         }
                     };
@@ -2744,8 +2741,7 @@ namespace WebexSDK.Tests
                         {
                             if (auxCount.Count == 0)
                             {
-                                currentCall.Hangup(rsp =>
-                                { });
+                                HangupCall(currentCall);
                             }
                         }
                     };
@@ -2810,8 +2806,7 @@ namespace WebexSDK.Tests
                             }
                             else if (auxCount.Count == 0)
                             {
-                                currentCall.Hangup(rsp =>
-                                { });
+                                HangupCall(currentCall);
                             }
                         }
                         if (callMediaChangedEvent is RemoteAuxVideoPersonChangedEvent)
@@ -2879,8 +2874,7 @@ namespace WebexSDK.Tests
                             }
                             else if (auxCount.Count == 0)
                             {
-                                currentCall.Hangup(rsp =>
-                                { });
+                                HangupCall(currentCall);
                             }
                         }
                         if (callMediaChangedEvent is RemoteAuxVideoSizeChangedEvent)
@@ -2949,8 +2943,7 @@ namespace WebexSDK.Tests
                             }
                             else if (auxCount.Count == 0)
                             {
-                                currentCall.Hangup(rsp =>
-                                { });
+                                HangupCall(currentCall);
                             }
                         }
                         if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)
@@ -3017,8 +3010,7 @@ namespace WebexSDK.Tests
                             }
                             else if (auxCount.Count == 0)
                             {
-                                currentCall.Hangup(rsp =>
-                                { });
+                                HangupCall(currentCall);
                             }
                         }
                         if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)
@@ -3085,8 +3077,7 @@ namespace WebexSDK.Tests
                             }
                             else if (auxCount.Count == 0)
                             {
-                                currentCall.Hangup(rsp =>
-                                { });
+                                HangupCall(currentCall);
                             }
                         }
                         if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)
@@ -3156,8 +3147,7 @@ namespace WebexSDK.Tests
                             }
                             else if (auxCount.Count == 0)
                             {
-                                currentCall.Hangup(rsp =>
-                                { });
+                                HangupCall(currentCall);
                             }
                         }
                         if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)
@@ -3232,8 +3222,7 @@ namespace WebexSDK.Tests
                             }
                             else if (auxCount.Count == 0)
                             {
-                                currentCall.Hangup(rsp =>
-                                { });
+                                HangupCall(currentCall);
                             }
                         }
                         if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)

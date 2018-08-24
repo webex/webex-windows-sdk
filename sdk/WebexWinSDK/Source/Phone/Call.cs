@@ -949,10 +949,21 @@ namespace WebexSDK
         internal void TrigerOnCallMembershipChanged(CallMembershipChangedEvent callMembershipEvent)
         {
             SdkLogger.Instance.Info($"event[{callMembershipEvent.GetType().Name}] callmembership[{callMembershipEvent.CallMembership.Email}]");
-            if (callMembershipEvent is CallMembershipLeftEvent)
+            if (callMembershipEvent is CallMembershipJoinedEvent joinedEvent
+                && JoinedCallMembershipCount == 2 && ActiveSpeaker == null)
             {
-                var leftperson = callMembershipEvent as CallMembershipLeftEvent;
-                CheckAuxVideoPersonChange(leftperson.CallMembership);
+                activeSpeaker = joinedEvent.CallMembership;
+                TrigerOnMediaChanged(new ActiveSpeakerChangedEvent(this, activeSpeaker, null));
+            }
+            if (callMembershipEvent is CallMembershipLeftEvent leftEvent)
+            {
+                CheckAuxVideoPersonChange(leftEvent.CallMembership);
+                if(JoinedCallMembershipCount < 2 && ActiveSpeaker != null)
+                {
+                    var oldperson = ActiveSpeaker;
+                    activeSpeaker = null;
+                    TrigerOnMediaChanged(new ActiveSpeakerChangedEvent(this, null, oldperson));
+                }
             }
             OnCallMembershipChanged?.Invoke(callMembershipEvent);
         }

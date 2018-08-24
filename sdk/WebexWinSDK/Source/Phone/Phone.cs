@@ -747,46 +747,59 @@ namespace WebexSDK
             SdkLogger.Instance.Debug($"trackType[{trackType}], callID[{callId}]");
             if (trackType == TrackType.Remote)
             {
-                SdkLogger.Instance.Debug("active speaker changed");
-                var oldperson = currentCall.ActiveSpeaker;
+                OnRemoteTrackPersonChanged(callId);
+            }
+            else if (trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
+            {
+                OnRemoteAuxTrackPersonChanged(trackType, callId);     
+            }
+        }
+        private void OnRemoteTrackPersonChanged(string callId)
+        {
+            SdkLogger.Instance.Debug("active speaker changed");
+            var oldperson = currentCall.ActiveSpeaker;
 
-                string contactId = m_core_telephoneService.getContact(callId, TrackType.Remote);
+            string contactId = m_core_telephoneService.getContact(callId, TrackType.Remote);
+            if (contactId == null || contactId.Length == 0)
+            {
+                SdkLogger.Instance.Error($"get contactID by Remote Track failed.");
+                currentCall.activeSpeaker = null;
+            }
+            else
+            {
+                var trackPersonId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.People, contactId);
+                currentCall.activeSpeaker = currentCall?.Memberships?.Find(x => x.PersonId == trackPersonId);
+            }
+            if (currentCall.ActiveSpeaker != oldperson)
+            {
+                currentCall?.TrigerOnMediaChanged(new ActiveSpeakerChangedEvent(currentCall, currentCall.ActiveSpeaker, oldperson));
+            }
+        }
+        private void OnRemoteAuxTrackPersonChanged(TrackType trackType, string callId)
+        {
+            var find = currentCall?.RemoteAuxVideos.Find(x => (x.Track == trackType));
+            if (find != null)
+            {
+                SdkLogger.Instance.Debug($"{trackType} person changed");
+                var oldperson = find.Person;
+
+                string contactId = m_core_telephoneService.getContact(callId, trackType);
                 if (contactId == null || contactId.Length == 0)
                 {
-                    SdkLogger.Instance.Error($"get contactID by Remote Track failed.");
-                    currentCall.activeSpeaker = null;
+                    SdkLogger.Instance.Debug($"trackType[{trackType}] has no person.");
+                    find.person = null;
                 }
                 else
                 {
                     var trackPersonId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.People, contactId);
-                    currentCall.activeSpeaker = currentCall?.Memberships?.Find(x => x.PersonId == trackPersonId);
+                    find.person = this.currentCall.Memberships.Find(x => x.PersonId == trackPersonId);
                 }
-                currentCall?.TrigerOnMediaChanged(new ActiveSpeakerChangedEvent(currentCall, currentCall.ActiveSpeaker, oldperson));
-            }
-            else if (trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
-            {
-                var find = currentCall?.RemoteAuxVideos.Find(x =>(x.Track == trackType));
-                if (find != null)
+                if (find.Person != oldperson)
                 {
-                    SdkLogger.Instance.Debug($"{trackType} person changed");
-                    var oldperson = find.Person;
-
-                    string contactId = m_core_telephoneService.getContact(callId, trackType);
-                    if (contactId == null || contactId.Length == 0)
-                    {
-                        SdkLogger.Instance.Debug($"trackType[{trackType}] has no person.");
-                        find.person = null;
-                    }
-                    else
-                    {
-                        var trackPersonId = StringExtention.EncodeHydraId(StringExtention.HydraIdType.People, contactId);
-                        find.person = this.currentCall.Memberships.Find(x => x.PersonId == trackPersonId);
-                    }
                     currentCall?.TrigerOnMediaChanged(new RemoteAuxVideoPersonChangedEvent(oldperson, find.Person, currentCall, find));
-                }      
+                }
             }
         }
-
         private void OnIsAuxVideoStreamInUseChanged(TrackType trackType, string callId)
         {
             bool isInUse = m_core_telephoneService.getIsVideoTrackInUse(callId, trackType);
@@ -1015,9 +1028,8 @@ namespace WebexSDK
                 {
                     return;
                 }
-
-                currentCall.TrigerOnCallMembershipChanged(new CallMembershipJoinedEvent(currentCall, newItem));
                 currentCall.JoinedCallMembershipCount++;
+                currentCall.TrigerOnCallMembershipChanged(new CallMembershipJoinedEvent(currentCall, newItem));
                 if (currentCall.JoinedCallMembershipCount >= 3)
                 {
                     OnRemoteAuxVideosCountChanged();
@@ -1030,11 +1042,11 @@ namespace WebexSDK
             }
             else if (newItem.State == CallMembership.CallState.Left)
             {
-                currentCall.TrigerOnCallMembershipChanged(new CallMembershipLeftEvent(currentCall, newItem));
                 if (currentCall.JoinedCallMembershipCount > 0)
                 {
                     currentCall.JoinedCallMembershipCount--;
                 }
+                currentCall.TrigerOnCallMembershipChanged(new CallMembershipLeftEvent(currentCall, newItem));
                 if (currentCall.JoinedCallMembershipCount >= 2)
                 {
                     OnRemoteAuxVideosCountChanged();
