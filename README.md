@@ -95,7 +95,7 @@ Here are some examples of how to use the Windows SDK in your application. More d
 
     ```c#
     // dial
-    // calleeAddress can be email address, person ID, or a room ID
+    // calleeAddress can be email address, person ID, or a space ID
     webex?.Phone.Dial(calleeAddress, MediaOption.AudioVideoShare(curCallView.LocalViewHandle, curCallView.RemoteViewHandle, curCallView.RemoteShareViewHandle), result =>
     {
         if (result.Success)
@@ -208,18 +208,18 @@ Here are some examples of how to use the Windows SDK in your application. More d
 8. Create a new Cisco Webex space, add a user to the space:
 
     ```c#
-    // Create a Cisco Webex room:
-    WebexSDK.Room room = null;
-    webex?.Rooms.Create("hello world", null, rsp =>
+    // Create a Cisco Webex space:
+    WebexSDK.Space space = null;
+    webex?.Spaces.Create("hello world", null, rsp =>
     {
         if (rsp.Success){
-            room = rsp.Data;
+            space = rsp.Data;
             System.Console.WriteLine("create space successfully");
         }
     });
     
-    // Add a user to the room
-    webex?.Memberships.CreateByPersonEmail(room?.Id, "email address", false, rsp =>
+    // Add a user to the space
+    webex?.Memberships.CreateByPersonEmail(space?.Id, "email address", false, rsp =>
     {
         if (rsp.Success)
         {
@@ -227,8 +227,8 @@ Here are some examples of how to use the Windows SDK in your application. More d
         }
     });
     
-    // send message to the room
-    webex?.Messages.PostToRoom(room?.Id, "hello", null, rsp =>
+    // send message to the space
+    webex?.Messages.PostToSpace(space?.Id, "hello", null, rsp =>
     {
         if(rsp.Success)
         {
@@ -254,8 +254,8 @@ Here are some examples of how to use the Windows SDK in your application. More d
         }
     });
     
-    // Post a message to a room by roomId.
-    webex?.Messages.PostToRoom(roomId, text, mentions, files, r =>
+    // Post a message to a space by spaceId.
+    webex?.Messages.PostToSpace(spaceId, text, mentions, files, r =>
     {
         if (r.IsSuccess)
         {
@@ -277,7 +277,7 @@ Here are some examples of how to use the Windows SDK in your application. More d
     
     // Mention All
     Mentions.Add(new MentionAll());
-    webex?.Messages.PostToRoom(roomId, text, Mentions, files, r =>
+    webex?.Messages.PostToSpace(spaceId, text, Mentions, files, r =>
     {
         if (r.IsSuccess)
         {
@@ -293,7 +293,7 @@ Here are some examples of how to use the Windows SDK in your application. More d
     
     // Mention one person
     Mentions.Add(new MentionPerson(personId));
-    webex?.Messages.PostToRoom(roomId, text, Mentions, files, r =>
+    webex?.Messages.PostToSpace(spaceId, text, Mentions, files, r =>
     {
         if (r.IsSuccess)
         {
