@@ -2499,7 +2499,7 @@ namespace WebexSDK.Tests
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
-            List<Call.RemoteAuxVideo> remoteAuxVideos = new List<Call.RemoteAuxVideo>();
+            List<RemoteAuxVideo> remoteAuxVideos = new List<RemoteAuxVideo>();
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
             List<bool> remoteAuxSendingVideos = new List<bool>();
 
@@ -2640,7 +2640,7 @@ namespace WebexSDK.Tests
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
-            List<Call.RemoteAuxVideo> remoteAuxVideos = new List<Call.RemoteAuxVideo>();
+            List<RemoteAuxVideo> remoteAuxVideos = new List<RemoteAuxVideo>();
             List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
 
             phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
@@ -2665,7 +2665,7 @@ namespace WebexSDK.Tests
                         {
                             remoteAuxVideo = currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
                         }
-                        remoteAuxVideos = new List<Call.RemoteAuxVideo>(currentCall.RemoteAuxVideos);
+                        remoteAuxVideos = new List<RemoteAuxVideo>(currentCall.RemoteAuxVideos);
                         foreach (var item in remoteAuxVideos)
                         {
                             currentCall.UnsubscribeRemoteAuxVideo(item);

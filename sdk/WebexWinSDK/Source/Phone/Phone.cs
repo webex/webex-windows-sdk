@@ -1280,10 +1280,7 @@ namespace WebexSDK
                 if (find != null && currentCall.CallId != null)
                 {
                     find.Track = videoTrackType;
-                    foreach (var item in find.HandleList)
-                    {
-                        m_core_telephoneService.setView(currentCall.CallId, item, videoTrackType);
-                    }
+                    m_core_telephoneService.setView(currentCall.CallId, find.Handle, videoTrackType);
                 }
             }
         }
@@ -1313,11 +1310,7 @@ namespace WebexSDK
                 var find = currentCall?.RemoteAuxVideos.Find(x =>(x.Track == trackType));
                 if (find != null && currentCall.CallId != null)
                 {
-                    var handleList = new List<IntPtr>(find.HandleList);
-                    foreach (var item in handleList)
-                    {
-                        find.RemoveViewHandle(item);
-                    }
+                    m_core_telephoneService.removeView(currentCall.CallId, find.Handle, trackType);
                     currentCall?.RemoteAuxVideos.Remove(find);
                 }
             }

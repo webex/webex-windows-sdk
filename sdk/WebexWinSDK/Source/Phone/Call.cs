@@ -47,7 +47,7 @@ namespace WebexSDK
 
         private readonly Phone phone;
         private readonly SparkNet.CoreFramework m_core;
-        private readonly SparkNet.TelephonyService m_core_telephoneService;
+        internal readonly SparkNet.TelephonyService m_core_telephoneService;
         internal bool isSendingVideo;
         internal bool isSendingAudio;
         private bool isReceivingVideo;
@@ -720,33 +720,33 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// Update remote video to display when video window is resized.
+        /// Refresh remote video to display when video window is resized.
         /// </summary>
         /// <param name="handle"> the video display window handle</param>
         /// <remarks>Since: 0.1.0</remarks>
-        public void UpdateRemoteView(IntPtr handle)
+        public void RefreshRemoteView(IntPtr handle)
         {
             SdkLogger.Instance.Debug($"handle:{handle}");
             m_core_telephoneService.updateView(this.CallId, handle, TrackType.Remote);
         }
 
         /// <summary>
-        /// Update local view to display when video window is resized.
+        /// Refresh local view to display when video window is resized.
         /// </summary>
         /// <param name="handle">the local video display window handle</param>
         /// <remarks>Since: 0.1.0</remarks>
-        public void UpdateLocalView(IntPtr handle)
+        public void RefreshLocalView(IntPtr handle)
         {
             SdkLogger.Instance.Debug($"handle:{handle}");
             m_core_telephoneService.updateView(this.CallId, handle, TrackType.Local);
         }
 
         /// <summary>
-        /// Update remote share view to display when video window is resized.
+        /// Refresh remote share view to display when video window is resized.
         /// </summary>
         /// <param name="handle">the remote share display window handle</param>
         /// <remarks>Since: 0.1.0</remarks>
-        public void UpdateRemoteShareView(IntPtr handle)
+        public void RefreshRemoteShareView(IntPtr handle)
         {
             SdkLogger.Instance.Debug($"handle:{handle}");
             m_core_telephoneService.updateView(this.CallId, handle, TrackType.RemoteShare);
@@ -779,7 +779,7 @@ namespace WebexSDK
             m_core_telephoneService.subscribeAuxVideo(this.CallId);
 
             var newRemoteAuxView = new RemoteAuxVideo(this);
-            newRemoteAuxView.AddViewHandle(handle);
+            newRemoteAuxView.Handle = handle;
             RemoteAuxVideos.Add(newRemoteAuxView);
             return newRemoteAuxView;
         }
@@ -1006,169 +1006,6 @@ namespace WebexSDK
             {
                 SelectShareSourceCompletedHandler?.Invoke(new WebexApiEventArgs<List<ShareSource>>(true, null, result));
                 SelectShareSourceCompletedHandler = null;
-            }
-        }
-
-        /// <summary>
-        /// A RemoteAuxVideo instance represents a remote auxiliary video.
-        /// </summary>
-        /// <remarks>Since: 2.0.0</remarks>
-        public class RemoteAuxVideo
-        {
-            /// <summary>
-            /// Gets the list of view handle.
-            /// </summary>
-            /// <remarks>Since: 2.0.0</remarks>
-            public List<IntPtr> HandleList { get; internal set; }
-
-            /// <summary>
-            /// Add a remote auxiliary video view.
-            /// </summary>
-            /// <param name="handle">The view handle.</param>
-            public void AddViewHandle(IntPtr handle)
-            {
-                if (handle == IntPtr.Zero)
-                {
-                    return;
-                }
-
-                if (!HandleList.Contains(handle))
-                {
-                    HandleList.Add(handle);
-                    if(Track > TrackType.Unknown)
-                    {
-                        this.currentCall?.m_core_telephoneService.setView(currentCall.CallId, handle, Track);
-                    }
-                }
-            }
-            /// <summary>
-            /// Remove the remote auxiliary video view.
-            /// </summary>
-            /// <param name="handle">The view handle.</param>
-            public void RemoveViewHandle(IntPtr handle)
-            {
-                if (handle == IntPtr.Zero)
-                {
-                    return;
-                }
-
-                if (HandleList.Contains(handle))
-                {
-                    HandleList.Remove(handle);
-                    if (Track > TrackType.Unknown)
-                    {
-                        this.currentCall?.m_core_telephoneService.removeView(currentCall.CallId, handle, Track);
-                    }
-                }
-            }
-
-            /// <summary>
-            /// Update the remote auxiliary video view.
-            /// </summary>
-            /// <param name="handle">The view handle.</param>
-            public void UpdateViewHandle(IntPtr handle)
-            {
-                if (handle == IntPtr.Zero)
-                {
-                    return;
-                }
-
-                if (HandleList.Contains(handle) && Track > TrackType.Unknown)
-                {
-                    this.currentCall?.m_core_telephoneService.updateView(currentCall.CallId, handle, Track);
-                }
-            }
-            internal CallMembership person;
-            /// <summary>
-            /// Gets the person represented this auxiliary video.
-            /// </summary>
-            /// <remarks>Since: 2.0.0</remarks>
-            public CallMembership Person
-            {
-                get
-                {
-                    return this.person;
-                }
-            }
-
-            private bool isSendingVideo = false;
-            /// <summary>
-            /// Gets a value indicating whether [this remote auxiliary video is sending video].
-            /// </summary>
-            /// <value>
-            ///   <c>true</c> if [remote auxiliary video is sending video]; otherwise, <c>false</c>.
-            /// </value>
-            /// <remarks>Since: 2.0.0</remarks>
-            public bool IsSendingVideo
-            {
-                get
-                {
-                    return this.isSendingVideo;
-                }
-                internal set
-                {
-                    isSendingVideo = value;
-                }
-            }
-
-            internal bool isReceivingVideo = true;
-            /// <summary>
-            /// Gets or sets a value indicating whether [the remote auxiliary video is receiving video].
-            /// </summary>
-            /// <value>
-            ///   <c>true</c> if [receiving video]; otherwise, <c>false</c>.
-            /// </value>
-            /// <remarks>Since: 2.0.0</remarks>
-            public bool IsReceivingVideo
-            {
-                get
-                {
-                    return isReceivingVideo;
-                }
-                set
-                {
-                    SdkLogger.Instance.Info($"{value}");
-                    this.currentCall.m_core_telephoneService?.muteRemoteVideo(this.currentCall.CallId, !value, Track);
-                    isReceivingVideo = value;
-                }
-            }
-
-
-            private VideoDimensions remoteAuxVideoSize;
-            /// <summary>
-            /// Gets the remote auxiliary video view dimensions (points) of this call.
-            /// </summary>
-            /// <remarks>Since: 2.0.0</remarks>
-            public VideoDimensions RemoteAuxVideoSize
-            {
-                get
-                {
-                    uint width = 0;
-                    uint height = 0;
-                    if (currentCall != null && currentCall.m_core_telephoneService != null
-                        && currentCall.m_core_telephoneService.getVideoSize(this.currentCall.CallId, Track, ref width, ref height))
-                    {
-                        remoteAuxVideoSize.Width = width;
-                        remoteAuxVideoSize.Height = height;
-                        SdkLogger.Instance.Debug($"get remote track[{Track}] video view size: width[{width}] height[{height}]");
-                    }
-                    else
-                    {
-                        SdkLogger.Instance.Error($"get remote track[{Track}] video view size error.");
-                    }
-                    return remoteAuxVideoSize;
-                }
-            }
-
-            internal SparkNet.TrackType Track { get; set; }
-            internal bool IsInUse { get; set; }
-            private readonly Call currentCall;
-            private RemoteAuxVideo() { }
-            internal RemoteAuxVideo(Call currentCall)
-                :base()
-            {
-                this.currentCall = currentCall;
-                HandleList = new List<IntPtr>();
             }
         }
     }

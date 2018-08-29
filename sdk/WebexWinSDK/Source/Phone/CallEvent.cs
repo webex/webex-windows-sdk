@@ -86,14 +86,14 @@ namespace WebexSDK
         /// <summary>
         /// the remote auxiliary video.
         /// </summary>
-        protected Call.RemoteAuxVideo remoteAuxVideo;
+        protected RemoteAuxVideo remoteAuxVideo;
         /// <summary>
         /// Initializes a new instance of the <see cref="RemoteAuxVideoChangedEvent"/> class.
         /// </summary>
         /// <param name="call">current call instance.</param>
         /// <param name="remoteAuxVideo">the remote auxiliary video instance.</param>
         /// <remarks>Since: 2.0.0</remarks>
-        protected RemoteAuxVideoChangedEvent(Call call, Call.RemoteAuxVideo remoteAuxVideo)
+        protected RemoteAuxVideoChangedEvent(Call call, RemoteAuxVideo remoteAuxVideo)
             : base(call)
         {
             this.remoteAuxVideo = remoteAuxVideo;
@@ -103,7 +103,7 @@ namespace WebexSDK
         /// Get the remote auxiliary video instance.
         /// </summary>
         /// <remarks>Since: 2.0.0</remarks>
-        public Call.RemoteAuxVideo RemoteAuxVideo
+        public RemoteAuxVideo RemoteAuxVideo
         {
             get
             {
@@ -243,7 +243,7 @@ namespace WebexSDK
         /// <remarks>Since: 2.0.0</remarks>
         public CallMembership ToPerson { get; internal set; }
 
-        internal RemoteAuxVideoPersonChangedEvent(CallMembership oldperson, CallMembership newperson, Call call, Call.RemoteAuxVideo remoteAuxVideo)
+        internal RemoteAuxVideoPersonChangedEvent(CallMembership oldperson, CallMembership newperson, Call call, RemoteAuxVideo remoteAuxVideo)
             : base(call, remoteAuxVideo)
         {
             FromPerson = oldperson;
@@ -373,9 +373,9 @@ namespace WebexSDK
     /// This might be triggered when the local party muted or unmuted the remote auxiliary video.
     /// </summary>
     /// <remarks>Since: 2.0.0</remarks>
-    public class ReceivingAuxVideoEvent : RemoteAuxVideoChangedEvent
+    internal class ReceivingAuxVideoEvent : RemoteAuxVideoChangedEvent
     {
-        internal ReceivingAuxVideoEvent(Call call, Call.RemoteAuxVideo remoteAuxVideo)
+        internal ReceivingAuxVideoEvent(Call call, RemoteAuxVideo remoteAuxVideo)
             : base(call, remoteAuxVideo)
         {
         }
@@ -492,7 +492,7 @@ namespace WebexSDK
     /// <remarks>Since: 2.0.0</remarks>
     public class RemoteAuxVideoSizeChangedEvent : RemoteAuxVideoChangedEvent
     {
-        internal RemoteAuxVideoSizeChangedEvent(Call call, Call.RemoteAuxVideo remoteAuxVideo)
+        internal RemoteAuxVideoSizeChangedEvent(Call call, RemoteAuxVideo remoteAuxVideo)
             : base(call, remoteAuxVideo)
         {
         }
@@ -504,7 +504,7 @@ namespace WebexSDK
     /// <remarks>Since: 2.0.0</remarks>
     public class RemoteAuxSendingVideoEvent : RemoteAuxVideoChangedEvent
     {
-        internal RemoteAuxSendingVideoEvent(Call call, Call.RemoteAuxVideo remoteAuxVideo)
+        internal RemoteAuxSendingVideoEvent(Call call, RemoteAuxVideo remoteAuxVideo)
             : base(call, remoteAuxVideo)
         {
         }

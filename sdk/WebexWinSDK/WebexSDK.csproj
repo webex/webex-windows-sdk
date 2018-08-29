@@ -111,6 +111,7 @@
     <Compile Include="Source\Phone\H264LicensePrompter.cs" />
     <Compile Include="Source\Phone\MediaOption.cs" />
     <Compile Include="Source\Phone\Phone.cs" />
+    <Compile Include="Source\Phone\RemoteAuxVideo.cs" />
     <Compile Include="Source\Phone\ShareSource.cs" />
     <Compile Include="Source\Space\Space.cs" />
     <Compile Include="Source\Space\SpaceClient.cs" />
