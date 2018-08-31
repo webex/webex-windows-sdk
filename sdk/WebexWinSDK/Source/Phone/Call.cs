@@ -789,7 +789,7 @@ namespace WebexSDK
                 TrigerOnAuxStreamEvent(new AuxStreamOpenedEvent(this, null, new WebexApiEventArgs<IntPtr>(false, new WebexError(WebexErrorCode.IllegalOperation, str), IntPtr.Zero)));
                 return;
             }
-            if(GetAuxSteam(handle) != null)
+            if(GetAuxStream(handle) != null)
             {
                 var str = "this view has opened. Please give another view handle.";
                 SdkLogger.Instance.Error(str);
@@ -819,7 +819,7 @@ namespace WebexSDK
                 TrigerOnAuxStreamEvent(new AuxStreamClosedEvent(this, new WebexApiEventArgs<IntPtr>(false, new WebexError(WebexErrorCode.IllegalOperation, str), IntPtr.Zero)));
                 return;
             }
-            var auxstream = GetAuxSteam(handle);
+            var auxstream = GetAuxStream(handle);
             if(auxstream == null)
             {
                 var str = "can't find this view";
@@ -836,7 +836,7 @@ namespace WebexSDK
         }
 
 
-        public AuxStream GetAuxSteam(IntPtr handle)
+        public AuxStream GetAuxStream(IntPtr handle)
         {
             AuxStream result = null;
             if (handle == IntPtr.Zero)
@@ -848,15 +848,7 @@ namespace WebexSDK
             {
                 return result;
             }
-            try
-            {
-                result = AuxStreams.First(x => x.Handle == handle);
-            }
-            catch
-            {
-                result = null;
-            }
-            return result;
+            return result = AuxStreams.FirstOrDefault(x => x.Handle == handle);
         }
 
 
