@@ -64,7 +64,7 @@ namespace WebexSDK
         private CallDirection direction;
         private List<CallMembership> memberships;
         internal int JoinedCallMembershipCount = 0;
-        internal int RemoteAuxVideoCount = 0;
+        internal int AuxStreamCount = 0;
 
         internal Call(Phone phone)
         {
@@ -91,7 +91,7 @@ namespace WebexSDK
             IsLocalRejectOrEndCall = false;
             IsGroup = false;
             IsWaittingVideoCodecActivate = false;
-            RemoteAuxVideos = new List<RemoteAuxVideo>();
+            AuxStreams = new List<AuxStream>();
         }
         /// <summary>
         /// The enumeration of directions of a call
@@ -162,6 +162,9 @@ namespace WebexSDK
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
         public event Action<Capabilities> OnCapabilitiesChanged;
+
+
+        public IMultiStreamObserver MultiStreamObserver { get; set; }
 
 
         private event Action<WebexApiEventArgs<List<ShareSource>>> SelectShareSourceCompletedHandler = null;
@@ -529,16 +532,16 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// Gets the count of available remote auxiliary videos now.
+        /// Gets the count of available remote auxiliary streams now.
         /// </summary>
         /// <remarks>Since: 2.0.0</remarks>
-        public int RemoteAvailableAuxVideoCount { get; internal set; }
+        public int AvailableAuxStreamCount { get; internal set; }
 
         /// <summary>
-        /// Gets the list of RemoteAuxVideo which has been subscribed.
+        /// Gets the list of AuxStream which has been subscribed.
         /// </summary>
         /// <remarks>Since: 2.0.0</remarks>
-        public List<RemoteAuxVideo> RemoteAuxVideos { get; internal set; }
+        public List<AuxStream> AuxStreams { get; internal set; }
 
         /// <summary>
         /// Acknowledge (without answering) an incoming call.
@@ -753,56 +756,107 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// Subscribe a new remote auxiliary video with a view handle. The Maximum of auxiliary videos you can subscribe is 4 currently.
+        /// Subscribe a new auxiliary stream with a view handle. The Maximum of auxiliary videos you can subscribe is 4 currently.
         /// You can invoke this API When receive RemoteAuxVideosCountChangedEvent event or call status is connected.
         /// </summary>
         /// <param name="handle">the remote auxiliary display window handle</param>
-        /// <returns>The subscribed remote auxiliary video instance. Return null if subscribing failed.</returns>
+        /// <returns>The subscribed auxiliary stream instance. Return null if subscribing failed.</returns>
         /// <remarks>Since: 2.0.0</remarks>
-        public RemoteAuxVideo SubscribeRemoteAuxVideo(IntPtr handle)
+        public void OpenAuxStream(IntPtr handle)
         {
+            if(handle == IntPtr.Zero)
+            {
+                return;
+            }
             if (!IsGroup)
             {
-                SdkLogger.Instance.Error("one2one call cannot subscribe remote auxiliary video.");
-                return null;
+                var str = "one2one call cannot open auxiliary stream.";
+                SdkLogger.Instance.Error(str);
+                TrigerOnAuxStreamEvent(new AuxStreamOpenedEvent(this, null, new WebexApiEventArgs<IntPtr>(false, new WebexError(WebexErrorCode.IllegalOperation, str), IntPtr.Zero)));
+                return;
             }
-            if (RemoteAvailableAuxVideoCount == 0 && Status != CallStatus.Connected)
+            if (AvailableAuxStreamCount == 0 && Status != CallStatus.Connected)
             {
-                SdkLogger.Instance.Error("You can invoke this API When receive RemoteAuxVideosCountChangedEvent event.");
-                return null;
+                var str = "There isn't available auxiliary streams.";
+                SdkLogger.Instance.Error(str);
+                TrigerOnAuxStreamEvent(new AuxStreamOpenedEvent(this, null, new WebexApiEventArgs<IntPtr>(false, new WebexError(WebexErrorCode.IllegalOperation, str), IntPtr.Zero)));
+                return;
             }
-            if (RemoteAuxVideos.Count >= 4)
+            if (AuxStreams.Count >= 4)
             {
-                SdkLogger.Instance.Error("max count of remote auxiliary view is 4");
-                return null;
+                var str = "The max count of auxiliary view is 4";
+                SdkLogger.Instance.Error(str);
+                TrigerOnAuxStreamEvent(new AuxStreamOpenedEvent(this, null, new WebexApiEventArgs<IntPtr>(false, new WebexError(WebexErrorCode.IllegalOperation, str), IntPtr.Zero)));
+                return;
+            }
+            if(GetAuxSteam(handle) != null)
+            {
+                var str = "this view has opened. Please give another view handle.";
+                SdkLogger.Instance.Error(str);
+                TrigerOnAuxStreamEvent(new AuxStreamOpenedEvent(this, null, new WebexApiEventArgs<IntPtr>(false, new WebexError(WebexErrorCode.IllegalOperation, str), IntPtr.Zero)));
+                return;
             }
             m_core_telephoneService.subscribeAuxVideo(this.CallId);
 
-            var newRemoteAuxView = new RemoteAuxVideo(this);
-            newRemoteAuxView.Handle = handle;
-            RemoteAuxVideos.Add(newRemoteAuxView);
-            return newRemoteAuxView;
+            var newAuxStream = new AuxStream(this)
+            {
+                Handle = handle
+            };
+            AuxStreams.Add(newAuxStream);
         }
 
         /// <summary>
-        /// Unsubscribe the indicated remote auxiliary video.
+        /// Unsubscribe the indicated auxiliary stream.
         /// </summary>
-        /// <param name="remoteAuxVideo"> The indicated remote auxiliary video.</param>
+        /// <param name="remoteAuxVideo"> The indicated auxiliary stream.</param>
         /// <remarks>Since: 2.0.0</remarks>
-        public void UnsubscribeRemoteAuxVideo(RemoteAuxVideo remoteAuxVideo)
+        public void CloseAuxStream(IntPtr handle)
         {
-            if (remoteAuxVideo == null)
+            if (handle == IntPtr.Zero)
             {
-                SdkLogger.Instance.Error($"input parameter invalid. remoteAuxVideo is null.");
+                var str = "input parameter invalid.";
+                SdkLogger.Instance.Error(str);
+                TrigerOnAuxStreamEvent(new AuxStreamClosedEvent(this, new WebexApiEventArgs<IntPtr>(false, new WebexError(WebexErrorCode.IllegalOperation, str), IntPtr.Zero)));
                 return;
             }
-            RemoteAuxVideos.Remove(remoteAuxVideo);
-
-            SdkLogger.Instance.Error($"unsubscribe track[{remoteAuxVideo?.Track}]");
-            if (remoteAuxVideo.Track >= TrackType.RemoteAux1 && remoteAuxVideo.Track <= TrackType.RemoteAux4)
+            var auxstream = GetAuxSteam(handle);
+            if(auxstream == null)
             {
-                m_core_telephoneService.unSubscribeAuxVideo(this.CallId, remoteAuxVideo.Track);
+                var str = "can't find this view";
+                SdkLogger.Instance.Error(str);
+                TrigerOnAuxStreamEvent(new AuxStreamClosedEvent(this, new WebexApiEventArgs<IntPtr>(false, new WebexError(WebexErrorCode.IllegalOperation, str), IntPtr.Zero)));
+                return;
             }
+
+            SdkLogger.Instance.Debug($"unsubscribe track[{auxstream?.Track}]");
+            if (auxstream.Track >= TrackType.RemoteAux1 && auxstream.Track < TrackType.LocalShare)
+            {
+                m_core_telephoneService.unSubscribeAuxVideo(this.CallId, auxstream.Track);
+            }
+        }
+
+
+        public AuxStream GetAuxSteam(IntPtr handle)
+        {
+            AuxStream result = null;
+            if (handle == IntPtr.Zero)
+            {
+                return result;
+            }
+
+            if(AuxStreams.Count <= 0)
+            {
+                return result;
+            }
+            try
+            {
+                result = AuxStreams.First(x => x.Handle == handle);
+            }
+            catch
+            {
+                result = null;
+            }
+            return result;
         }
 
 
@@ -969,9 +1023,9 @@ namespace WebexSDK
         }
         private void CheckAuxVideoPersonChange(CallMembership leftPerson)
         {
-            if (RemoteAuxVideos != null && RemoteAuxVideos.Count > 0)
+            if (AuxStreams != null && AuxStreams.Count > 0)
             {
-                foreach (var item in RemoteAuxVideos)
+                foreach (var item in AuxStreams)
                 {
                     if (item.IsInUse && item.Person.PersonId == leftPerson.PersonId)
                     {
@@ -979,7 +1033,7 @@ namespace WebexSDK
                         var oldperson = item.Person;
                         item.person = null;
                         item.IsInUse = false;
-                        TrigerOnMediaChanged(new RemoteAuxVideoPersonChangedEvent(oldperson, item.Person, this, item));
+                        TrigerOnAuxStreamEvent(new AuxStreamPersonChangedEvent(oldperson, item.Person, this, item));
                     }
                 }
             }
@@ -1006,6 +1060,14 @@ namespace WebexSDK
             {
                 SelectShareSourceCompletedHandler?.Invoke(new WebexApiEventArgs<List<ShareSource>>(true, null, result));
                 SelectShareSourceCompletedHandler = null;
+            }
+        }
+
+        internal void TrigerOnAuxStreamEvent(AuxStreamEvent auxStreamEvent)
+        {
+            if(MultiStreamObserver != null )
+            {
+                MultiStreamObserver.OnAuxStreamEvent(auxStreamEvent);
             }
         }
     }

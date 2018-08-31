@@ -30,10 +30,10 @@ using SparkNet;
 namespace WebexSDK
 {
     /// <summary>
-    /// A RemoteAuxVideo instance represents a remote auxiliary video.
+    /// A AuxStream instance represents a auxiliary stream.
     /// </summary>
     /// <remarks>Since: 2.0.0</remarks>
-    public class RemoteAuxVideo
+    public class AuxStream
     {
         /// <summary>
         /// Gets the view handle.
@@ -43,7 +43,7 @@ namespace WebexSDK
 
 
         /// <summary>
-        /// Update the remote auxiliary video view.
+        /// Update the auxiliary stream view.
         /// </summary>
         /// <param name="handle">The view handle.</param>
         public void RefreshView()
@@ -53,6 +53,12 @@ namespace WebexSDK
                 this.currentCall?.m_core_telephoneService.updateView(currentCall.CallId, Handle, Track);
             }
         }
+
+        public void CloseAuxStream()
+        {
+            currentCall?.CloseAuxStream(Handle);
+        }
+
         internal CallMembership person;
         /// <summary>
         /// Gets the person represented this auxiliary video.
@@ -68,10 +74,10 @@ namespace WebexSDK
 
         private bool isSendingVideo = false;
         /// <summary>
-        /// Gets a value indicating whether [this remote auxiliary video is sending video].
+        /// Gets a value indicating whether [this auxiliary stream is sending video].
         /// </summary>
         /// <value>
-        ///   <c>true</c> if [remote auxiliary video is sending video]; otherwise, <c>false</c>.
+        ///   <c>true</c> if [auxiliary stream is sending video]; otherwise, <c>false</c>.
         /// </value>
         /// <remarks>Since: 2.0.0</remarks>
         public bool IsSendingVideo
@@ -88,7 +94,7 @@ namespace WebexSDK
 
         internal bool isReceivingVideo = true;
         /// <summary>
-        /// Gets or sets a value indicating whether [the remote auxiliary video is receiving video].
+        /// Gets or sets a value indicating whether [the auxiliary stream is receiving video].
         /// </summary>
         /// <value>
         ///   <c>true</c> if [receiving video]; otherwise, <c>false</c>.
@@ -109,12 +115,12 @@ namespace WebexSDK
         }
 
 
-        private Call.VideoDimensions remoteAuxVideoSize;
+        private Call.VideoDimensions auxStreamSize;
         /// <summary>
-        /// Gets the remote auxiliary video view dimensions (points) of this call.
+        /// Gets the auxiliary stream view dimensions (points) of this call.
         /// </summary>
         /// <remarks>Since: 2.0.0</remarks>
-        public Call.VideoDimensions RemoteAuxVideoSize
+        public Call.VideoDimensions AuxStreamSize
         {
             get
             {
@@ -123,23 +129,23 @@ namespace WebexSDK
                 if (currentCall != null && currentCall.m_core_telephoneService != null
                     && currentCall.m_core_telephoneService.getVideoSize(this.currentCall.CallId, Track, ref width, ref height))
                 {
-                    remoteAuxVideoSize.Width = width;
-                    remoteAuxVideoSize.Height = height;
+                    auxStreamSize.Width = width;
+                    auxStreamSize.Height = height;
                     SdkLogger.Instance.Debug($"get remote track[{Track}] video view size: width[{width}] height[{height}]");
                 }
                 else
                 {
                     SdkLogger.Instance.Error($"get remote track[{Track}] video view size error.");
                 }
-                return remoteAuxVideoSize;
+                return auxStreamSize;
             }
         }
 
         internal SparkNet.TrackType Track { get; set; }
         internal bool IsInUse { get; set; }
         private readonly Call currentCall;
-        private RemoteAuxVideo() { }
-        internal RemoteAuxVideo(Call currentCall)
+        private AuxStream() { }
+        internal AuxStream(Call currentCall)
             : base()
         {
             this.currentCall = currentCall;

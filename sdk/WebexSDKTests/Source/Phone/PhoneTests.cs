@@ -49,6 +49,7 @@ namespace WebexSDK.Tests
         private static Space mySpace;
         private Call currentCall;
         private CallData callData;
+        private readonly IntPtr fakeViewHandle = (IntPtr)1;
 
         //private static Process testFixtureAppProcess = null;
         private readonly static string calleeAddress = ConfigurationManager.AppSettings["TestFixtureAppAddress01"] ?? "";
@@ -2499,9 +2500,9 @@ namespace WebexSDK.Tests
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
-            List<RemoteAuxVideo> remoteAuxVideos = new List<RemoteAuxVideo>();
-            List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
-            List<bool> remoteAuxSendingVideos = new List<bool>();
+            List<AuxStream> auxStreams = new List<AuxStream>();
+            List<AuxStreamEvent> auxStreamEvents = new List<AuxStreamEvent>();
+            List<bool> AuxStreamSending = new List<bool>();
 
             phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
             {
@@ -2520,29 +2521,37 @@ namespace WebexSDK.Tests
                     currentCall.OnConnected += (call) =>
                     {
                         Console.WriteLine("onConnected");
-                        var remoteAuxVideo = currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
-                        while (remoteAuxVideo != null)
+
+                        int viewCount = 5;
+                        while (viewCount>0)
                         {
-                            remoteAuxVideo = currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
+                            currentCall.OpenAuxStream((IntPtr)viewCount);
+                            viewCount--;
                         }
-                        remoteAuxVideos = currentCall.RemoteAuxVideos;
+                        auxStreams = currentCall.AuxStreams;
                     };
-                    currentCall.OnMediaChanged += (callMediaChangedEvent) =>
+                    currentCall.MultiStreamObserver = new MultiStreamOberver()
                     {
-                        Console.WriteLine($"event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)
+                        AuxStreamAvailableHandler = () =>
                         {
-                            mediaEvents.Add(callMediaChangedEvent);
-                            var remoteAuxSendingVideoEvent = callMediaChangedEvent as RemoteAuxSendingVideoEvent;
-                            remoteAuxSendingVideos.Add(remoteAuxSendingVideoEvent.RemoteAuxVideo.IsSendingVideo);
-                        }
-                        if(callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
+                            return IntPtr.Zero;
+                        },
+                        AuxStreamUnAvailableHandler = () =>
                         {
-                            if(auxCount.Count == 0)
+                            if(currentCall.AvailableAuxStreamCount == 0)
                             {
                                 HangupCall(currentCall);
                             }
-                        }
+                            return IntPtr.Zero;
+                        },
+                        AuxStreamEventHandler = (e) =>
+                        {
+                            if (e is AuxStreamSendingEvent auxStreamSendingEvent)
+                            {
+                                auxStreamEvents.Add(e);
+                                AuxStreamSending.Add(auxStreamSendingEvent.AuxStream.IsSendingVideo);
+                            }
+                        }                  
                     };
                 }
                 else
@@ -2556,13 +2565,13 @@ namespace WebexSDK.Tests
 
             MessageHelper.RunDispatcherLoop();
 
-            Assert.AreEqual(4, remoteAuxVideos.Count);
-            //Assert.IsTrue(mediaEvents.Count > 0);//unstable
-            //Assert.IsTrue(remoteAuxSendingVideos[0]);
+            Assert.AreEqual(4, auxStreams.Count);
+            //Assert.IsTrue(auxStreamEvents.Count > 0);//unstable
+            //Assert.IsTrue(AuxStreamSending[0]);
         }
 
         [TestMethod()]
-        public void OutgoingSubscribeRemoteAuxVideoWhenCallStartTest()
+        public void OutgoingAuxStreamPersonChangedEventTest()
         {
             //call scene：
             //1. caller: callout
@@ -2572,213 +2581,7 @@ namespace WebexSDK.Tests
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
-            int remoteAuxVideoCount = 0;
-            List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
-
-            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
-            {
-                if (r.IsSuccess)
-                {
-                    currentCall = r.Data;
-
-                    //mute local video, cause there is only one camera which should be used by callee part.
-                    currentCall.IsSendingVideo = false;
-
-                    var remoteAuxVideo = currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
-                    while (remoteAuxVideo != null)
-                    {
-                        remoteAuxVideoCount++;
-                        remoteAuxVideo = currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
-                    }
-
-                    currentCall.OnDisconnected += (call) =>
-                    {
-                        Console.WriteLine("onDisconnected");
-                        MessageHelper.BreakLoop();
-                    };
-
-                    currentCall.OnMediaChanged += (callMediaChangedEvent) =>
-                    {
-                        Console.WriteLine($"event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)
-                        {
-                            mediaEvents.Add(callMediaChangedEvent);
-                        }
-                        if(callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
-                        {
-                            if(auxCount.Count == 0)
-                            {
-                                HangupCall(currentCall);
-                            }
-                        }
-                    };
-                }
-                else
-                {
-                    Console.WriteLine($"dial fail: {r.Error.ErrorCode}:{r.Error.Reason}");
-                    currentCall = r.Data;
-                    MessageHelper.BreakLoop();
-                }
-            });
-
-
-            MessageHelper.RunDispatcherLoop();
-
-            // subscribing remote auxiliary video should be invoked when RemoteAuxVideosCountChangedEvent.
-            Assert.AreEqual(0, remoteAuxVideoCount);
-            Assert.AreEqual(0, mediaEvents.Count);
-        }
-
-        [TestMethod()]
-        public void OutgoingUnSubscribeRemoteAuxVideoTest()
-        {
-            //call scene：
-            //1. caller: callout
-            //2. callee: answer
-            //3. callee: hangup
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(testFixtureApp);
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
-
-            currentCall = null;
-            List<RemoteAuxVideo> remoteAuxVideos = new List<RemoteAuxVideo>();
-            List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
-
-            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
-            {
-                if (r.IsSuccess)
-                {
-                    currentCall = r.Data;
-
-                    //mute local video, cause there is only one camera which should be used by callee part.
-                    currentCall.IsSendingVideo = false;
-
-                    currentCall.OnDisconnected += (call) =>
-                    {
-                        Console.WriteLine("onDisconnected");
-                        MessageHelper.BreakLoop();
-                    };
-                    currentCall.OnConnected += (call) =>
-                    {
-                        Console.WriteLine("onConnected");
-                        var remoteAuxVideo = currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
-                        while (remoteAuxVideo != null)
-                        {
-                            remoteAuxVideo = currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
-                        }
-                        remoteAuxVideos = new List<RemoteAuxVideo>(currentCall.RemoteAuxVideos);
-                        foreach (var item in remoteAuxVideos)
-                        {
-                            currentCall.UnsubscribeRemoteAuxVideo(item);
-                        }
-                    };
-                    currentCall.OnMediaChanged += (callMediaChangedEvent) =>
-                    {
-                        Console.WriteLine($"event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)
-                        {
-                            mediaEvents.Add(callMediaChangedEvent);
-                        }
-                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
-                        {
-                            if (auxCount.Count == 0)
-                            {
-                                HangupCall(currentCall);
-                            }
-                        }
-                    };
-                }
-                else
-                {
-                    Console.WriteLine($"dial fail: {r.Error.ErrorCode}:{r.Error.Reason}");
-                    currentCall = r.Data;
-                    MessageHelper.BreakLoop();
-                }
-            });
-
-
-            MessageHelper.RunDispatcherLoop();
-
-            Assert.AreEqual(0, currentCall.RemoteAuxVideos.Count);
-            Assert.AreEqual(0, mediaEvents.Count);
-        }
-
-        [TestMethod()]
-        public void OutgoingMediaChangedRemoteAuxVideosCountChangedEventTest()
-        {
-            //call scene：
-            //1. caller: callout
-            //2. callee: answer
-            //3. callee: hangup
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(testFixtureApp);
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
-
-            currentCall = null;
-            List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
-
-            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
-            {
-                if (r.IsSuccess)
-                {
-                    currentCall = r.Data;
-
-                    //mute local video, cause there is only one camera which should be used by callee part.
-                    currentCall.IsSendingVideo = false;
-
-                    currentCall.OnDisconnected += (call) =>
-                    {
-                        Console.WriteLine("onDisconnected");
-                        MessageHelper.BreakLoop();
-                    };
-                    currentCall.OnMediaChanged += (callMediaChangedEvent) =>
-                    {
-                        Console.WriteLine($"event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent)
-                        {
-                            mediaEvents.Add(callMediaChangedEvent);
-                            currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
-                        }
-                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
-                        {
-                            if (auxCount.Count == 0)
-                            {
-                                HangupCall(currentCall);
-                            }
-                        }
-                    };
-                }
-                else
-                {
-                    Console.WriteLine($"dial fail: {r.Error.ErrorCode}:{r.Error.Reason}");
-                    currentCall = r.Data;
-                    MessageHelper.BreakLoop();
-                }
-            });
-
-
-            MessageHelper.RunDispatcherLoop();
-
-            Assert.AreEqual(2, mediaEvents.Count);
-            var remoteAuxVideosCountChangedEvent = mediaEvents[0] as RemoteAuxVideosCountChangedEvent;
-            Assert.IsNotNull(remoteAuxVideosCountChangedEvent);
-            Assert.IsTrue(remoteAuxVideosCountChangedEvent.Count == 1);
-
-            remoteAuxVideosCountChangedEvent = mediaEvents[1] as RemoteAuxVideosCountChangedEvent;
-            Assert.IsNotNull(remoteAuxVideosCountChangedEvent);
-            Assert.IsTrue(remoteAuxVideosCountChangedEvent.Count == 0);
-        }
-
-        [TestMethod()]
-        public void OutgoingMediaChangedRemoteAuxVideoPersonChangedEventTest()
-        {
-            //call scene：
-            //1. caller: callout
-            //2. callee: answer
-            //3. callee: hangup
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(testFixtureApp);
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
-
-            currentCall = null;
-            List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
+            List<AuxStreamEvent> auxStreamEvents = new List<AuxStreamEvent>();
             List<CallMembership> perosons = new List<CallMembership>();
 
             phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
@@ -2795,24 +2598,27 @@ namespace WebexSDK.Tests
                         Console.WriteLine("onDisconnected");
                         MessageHelper.BreakLoop();
                     };
-                    currentCall.OnMediaChanged += (callMediaChangedEvent) =>
+                    currentCall.MultiStreamObserver = new MultiStreamOberver()
                     {
-                        Console.WriteLine($"event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
+                        AuxStreamAvailableHandler = () =>
                         {
-                            if(auxCount.Count > 0)
-                            {
-                                currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
-                            }
-                            else if (auxCount.Count == 0)
+                            return fakeViewHandle;
+                        },
+                        AuxStreamUnAvailableHandler = () =>
+                        {
+                            if (currentCall.AvailableAuxStreamCount == 0)
                             {
                                 HangupCall(currentCall);
                             }
-                        }
-                        if (callMediaChangedEvent is RemoteAuxVideoPersonChangedEvent)
+                            return fakeViewHandle;
+                        },
+                        AuxStreamEventHandler = (e) =>
                         {
-                            mediaEvents.Add(callMediaChangedEvent);
-                            perosons.Add(((RemoteAuxVideoPersonChangedEvent)callMediaChangedEvent).RemoteAuxVideo.Person);
+                            if (e is AuxStreamPersonChangedEvent auxStreamPersonChangedEvent)
+                            {
+                                auxStreamEvents.Add(e);
+                                perosons.Add(auxStreamPersonChangedEvent.ToPerson);
+                            }
                         }
                     };
                 }
@@ -2827,17 +2633,14 @@ namespace WebexSDK.Tests
 
             MessageHelper.RunDispatcherLoop();
 
-            Assert.AreEqual(2, mediaEvents.Count);
-
-            var remoteAuxVideoPersonChangedEvent = mediaEvents[0] as RemoteAuxVideoPersonChangedEvent;
+            Assert.AreEqual(2, auxStreamEvents.Count);
             Assert.IsNotNull(perosons[0]);
             Assert.IsNotNull(perosons[0].Email);
-            remoteAuxVideoPersonChangedEvent = mediaEvents[1] as RemoteAuxVideoPersonChangedEvent;
             Assert.IsNull(perosons[1]);
         }
 
         [TestMethod()]
-        public void OutgoingMediaChangedRemoteAuxVideoSizeChangedEventTest()
+        public void OutgoingAuxStreamSizeChangedEventTest()
         {
             //call scene：
             //1. caller: callout
@@ -2847,7 +2650,7 @@ namespace WebexSDK.Tests
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
-            List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
+            List<AuxStreamEvent> auxStreamEvents = new List<AuxStreamEvent>();
 
             phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
             {
@@ -2863,23 +2666,26 @@ namespace WebexSDK.Tests
                         Console.WriteLine("onDisconnected");
                         MessageHelper.BreakLoop();
                     };
-                    currentCall.OnMediaChanged += (callMediaChangedEvent) =>
+                    currentCall.MultiStreamObserver = new MultiStreamOberver()
                     {
-                        Console.WriteLine($"event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
+                        AuxStreamAvailableHandler = () =>
                         {
-                            if (auxCount.Count > 0)
-                            {
-                                currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
-                            }
-                            else if (auxCount.Count == 0)
+                            return fakeViewHandle;
+                        },
+                        AuxStreamUnAvailableHandler = () =>
+                        {
+                            if (currentCall.AvailableAuxStreamCount == 0)
                             {
                                 HangupCall(currentCall);
                             }
-                        }
-                        if (callMediaChangedEvent is RemoteAuxVideoSizeChangedEvent)
+                            return fakeViewHandle;
+                        },
+                        AuxStreamEventHandler = (e) =>
                         {
-                            mediaEvents.Add(callMediaChangedEvent);
+                            if (e is AuxStreamSizeChangedEvent)
+                            {
+                                auxStreamEvents.Add(e);
+                            }
                         }
                     };
                 }
@@ -2894,17 +2700,17 @@ namespace WebexSDK.Tests
 
             MessageHelper.RunDispatcherLoop();
 
-            Assert.IsTrue(mediaEvents.Count > 0);
+            Assert.IsTrue(auxStreamEvents.Count > 0);
 
-            var remoteAuxVideoSizeChangedEvent = mediaEvents[0] as RemoteAuxVideoSizeChangedEvent;
-            Assert.IsNotNull(remoteAuxVideoSizeChangedEvent);
-            Assert.IsNotNull(remoteAuxVideoSizeChangedEvent.RemoteAuxVideo.RemoteAuxVideoSize);
-            Assert.IsNotNull(remoteAuxVideoSizeChangedEvent.RemoteAuxVideo.RemoteAuxVideoSize.Width);
-            Assert.IsNotNull(remoteAuxVideoSizeChangedEvent.RemoteAuxVideo.RemoteAuxVideoSize.Height);
+            var auxStreamSizeChangedEvent = auxStreamEvents[0] as AuxStreamSizeChangedEvent;
+            Assert.IsNotNull(auxStreamSizeChangedEvent);
+            Assert.IsNotNull(auxStreamSizeChangedEvent.AuxStream.AuxStreamSize);
+            Assert.IsNotNull(auxStreamSizeChangedEvent.AuxStream.AuxStreamSize.Width);
+            Assert.IsNotNull(auxStreamSizeChangedEvent.AuxStream.AuxStreamSize.Height);
         }
 
         [TestMethod()]
-        public void OutgoingMediaChangedRemoteAuxSendingVideoEventTest()
+        public void OutgoingAuxStreamSendingEventTest()
         {
             //call scene：
             //1. caller: callout
@@ -2914,8 +2720,8 @@ namespace WebexSDK.Tests
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
-            List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
-            List<bool> remoteAuxSendingVideos = new List<bool>();
+            List<AuxStreamEvent> auxStreamEvents = new List<AuxStreamEvent>();
+            List<bool> auxStreamSendingVideos = new List<bool>();
 
             phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
             {
@@ -2931,26 +2737,27 @@ namespace WebexSDK.Tests
                         Console.WriteLine("onDisconnected");
                         MessageHelper.BreakLoop();
                     };
-                    currentCall.OnMediaChanged += (callMediaChangedEvent) =>
+                    currentCall.MultiStreamObserver = new MultiStreamOberver()
                     {
-                        Console.WriteLine($"event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
+                        AuxStreamAvailableHandler = () =>
                         {
-                            currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
-                            if (auxCount.Count > 0)
-                            {
-                                currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
-                            }
-                            else if (auxCount.Count == 0)
+                            return fakeViewHandle;
+                        },
+                        AuxStreamUnAvailableHandler = () =>
+                        {
+                            if (currentCall.AvailableAuxStreamCount == 0)
                             {
                                 HangupCall(currentCall);
                             }
-                        }
-                        if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)
+                            return fakeViewHandle;
+                        },
+                        AuxStreamEventHandler = (e) =>
                         {
-                            mediaEvents.Add(callMediaChangedEvent);
-                            var remoteAuxSendingVideoEvent = callMediaChangedEvent as RemoteAuxSendingVideoEvent;
-                            remoteAuxSendingVideos.Add(remoteAuxSendingVideoEvent.RemoteAuxVideo.IsSendingVideo);
+                            if (e is AuxStreamSendingEvent auxStreamSendingEvent)
+                            {
+                                auxStreamEvents.Add(e);
+                                auxStreamSendingVideos.Add(auxStreamSendingEvent.AuxStream.IsSendingVideo);
+                            }
                         }
                     };
                 }
@@ -2965,13 +2772,13 @@ namespace WebexSDK.Tests
 
             MessageHelper.RunDispatcherLoop();
 
-            Assert.IsTrue(mediaEvents.Count > 0);
-            Assert.IsTrue(remoteAuxSendingVideos.Count > 0);
-            Assert.IsTrue(remoteAuxSendingVideos[0]);
+            Assert.IsTrue(auxStreamEvents.Count > 0);
+            Assert.IsTrue(auxStreamSendingVideos.Count > 0);
+            Assert.IsTrue(auxStreamSendingVideos[0]);
         }
 
         [TestMethod()]
-        public void OutgoingMediaChangedRemoteAuxSendingVideoEventByRemoteMuteTest()
+        public void OutgoingAuxStreamSendingEventByRemoteMuteTest()
         {
             //call scene：
             //1. caller: callout
@@ -2982,8 +2789,8 @@ namespace WebexSDK.Tests
             MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndHangupAfter100Seconds(thirdpart);
 
             currentCall = null;
-            List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
-            List<bool> remoteAuxSendingVideos = new List<bool>();
+            List<AuxStreamEvent> auxStreamEvents = new List<AuxStreamEvent>();
+            List<bool> auxStreamSendingVideos = new List<bool>();
 
             phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
             {
@@ -2999,25 +2806,27 @@ namespace WebexSDK.Tests
                         Console.WriteLine($"{DateTime.Now} onDisconnected");
                         MessageHelper.BreakLoop();
                     };
-                    currentCall.OnMediaChanged += (callMediaChangedEvent) =>
+                    currentCall.MultiStreamObserver = new MultiStreamOberver()
                     {
-                        Console.WriteLine($"{DateTime.Now} event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
+                        AuxStreamAvailableHandler = () =>
                         {
-                            if (auxCount.Count > 0)
-                            {
-                                currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
-                            }
-                            else if (auxCount.Count == 0)
+                            return fakeViewHandle;
+                        },
+                        AuxStreamUnAvailableHandler = () =>
+                        {
+                            if (currentCall.AvailableAuxStreamCount == 0)
                             {
                                 HangupCall(currentCall);
                             }
-                        }
-                        if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)
+                            return fakeViewHandle;
+                        },
+                        AuxStreamEventHandler = (e) =>
                         {
-                            mediaEvents.Add(callMediaChangedEvent);
-                            var remoteAuxSendingVideoEvent = callMediaChangedEvent as RemoteAuxSendingVideoEvent;
-                            remoteAuxSendingVideos.Add(remoteAuxSendingVideoEvent.RemoteAuxVideo.IsSendingVideo);
+                            if (e is AuxStreamSendingEvent auxStreamSendingEvent)
+                            {
+                                auxStreamEvents.Add(e);
+                                auxStreamSendingVideos.Add(auxStreamSendingEvent.AuxStream.IsSendingVideo);
+                            }
                         }
                     };
                 }
@@ -3033,13 +2842,13 @@ namespace WebexSDK.Tests
             MessageHelper.RunDispatcherLoop();
 
             //comment for not stable
-            //Assert.AreEqual(2, mediaEvents.Count);
-            //Assert.AreEqual(2, remoteAuxSendingVideos.Count);
-            //Assert.IsTrue(remoteAuxSendingVideos[0]);
-            //Assert.IsFalse(remoteAuxSendingVideos[1]);
+            //Assert.AreEqual(2, auxStreamEvents.Count);
+            //Assert.AreEqual(2, auxStreamSendingVideos.Count);
+            //Assert.IsTrue(auxStreamSendingVideos[0]);
+            //Assert.IsFalse(auxStreamSendingVideos[1]);
         }
         [TestMethod()]
-        public void OutgoingMediaChangedRemoteAuxSendingVideoEventByRemoteUnMuteTest()
+        public void OutgoingAuxStreamSendingEventByRemoteUnMuteTest()
         {
             //call scene：
             //1. caller: callout
@@ -3049,8 +2858,8 @@ namespace WebexSDK.Tests
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter100Seconds(testFixtureApp);
             MessageHelper.SetTestMode_CalleeAutoAnswerAndMuteVideoAndUnMuteVideoAndHangupAfter100Seconds(thirdpart);
             currentCall = null;
-            List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
-            List<bool> remoteAuxSendingVideos = new List<bool>();
+            List<AuxStreamEvent> auxStreamEvents = new List<AuxStreamEvent>();
+            List<bool> auxStreamSendingVideos = new List<bool>();
 
             phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
             {
@@ -3066,25 +2875,27 @@ namespace WebexSDK.Tests
                         Console.WriteLine($"{DateTime.Now} onDisconnected");
                         MessageHelper.BreakLoop();
                     };
-                    currentCall.OnMediaChanged += (callMediaChangedEvent) =>
+                    currentCall.MultiStreamObserver = new MultiStreamOberver()
                     {
-                        Console.WriteLine($"{DateTime.Now} event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
+                        AuxStreamAvailableHandler = () =>
                         {
-                            if (auxCount.Count > 0)
-                            {
-                                currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
-                            }
-                            else if (auxCount.Count == 0)
+                            return fakeViewHandle;
+                        },
+                        AuxStreamUnAvailableHandler = () =>
+                        {
+                            if (currentCall.AvailableAuxStreamCount == 0)
                             {
                                 HangupCall(currentCall);
                             }
-                        }
-                        if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)
+                            return fakeViewHandle;
+                        },
+                        AuxStreamEventHandler = (e) =>
                         {
-                            mediaEvents.Add(callMediaChangedEvent);
-                            var remoteAuxSendingVideoEvent = callMediaChangedEvent as RemoteAuxSendingVideoEvent;
-                            remoteAuxSendingVideos.Add(remoteAuxSendingVideoEvent.RemoteAuxVideo.IsSendingVideo);
+                            if (e is AuxStreamSendingEvent auxStreamSendingEvent)
+                            {
+                                auxStreamEvents.Add(e);
+                                auxStreamSendingVideos.Add(auxStreamSendingEvent.AuxStream.IsSendingVideo);
+                            }
                         }
                     };
                 }
@@ -3100,15 +2911,15 @@ namespace WebexSDK.Tests
             MessageHelper.RunDispatcherLoop();
 
             //comment for not stable
-            //Assert.IsTrue(mediaEvents.Count >= 3);
-            //Assert.IsTrue(remoteAuxSendingVideos.Count >= 3);
-            //Assert.IsTrue(remoteAuxSendingVideos[0]);
-            //Assert.IsFalse(remoteAuxSendingVideos[1]);
-            //Assert.IsTrue(remoteAuxSendingVideos[2]);
+            //Assert.IsTrue(auxStreamEvents.Count >= 3);
+            //Assert.IsTrue(auxStreamSendingVideos.Count >= 3);
+            //Assert.IsTrue(auxStreamSendingVideos[0]);
+            //Assert.IsFalse(auxStreamSendingVideos[1]);
+            //Assert.IsTrue(auxStreamSendingVideos[2]);
         }
 
         [TestMethod()]
-        public void OutgoingMediaChangedReceivingAuxVideoEventMuteRemoteAuxTest()
+        public void OutgoingReceivingAuxStreamEventMuteRemoteAuxTest()
         {
             //call scene：
             //1. caller: callout
@@ -3119,7 +2930,7 @@ namespace WebexSDK.Tests
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
-            List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
+            List<AuxStreamEvent> auxStreamEvents = new List<AuxStreamEvent>();
             List<bool> receivingAuxVideos = new List<bool>();
 
             phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
@@ -3136,33 +2947,34 @@ namespace WebexSDK.Tests
                         Console.WriteLine("onDisconnected");
                         MessageHelper.BreakLoop();
                     };
-                    currentCall.OnMediaChanged += (callMediaChangedEvent) =>
+                    currentCall.MultiStreamObserver = new MultiStreamOberver()
                     {
-                        Console.WriteLine($"event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
+                        AuxStreamAvailableHandler = () =>
                         {
-                            if (auxCount.Count > 0)
-                            {
-                                currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
-                            }
-                            else if (auxCount.Count == 0)
+                            return fakeViewHandle;
+                        },
+                        AuxStreamUnAvailableHandler = () =>
+                        {
+                            if (currentCall.AvailableAuxStreamCount == 0)
                             {
                                 HangupCall(currentCall);
                             }
-                        }
-                        if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)
+                            return fakeViewHandle;
+                        },
+                        AuxStreamEventHandler = (e) =>
                         {
-                            var remoteAuxSendingVideoEvent = callMediaChangedEvent as RemoteAuxSendingVideoEvent;
-                            if (remoteAuxSendingVideoEvent.RemoteAuxVideo.IsSendingVideo)
+                            if (e is AuxStreamSendingEvent auxStreamSendingEvent)
                             {
-                                remoteAuxSendingVideoEvent.RemoteAuxVideo.IsReceivingVideo = false;
+                                if(auxStreamSendingEvent.AuxStream.IsSendingVideo)
+                                {
+                                    auxStreamSendingEvent.AuxStream.isReceivingVideo = false;
+                                }
                             }
-                        }
-                        if (callMediaChangedEvent is ReceivingAuxVideoEvent)
-                        {
-                            mediaEvents.Add(callMediaChangedEvent);
-                            var receivingAuxVideoEvent = callMediaChangedEvent as ReceivingAuxVideoEvent;
-                            receivingAuxVideos.Add(receivingAuxVideoEvent.RemoteAuxVideo.IsReceivingVideo);
+                            else if(e is ReceivingAuxStreamEvent receivingAuxStreamEvent)
+                            {
+                                auxStreamEvents.Add(e);
+                                receivingAuxVideos.Add(receivingAuxStreamEvent.AuxStream.IsReceivingVideo);
+                            }
                         }
                     };
                 }
@@ -3177,12 +2989,12 @@ namespace WebexSDK.Tests
 
             MessageHelper.RunDispatcherLoop();
 
-            Assert.IsTrue(mediaEvents.Count > 0);
+            Assert.IsTrue(auxStreamEvents.Count > 0);
             Assert.AreEqual(1, receivingAuxVideos.Count);
             Assert.IsFalse(receivingAuxVideos[0]);
         }
         [TestMethod()]
-        public void OutgoingMediaChangedReceivingAuxVideoEventUnMuteRemoteAuxTest()
+        public void OutgoingReceivingAuxStreamEventUnMuteRemoteAuxTest()
         {
             //call scene：
             //1. caller: callout
@@ -3194,7 +3006,7 @@ namespace WebexSDK.Tests
             MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
 
             currentCall = null;
-            List<MediaChangedEvent> mediaEvents = new List<MediaChangedEvent>();
+            List<AuxStreamEvent> auxStreamEvents = new List<AuxStreamEvent>();
             List<bool> receivingAuxVideos = new List<bool>();
 
             phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
@@ -3211,36 +3023,37 @@ namespace WebexSDK.Tests
                         Console.WriteLine("onDisconnected");
                         MessageHelper.BreakLoop();
                     };
-                    currentCall.OnMediaChanged += (callMediaChangedEvent) =>
+                    currentCall.MultiStreamObserver = new MultiStreamOberver()
                     {
-                        Console.WriteLine($"event:{callMediaChangedEvent.GetType().Name}");
-                        if (callMediaChangedEvent is RemoteAuxVideosCountChangedEvent auxCount)
+                        AuxStreamAvailableHandler = () =>
                         {
-                            if (auxCount.Count > 0)
-                            {
-                                currentCall.SubscribeRemoteAuxVideo(IntPtr.Zero);
-                            }
-                            else if (auxCount.Count == 0)
+                            return fakeViewHandle;
+                        },
+                        AuxStreamUnAvailableHandler = () =>
+                        {
+                            if (currentCall.AvailableAuxStreamCount == 0)
                             {
                                 HangupCall(currentCall);
                             }
-                        }
-                        if (callMediaChangedEvent is RemoteAuxSendingVideoEvent)
+                            return fakeViewHandle;
+                        },
+                        AuxStreamEventHandler = (e) =>
                         {
-                            var remoteAuxSendingVideoEvent = callMediaChangedEvent as RemoteAuxSendingVideoEvent;
-                            if (remoteAuxSendingVideoEvent.RemoteAuxVideo.IsSendingVideo)
+                            if (e is AuxStreamSendingEvent auxStreamSendingEvent)
                             {
-                                remoteAuxSendingVideoEvent.RemoteAuxVideo.IsReceivingVideo = false;
+                                if (auxStreamSendingEvent.AuxStream.IsSendingVideo)
+                                {
+                                    auxStreamSendingEvent.AuxStream.isReceivingVideo = false;
+                                }
                             }
-                        }
-                        if (callMediaChangedEvent is ReceivingAuxVideoEvent)
-                        {
-                            mediaEvents.Add(callMediaChangedEvent);
-                            var receivingAuxVideoEvent = callMediaChangedEvent as ReceivingAuxVideoEvent;
-                            receivingAuxVideos.Add(receivingAuxVideoEvent.RemoteAuxVideo.IsReceivingVideo);
-                            if (receivingAuxVideoEvent.RemoteAuxVideo.IsReceivingVideo == false)
+                            else if (e is ReceivingAuxStreamEvent receivingAuxStreamEvent)
                             {
-                                receivingAuxVideoEvent.RemoteAuxVideo.IsReceivingVideo = true;
+                                auxStreamEvents.Add(e);
+                                receivingAuxVideos.Add(receivingAuxStreamEvent.AuxStream.IsReceivingVideo);
+                                if (!receivingAuxStreamEvent.AuxStream.IsReceivingVideo)
+                                {
+                                    receivingAuxStreamEvent.AuxStream.IsReceivingVideo = true;
+                                }
                             }
                         }
                     };
@@ -3256,7 +3069,7 @@ namespace WebexSDK.Tests
 
             MessageHelper.RunDispatcherLoop();
 
-            Assert.IsTrue(mediaEvents.Count > 0);
+            Assert.IsTrue(auxStreamEvents.Count > 0);
             Assert.AreEqual(2, receivingAuxVideos.Count);
             Assert.IsFalse(receivingAuxVideos[0]);
             Assert.IsTrue(receivingAuxVideos[1]);

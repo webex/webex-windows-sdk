@@ -777,7 +777,7 @@ namespace WebexSDK
         }
         private void OnRemoteAuxTrackPersonChanged(TrackType trackType, string callId)
         {
-            var find = currentCall?.RemoteAuxVideos.Find(x => (x.Track == trackType));
+            var find = currentCall?.AuxStreams.Find(x => (x.Track == trackType));
             if (find != null)
             {
                 SdkLogger.Instance.Debug($"{trackType} person changed");
@@ -796,7 +796,7 @@ namespace WebexSDK
                 }
                 if (find.Person != oldperson)
                 {
-                    currentCall?.TrigerOnMediaChanged(new RemoteAuxVideoPersonChangedEvent(oldperson, find.Person, currentCall, find));
+                    currentCall?.TrigerOnAuxStreamEvent(new AuxStreamPersonChangedEvent(oldperson, find.Person, currentCall, find));
                 }
             }
         }
@@ -806,7 +806,7 @@ namespace WebexSDK
             
             if (trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
             {
-                var find = currentCall?.RemoteAuxVideos.Find(x => (x.Track == trackType));
+                var find = currentCall?.AuxStreams.Find(x => (x.Track == trackType));
                 if (find != null && find.IsInUse != isInUse)
                 {
                     find.IsInUse = isInUse;
@@ -837,11 +837,11 @@ namespace WebexSDK
             }
             else if (trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
             {
-                var find = currentCall?.RemoteAuxVideos.Find(x => (x.Track == trackType));
+                var find = currentCall?.AuxStreams.Find(x => (x.Track == trackType));
                 if (find != null && find.IsSendingVideo != isStreaming)
                 {
                     find.IsSendingVideo = isStreaming;
-                    currentCall?.TrigerOnMediaChanged(new RemoteAuxSendingVideoEvent(currentCall, find));
+                    currentCall?.TrigerOnAuxStreamEvent(new AuxStreamSendingEvent(currentCall, find));
                 }
             }
         }
@@ -862,7 +862,7 @@ namespace WebexSDK
                 return;
             }
             SdkLogger.Instance.Debug($"callID[{callId}] count[{count}]");
-            currentCall.RemoteAuxVideoCount = count;
+            currentCall.AuxStreamCount = count;
             OnRemoteAuxVideosCountChanged();
         }
 
@@ -873,14 +873,48 @@ namespace WebexSDK
                 return;
             }
 
-            SdkLogger.Instance.Debug($"JoinedCallMembershipCount:{currentCall.JoinedCallMembershipCount} RemoteAuxVideoCount: {currentCall.RemoteAuxVideoCount}");
-            int min = Math.Min(currentCall.JoinedCallMembershipCount-2, currentCall.RemoteAuxVideoCount);
-            if(min != currentCall.RemoteAvailableAuxVideoCount)
+            SdkLogger.Instance.Debug($"JoinedCallMembershipCount:{currentCall.JoinedCallMembershipCount} AuxStreamCount: {currentCall.AuxStreamCount}");
+            int min = Math.Min(currentCall.JoinedCallMembershipCount-2, currentCall.AuxStreamCount);
+            if (min == currentCall.AvailableAuxStreamCount)
             {
-                currentCall.RemoteAvailableAuxVideoCount = min;
-                currentCall.TrigerOnMediaChanged(new RemoteAuxVideosCountChangedEvent(currentCall, min));
-                SdkLogger.Instance.Debug($"RemoteAuxVideoAccurateCount: {currentCall.RemoteAvailableAuxVideoCount}");
+                return;
             }
+            bool isIncrease = min > currentCall.AvailableAuxStreamCount;
+            int count = isIncrease? (min - currentCall.AvailableAuxStreamCount):(currentCall.AvailableAuxStreamCount - min);
+            currentCall.AvailableAuxStreamCount = min;
+            SdkLogger.Instance.Debug($"AvailableAuxStreamCount: {currentCall.AvailableAuxStreamCount}");
+
+            if(currentCall.MultiStreamObserver != null)
+            {
+                if (isIncrease)
+                {
+                    SdkLogger.Instance.Debug($"OnAuxStreamAvailable, increase:{count}");
+                    while(count > 0)
+                    {
+                        var handle = currentCall.MultiStreamObserver.OnAuxStreamAvailable();
+                        if(handle != IntPtr.Zero)
+                        {
+                            currentCall.OpenAuxStream(handle);
+                        }
+                        count--;
+                    }
+                }
+                else
+                {
+                    SdkLogger.Instance.Debug($"OnAuxStreamUnAvailable, decrease:{count}");
+                    while (count > 0)
+                    {
+                        var handle = currentCall.MultiStreamObserver.OnAuxStreamUnAvailable();
+                        if(handle == IntPtr.Zero && currentCall.AvailableAuxStreamCount < currentCall.AuxStreams.Count)
+                        {
+                            handle = currentCall.AuxStreams[currentCall.AuxStreams.Count - 1].Handle;
+                        }
+                        currentCall.CloseAuxStream(handle);
+                        count--;
+                    }
+                }
+            }
+
         }
         private void OnParticipantsChanged(string callId)
         {
@@ -1275,12 +1309,13 @@ namespace WebexSDK
             }
             else if (videoTrackType >= TrackType.RemoteAux1 && videoTrackType < TrackType.LocalShare)
             {
-                var find = currentCall?.RemoteAuxVideos.Find(x => (x.Track == 0));
+                var find = currentCall?.AuxStreams.Find(x => (x.Track == 0));
 
                 if (find != null && currentCall.CallId != null)
                 {
                     find.Track = videoTrackType;
                     m_core_telephoneService.setView(currentCall.CallId, find.Handle, videoTrackType);
+                    currentCall?.TrigerOnAuxStreamEvent(new AuxStreamOpenedEvent(currentCall, find, new WebexApiEventArgs<IntPtr>(true, null, find.Handle)));
                 }
             }
         }
@@ -1307,11 +1342,12 @@ namespace WebexSDK
             }
             else if (trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
             {
-                var find = currentCall?.RemoteAuxVideos.Find(x =>(x.Track == trackType));
+                var find = currentCall?.AuxStreams.Find(x =>(x.Track == trackType));
                 if (find != null && currentCall.CallId != null)
                 {
                     m_core_telephoneService.removeView(currentCall.CallId, find.Handle, trackType);
-                    currentCall?.RemoteAuxVideos.Remove(find);
+                    currentCall?.AuxStreams.Remove(find);
+                    currentCall?.TrigerOnAuxStreamEvent(new AuxStreamClosedEvent(currentCall, new WebexApiEventArgs<IntPtr>(true, null, find.Handle)));
                 }
             }
         }
@@ -1344,11 +1380,11 @@ namespace WebexSDK
             }
             else if (trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
             {
-                var find = currentCall?.RemoteAuxVideos.Find(x => (x.Track == trackType));
+                var find = currentCall?.AuxStreams.Find(x => (x.Track == trackType));
                 if (find != null)
                 {
                     find.isReceivingVideo = (status != "muted");
-                    currentCall?.TrigerOnMediaChanged(new ReceivingAuxVideoEvent(currentCall, find));
+                    currentCall?.TrigerOnAuxStreamEvent(new ReceivingAuxStreamEvent(currentCall, find));
                 }
             }
             else if (trackType == TrackType.RemoteShare)
@@ -1369,11 +1405,11 @@ namespace WebexSDK
             }
             else if(trackType >= TrackType.RemoteAux1 && trackType < TrackType.LocalShare)
             {
-                var find = currentCall?.RemoteAuxVideos.Find(x =>(x.Track == trackType));
+                var find = currentCall?.AuxStreams.Find(x =>(x.Track == trackType));
                 if (find != null)
                 {
                     SdkLogger.Instance.Debug($"{trackType} person changed");
-                    currentCall?.TrigerOnMediaChanged(new RemoteAuxVideoSizeChangedEvent(currentCall, find));
+                    currentCall?.TrigerOnAuxStreamEvent(new AuxStreamSizeChangedEvent(currentCall, find));
                 }                
             }
         }

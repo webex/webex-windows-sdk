@@ -77,40 +77,7 @@ namespace WebexSDK
         }
     }
 
-    /// <summary>
-    /// The remote auxiliary video changed event.
-    /// </summary>
-    /// <remarks>Since: 2.0.0</remarks>
-    public abstract class RemoteAuxVideoChangedEvent : MediaChangedEvent
-    {
-        /// <summary>
-        /// the remote auxiliary video.
-        /// </summary>
-        protected RemoteAuxVideo remoteAuxVideo;
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RemoteAuxVideoChangedEvent"/> class.
-        /// </summary>
-        /// <param name="call">current call instance.</param>
-        /// <param name="remoteAuxVideo">the remote auxiliary video instance.</param>
-        /// <remarks>Since: 2.0.0</remarks>
-        protected RemoteAuxVideoChangedEvent(Call call, RemoteAuxVideo remoteAuxVideo)
-            : base(call)
-        {
-            this.remoteAuxVideo = remoteAuxVideo;
-        }
-
-        /// <summary>
-        /// Get the remote auxiliary video instance.
-        /// </summary>
-        /// <remarks>Since: 2.0.0</remarks>
-        public RemoteAuxVideo RemoteAuxVideo
-        {
-            get
-            {
-                return this.remoteAuxVideo;
-            }
-        }
-    }
+    
 
 
     /// <summary>
@@ -198,56 +165,6 @@ namespace WebexSDK
         {
             FromPerson = oldperson;
             ToPerson = activeSpeaker;
-        }
-    }
-    /// <summary>
-    /// The available remote auxiliary video count is changed. You can subscribe or unsubscribe auxiliary videos when this event.
-    /// </summary>
-    /// <remarks>Since: 2.0.0</remarks>
-    public class RemoteAuxVideosCountChangedEvent : MediaChangedEvent
-    {
-        private readonly int count;
-        internal RemoteAuxVideosCountChangedEvent(Call call, int count)
-            : base(call)
-        {
-            this.count = count;
-        }
-
-        /// <summary>
-        /// The available remote auxiliary video count.
-        /// </summary>
-        /// <remarks>Since: 2.0.0</remarks>
-        public int Count
-        {
-            get
-            {
-                return this.count;
-            }
-        }
-    }
-
-    /// <summary>
-    /// The person represented this auxiliary video is changed.
-    /// </summary>
-    /// <remarks>Since: 2.0.0</remarks>
-    public class RemoteAuxVideoPersonChangedEvent : RemoteAuxVideoChangedEvent
-    {
-        /// <summary>
-        /// The new person represented this auxiliary video
-        /// </summary>
-        /// <remarks>Since: 2.0.0</remarks>
-        public CallMembership FromPerson { get; internal set; }
-        /// <summary>
-        /// The former person represented this auxiliary video
-        /// </summary>
-        /// <remarks>Since: 2.0.0</remarks>
-        public CallMembership ToPerson { get; internal set; }
-
-        internal RemoteAuxVideoPersonChangedEvent(CallMembership oldperson, CallMembership newperson, Call call, RemoteAuxVideo remoteAuxVideo)
-            : base(call, remoteAuxVideo)
-        {
-            FromPerson = oldperson;
-            ToPerson = newperson;
         }
     }
 
@@ -369,17 +286,7 @@ namespace WebexSDK
         }
     }
 
-    /// <summary>
-    /// This might be triggered when the local party muted or unmuted the remote auxiliary video.
-    /// </summary>
-    /// <remarks>Since: 2.0.0</remarks>
-    internal class ReceivingAuxVideoEvent : RemoteAuxVideoChangedEvent
-    {
-        internal ReceivingAuxVideoEvent(Call call, RemoteAuxVideo remoteAuxVideo)
-            : base(call, remoteAuxVideo)
-        {
-        }
-    }
+
 
     /// <summary>
     /// This might be triggered when the local party muted or unmuted the audio.
@@ -486,29 +393,7 @@ namespace WebexSDK
         }
     }
 
-    /// <summary>
-    /// Remote auxiliary video view size has changed.
-    /// </summary>
-    /// <remarks>Since: 2.0.0</remarks>
-    public class RemoteAuxVideoSizeChangedEvent : RemoteAuxVideoChangedEvent
-    {
-        internal RemoteAuxVideoSizeChangedEvent(Call call, RemoteAuxVideo remoteAuxVideo)
-            : base(call, remoteAuxVideo)
-        {
-        }
-    }
 
-    /// <summary>
-    /// This might be triggered when the network is unstable or the represented person muted or unmuted his video.
-    /// </summary>
-    /// <remarks>Since: 2.0.0</remarks>
-    public class RemoteAuxSendingVideoEvent : RemoteAuxVideoChangedEvent
-    {
-        internal RemoteAuxSendingVideoEvent(Call call, RemoteAuxVideo remoteAuxVideo)
-            : base(call, remoteAuxVideo)
-        {
-        }
-    }
 
     /// <summary>
     /// This might be triggered when the local party muted or unmuted the video

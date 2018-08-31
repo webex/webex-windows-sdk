@@ -109,6 +109,7 @@
     <Compile Include="Source\Membership\MembershipClientTests.cs" />
     <Compile Include="Source\Message\MessageClientTests.cs" />
     <Compile Include="Source\Person\PersonClientTests.cs" />
+    <Compile Include="Source\Phone\MultiStreamOberver.cs" />
     <Compile Include="Source\Phone\PhoneTests.cs" />
     <Compile Include="Source\Space\SpaceClientTests.cs" />
     <Compile Include="Source\WebexTestFixture.cs" />
