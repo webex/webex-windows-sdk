@@ -2565,7 +2565,8 @@ namespace WebexSDK.Tests
 
             MessageHelper.RunDispatcherLoop();
 
-            Assert.AreEqual(4, auxStreams.Count);
+            //open 4 AuxStreams and close 1 AuxStreams by sdk in the end of the call, So final count is 3.
+            Assert.AreEqual(3, auxStreams.Count);
             //Assert.IsTrue(auxStreamEvents.Count > 0);//unstable
             //Assert.IsTrue(AuxStreamSending[0]);
         }
@@ -2965,7 +2966,7 @@ namespace WebexSDK.Tests
                             {
                                 if(auxStreamSendingEvent.AuxStream.IsSendingVideo)
                                 {
-                                    auxStreamSendingEvent.AuxStream.isReceivingVideo = false;
+                                    auxStreamSendingEvent.AuxStream.IsReceivingVideo = false;
                                 }
                             }
                             else if(e is ReceivingAuxStreamEvent receivingAuxStreamEvent)
@@ -3041,7 +3042,7 @@ namespace WebexSDK.Tests
                             {
                                 if (auxStreamSendingEvent.AuxStream.IsSendingVideo)
                                 {
-                                    auxStreamSendingEvent.AuxStream.isReceivingVideo = false;
+                                    auxStreamSendingEvent.AuxStream.IsReceivingVideo = false;
                                 }
                             }
                             else if (e is ReceivingAuxStreamEvent receivingAuxStreamEvent)
