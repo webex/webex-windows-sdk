@@ -2490,7 +2490,7 @@ namespace WebexSDK.Tests
         }
 
         [TestMethod()]
-        public void OutgoingSubscribeRemoteAuxVideoWhenCallConnectedTest()
+        public void OutgoingOpenAuxStreamWhenCallConnectedTest()
         {
             //call scene：
             //1. caller: callout
@@ -2633,10 +2633,8 @@ namespace WebexSDK.Tests
 
             MessageHelper.RunDispatcherLoop();
 
-            Assert.AreEqual(2, auxStreamEvents.Count);
             Assert.IsNotNull(perosons[0]);
             Assert.IsNotNull(perosons[0].Email);
-            Assert.IsNull(perosons[1]);
         }
 
         [TestMethod()]
