@@ -43,7 +43,7 @@ namespace WebexSDK
         IntPtr OnAuxStreamAvailable();
 
         /// <summary>
-        /// Callback of SDK when there is a auxiliary stream unavailable.
+        /// Callback of SDK when there is an auxiliary stream unavailable.
         /// Client should give SDK a view handle which will be closed or if the given view handle is IntPtr.Zero, SDK will automatically close the last opened stream.
         /// </summary>
         /// <returns>The handle of the view</returns>

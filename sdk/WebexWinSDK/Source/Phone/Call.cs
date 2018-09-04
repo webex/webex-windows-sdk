@@ -536,13 +536,13 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// Gets the count of available remote auxiliary streams now.
+        /// Gets the count of available auxiliary streams now.
         /// </summary>
         /// <remarks>Since: 2.0.0</remarks>
         public int AvailableAuxStreamCount { get; internal set; }
 
         /// <summary>
-        /// Gets the list of AuxStream which has been subscribed.
+        /// Gets the list of AuxStream which has been opened.
         /// </summary>
         /// <remarks>Since: 2.0.0</remarks>
         public List<AuxStream> AuxStreams { get; internal set; }
@@ -760,11 +760,10 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// Subscribe a new auxiliary stream with a view handle. The Maximum of auxiliary videos you can subscribe is 4 currently.
-        /// You can invoke this API When receive RemoteAuxVideosCountChangedEvent event or call status is connected.
+        /// Open an auxiliary stream with a view handle. The Maximum of auxiliary videos you can open is 4.
+        /// When the client manually closed an auxiliary stream, the client can call this API to reopen the auxiliary stream again.
         /// </summary>
-        /// <param name="handle">the remote auxiliary display window handle</param>
-        /// <returns>The subscribed auxiliary stream instance. Return null if subscribing failed.</returns>
+        /// <param name="handle">the auxiliary display view handle</param>
         /// <remarks>Since: 2.0.0</remarks>
         public void OpenAuxStream(IntPtr handle)
         {

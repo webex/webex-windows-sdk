@@ -124,7 +124,7 @@ namespace WebexSDK
     }
 
     /// <summary>
-    /// This might be triggered when auxiliary stream is opened successfully or unsuccessfully.
+    /// This might be triggered when an auxiliary stream is opened successfully or unsuccessfully.
     /// On this event, the client can display the view.
     /// </summary>
     /// <remarks>Since: 2.0.0</remarks>
@@ -143,7 +143,7 @@ namespace WebexSDK
     }
 
     /// <summary>
-    /// This might be triggered when auxiliary stream is closed successfully or unsuccessfully.
+    /// This might be triggered when an auxiliary stream is closed successfully or unsuccessfully.
     /// On this event, the client can hide the view.
     /// </summary>
     /// <remarks>Since: 2.0.0</remarks>
