@@ -2546,7 +2546,7 @@ namespace WebexSDK.Tests
                         },
                         AuxStreamEventHandler = (e) =>
                         {
-                            if (e is AuxStreamSendingEvent auxStreamSendingEvent)
+                            if (e is AuxStreamSendingVideoEvent auxStreamSendingEvent)
                             {
                                 auxStreamEvents.Add(e);
                                 AuxStreamSending.Add(auxStreamSendingEvent.AuxStream.IsSendingVideo);
@@ -2752,7 +2752,7 @@ namespace WebexSDK.Tests
                         },
                         AuxStreamEventHandler = (e) =>
                         {
-                            if (e is AuxStreamSendingEvent auxStreamSendingEvent)
+                            if (e is AuxStreamSendingVideoEvent auxStreamSendingEvent)
                             {
                                 auxStreamEvents.Add(e);
                                 auxStreamSendingVideos.Add(auxStreamSendingEvent.AuxStream.IsSendingVideo);
@@ -2821,7 +2821,7 @@ namespace WebexSDK.Tests
                         },
                         AuxStreamEventHandler = (e) =>
                         {
-                            if (e is AuxStreamSendingEvent auxStreamSendingEvent)
+                            if (e is AuxStreamSendingVideoEvent auxStreamSendingEvent)
                             {
                                 auxStreamEvents.Add(e);
                                 auxStreamSendingVideos.Add(auxStreamSendingEvent.AuxStream.IsSendingVideo);
@@ -2890,7 +2890,7 @@ namespace WebexSDK.Tests
                         },
                         AuxStreamEventHandler = (e) =>
                         {
-                            if (e is AuxStreamSendingEvent auxStreamSendingEvent)
+                            if (e is AuxStreamSendingVideoEvent auxStreamSendingEvent)
                             {
                                 auxStreamEvents.Add(e);
                                 auxStreamSendingVideos.Add(auxStreamSendingEvent.AuxStream.IsSendingVideo);
@@ -2962,7 +2962,7 @@ namespace WebexSDK.Tests
                         },
                         AuxStreamEventHandler = (e) =>
                         {
-                            if (e is AuxStreamSendingEvent auxStreamSendingEvent)
+                            if (e is AuxStreamSendingVideoEvent auxStreamSendingEvent)
                             {
                                 if(auxStreamSendingEvent.AuxStream.IsSendingVideo)
                                 {
@@ -3038,7 +3038,7 @@ namespace WebexSDK.Tests
                         },
                         AuxStreamEventHandler = (e) =>
                         {
-                            if (e is AuxStreamSendingEvent auxStreamSendingEvent)
+                            if (e is AuxStreamSendingVideoEvent auxStreamSendingEvent)
                             {
                                 if (auxStreamSendingEvent.AuxStream.IsSendingVideo)
                                 {

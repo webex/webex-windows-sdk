@@ -841,7 +841,7 @@ namespace WebexSDK
                 if (find != null && find.IsSendingVideo != isStreaming)
                 {
                     find.IsSendingVideo = isStreaming;
-                    currentCall?.TrigerOnAuxStreamEvent(new AuxStreamSendingEvent(currentCall, find));
+                    currentCall?.TrigerOnAuxStreamEvent(new AuxStreamSendingVideoEvent(currentCall, find));
                 }
             }
         }
@@ -886,36 +886,49 @@ namespace WebexSDK
 
             if(currentCall.MultiStreamObserver != null)
             {
-                if (isIncrease)
-                {
-                    SdkLogger.Instance.Debug($"OnAuxStreamAvailable, increase:{count}");
-                    while(count > 0)
-                    {
-                        var handle = currentCall.MultiStreamObserver.OnAuxStreamAvailable();
-                        if(handle != IntPtr.Zero)
-                        {
-                            currentCall.OpenAuxStream(handle);
-                        }
-                        count--;
-                    }
-                }
-                else
-                {
-                    SdkLogger.Instance.Debug($"OnAuxStreamUnAvailable, decrease:{count}");
-                    while (count > 0)
-                    {
-                        var handle = currentCall.MultiStreamObserver.OnAuxStreamUnAvailable();
-                        if(handle == IntPtr.Zero && currentCall.AvailableAuxStreamCount < currentCall.AuxStreams.Count)
-                        {
-                            handle = currentCall.AuxStreams[currentCall.AuxStreams.Count - 1].Handle;
-                        }
-                        currentCall.CloseAuxStream(handle);
-                        count--;
-                    }
-                }
+                TriggerAuxStreamAvailabelOrUnAvailabe(isIncrease, count);
             }
 
         }
+        private void TriggerAuxStreamAvailabelOrUnAvailabe(bool isIncrease, int count)
+        {
+            if (currentCall.MultiStreamObserver == null)
+            {
+                return;
+            }
+            if(currentCall.AvailableAuxStreamCount > currentCall.OpenAuxStreamMaxCount)
+            {
+                return;
+            }
+            if (isIncrease)
+            {
+                SdkLogger.Instance.Debug($"OnAuxStreamAvailable, increase:{count}");
+                while (count > 0)
+                {
+                    var handle = currentCall.MultiStreamObserver.OnAuxStreamAvailable();
+                    if (handle != IntPtr.Zero)
+                    {
+                        currentCall.OpenAuxStream(handle);
+                    }
+                    count--;
+                }
+            }
+            else if(currentCall.AvailableAuxStreamCount < currentCall.OpenAuxStreamMaxCount)
+            {
+                SdkLogger.Instance.Debug($"OnAuxStreamUnAvailable, decrease:{count}");
+                while (count > 0)
+                {
+                    var handle = currentCall.MultiStreamObserver.OnAuxStreamUnAvailable();
+                    if (handle == IntPtr.Zero && currentCall.AvailableAuxStreamCount < currentCall.AuxStreams.Count)
+                    {
+                        handle = currentCall.AuxStreams[currentCall.AuxStreams.Count - 1].Handle;
+                    }
+                    currentCall.CloseAuxStream(handle);
+                    count--;
+                }
+            }
+        }
+
         private void OnParticipantsChanged(string callId)
         {
             List<CallMembership> tmpMemberships = new List<CallMembership>();

@@ -30,7 +30,7 @@ using SparkNet;
 namespace WebexSDK
 {
     /// <summary>
-    /// A AuxStream instance represents a auxiliary stream.
+    /// An AuxStream instance represents an auxiliary stream.
     /// </summary>
     /// <remarks>Since: 2.0.0</remarks>
     public class AuxStream
@@ -43,9 +43,9 @@ namespace WebexSDK
 
 
         /// <summary>
-        /// Update the auxiliary stream view.
+        /// Update the auxiliary stream view. When the view size is changed, you may need to refresh the view.
         /// </summary>
-        /// <param name="handle">The view handle.</param>
+        /// <remarks>Since: 2.0.0</remarks>
         public void RefreshView()
         {
             if (Track > TrackType.Unknown)
@@ -54,6 +54,9 @@ namespace WebexSDK
             }
         }
 
+        /// <summary>
+        /// Close this auxiliary stream. Client can manually invoke this API to close stream or automatically close the last opened stream by SDK.<see cref="IMultiStreamObserver.OnAuxStreamUnAvailable"/>
+        /// </summary>
         public void CloseAuxStream()
         {
             currentCall?.CloseAuxStream(Handle);
@@ -61,7 +64,7 @@ namespace WebexSDK
 
         internal CallMembership person;
         /// <summary>
-        /// Gets the person represented this auxiliary video.
+        /// Gets the person represented this auxiliary stream.
         /// </summary>
         /// <remarks>Since: 2.0.0</remarks>
         public CallMembership Person

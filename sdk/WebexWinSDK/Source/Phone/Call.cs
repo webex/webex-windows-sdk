@@ -65,6 +65,7 @@ namespace WebexSDK
         private List<CallMembership> memberships;
         internal int JoinedCallMembershipCount = 0;
         internal int AuxStreamCount = 0;
+        internal readonly int OpenAuxStreamMaxCount = 4;
 
         internal Call(Phone phone)
         {
@@ -163,7 +164,10 @@ namespace WebexSDK
         /// <remarks>Since: 0.1.0</remarks>
         public event Action<Capabilities> OnCapabilitiesChanged;
 
-
+        /// <summary>
+        /// The instance of the IMultiStreamObserver. <see cref="IMultiStreamObserver"/>
+        /// </summary>
+        /// <remarks>Since: 2.0.0</remarks>
         public IMultiStreamObserver MultiStreamObserver { get; set; }
 
 
@@ -782,9 +786,9 @@ namespace WebexSDK
                 TrigerOnAuxStreamEvent(new AuxStreamOpenedEvent(this, null, new WebexApiEventArgs<IntPtr>(false, new WebexError(WebexErrorCode.IllegalOperation, str), IntPtr.Zero)));
                 return;
             }
-            if (AuxStreams.Count >= 4)
+            if (AuxStreams.Count >= OpenAuxStreamMaxCount)
             {
-                var str = "The max count of auxiliary view is 4";
+                var str = $"The max count of auxiliary view is {OpenAuxStreamMaxCount}";
                 SdkLogger.Instance.Error(str);
                 TrigerOnAuxStreamEvent(new AuxStreamOpenedEvent(this, null, new WebexApiEventArgs<IntPtr>(false, new WebexError(WebexErrorCode.IllegalOperation, str), IntPtr.Zero)));
                 return;
@@ -806,9 +810,9 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// Unsubscribe the indicated auxiliary stream.
+        /// Close the indicated auxiliary stream.
         /// </summary>
-        /// <param name="remoteAuxVideo"> The indicated auxiliary stream.</param>
+        /// <param name="handle"> The handle of the indicated auxiliary stream.</param>
         /// <remarks>Since: 2.0.0</remarks>
         public void CloseAuxStream(IntPtr handle)
         {
@@ -835,7 +839,12 @@ namespace WebexSDK
             }
         }
 
-
+        /// <summary>
+        /// Gets the instance of the AuxStream by a view handle.
+        /// </summary>
+        /// <param name="handle">The view handle.</param>
+        /// <returns>The instance of opened auxiliary stream.</returns>
+        /// <remarks>Since: 2.0.0</remarks>
         public AuxStream GetAuxStream(IntPtr handle)
         {
             AuxStream result = null;

@@ -27,10 +27,34 @@ using System.Threading.Tasks;
 
 namespace WebexSDK
 {
+    /// <summary>
+    /// The interface of multi stream. Client must implement this interface to enable the multi-stream feature.
+    /// </summary>
+    /// <remarks>Since: 2.0.0</remarks>
     public interface IMultiStreamObserver
     {
+        /// <summary>
+        /// Callback of SDK when there is a new available auxiliary stream.
+        /// Client should give SDK a view handle for rendering, and the AuxStreamOpenedEvent would be triggered indicating whether the stream is successfully opened.
+        /// If the client don't want to open stream, return IntPtr.Zero.
+        /// </summary>
+        /// <returns>The handle of the view.</returns>
+        /// <remarks>Since: 2.0.0</remarks>
         IntPtr OnAuxStreamAvailable();
+
+        /// <summary>
+        /// Callback of SDK when there is a auxiliary stream unavailable.
+        /// Client should give SDK a view handle which will be closed or if the given view handle is IntPtr.Zero, SDK will automatically close the last opened stream.
+        /// </summary>
+        /// <returns>The handle of the view</returns>
+        /// <remarks>Since: 2.0.0</remarks>
         IntPtr OnAuxStreamUnAvailable();
+
+        /// <summary>
+        /// Callback of auxiliary stream related events.
+        /// </summary>
+        /// <param name="auxStreamEvent">the auxiliary stream related event</param>
+        /// <remarks>Since: 2.0.0</remarks>
         void OnAuxStreamEvent(AuxStreamEvent auxStreamEvent);
     }
 }
