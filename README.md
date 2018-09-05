@@ -7,7 +7,7 @@
  
 The Cisco Webex Windows SDK makes it easy to integrate secure and convenient Cisco Webex calling and messaging features in your Windows applications.
 
-This SDK is built with **Vistual Studio 2017** and requires:
+This SDK is built with **Visual Studio 2017** and requires:
 
 - .NET Framework 4.5.2 or higher version
 - Win8 or Win10
@@ -23,7 +23,7 @@ In your Windows application for example WPF project, here are steps to integrate
 
 1. Right click your project, and select "Manage NuGet Packages..."  
 2. Search "Cisco.Webex.WindowsSDK" in the Browse tag  
-3. Install the lastest stable version
+3. Install the latest stable version
 
 ## Usage
 To use the SDK, you will need Cisco Webex integration credentials. If you do not already have a Cisco Webex account, visit the [Cisco Webex for Developers portal](https://developer.webex.com/) to create your account and [register an integration](https://developer.webex.com/authentication.html#registering-your-integration). Your app will need to authenticate users via an [OAuth](https://oauth.net/) grant flow for existing Cisco Webex users or a [JSON Web Token](https://jwt.io/) for guest users without a Cisco Webex account.
