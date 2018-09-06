@@ -876,7 +876,7 @@ namespace WebexSDK
 
             SdkLogger.Instance.Debug($"JoinedCallMembershipCount:{currentCall.JoinedCallMembershipCount} AuxStreamCount: {currentCall.AuxStreamCount}");
             int min = Math.Min(currentCall.JoinedCallMembershipCount-2, currentCall.AuxStreamCount);
-            if (min == currentCall.AvailableAuxStreamCount)
+            if (min == currentCall.AvailableAuxStreamCount || min > currentCall.OpenAuxStreamMaxCount)
             {
                 return;
             }
