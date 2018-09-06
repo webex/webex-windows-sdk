@@ -289,6 +289,7 @@ namespace WebexSDK
                         completedHandler?.Invoke(new WebexApiEventArgs<Call>(false, new WebexError(WebexErrorCode.IllegalOperation, "maybe space id is invalid"), null));
                         return;
                     }
+                    OnCallStarted(outputAddress);
                     SdkLogger.Instance.Debug($"This is a space call. join call: {outputAddress}");
                     m_core_telephoneService.joinCall(outputAddress);
                 }
@@ -661,7 +662,7 @@ namespace WebexSDK
                     OnJwtAccessTokenExpired();
                     break;
                 case SCFEventType.CallStarted:
-                    OnCallStarted(error, status);
+                    OnCallStarted(status);
                     break;
                 case SCFEventType.StartRing:
                     OnStartRing((SparkNet.RingerType)error, status);
@@ -1089,10 +1090,7 @@ namespace WebexSDK
             }
             else if (newItem.State == CallMembership.CallState.Left)
             {
-                if (currentCall.JoinedCallMembershipCount > 0)
-                {
-                    currentCall.JoinedCallMembershipCount--;
-                }
+                currentCall.JoinedCallMembershipCount = currentCall.Memberships.Count(x => x.State == CallMembership.CallState.Joined);
                 currentCall.TrigerOnCallMembershipChanged(new CallMembershipLeftEvent(currentCall, newItem));
                 if (currentCall.JoinedCallMembershipCount >= 2)
                 {
@@ -1183,9 +1181,9 @@ namespace WebexSDK
                 }
             });
         }
-        private void OnCallStarted(int error, string callId)
+        private void OnCallStarted(string callId)
         {
-            SdkLogger.Instance.Debug($"CallId[{callId}] error[{error}]");
+            SdkLogger.Instance.Debug($"CallId[{callId}]");
             if (currentCall.CallId != null)
             {
                 SdkLogger.Instance.Warn("already have a call");
@@ -1275,12 +1273,16 @@ namespace WebexSDK
             string reason = m_core_telephoneService.getCallEndReason(currentCall.CallId);
             SdkLogger.Instance.Info($"callid[{currentCall.CallId}], call disconnected, release reason is {reason}");
             currentCall.ReleaseReason = ConvertToCallDisconnectReasonType(reason);
+            if(currentCall.IsGroup)
+            {
+                OnCallTerminated(callId);
+            }
         }
 
 
         private void OnCallTerminated(string callId)
         {
-            if (callId != currentCall.CallId)
+            if (callId != currentCall.CallId || !currentCall.IsUsed)
             {
                 return;
             }
