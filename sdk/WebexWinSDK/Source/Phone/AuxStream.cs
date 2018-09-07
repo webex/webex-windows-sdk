@@ -55,7 +55,7 @@ namespace WebexSDK
         }
 
         /// <summary>
-        /// Close this auxiliary stream. Client can manually invoke this API to close stream or automatically close the last opened stream by SDK.<see cref="IMultiStreamObserver.OnAuxStreamUnAvailable"/>
+        /// Close this auxiliary stream. Client can manually invoke this API to close stream , or the SDK will automatically close the last opened stream if needed.<see cref="IMultiStreamObserver.OnAuxStreamUnAvailable"/>
         /// </summary>
         public void CloseAuxStream()
         {
