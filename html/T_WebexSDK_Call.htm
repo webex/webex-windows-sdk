@@ -9,6 +9,10 @@
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_WebexSDK_Call_ActiveSpeaker.htm">ActiveSpeaker</a></td><td><div class="summary">
             Gets the active speaker in this call. It would be changed dynamically in the meeting.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_WebexSDK_Call_AuxStreams.htm">AuxStreams</a></td><td><div class="summary">
+            Gets the list of AuxStream which has been opened.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_WebexSDK_Call_AvailableAuxStreamCount.htm">AvailableAuxStreamCount</a></td><td><div class="summary">
+            Gets the count of available auxiliary streams now.
             </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_WebexSDK_Call_Direction.htm">Direction</a></td><td><div class="summary">
             Gets the direction of this call.
             </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_WebexSDK_Call_From.htm">From</a></td><td><div class="summary">
@@ -37,11 +41,8 @@
             The local video render view dimensions (points) of this call.
             </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_WebexSDK_Call_Memberships.htm">Memberships</a></td><td><div class="summary">
             Gets the memberships represent participants in this call.
-            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_WebexSDK_Call_RemoteAuxVideos.htm">RemoteAuxVideos</a></td><td><div class="summary">
-            Gets the list of RemoteAuxVideo which has been subscribed.
-            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_WebexSDK_Call_RemoteAvailableAuxVideoCount.htm">RemoteAvailableAuxVideoCount</a></td><td><div class="summary">
-            Gets the count of available remote auxiliary videos now.
-            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_WebexSDK_Call_RemoteShareViewSize.htm">RemoteShareViewSize</a></td><td><div class="summary">
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_WebexSDK_Call_MultiStreamObserver.htm">MultiStreamObserver</a></td><td><div class="summary">
+            The instance of the IMultiStreamObserver. <a href="T_WebexSDK_IMultiStreamObserver.htm">IMultiStreamObserver</a></div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_WebexSDK_Call_RemoteShareViewSize.htm">RemoteShareViewSize</a></td><td><div class="summary">
             The remote share render view dimensions (points) of this call.
             </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubproperty.gif" alt="Public property" title="Public property" /></td><td><a href="P_WebexSDK_Call_RemoteVideoViewSize.htm">RemoteVideoViewSize</a></td><td><div class="summary">
             The remote video render view dimensions (points) of this call.
@@ -57,11 +58,24 @@
             </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_WebexSDK_Call_Answer.htm">Answer</a></td><td><div class="summary">
             Answers this call.
             This can only be invoked when this call is incoming.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_WebexSDK_Call_CloseAuxStream.htm">CloseAuxStream</a></td><td><div class="summary">
+            Close the indicated auxiliary stream.
             </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_WebexSDK_Call_FetchShareSources.htm">FetchShareSources</a></td><td><div class="summary">
             Fetch enumerated sources with a kind of source type
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_WebexSDK_Call_GetAuxStream.htm">GetAuxStream</a></td><td><div class="summary">
+            Gets the instance of the AuxStream by a view handle.
             </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_WebexSDK_Call_Hangup.htm">Hangup</a></td><td><div class="summary">
             Disconnects this call.
             This can only be invoked when this call is in answered status.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_WebexSDK_Call_OpenAuxStream.htm">OpenAuxStream</a></td><td><div class="summary">
+            Open an auxiliary stream with a view handle. The Maximum of auxiliary videos you can open is 4.
+            When the client manually closed an auxiliary stream, the client can call this API to reopen the auxiliary stream again.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_WebexSDK_Call_RefreshLocalView.htm">RefreshLocalView</a></td><td><div class="summary">
+            Refresh local view to display when video window is resized.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_WebexSDK_Call_RefreshRemoteShareView.htm">RefreshRemoteShareView</a></td><td><div class="summary">
+            Refresh remote share view to display when video window is resized.
+            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_WebexSDK_Call_RefreshRemoteView.htm">RefreshRemoteView</a></td><td><div class="summary">
+            Refresh remote video to display when video window is resized.
             </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_WebexSDK_Call_Reject.htm">Reject</a></td><td><div class="summary">
             Rejects this call. 
             This can only be invoked when this call is incoming and in ringing status.
@@ -79,17 +93,6 @@
             Start share .
             </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_WebexSDK_Call_StopShare.htm">StopShare</a></td><td><div class="summary">
             Stop share .
-            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_WebexSDK_Call_SubscribeRemoteAuxVideo.htm">SubscribeRemoteAuxVideo</a></td><td><div class="summary">
-            Subscribe a new remote auxiliary video with a view handle. The Maximum of auxiliary videos you can subscribe is 4 currently.
-            You can invoke this API When receive RemoteAuxVideosCountChangedEvent event or call status is connected.
-            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_WebexSDK_Call_UnsubscribeRemoteAuxVideo.htm">UnsubscribeRemoteAuxVideo</a></td><td><div class="summary">
-            Unsubscribe the indicated remote auxiliary video.
-            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_WebexSDK_Call_UpdateLocalView.htm">UpdateLocalView</a></td><td><div class="summary">
-            Update local view to display when video window is resized.
-            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_WebexSDK_Call_UpdateRemoteShareView.htm">UpdateRemoteShareView</a></td><td><div class="summary">
-            Update remote share view to display when video window is resized.
-            </div></td></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubmethod.gif" alt="Public method" title="Public method" /></td><td><a href="M_WebexSDK_Call_UpdateRemoteView.htm">UpdateRemoteView</a></td><td><div class="summary">
-            Update remote video to display when video window is resized.
             </div></td></tr></table><a href="#PageHeader">Top</a></div><div class="collapsibleAreaRegion"><span class="collapsibleRegionTitle" onclick="SectionExpandCollapse('ID5RB')" onkeypress="SectionExpandCollapse_CheckKey('ID5RB', event)" tabindex="0"><img id="ID5RBToggle" class="collapseToggle" src="../icons/SectionExpanded.png" />Events</span></div><div id="ID5RBSection" class="collapsibleSection"><table class="members" id="eventList"><tr><th class="iconColumn">
 								 
 							</th><th>Name</th><th>Description</th></tr><tr data="public;declared;notNetfw;"><td><img src="../icons/pubevent.gif" alt="Public event" title="Public event" /></td><td><a href="E_WebexSDK_Call_OnCallMembershipChanged.htm">OnCallMembershipChanged</a></td><td><div class="summary">

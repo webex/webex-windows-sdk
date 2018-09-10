@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shfbBuild product="Sandcastle Help File Builder and Tools" version="2018.5.14.0" projectFile="D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\WebexSDKDoc.shfbproj" started="8/24/2018 12:26:34 PM">
+<shfbBuild product="Sandcastle Help File Builder and Tools" version="2018.5.14.0" projectFile="D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\WebexSDKDoc.shfbproj" started="9/10/2018 7:26:16 AM">
 <buildStep step="Initializing">
 Finding tools...
 The Sandcastle tools are located in &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\&#39;
@@ -30,16 +30,16 @@ Copying XML comments files
 <buildStep step="GenerateSharedContent">
 Generating shared content files (en-US, English (United States))...
 <plugIn name="Lightweight Website Style" behavior="After" priority="1000">
-</plugIn>    Last step completed in 00:00:00.0110
+</plugIn>    Last step completed in 00:00:00.1264
 </buildStep>
 <buildStep step="GenerateApiFilter">
 Generating API filter for MRefBuilder...
-    Last step completed in 00:00:00.0040
+    Last step completed in 00:00:00.0085
 </buildStep>
 <buildStep step="GenerateReflectionInfo">
 Generating reflection information...
 [C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe - GenerateRefInfo.proj]
-Build started 8/24/2018 12:26:35 PM.
+Build started 9/10/2018 7:26:19 AM.
 Project &quot;D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\GenerateRefInfo.proj&quot; on node 1 (default targets).
 PrepareForBuild:
   Creating directory &quot;obj\Debug\&quot;.
@@ -49,19 +49,19 @@ GenerateRefInfo:
   Portions Copyright c 2006-2018, Eric Woodruff, All Rights Reserved.
   No source code context base path specified.  Source context information is unavailable.
   Loaded 1 assemblies for reflection and 1 dependency assemblies.
-  Wrote information on 1 namespaces, 93 types, and 341 members
+  Wrote information on 1 namespaces, 94 types, and 345 members
   Copying file from &quot;reflection.org&quot; to &quot;reflection.all&quot;.
   XslTransform (v2018.5.14.0)
   Copyright c 2006-2018, Microsoft Corporation, All Rights Reserved.
   Portions Copyright c 2006-2018, Eric Woodruff, All Rights Reserved.
   Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\MergeDuplicates.xsl&#39;.
 Done Building Project &quot;D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\GenerateRefInfo.proj&quot; (default targets).
-    Last step completed in 00:00:00.7440
+    Last step completed in 00:00:00.8377
 </buildStep>
 <buildStep step="TransformReflectionInfo">
 Transforming reflection output...
 [C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe - TransformManifest.proj]
-Build started 8/24/2018 12:26:36 PM.
+Build started 9/10/2018 7:26:20 AM.
 Project &quot;D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\TransformManifest.proj&quot; on node 1 (default targets).
 TransformManifest:
   XslTransform (v2018.5.14.0)
@@ -83,25 +83,25 @@ TransformManifest:
   Portions Copyright c 2006-2018, Eric Woodruff, All Rights Reserved.
   Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\ProductionTransforms\ReflectionToManifest.xsl&#39;.
 Done Building Project &quot;D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\TransformManifest.proj&quot; (default targets).
-    Last step completed in 00:00:00.4503
+    Last step completed in 00:00:00.7758
 </buildStep>
 <buildStep step="GenerateNamespaceSummaries">
 Generating namespace summary information...
-    Last step completed in 00:00:00.0251
+    Last step completed in 00:00:00.0261
 </buildStep>
 <buildStep step="CopyAdditionalContent">
 Copying additional content files...
 No additional content to copy
-    Last step completed in 00:00:00.0020
+    Last step completed in 00:00:00.0015
 </buildStep>
 <buildStep step="MergeTablesOfContents">
 Merging conceptual and additional tables of contents...
-    Last step completed in 00:00:00.0000
+    Last step completed in 00:00:00.0005
 </buildStep>
 <buildStep step="GenerateIntermediateTableOfContents">
 Generating intermediate table of contents file...
 [C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe - GenerateIntermediateTOC.proj]
-Build started 8/24/2018 12:26:36 PM.
+Build started 9/10/2018 7:26:21 AM.
 Project &quot;D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\GenerateIntermediateTOC.proj&quot; on node 1 (default targets).
 GenerateIntermediateTOC:
   XslTransform (v2018.5.14.0)
@@ -110,24 +110,24 @@ GenerateIntermediateTOC:
   Applying XSL transformation &#39;C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\\ProductionTransforms\CreateVSToc.xsl&#39;.
 Done Building Project &quot;D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\GenerateIntermediateTOC.proj&quot; (default targets).
 Generating conceptual content intermediate TOC file...
-    Last step completed in 00:00:00.2155
+    Last step completed in 00:00:00.2693
 </buildStep>
 <buildStep step="CreateBuildAssemblerConfigs">
 Creating Sandcastle configuration files...
     sandcastle.config
-    Last step completed in 00:00:00.1294
+    Last step completed in 00:00:00.2370
 </buildStep>
 <buildStep step="MergeCustomConfigs">
 Merging custom build component configurations
 D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\sandcastle.config
   Updating reference topic configurations.
   No conceptual content.  Removing conceptual content components.
-    Last step completed in 00:00:00.0040
+    Last step completed in 00:00:00.0050
 </buildStep>
 <buildStep step="BuildTopics">
 Building help topics...
 [C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe - BuildTopics.proj]
-Build started 8/24/2018 12:26:37 PM.
+Build started 9/10/2018 7:26:21 AM.
 Project &quot;D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\BuildTopics.proj&quot; on node 1 (default targets).
 BuildTopics:
   BuildAssembler (v2018.5.14.0)
@@ -135,15 +135,15 @@ BuildTopics:
   Portions Copyright c 2006-2018, Eric Woodruff, All Rights Reserved.
   Loading configuration...
   Processing topics...
-  Processed 485 topic(s)
+  Processed 491 topic(s)
   CopyFromIndexComponent: &quot;reflection&quot; in-memory cache entries used: 3 of 15.
   CopyFromIndexComponent: &quot;comments&quot; in-memory cache entries used: 1 of 30.
 Done Building Project &quot;D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\BuildTopics.proj&quot; (default targets).
-    Last step completed in 00:00:08.0126
+    Last step completed in 00:00:13.0551
 </buildStep>
 <buildStep step="CombiningIntermediateTocFiles">
 Combining conceptual and API intermediate TOC files...
-    Last step completed in 00:00:00.0030
+    Last step completed in 00:00:00.0035
 </buildStep>
 <buildStep step="ExtractingHtmlInfo">
 Extracting HTML info for HTML Help 1 and/or website...
@@ -155,17 +155,17 @@ E-Mail: Eric@EWoodruff.us
 Using LCID &#39;1033&#39;, code page &#39;65001&#39;, encoding charset &#39;UTF-8&#39;.
 
 Processing Help 1 files in D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\Output\HtmlHelp1
-Processed 485 HTML files
+Processed 491 HTML files
 Sorting keywords and generating See Also indices
 Saving HTML Help 1 keyword index to D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\WebexSDKHelper.hhk
 Saving HTML Help 1 table of contents to D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\WebexSDKHelper.hhc
 
 Processing website files in D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\Output\Website
-Processed 485 HTML files
+Processed 491 HTML files
 Sorting keywords and generating See Also indices
 Saving website keyword index to D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\WebKI.xml
 Saving website table of contents to D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\WebTOC.xml
-    Last step completed in 00:00:00.4542
+    Last step completed in 00:00:00.8093
 </buildStep>
 <buildStep step="CopyStandardHelpContent">
 Copying standard help content...
@@ -309,7 +309,7 @@ C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyle
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\branding-Website.js -&gt; D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\Output\Website\scripts\branding-Website.js
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\clipboard.min.js -&gt; D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\Output\Website\scripts\clipboard.min.js
 C:\Program Files (x86)\EWSoftware\Sandcastle Help File Builder\PresentationStyles\VS2013\Web\scripts\jquery-1.11.0.min.js -&gt; D:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\Output\Website\scripts\jquery-1.11.0.min.js
-    Last step completed in 00:00:00.4963
+    Last step completed in 00:00:01.1136
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating HTML Help 1 table of contents file...
@@ -321,7 +321,7 @@ Generating HTML Help 1 index file...
 </buildStep>
 <buildStep step="GenerateHelpProject">
 Generating HTML Help 1 project file...
-    Last step completed in 00:00:00.0050
+    Last step completed in 00:00:00.0055
 </buildStep>
 <buildStep step="CompilingHelpFile">
 Compiling HTML Help 1 file...
@@ -338,9 +338,9 @@ Compiling HTML Help 1 file...
   
   Compile time: 0 minutes, 4 seconds
   
-  487	Topics
+  493	Topics
   
-  5,466	Local links
+  5,538	Local links
   
   459	Internet links
   
@@ -350,37 +350,37 @@ Compiling HTML Help 1 file...
   
   
   
-  Created d:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\Output\HtmlHelp1\WebexSDKHelper.chm, 364,651 bytes
+  Created d:\Program Files\Jenkins\workspace\webex-windows-sdk-master-branch\doc\Help\Working\Output\HtmlHelp1\WebexSDKHelper.chm, 370,821 bytes
   
-  Compression decreased file by 2,971,360 bytes.
+  Compression decreased file by 2,994,478 bytes.
   
-    Last step completed in 00:00:05.1454
+    Last step completed in 00:00:05.1036
 </buildStep>
 <buildStep step="GenerateHelpFormatTableOfContents">
 Generating website table of contents file...
-    Last step completed in 00:00:00.0010
+    Last step completed in 00:00:00.0005
 </buildStep>
 <buildStep step="GenerateFullTextIndex">
 Generating full-text index for the website...
 
 <plugIn name="Lightweight Website Style" behavior="After" priority="1000">
 Adding lightweight search and TOC elements to each topic...
-</plugIn>    Last step completed in 00:00:00.3198
+</plugIn>    Last step completed in 00:00:00.3337
 </buildStep>
 <buildStep step="CopyingWebsiteFiles">
 Copying website files to output folder...
 
 Copied 500 files
-Copied 742 files for the website content
-    Last step completed in 00:00:00.3585
+Copied 752 files for the website content
+    Last step completed in 00:00:00.3549
 </buildStep>
 <buildStep step="CleanIntermediates">
 Removing intermediate files...
-    Last step completed in 00:00:00.5085
+    Last step completed in 00:00:00.6482
 </buildStep>
 <buildStep step="Completed">
 
-Build completed successfully at 8/24/2018 12:26:52 PM.  Total time: 00:00:18.2117
+Build completed successfully at 9/10/2018 7:26:42 AM.  Total time: 00:00:25.9984
 
 </buildStep>
 </shfbBuild>
