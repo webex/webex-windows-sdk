@@ -414,6 +414,7 @@ namespace WebexSDK
                     SdkLogger.Instance.Warn("reject video codec license");
                     currentCall = new Call(this);
                     DialCompletedHandler?.Invoke(new WebexApiEventArgs<Call>(false, new WebexError(WebexErrorCode.RequireH264, ""), null));
+                    DialCompletedHandler = null;
                     return;
                 }
                 ConvertToDialAddress(currentCall.CalleeAddress, (isSpaceCall, outputAddress) =>
@@ -1184,7 +1185,7 @@ namespace WebexSDK
         private void OnCallStarted(string callId)
         {
             SdkLogger.Instance.Debug($"CallId[{callId}]");
-            if (currentCall.CallId != null)
+            if (currentCall.CallId != null && currentCall.CallId != callId)
             {
                 SdkLogger.Instance.Warn("already have a call");
                 return;
@@ -1198,6 +1199,7 @@ namespace WebexSDK
                 m_core_telephoneService.setAudioMaxBandwidth(currentCall.CallId, AudioMaxBandwidth);
                 m_core_telephoneService.setVideoMaxBandwidth(currentCall.CallId, VideoMaxBandwidth);
                 DialCompletedHandler?.Invoke(new WebexApiEventArgs<Call>(true, null, currentCall));
+                DialCompletedHandler = null;
             }
         }
 
