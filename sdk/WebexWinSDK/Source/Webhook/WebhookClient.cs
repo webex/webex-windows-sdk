@@ -66,7 +66,7 @@ namespace WebexSDK
             ServiceRequest request = BuildRequest();
             request.Method = HttpMethod.GET;
             request.RootElement = "items";
-            if (max != null) request.AddQueryParameters("max", max);
+            if (max != null) request.AddQueryParameters("max", max.ToString());
 
             request.Execute<List<Webhook>>(completionHandler);
         }
@@ -124,8 +124,8 @@ namespace WebexSDK
             ServiceRequest request = BuildRequest();
             request.Method = HttpMethod.PUT;
             request.Resource = webhookId;
-            if (name != null) request.AddQueryParameters("name", name);
-            if (targetUrl != null) request.AddQueryParameters("targetUrl", targetUrl);
+            if (name != null) request.AddBodyParameters("name", name);
+            if (targetUrl != null) request.AddBodyParameters("targetUrl", targetUrl);
 
             request.Execute<Webhook>(completionHandler);
         }

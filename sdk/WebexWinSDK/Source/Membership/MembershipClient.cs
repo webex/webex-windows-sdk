@@ -113,9 +113,21 @@ namespace WebexSDK
             if (spaceId != null)        request.AddQueryParameters("roomId", spaceId);
             if (personId != null)       request.AddQueryParameters("personId", personId);
             if (personEmail != null)    request.AddQueryParameters("personEmail", personEmail);
-            if (max != null)            request.AddQueryParameters("max", max);
+            if (max != null)            request.AddQueryParameters("max", max.ToString());
 
-            request.Execute<List<Membership>>(completionHandler);
+            request.Execute<List<InternalMembership>>(r =>
+            {
+                List<Membership> m = null;
+                if (r.IsSuccess)
+                {
+                    m = new List<Membership>();
+                    foreach(var item in r.Data)
+                    {
+                        m.Add(ConvertToMembership(item));
+                    }
+                }
+                completionHandler?.Invoke(new WebexApiEventArgs<List<Membership>>(r.IsSuccess, r.Error, m));
+            });
         }
 
 
@@ -133,9 +145,17 @@ namespace WebexSDK
             request.Method = HttpMethod.POST;
             if (spaceId != null) request.AddBodyParameters("roomId", spaceId);
             if (personId != null) request.AddBodyParameters("personId", personId);
-            if (isModerator != null) request.AddBodyParameters("isModerator", isModerator);
+            if (isModerator != null) request.AddBodyParameters("isModerator", isModerator.ToString());
 
-            request.Execute<Membership>(completionHandler);
+            request.Execute<InternalMembership>(r =>
+            {
+                Membership m = null;
+                if (r.IsSuccess)
+                {
+                    m = ConvertToMembership(r.Data);
+                }
+                completionHandler?.Invoke(new WebexApiEventArgs<Membership>(r.IsSuccess, r.Error, m));
+            });
         }
 
         /// <summary>
@@ -152,9 +172,17 @@ namespace WebexSDK
             request.Method = HttpMethod.POST;
             if (spaceId != null) request.AddBodyParameters("roomId", spaceId);
             if (personEmail != null) request.AddBodyParameters("personEmail", personEmail);
-            if (isModerator != null) request.AddBodyParameters("isModerator", isModerator);
+            if (isModerator != null) request.AddBodyParameters("isModerator", isModerator.ToString());
 
-            request.Execute<Membership>(completionHandler);
+            request.Execute<InternalMembership>(r=>
+            {
+                Membership m = null;
+                if (r.IsSuccess)
+                {
+                    m = ConvertToMembership(r.Data);
+                }
+                completionHandler?.Invoke(new WebexApiEventArgs<Membership>(r.IsSuccess, r.Error, m));
+            });
         }
 
         /// <summary>
@@ -169,7 +197,15 @@ namespace WebexSDK
             request.Method = HttpMethod.GET;
             request.Resource = membershipId;
 
-            request.Execute<Membership>(completionHandler);
+            request.Execute<InternalMembership>(r =>
+            {
+                Membership m = null;
+                if (r.IsSuccess)
+                {
+                    m = ConvertToMembership(r.Data);
+                }
+                completionHandler?.Invoke(new WebexApiEventArgs<Membership>(r.IsSuccess, r.Error, m));
+            });
         }
 
         /// <summary>
@@ -184,9 +220,17 @@ namespace WebexSDK
             ServiceRequest request = BuildRequest();
             request.Method = HttpMethod.PUT;
             request.Resource = membershipId;
-            if (isModerator != null) request.AddQueryParameters("isModerator", isModerator);
+            if (isModerator != null) request.AddBodyParameters("isModerator", isModerator.ToString());
 
-            request.Execute<Membership>(completionHandler);
+            request.Execute<InternalMembership>(r =>
+            {
+                Membership m = null;
+                if (r.IsSuccess)
+                {
+                    m = ConvertToMembership(r.Data);
+                }
+                completionHandler?.Invoke(new WebexApiEventArgs<Membership>(r.IsSuccess, r.Error, m));
+            });
         }
 
         /// <summary>
@@ -202,6 +246,27 @@ namespace WebexSDK
             request.Resource = membershipId;
 
             request.Execute<bool>(completionHandler);
+        }
+
+        private Membership ConvertToMembership(InternalMembership from)
+        {
+            if(from == null)
+            {
+                return null;
+            }
+            var m = new Membership
+            {
+                Id = from.Id,
+                PersonId = from.PersonId,
+                PersonEmail = from.PersonEmail,
+                PersonDisplayName = from.PersonDisplayName,
+                PersonOrgId = from.PersonOrgId,
+                SpaceId = from.RoomId,//room->space
+                IsModerator = from.IsModerator,
+                IsMonitor = from.IsMonitor,
+                Created = from.Created
+            };
+            return m;
         }
     }
 }

@@ -70,7 +70,7 @@ namespace WebexSDK
             request.Method = HttpMethod.GET;
             request.RootElement = "items";
             if (teamId != null) request.AddQueryParameters("teamId", teamId);
-            if (max != null) request.AddQueryParameters("max", max);
+            if (max != null) request.AddQueryParameters("max", max.ToString());
 
             request.Execute<List<TeamMembership>>(completionHandler);
         }
@@ -90,7 +90,7 @@ namespace WebexSDK
             request.Method = HttpMethod.POST;
             if (teamId != null)         request.AddBodyParameters("teamId", teamId);
             if (personId != null)       request.AddBodyParameters("personId", personId);
-            if (isModerator != null)    request.AddBodyParameters("isModerator", isModerator);
+            if (isModerator != null)    request.AddBodyParameters("isModerator", isModerator.ToString());
 
             request.Execute<TeamMembership>(completionHandler);
         }
@@ -109,7 +109,7 @@ namespace WebexSDK
             request.Method = HttpMethod.POST;
             if (teamId != null) request.AddBodyParameters("teamId", teamId);
             if (personEmail != null) request.AddBodyParameters("personEmail", personEmail);
-            if (isModerator != null) request.AddBodyParameters("isModerator", isModerator);
+            if (isModerator != null) request.AddBodyParameters("isModerator", isModerator.ToString());
 
             request.Execute<TeamMembership>(completionHandler);
         }
@@ -142,7 +142,7 @@ namespace WebexSDK
             ServiceRequest request = BuildRequest();
             request.Method = HttpMethod.PUT;
             request.Resource = membershipId;
-            if (isModerator != null) request.AddQueryParameters("isModerator", isModerator);
+            if (isModerator != null) request.AddBodyParameters("isModerator", isModerator.ToString());
 
             request.Execute<TeamMembership>(completionHandler);
         }

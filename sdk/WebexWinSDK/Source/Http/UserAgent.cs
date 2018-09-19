@@ -36,20 +36,14 @@ namespace WebexSDK
 
         public string OSVersion { get; set; }
         public string OSLanguage { get; set; }
+        public string OSArchitecture { get; set; }
 
         private UserAgent()
         {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT Version FROM Win32_OperatingSystem");
-            ManagementObjectCollection collection = searcher.Get();
-            var OSBuildNumber = (from x in collection.Cast<ManagementObject>()
-                                 select x.GetPropertyValue("Version")).FirstOrDefault();
-
-            OSVersion = OSBuildNumber != null ? OSBuildNumber.ToString() : "Unknown";
-            OSVersion = "Microsoft Windows " + OSVersion;
-
+            string OSBuildNumber = GetOSInfo("Version");
+            OSVersion = "Microsoft Windows " + OSBuildNumber;
+            OSArchitecture = GetOSArchitecture();
             OSLanguage = GetOSLanguage();
-            collection.Dispose();
-            searcher.Dispose();
         }
 
         public static UserAgent Instance
@@ -74,13 +68,49 @@ namespace WebexSDK
         {
             get
             {
-                return string.Format($"webex_win_sdk {Webex.Version}/({OSVersion})");
+                return string.Format($"webex_win_sdk/{Webex.Version} ({OSVersion}; {OSArchitecture})");
             } 
         }
         public static string GetOSLanguage()
         {
             string s = System.Globalization.CultureInfo.InstalledUICulture.NativeName;
             return s;
+        }
+        private string GetOSArchitecture()
+        {
+            string result = "";
+            if (Environment.Is64BitOperatingSystem)
+            {
+                result = "64-bit";
+            }
+            else
+            {
+                result = "32-bit";
+            }
+            return result;
+        }
+        private string GetOSInfo(string property)
+        {
+            string result = "";
+            if (property == null || property.Length == 0)
+            {
+                return null;
+            }
+            try
+            {
+                var queryStr = string.Format($"SELECT {property} FROM Win32_OperatingSystem");
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher(queryStr);
+                ManagementObjectCollection collection = searcher.Get();
+                result = (from x in collection.Cast<ManagementObject>()
+                          select x.GetPropertyValue(property)).FirstOrDefault().ToString();
+                collection.Dispose();
+                searcher.Dispose();
+            }
+            catch (Exception e)
+            {
+                SdkLogger.Instance.Error($"{e}");
+            }
+            return result;
         }
     }
 }

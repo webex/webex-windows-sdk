@@ -66,7 +66,7 @@ namespace WebexSDK
             ServiceRequest request = BuildRequest();
             request.Method = HttpMethod.GET;
             request.RootElement = "items";
-            if (max != null) request.AddQueryParameters("max", max);
+            if (max != null) request.AddQueryParameters("max", max.ToString());
 
             request.Execute<List<Team>>(completionHandler);
         }
@@ -115,7 +115,7 @@ namespace WebexSDK
             ServiceRequest request = BuildRequest();
             request.Method = HttpMethod.PUT;
             request.Resource = teamId;
-            if (name != null) request.AddQueryParameters("name", name);
+            if (name != null) request.AddBodyParameters("name", name);
 
             request.Execute<Team>(completionHandler);
         }

@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using Newtonsoft.Json;
+using System.Web.Script.Serialization;
 using SparkNet;
 
 namespace WebexSDK
@@ -284,11 +284,12 @@ namespace WebexSDK
             try
             {
                 decodeResult = Base64UrlDecode(segments[1]);
-                result = JsonConvert.DeserializeObject<Dictionary<string, string>>(Encoding.UTF8.GetString(decodeResult));
+                var ser = new JavaScriptSerializer();
+                result = ser.Deserialize<Dictionary<string, string>>(Encoding.UTF8.GetString(decodeResult));
             }
-            catch
+            catch(Exception e)
             {
-                SdkLogger.Instance.Error("deserialize jwt fail.");
+                SdkLogger.Instance.Error($"deserialize jwt fail. {e.GetType()}");
                 return result;
             }
 

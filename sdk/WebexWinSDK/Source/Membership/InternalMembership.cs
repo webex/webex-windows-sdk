@@ -31,7 +31,7 @@ namespace WebexSDK
     /// Membership contents.
     /// </summary>
     /// <remarks>Since: 0.1.0</remarks>
-    public class Membership
+    internal class InternalMembership
     {
         /// <summary>
         /// The id of this membership.
@@ -63,11 +63,12 @@ namespace WebexSDK
         /// <remarks>Since: 0.1.0</remarks>
         public string PersonOrgId { get; set; }
 
+
         /// <summary>
         /// The id of the space.
         /// </summary>
         /// <remarks>Since: 0.1.0</remarks>
-        public string SpaceId { get; set; }
+        public string RoomId { get; set; }
 
         /// <summary>
         /// Moderator of a space.

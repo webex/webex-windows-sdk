@@ -59,9 +59,6 @@ namespace WebexSDK
                 Resource = "jwt/login"
             };
             request.AddHeaders("Authorization", jwt);
-            request.AddBodyParameters("Content-Type", "text/plain");
-            request.AddBodyParameters("Cache-Control", "no-cache");
-            request.AddBodyParameters("Accept-Encoding", "none");
 
             request.ExecuteAuth<JWTAccessTokenInfo>((response) =>
             {

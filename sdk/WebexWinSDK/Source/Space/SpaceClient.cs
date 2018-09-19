@@ -71,7 +71,7 @@ namespace WebexSDK
             request.Method = HttpMethod.GET;
             request.RootElement = "items";
             if (teamId != null) request.AddQueryParameters("teamId", teamId);
-            if (max != null) request.AddQueryParameters("max", max);
+            if (max != null) request.AddQueryParameters("max", max.ToString());
             if (type != null) request.AddQueryParameters("type", type.ToString().ToLower());
             if (sortBy != null)
             {
@@ -142,7 +142,7 @@ namespace WebexSDK
             ServiceRequest request = BuildRequest();
             request.Method = HttpMethod.PUT;
             request.Resource = spaceId;
-            if (title != null) request.AddQueryParameters("title", title);
+            if (title != null) request.AddBodyParameters("title", title);
 
             request.Execute<Space>(completionHandler);
         }

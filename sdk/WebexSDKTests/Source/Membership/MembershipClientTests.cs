@@ -94,9 +94,9 @@ namespace WebexSDK.Tests
 
             var list = ListMembershipByPersonId(spaceId, other.PersonId);
             Assert.IsNotNull(list);
-            Assert.AreEqual(list[0].PersonId, other.PersonId);
-            Assert.AreEqual(list[0].PersonEmail, other.Email);
-            Assert.AreEqual(list[0].SpaceId, spaceId);
+            Assert.AreEqual(other.PersonId, list[0].PersonId);
+            Assert.AreEqual(other.Email, list[0].PersonEmail);
+            Assert.AreEqual(spaceId, list[0].SpaceId);
             Assert.IsFalse(list[0].IsModerator);
             Assert.IsFalse(list[0].IsMonitor);
         }

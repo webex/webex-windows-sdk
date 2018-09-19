@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 
@@ -51,9 +52,11 @@ namespace WebexSDK
             get { return resource; }
             set { resource += ("/" + value); }
         }
+        public string UserAgent { get; set; }
+        public string ContentType { get; set; }
         public List<KeyValuePair<string, string>> Headers { get; set; }
-        public List<KeyValuePair<string, object>> QueryParameters { get; set; }
-        public List<KeyValuePair<string, object>> BodyParameters { get; set; }
+        public List<KeyValuePair<string, string>> QueryParameters { get; set; }
+        public List<KeyValuePair<string, string>> BodyParameters { get; set; }
         IAuthenticator Authenticator { get; set; }
         public string RootElement { get; set; }
         public string AccessToken { get; set; }
@@ -77,20 +80,22 @@ namespace WebexSDK
         {
             Method = HttpMethod.GET;
             BaseUri = "https://api.ciscospark.com/v1/";
+            UserAgent = WebexSDK.UserAgent.Instance.Name;
+            ContentType = "application/json";
             AccessToken = null;
 
             Headers = new List<KeyValuePair<string, string>>()
             {
-                new KeyValuePair<string, string>("Content-Type", "application/json"),
-                new KeyValuePair<string, string>("User-Agent", UserAgent.Instance.Name),
-                new KeyValuePair<string, string>("Webex-User-Agent", UserAgent.Instance.Name)
+                new KeyValuePair<string, string>("Webex-User-Agent", WebexSDK.UserAgent.Instance.Name)
             };
-            QueryParameters = new List<KeyValuePair<string, object>>();
-            BodyParameters = new List<KeyValuePair<string, object>>();
+            QueryParameters = new List<KeyValuePair<string, string>>();
+            BodyParameters = new List<KeyValuePair<string, string>>();
             Resource = "";
             RootElement = "";
 
-            ClientHandler = new RestSharpClient();
+            //Cisco Webex platform is dropping support for TLS 1.0 as of March 16, 2018
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
+            ClientHandler = new SystemNetHttpClient();
         }
 
         public ServiceRequest(IAuthenticator authenticator)
@@ -106,14 +111,14 @@ namespace WebexSDK
             this.Method = method;
         }
 
-        public void AddQueryParameters(string name, object value)
+        public void AddQueryParameters(string name, string value)
         {
-            QueryParameters.Add(new KeyValuePair<string, object>(name, value));
+            QueryParameters.Add(new KeyValuePair<string, string>(name, value));
         }
 
-        public void AddBodyParameters(string name, object value)
+        public void AddBodyParameters(string name, string value)
         {
-            BodyParameters.Add(new KeyValuePair<string, object>(name, value));
+            BodyParameters.Add(new KeyValuePair<string, string>(name, value));
         }
 
         public void AddHeaders(string name, string value)

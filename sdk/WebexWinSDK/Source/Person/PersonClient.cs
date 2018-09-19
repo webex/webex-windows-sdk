@@ -71,7 +71,7 @@ namespace WebexSDK
             request.RootElement = "items";
             if(email != null)       request.AddQueryParameters("email", email);
             if(displayName != null) request.AddQueryParameters("displayName", displayName);
-            if(max != null)         request.AddQueryParameters("max", max);        
+            if(max != null)         request.AddQueryParameters("max", max.ToString());        
 
             request.Execute<List<Person>>(completionHandler);
         }
