@@ -2774,6 +2774,7 @@ namespace WebexSDK.Tests
             Assert.IsTrue(auxStreamEvents.Count > 0);
             Assert.IsTrue(auxStreamSendingVideos.Count > 0);
             Assert.IsTrue(auxStreamSendingVideos[0]);
+            Thread.Sleep(10000);
         }
 
         [TestMethod()]
@@ -2845,6 +2846,7 @@ namespace WebexSDK.Tests
             //Assert.AreEqual(2, auxStreamSendingVideos.Count);
             //Assert.IsTrue(auxStreamSendingVideos[0]);
             //Assert.IsFalse(auxStreamSendingVideos[1]);
+            Thread.Sleep(10000);
         }
         [TestMethod()]
         public void OutgoingAuxStreamSendingEventByRemoteUnMuteTest()
@@ -2915,166 +2917,8 @@ namespace WebexSDK.Tests
             //Assert.IsTrue(auxStreamSendingVideos[0]);
             //Assert.IsFalse(auxStreamSendingVideos[1]);
             //Assert.IsTrue(auxStreamSendingVideos[2]);
+            Thread.Sleep(10000);
         }
-
-        [TestMethod()]
-        public void OutgoingReceivingAuxStreamEventMuteRemoteAuxTest()
-        {
-            //call scene：
-            //1. caller: callout
-            //2. callee: answer
-            //3. caller: mute remote aux1
-            //4. callee: hangup
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(testFixtureApp);
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
-
-            currentCall = null;
-            List<AuxStreamEvent> auxStreamEvents = new List<AuxStreamEvent>();
-            List<bool> receivingAuxVideos = new List<bool>();
-
-            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
-            {
-                if (r.IsSuccess)
-                {
-                    currentCall = r.Data;
-
-                    //mute local video, cause there is only one camera which should be used by callee part.
-                    currentCall.IsSendingVideo = false;
-
-                    currentCall.OnDisconnected += (call) =>
-                    {
-                        Console.WriteLine("onDisconnected");
-                        MessageHelper.BreakLoop();
-                    };
-                    currentCall.MultiStreamObserver = new MultiStreamOberver()
-                    {
-                        AuxStreamAvailableHandler = () =>
-                        {
-                            return fakeViewHandle;
-                        },
-                        AuxStreamUnAvailableHandler = () =>
-                        {
-                            if (currentCall.AvailableAuxStreamCount == 0)
-                            {
-                                HangupCall(currentCall);
-                            }
-                            return fakeViewHandle;
-                        },
-                        AuxStreamEventHandler = (e) =>
-                        {
-                            if (e is AuxStreamSendingVideoEvent auxStreamSendingEvent)
-                            {
-                                if(auxStreamSendingEvent.AuxStream.IsSendingVideo)
-                                {
-                                    auxStreamSendingEvent.AuxStream.IsReceivingVideo = false;
-                                }
-                            }
-                            else if(e is ReceivingAuxStreamEvent receivingAuxStreamEvent)
-                            {
-                                auxStreamEvents.Add(e);
-                                receivingAuxVideos.Add(receivingAuxStreamEvent.AuxStream.IsReceivingVideo);
-                            }
-                        }
-                    };
-                }
-                else
-                {
-                    Console.WriteLine($"dial fail: {r.Error.ErrorCode}:{r.Error.Reason}");
-                    currentCall = r.Data;
-                    MessageHelper.BreakLoop();
-                }
-            });
-
-
-            MessageHelper.RunDispatcherLoop();
-
-            Assert.IsTrue(auxStreamEvents.Count > 0);
-            Assert.AreEqual(1, receivingAuxVideos.Count);
-            Assert.IsFalse(receivingAuxVideos[0]);
-        }
-        [TestMethod()]
-        public void OutgoingReceivingAuxStreamEventUnMuteRemoteAuxTest()
-        {
-            //call scene：
-            //1. caller: callout
-            //2. callee: answer
-            //3. caller: mute remote aux1
-            //4. caller: unmute remote aux1
-            //5. callee: hangup
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(testFixtureApp);
-            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
-
-            currentCall = null;
-            List<AuxStreamEvent> auxStreamEvents = new List<AuxStreamEvent>();
-            List<bool> receivingAuxVideos = new List<bool>();
-
-            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
-            {
-                if (r.IsSuccess)
-                {
-                    currentCall = r.Data;
-
-                    //mute local video, cause there is only one camera which should be used by callee part.
-                    currentCall.IsSendingVideo = false;
-
-                    currentCall.OnDisconnected += (call) =>
-                    {
-                        Console.WriteLine("onDisconnected");
-                        MessageHelper.BreakLoop();
-                    };
-                    currentCall.MultiStreamObserver = new MultiStreamOberver()
-                    {
-                        AuxStreamAvailableHandler = () =>
-                        {
-                            return fakeViewHandle;
-                        },
-                        AuxStreamUnAvailableHandler = () =>
-                        {
-                            if (currentCall.AvailableAuxStreamCount == 0)
-                            {
-                                HangupCall(currentCall);
-                            }
-                            return fakeViewHandle;
-                        },
-                        AuxStreamEventHandler = (e) =>
-                        {
-                            if (e is AuxStreamSendingVideoEvent auxStreamSendingEvent)
-                            {
-                                if (auxStreamSendingEvent.AuxStream.IsSendingVideo)
-                                {
-                                    auxStreamSendingEvent.AuxStream.IsReceivingVideo = false;
-                                }
-                            }
-                            else if (e is ReceivingAuxStreamEvent receivingAuxStreamEvent)
-                            {
-                                auxStreamEvents.Add(e);
-                                receivingAuxVideos.Add(receivingAuxStreamEvent.AuxStream.IsReceivingVideo);
-                                if (!receivingAuxStreamEvent.AuxStream.IsReceivingVideo)
-                                {
-                                    receivingAuxStreamEvent.AuxStream.IsReceivingVideo = true;
-                                }
-                            }
-                        }
-                    };
-                }
-                else
-                {
-                    Console.WriteLine($"dial fail: {r.Error.ErrorCode}:{r.Error.Reason}");
-                    currentCall = r.Data;
-                    MessageHelper.BreakLoop();
-                }
-            });
-
-
-            MessageHelper.RunDispatcherLoop();
-
-            Assert.IsTrue(auxStreamEvents.Count > 0);
-            Assert.AreEqual(2, receivingAuxVideos.Count);
-            Assert.IsFalse(receivingAuxVideos[0]);
-            Assert.IsTrue(receivingAuxVideos[1]);
-        }
-
-
         [TestMethod()]
         public void OutgoingMediaChangedActiveSpeakerChangedEventTest()
         {
@@ -3216,6 +3060,166 @@ namespace WebexSDK.Tests
                 });
             });
 
+        }
+
+        [TestMethod()]
+        public void OutgoingReceivingAuxStreamEventMuteRemoteAuxTest()
+        {
+            //call scene：
+            //1. caller: callout
+            //2. callee: answer
+            //3. caller: mute remote aux1
+            //4. callee: hangup
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
+
+            currentCall = null;
+            List<AuxStreamEvent> auxStreamEvents = new List<AuxStreamEvent>();
+            List<bool> receivingAuxVideos = new List<bool>();
+
+            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
+            {
+                if (r.IsSuccess)
+                {
+                    currentCall = r.Data;
+
+                    //mute local video, cause there is only one camera which should be used by callee part.
+                    currentCall.IsSendingVideo = false;
+
+                    currentCall.OnDisconnected += (call) =>
+                    {
+                        Console.WriteLine("onDisconnected");
+                        MessageHelper.BreakLoop();
+                    };
+                    currentCall.MultiStreamObserver = new MultiStreamOberver()
+                    {
+                        AuxStreamAvailableHandler = () =>
+                        {
+                            return fakeViewHandle;
+                        },
+                        AuxStreamUnAvailableHandler = () =>
+                        {
+                            if (currentCall.AvailableAuxStreamCount == 0)
+                            {
+                                HangupCall(currentCall);
+                            }
+                            return fakeViewHandle;
+                        },
+                        AuxStreamEventHandler = (e) =>
+                        {
+                            if (e is AuxStreamSendingVideoEvent auxStreamSendingEvent)
+                            {
+                                if (auxStreamSendingEvent.AuxStream.IsSendingVideo)
+                                {
+                                    auxStreamSendingEvent.AuxStream.IsReceivingVideo = false;
+                                }
+                            }
+                            else if (e is ReceivingAuxStreamEvent receivingAuxStreamEvent)
+                            {
+                                auxStreamEvents.Add(e);
+                                receivingAuxVideos.Add(receivingAuxStreamEvent.AuxStream.IsReceivingVideo);
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    Console.WriteLine($"dial fail: {r.Error.ErrorCode}:{r.Error.Reason}");
+                    currentCall = r.Data;
+                    MessageHelper.BreakLoop();
+                }
+            });
+
+
+            MessageHelper.RunDispatcherLoop();
+
+            Assert.IsTrue(auxStreamEvents.Count > 0);
+            Assert.AreEqual(1, receivingAuxVideos.Count);
+            Assert.IsFalse(receivingAuxVideos[0]);
+
+            Thread.Sleep(10000);
+        }
+        [TestMethod()]
+        public void OutgoingReceivingAuxStreamEventUnMuteRemoteAuxTest()
+        {
+            //call scene：
+            //1. caller: callout
+            //2. callee: answer
+            //3. caller: mute remote aux1
+            //4. caller: unmute remote aux1
+            //5. callee: hangup
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(testFixtureApp);
+            MessageHelper.SetTestMode_CalleeAutoAnswerAndHangupAfter30Seconds(thirdpart);
+
+            currentCall = null;
+            List<AuxStreamEvent> auxStreamEvents = new List<AuxStreamEvent>();
+            List<bool> receivingAuxVideos = new List<bool>();
+
+            phone.Dial(mySpace.Id, MediaOption.AudioVideoShare(), r =>
+            {
+                if (r.IsSuccess)
+                {
+                    currentCall = r.Data;
+
+                    //mute local video, cause there is only one camera which should be used by callee part.
+                    currentCall.IsSendingVideo = false;
+
+                    currentCall.OnDisconnected += (call) =>
+                    {
+                        Console.WriteLine("onDisconnected");
+                        MessageHelper.BreakLoop();
+                    };
+                    currentCall.MultiStreamObserver = new MultiStreamOberver()
+                    {
+                        AuxStreamAvailableHandler = () =>
+                        {
+                            return fakeViewHandle;
+                        },
+                        AuxStreamUnAvailableHandler = () =>
+                        {
+                            if (currentCall.AvailableAuxStreamCount == 0)
+                            {
+                                HangupCall(currentCall);
+                            }
+                            return fakeViewHandle;
+                        },
+                        AuxStreamEventHandler = (e) =>
+                        {
+                            if (e is AuxStreamSendingVideoEvent auxStreamSendingEvent)
+                            {
+                                if (auxStreamSendingEvent.AuxStream.IsSendingVideo)
+                                {
+                                    auxStreamSendingEvent.AuxStream.IsReceivingVideo = false;
+                                }
+                            }
+                            else if (e is ReceivingAuxStreamEvent receivingAuxStreamEvent)
+                            {
+                                auxStreamEvents.Add(e);
+                                receivingAuxVideos.Add(receivingAuxStreamEvent.AuxStream.IsReceivingVideo);
+                                if (!receivingAuxStreamEvent.AuxStream.IsReceivingVideo)
+                                {
+                                    receivingAuxStreamEvent.AuxStream.IsReceivingVideo = true;
+                                }
+                            }
+                        }
+                    };
+                }
+                else
+                {
+                    Console.WriteLine($"dial fail: {r.Error.ErrorCode}:{r.Error.Reason}");
+                    currentCall = r.Data;
+                    MessageHelper.BreakLoop();
+                }
+            });
+
+
+            MessageHelper.RunDispatcherLoop();
+
+            Assert.IsTrue(auxStreamEvents.Count > 0);
+            Assert.AreEqual(2, receivingAuxVideos.Count);
+            Assert.IsFalse(receivingAuxVideos[0]);
+            Assert.IsTrue(receivingAuxVideos[1]);
+            Thread.Sleep(10000);
         }
 
         [TestMethod()]
