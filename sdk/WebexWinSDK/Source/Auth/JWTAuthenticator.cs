@@ -335,7 +335,7 @@ namespace WebexSDK
 
                 if (expTime < DateTime.Now)
                 {
-                    SdkLogger.Instance.Error("JWT has expired at {0}", expTime);
+                    SdkLogger.Instance.Error($"JWT has expired at {expTime}");
                     return null;
                 }
             }

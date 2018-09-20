@@ -509,7 +509,7 @@ namespace WebexSDK
 
         private void OnCoreCallBackMessage(SCFEventType type, int error, string status)
         {
-            SdkLogger.Instance.Debug("event type:{0}, error[{1}], status:{2}", type.ToString(), error, status);
+            SdkLogger.Instance.Debug($"event type:{type}, error[{error}], status:{status}");
             string[] arrStr = status.Trim().Split(' ');
             switch (type)
             {

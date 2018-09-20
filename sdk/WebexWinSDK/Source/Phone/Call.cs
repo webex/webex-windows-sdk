@@ -1023,11 +1023,17 @@ namespace WebexSDK
         }
         private void CheckAuxVideoPersonChange(CallMembership leftPerson)
         {
+            if(leftPerson == null)
+            {
+                SdkLogger.Instance.Debug("CallMembership leftPerson is null.");
+                return;
+            }
+
             if (AuxStreams != null && AuxStreams.Count > 0)
             {
                 foreach (var item in AuxStreams)
                 {
-                    if (item.IsInUse && item.Person.PersonId == leftPerson.PersonId)
+                    if (item != null && item.IsInUse && item.Person.PersonId == leftPerson.PersonId)
                     {
                         SdkLogger.Instance.Debug($"{item.Track} change to no person.");
                         var oldperson = item.Person;

@@ -71,44 +71,55 @@ namespace WebexSDK
             }
         }
 
-        public void Debug(String format, params object[] args)
+        public void Debug(String str,
+        [System.Runtime.CompilerServices.CallerMemberName] string memberName = "",
+        [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "",
+        [System.Runtime.CompilerServices.CallerLineNumber] int sourceLineNumber = 0
+        )
         {
-            string str = string.Format(format, args);
-            Log(LogLevel.Debug, str);
+            Log(LogLevel.Debug, str, memberName, sourceFilePath, sourceLineNumber);
         }
 
-        public void Info(String format, params object[] args)
+        public void Info(String str,
+        [System.Runtime.CompilerServices.CallerMemberName] string memberName = "",
+        [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "",
+        [System.Runtime.CompilerServices.CallerLineNumber] int sourceLineNumber = 0
+        )
         {
-            string str = string.Format(format, args);
-            Log(LogLevel.Info, str);
+            Log(LogLevel.Info, str, memberName, sourceFilePath, sourceLineNumber);
         }
 
-        public void Warn(String format, params object[] args)
+        public void Warn(String str,
+        [System.Runtime.CompilerServices.CallerMemberName] string memberName = "",
+        [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "",
+        [System.Runtime.CompilerServices.CallerLineNumber] int sourceLineNumber = 0
+        )
         {
-            string str = string.Format(format, args);
-            Log(LogLevel.Warn, str);
-        }
-        public void Error(String format, params object[] args)
-        {
-            string str = string.Format(format, args);
-            Log(LogLevel.Error, str);
+            Log(LogLevel.Warn, str, memberName, sourceFilePath, sourceLineNumber);
         }
 
-        public void Output(LogLevel logLevel, String format, params object[] args)
+        public void Error(String str,
+        [System.Runtime.CompilerServices.CallerMemberName] string memberName = "",
+        [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "",
+        [System.Runtime.CompilerServices.CallerLineNumber] int sourceLineNumber = 0
+        )
         {
-            string str = string.Format(format, args);
-            Log(logLevel, str);
+            Log(LogLevel.Error, str, memberName, sourceFilePath, sourceLineNumber);
         }
 
-        private void Log(LogLevel logLevel, string str)
+        public void Output(LogLevel logLevel, String str,
+        [System.Runtime.CompilerServices.CallerMemberName] string memberName = "",
+        [System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "",
+        [System.Runtime.CompilerServices.CallerLineNumber] int sourceLineNumber = 0
+        )
         {
-            StackTrace st = new StackTrace(true);
+            Log(logLevel, str, memberName, sourceFilePath, sourceLineNumber);
+        }
 
-            StackFrame sf = st.GetFrame(2);
-
+        private void Log(LogLevel logLevel, string str, string memberName, string sourceFilePath, int sourceLineNumber)
+        {
             string fullstr = string.Format("{0,-10}", "[WebexSDK]");
-            fullstr += string.Format(" {0}:{1} {2}::{3} {4}", System.IO.Path.GetFileName(sf.GetFileName()), sf.GetFileLineNumber(), sf.GetMethod().ReflectedType.Name, sf.GetMethod().Name, str);
-            
+            fullstr += string.Format(" {0}:{1} {2}: {3}", System.IO.Path.GetFileName(sourceFilePath), sourceLineNumber, memberName, str);
             if (logLevel >= Console)
             {
                 SCFCore.Instance.m_core.outputLog((SCFLogLevel)logLevel, fullstr);
@@ -122,8 +133,6 @@ namespace WebexSDK
                     this.Logger.Log(loggerOutput);
                 }
             }
-
-
         }
     }
 }

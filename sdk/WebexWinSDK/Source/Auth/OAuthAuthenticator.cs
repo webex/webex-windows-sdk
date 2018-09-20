@@ -212,7 +212,7 @@ namespace WebexSDK
 
         private void OnCoreCallBack(SCFEventType type, int error, string status)
         {
-            SdkLogger.Instance.Debug("event type:{0}, error[{1}], status:{2}", type.ToString(), error, status);
+            SdkLogger.Instance.Debug($"event type:{type}, error[{error}], status:{status}");
             switch (type)
             {
                 case SCFEventType.AccessTokenRefreshed:
@@ -257,7 +257,7 @@ namespace WebexSDK
                     else
                     {
                         this.isAuthorized = false;
-                        SdkLogger.Instance.Error("Log in failed. error:{0}, status:{1}", error, status);
+                        SdkLogger.Instance.Error($"Log in failed. error:{error}, status:{status}");
      
                         this.AuthorizeAction?.Invoke(new WebexApiEventArgs(false, null));
                         this.AuthorizeAction = null;
@@ -283,7 +283,7 @@ namespace WebexSDK
                     else
                     {
                         this.isAuthorized = false;
-                        SdkLogger.Instance.Info("RefreshTokenLogin in failed. error:{0}, status:{1}", error, status);
+                        SdkLogger.Instance.Info($"RefreshTokenLogin in failed. error:{error}, status:{status}");
                         this.AuthorizedAction?.Invoke(new WebexApiEventArgs(false, null));
                         this.AuthorizedAction = null;
                     }
