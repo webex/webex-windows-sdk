@@ -1033,7 +1033,7 @@ namespace WebexSDK
             {
                 foreach (var item in AuxStreams)
                 {
-                    if (item != null && item.IsInUse && item.Person.PersonId == leftPerson.PersonId)
+                    if (item != null && item.IsInUse && item.Person != null && item.Person.PersonId == leftPerson.PersonId)
                     {
                         SdkLogger.Instance.Debug($"{item.Track} change to no person.");
                         var oldperson = item.Person;
