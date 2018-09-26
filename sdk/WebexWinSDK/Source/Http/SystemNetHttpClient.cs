@@ -35,6 +35,9 @@ namespace WebexSDK
 {
     internal class SystemNetHttpClient : IServiceRequestClient
     {
+        // Singleton HttpClient
+        static HttpClient Client = new HttpClient();
+
         public void Execute<T>(ServiceRequest serviceRequest, Action<ServiceRequest.Response<T>> completedhandler) where T : new()
         {
             if (serviceRequest == null)
@@ -103,8 +106,7 @@ namespace WebexSDK
         {
             // Send async
             SdkLogger.Instance.Info($"http request[{request.Method}]: {request.RequestUri}");
-            var client = new HttpClient();
-            var task = client.SendAsync(request);
+            var task = Client.SendAsync(request);
 
             // Process Response and Callback
             task.ContinueWith(t =>
