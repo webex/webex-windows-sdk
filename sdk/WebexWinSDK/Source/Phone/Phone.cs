@@ -1184,13 +1184,14 @@ namespace WebexSDK
                 SdkLogger.Instance.Warn("already have a call");
                 return;
             }
-            currentCall.IsOne2One = m_core_telephoneService.getIsOne2One(currentCall.CallId);
-            SdkLogger.Instance.Debug($"This is a {(currentCall.IsOne2One ? "One2One Call" : "meeting")}");
 
             // outgoing call
             if (currentCall.IsUsed && currentCall.Direction == Call.CallDirection.Outgoing)
             {
                 currentCall.CallId = callId;
+                currentCall.IsOne2One = m_core_telephoneService.getIsOne2One(currentCall.CallId);
+                SdkLogger.Instance.Debug($"This is a {(currentCall.IsOne2One ? "One2One Call" : "meeting")}");
+
                 m_core_telephoneService.setMediaOption(currentCall.CallId , currentCall.MediaOption.MediaOptionType);
                 m_core_telephoneService.setAudioMaxBandwidth(currentCall.CallId, AudioMaxBandwidth);
                 m_core_telephoneService.setVideoMaxBandwidth(currentCall.CallId, VideoMaxBandwidth);
@@ -1215,6 +1216,9 @@ namespace WebexSDK
             currentCall.Direction = Call.CallDirection.Incoming;
             currentCall.Status = CallStatus.Initiated;
             currentCall.CallId = callId;
+
+            currentCall.IsOne2One = m_core_telephoneService.getIsOne2One(currentCall.CallId);
+            SdkLogger.Instance.Debug($"This is a {(currentCall.IsOne2One ? "One2One Call" : "meeting")}");
 
             OnIncoming?.Invoke(currentCall);
         }
