@@ -63,7 +63,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="spark-client-framework-dot-net, Version=1.0.6835.11346, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="spark-client-framework-dot-net, Culture=neutral, processorArchitecture=x86">
       <HintPath>..\solutions\WinSDK4Desktop\packages\Cisco.Webex.WindowsSDK.2.0.0-EFT02\lib\net452\spark-client-framework-dot-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
