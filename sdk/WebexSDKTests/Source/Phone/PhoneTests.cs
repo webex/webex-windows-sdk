@@ -3049,7 +3049,7 @@ namespace WebexSDK.Tests
                 callData.ReleaseReason = r;
                 MessageHelper.BreakLoop();
             };
-            TimerHelper.StartTimer(1000, (o, e) =>
+            TimerHelper.StartTimer(5000, (o, e) =>
             {
                 currentCall.Reject(r =>
                 {
