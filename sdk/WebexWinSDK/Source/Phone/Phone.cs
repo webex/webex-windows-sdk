@@ -947,18 +947,6 @@ namespace WebexSDK
             }
 
             SparkNet.CallParticipant[] participants = m_core_telephoneService.getCallParticipants(currentCall.CallId);
-
-            if (participants.Count() > 2)
-            {
-                currentCall.IsGroup = true;
-                SdkLogger.Instance.Debug($"CallID[{currentCall.CallId}], this is a meeting call");
-            }
-            else
-            {
-                currentCall.IsGroup = false ;
-                SdkLogger.Instance.Debug($"CallID[{currentCall.CallId}], this is a one2one call");
-            }
-
             foreach (var item in participants)
             {
                 //filter
@@ -1101,8 +1089,14 @@ namespace WebexSDK
         }
         private bool ProcessParticipantJoined(CallMembership newItem)
         {
+            if(currentCall==null)
+            {
+                SdkLogger.Instance.Error("currentCall is null.");
+                return true;
+            }
+
             //one2one outgoing call, trigger callConnected event when remote participant joined
-            if (currentCall?.IsGroup == false && currentCall?.Direction == Call.CallDirection.Outgoing)
+            if (currentCall.IsOne2One && currentCall.Direction == Call.CallDirection.Outgoing)
             {
                 if (!newItem.IsSelf)
                 {
@@ -1190,6 +1184,8 @@ namespace WebexSDK
                 SdkLogger.Instance.Warn("already have a call");
                 return;
             }
+            currentCall.IsOne2One = m_core_telephoneService.getIsOne2One(currentCall.CallId);
+            SdkLogger.Instance.Debug($"This is a {(currentCall.IsOne2One ? "One2One Call" : "meeting")}");
 
             // outgoing call
             if (currentCall.IsUsed && currentCall.Direction == Call.CallDirection.Outgoing)
@@ -1275,7 +1271,7 @@ namespace WebexSDK
             string reason = m_core_telephoneService.getCallEndReason(currentCall.CallId);
             SdkLogger.Instance.Info($"callid[{currentCall.CallId}], call disconnected, release reason is {reason}");
             currentCall.ReleaseReason = ConvertToCallDisconnectReasonType(reason);
-            if(currentCall.IsGroup)
+            if(!currentCall.IsOne2One)
             {
                 OnCallTerminated(callId);
             }

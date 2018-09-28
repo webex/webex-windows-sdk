@@ -38,7 +38,7 @@ namespace WebexSDK
         internal string CallId { get; set; }
         internal string CalleeAddress { get; set; }
         internal bool IsUsed { get; set; }
-        internal bool IsGroup { get; set; }
+        internal bool IsOne2One { get; set; }
         internal bool IsSignallingConnected { get; set; }
         internal bool IsMediaConnected { get; set; }
         internal MediaOption MediaOption { get; set; }
@@ -90,7 +90,7 @@ namespace WebexSDK
             isReceivingShare = true;
             memberships = new List<CallMembership>();
             IsLocalRejectOrEndCall = false;
-            IsGroup = false;
+            IsOne2One = true;
             IsWaittingVideoCodecActivate = false;
             AuxStreams = new List<AuxStream>();
         }
@@ -521,7 +521,7 @@ namespace WebexSDK
         public CallMembership To {
             get
             {
-                if (!IsGroup)
+                if (IsOne2One)
                 {
                     return Memberships.Find(item =>
                     {
@@ -771,7 +771,7 @@ namespace WebexSDK
             {
                 return;
             }
-            if (!IsGroup)
+            if (IsOne2One)
             {
                 var str = "one2one call cannot open auxiliary stream.";
                 SdkLogger.Instance.Error(str);
