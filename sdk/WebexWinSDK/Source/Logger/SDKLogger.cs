@@ -126,8 +126,8 @@ namespace WebexSDK
 
                 if (this.Logger != null)
                 {
-                    string loggerOutput = string.Format("{0,-22}", $"{DateTime.UtcNow}");
-                    loggerOutput += string.Format("{0,-5}", $"{logLevel.ToString()}");
+                    string loggerOutput = string.Format("{0,-25}", $"{DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ")}");
+                    loggerOutput += string.Format("{0,-7}", $"<{logLevel.ToString()}>");
                     loggerOutput += string.Format("{0,-5}", $"[{Thread.CurrentThread.ManagedThreadId}]");
                     loggerOutput += string.Format($"{fullstr}");
                     this.Logger.Log(loggerOutput);
