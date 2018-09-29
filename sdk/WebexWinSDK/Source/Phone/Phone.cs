@@ -289,6 +289,7 @@ namespace WebexSDK
                         completedHandler?.Invoke(new WebexApiEventArgs<Call>(false, new WebexError(WebexErrorCode.IllegalOperation, "maybe space id is invalid"), null));
                         return;
                     }
+                    currentCall.IsOne2One = false;
                     OnCallStarted(outputAddress);
                     SdkLogger.Instance.Debug($"This is a space call. join call: {outputAddress}");
                     m_core_telephoneService.joinCall(outputAddress);
@@ -1189,7 +1190,10 @@ namespace WebexSDK
             if (currentCall.IsUsed && currentCall.Direction == Call.CallDirection.Outgoing)
             {
                 currentCall.CallId = callId;
-                currentCall.IsOne2One = m_core_telephoneService.getIsOne2One(currentCall.CallId);
+                if(currentCall.IsOne2One)
+                {
+                    currentCall.IsOne2One = m_core_telephoneService.getIsOne2One(currentCall.CallId);
+                }
                 SdkLogger.Instance.Debug($"This is a {(currentCall.IsOne2One ? "One2One Call" : "meeting")}");
 
                 m_core_telephoneService.setMediaOption(currentCall.CallId , currentCall.MediaOption.MediaOptionType);
