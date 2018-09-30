@@ -64,7 +64,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="spark-client-framework-dot-net, Culture=neutral, processorArchitecture=x86">
-      <HintPath>..\solutions\WinSDK4Desktop\packages\Cisco.Webex.WindowsSDK.2.0.0-EFT02\lib\net452\spark-client-framework-dot-net.dll</HintPath>
+      <HintPath>..\solutions\WinSDK4Desktop\packages\Cisco.Webex.WindowsSDK.2.0.0-EFT03\lib\net452\spark-client-framework-dot-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -130,12 +130,12 @@
     <None Include="WebexSDK.ruleset" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\solutions\WinSDK4Desktop\packages\Cisco.Webex.WindowsSDK.2.0.0-EFT02\build\Cisco.Webex.WindowsSDK.targets" Condition="Exists('..\solutions\WinSDK4Desktop\packages\Cisco.Webex.WindowsSDK.2.0.0-EFT02\build\Cisco.Webex.WindowsSDK.targets')" />
+  <Import Project="..\solutions\WinSDK4Desktop\packages\Cisco.Webex.WindowsSDK.2.0.0-EFT03\build\Cisco.Webex.WindowsSDK.targets" Condition="Exists('..\solutions\WinSDK4Desktop\packages\Cisco.Webex.WindowsSDK.2.0.0-EFT03\build\Cisco.Webex.WindowsSDK.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\solutions\WinSDK4Desktop\packages\Cisco.Webex.WindowsSDK.2.0.0-EFT02\build\Cisco.Webex.WindowsSDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\solutions\WinSDK4Desktop\packages\Cisco.Webex.WindowsSDK.2.0.0-EFT02\build\Cisco.Webex.WindowsSDK.targets'))" />
+    <Error Condition="!Exists('..\solutions\WinSDK4Desktop\packages\Cisco.Webex.WindowsSDK.2.0.0-EFT03\build\Cisco.Webex.WindowsSDK.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\solutions\WinSDK4Desktop\packages\Cisco.Webex.WindowsSDK.2.0.0-EFT03\build\Cisco.Webex.WindowsSDK.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
