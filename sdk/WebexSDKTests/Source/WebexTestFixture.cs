@@ -129,6 +129,9 @@ namespace WebexSDK.Tests
             adminClientId = ConfigurationManager.AppSettings["AdminClientID"] ?? "";
             adminClientSecret = ConfigurationManager.AppSettings["AdminSecret"] ?? "";
 
+            // Cisco Webex platform is dropping support for TLS 1.0 as of March 16, 2018
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
+
             // get access token
             adminAccessToken = CreateAdminAccessToken(adminClientId, adminClientSecret);
             if (adminAccessToken == null)
