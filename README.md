@@ -7,6 +7,8 @@
  
 The Cisco Webex Windows SDK makes it easy to integrate secure and convenient Cisco Webex calling and messaging features in your Windows applications.
 
+:warning: **Warning**: This SDK is in **beta** and is subject to change. It is not recommended for production applications.
+
 This SDK is built with **Visual Studio 2017** and requires:
 
 - .NET Framework 4.5.2 or higher version
