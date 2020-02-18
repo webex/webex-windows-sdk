@@ -150,6 +150,11 @@ namespace WebexSDK
                 completionHandler(new WebexApiEventArgs<string>(true, null, token));
                 return;
             }
+            else if (!isRegisteredToCore)
+            {
+                completionHandler(new WebexApiEventArgs<string>(false, null, null));
+                return;
+            }
 
             this.AccessTokenAction = completionHandler;
 
